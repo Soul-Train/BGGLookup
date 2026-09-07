@@ -1,0 +1,39 @@
+name: Rebuild game cache
+
+"on":
+  workflow_dispatch:
+    inputs:
+      games:
+        description: How many ranked games
+        default: "5000"
+      expansions:
+        description: How many ranked expansions
+        default: "1000"
+  schedule:
+    - cron: "20 7 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build cache
+        run: python scripts/build_cache.py --games "${{ inputs.games || 5000 }}" --expansions "${{ inputs.expansions || 1000 }}"
+      - name: Sanity check
+        run: python scripts/check_cache.py
+      - name: Show result
+        run: cat data/meta.json
+      - name: Commit
+        run: |
+          git config user.name cache-bot
+          git config user.email cache-bot@users.noreply.github.com
+          git add data/
+          git diff --cached --quiet || git commit -m "Cache rebuild"
+          git push
