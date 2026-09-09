@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shelfworthy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --board:#E9EBE4; --card:#F6F7F3; --ink:#16241E; --pine:#1F4536;
+    --ochre:#C6941F; --slate:#55655C; --line:#CFD5CB; --flag:#8C3A2B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--board);color:var(--ink);
+    font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.45;
+    -webkit-font-smoothing:antialiased}
+  .app{max-width:460px;margin:0 auto;padding:20px 16px calc(40px + env(safe-area-inset-bottom))}
+
+  .top{display:flex;align-items:flex-start;gap:10px}
+  .top .who{flex:1;min-width:0}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:26px;color:var(--pine);
+    margin:0 0 3px;letter-spacing:-.4px}
+  .tag{color:var(--slate);font-size:13.5px;margin:0 0 18px}
+  .gear{border:1.5px solid var(--line);background:var(--card);border-radius:9px;
+    width:40px;height:40px;flex:none;font-size:17px;color:var(--slate);line-height:1}
+  .gear:hover{border-color:var(--pine)}
+  .gear.off{border-color:var(--ochre);color:var(--ochre)}
+
+  h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:18px;margin:0 0 3px}
+  .hint{color:var(--slate);font-size:13px;margin:0 0 14px}
+
+  button{font-family:inherit;font-size:15px;cursor:pointer}
+  button:focus-visible,input:focus-visible{outline:2.5px solid var(--ochre);outline-offset:2px}
+  .btn{width:100%;border:none;border-radius:10px;background:var(--pine);color:#F6F7F3;
+    padding:15px;font-weight:600;margin-top:10px}
+  .btn.ghost{background:transparent;color:var(--pine);border:1.5px solid var(--line);padding:13px}
+  .btn.ghost:hover{border-color:var(--pine)}
+
+  .row{display:flex;gap:8px}
+  .row input{flex:1;padding:13px;font-size:16px;font-family:inherit;border:1.5px solid var(--line);
+    border-radius:10px;background:#FFF;color:var(--ink);min-width:0}
+  .row button{border:none;background:var(--pine);color:#F6F7F3;border-radius:10px;
+    padding:0 18px;font-weight:600}
+
+  #cam{width:100%;border-radius:14px;background:#0D1512;display:block;aspect-ratio:4/3;object-fit:cover}
+  .camwrap{position:relative;margin-bottom:12px}
+  .reticle{position:absolute;left:12%;right:12%;top:38%;height:24%;
+    border:2px solid rgba(246,247,243,.85);border-radius:8px;pointer-events:none}
+  .reticle:after{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;
+    background:var(--ochre);opacity:.9}
+
+  .pick{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);
+    border-radius:10px;padding:13px;margin-bottom:8px;text-decoration:none;color:inherit;width:100%;
+    text-align:left;font-size:15px}
+  .pick:hover{border-color:var(--pine);background:#FFF}
+  .pick .n{flex:1;font-weight:600;min-width:0}
+  .pick .go{color:var(--slate);font-size:19px;flex:none}
+
+  .card{background:var(--card);border:1.5px solid var(--pine);border-radius:12px;
+    padding:16px;margin-bottom:12px}
+  .card .name{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:21px;
+    letter-spacing:-.3px;line-height:1.2;text-decoration:none;color:var(--ink);display:block}
+  .card .name:hover{color:var(--pine);text-decoration:underline}
+  .card .sub{color:var(--slate);font-size:12.5px;margin-top:4px}
+
+  .big{display:flex;align-items:baseline;gap:9px;margin:14px 0 2px}
+  .big .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:40px;line-height:1;
+    letter-spacing:-1.5px;color:var(--pine);font-variant-numeric:tabular-nums}
+  .big .k{font-size:12.5px;color:var(--slate)}
+
+  .facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .fact{background:#FFF;border:1px solid var(--line);border-radius:7px;padding:6px 10px;font-size:12.5px}
+  .fact b{font-weight:600}
+  .fact span{color:var(--slate)}
+
+  .pips{display:inline-flex;gap:2.5px;align-items:center;vertical-align:-1px}
+  .pips i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+  .pips i.f{background:var(--ochre)}
+
+  .note{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--ochre);
+    border-radius:10px;padding:12px;font-size:13.5px;margin-bottom:12px}
+  .note b{display:block;margin-bottom:3px}
+  .note.bad{border-left-color:var(--flag);background:#F7E9E6;border-color:#D9B5AC}
+
+  .dots{display:inline-flex;gap:6px}
+  .dots i{width:9px;height:9px;border-radius:50%;background:var(--pine);animation:p 1.05s ease-in-out infinite}
+  .dots i:nth-child(2){animation-delay:.16s}
+  .dots i:nth-child(3){animation-delay:.32s}
+  @keyframes p{0%,100%{opacity:.25}50%{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.dots i{animation:none;opacity:.6}}
+  .working{text-align:center;padding:36px 0}
+
+  .sheet{position:fixed;inset:0;background:rgba(22,36,30,.55);display:flex;align-items:flex-end;
+    justify-content:center;z-index:9}
+  .sheet .inner{background:var(--board);border-radius:16px 16px 0 0;padding:20px 16px
+    calc(24px + env(safe-area-inset-bottom));width:100%;max-width:460px}
+  @media (min-width:520px){ .sheet{align-items:center} .sheet .inner{border-radius:16px} }
+  .sheet code{background:#FFF;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
+
+  .foot{margin-top:24px;font-size:12px;color:var(--slate);line-height:1.5}
+  .foot a{color:var(--slate)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="who">
+      <h1>Shelfworthy</h1>
+      <p class="tag">Scan a box. See if it is worth it.</p>
+    </div>
+    <button class="gear" id="gear" title="Settings" aria-label="Settings">&#9881;</button>
+  </div>
+  <div id="stage"></div>
+  <div class="foot">
+    Barcode matching by <a href="https://gameupc.com" target="_blank" rel="noopener">GameUPC</a>.
+    Game data from <a href="https://boardgamegeek.com" target="_blank" rel="noopener">BoardGameGeek</a>,
+    shown unmodified.
+  </div>
+</div>
+<div id="modal"></div>
+
+<script>
+var UPC_URL = "https://api.gameupc.com/test/upc/";
+var UPC_KEY = "test_test_test_test_test";
+var BGG_URL = "https://boardgamegeek.com/xmlapi2/thing?stats=1&id=";
+var STORE = "shelfworthy.bgg.token";
+
+var stage="idle", stream=null, detector=null, scanning=false;
+var picks=[], game=null, lastUPC="", searchedFor="", msg=null, msgBad=false, sheet=false;
+var el=document.getElementById("stage"), modal=document.getElementById("modal");
+
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+// The token lives on this device only. It is never sent anywhere except BGG.
+function getToken(){ try { return localStorage.getItem(STORE) || ""; } catch(e){ return ""; } }
+function setToken(v){ try { v ? localStorage.setItem(STORE,v) : localStorage.removeItem(STORE); } catch(e){} }
+
+function gameURL(id){ return "https://boardgamegeek.com/boardgame/"+encodeURIComponent(id); }
+function searchURL(q){ return "https://boardgamegeek.com/geeksearch.php?action=search&objecttype=boardgame&q="+encodeURIComponent(q); }
+
+function render(){
+  document.getElementById("gear").className = "gear" + (getToken() ? "" : " off");
+  if (stage==="scanning") viewScanning();
+  else if (stage==="looking") viewLooking();
+  else if (stage==="result") viewResult();
+  else viewIdle();
+  renderSheet();
+}
+
+function notice(){ return msg ? '<div class="note'+(msgBad?" bad":"")+'">'+msg+'</div>' : ""; }
+
+/* ---------------------------------------------------------- settings */
+function renderSheet(){
+  if (!sheet){ modal.innerHTML=""; return; }
+  var t = getToken();
+  modal.innerHTML =
+    '<div class="sheet" id="scrim"><div class="inner">'+
+      '<h2>BoardGameGeek token</h2>'+
+      '<p class="hint">Paste the token from your approved application. It is saved on this device only, and is only ever sent to BoardGameGeek.</p>'+
+      '<div class="row"><input id="tok" placeholder="Paste token" value="'+esc(t)+'" autocomplete="off" spellcheck="false"></div>'+
+      '<button class="btn" id="savetok">Save</button>'+
+      (t ? '<button class="btn ghost" id="cleartok">Remove token</button>' : "")+
+      '<button class="btn ghost" id="closetok">Close</button>'+
+      '<p class="hint" style="margin-top:14px">Without a token this still scans and links to BGG. With one, ratings show here.</p>'+
+    '</div></div>';
+
+  document.getElementById("savetok").onclick = function(){
+    setToken((document.getElementById("tok").value||"").trim());
+    sheet=false; msg=null; render();
+  };
+  var c = document.getElementById("cleartok");
+  if (c) c.onclick = function(){ setToken(""); sheet=false; render(); };
+  document.getElementById("closetok").onclick = function(){ sheet=false; render(); };
+  document.getElementById("scrim").onclick = function(e){
+    if (e.target.id === "scrim"){ sheet=false; render(); }
+  };
+}
+document.getElementById("gear").onclick = function(){ sheet=true; render(); };
+
+/* ---------------------------------------------------------- screens */
+function viewIdle(){
+  el.innerHTML = notice()+
+    '<h2>Scan a barcode</h2>'+
+    '<p class="hint">Point the camera at the barcode on the box.</p>'+
+    '<button class="btn" id="start">Open camera</button>'+
+    '<button class="btn ghost" id="mt">Type it instead</button>'+
+    '<div id="manual" hidden style="margin-top:14px">'+
+      '<div class="row"><input id="q" placeholder="Barcode digits or game name"><button id="qgo">Go</button></div>'+
+    '</div>';
+  document.getElementById("start").onclick = startCamera;
+  document.getElementById("mt").onclick = function(){
+    var m=document.getElementById("manual"); m.hidden=!m.hidden;
+    if(!m.hidden) document.getElementById("q").focus();
+  };
+  document.getElementById("qgo").onclick = submitManual;
+  document.getElementById("q").onkeydown = function(e){ if(e.key==="Enter") submitManual(); };
+}
+
+function submitManual(){
+  var v=(document.getElementById("q").value||"").trim();
+  if(!v) return;
+  if (/^[0-9]{6,14}$/.test(v)) lookup(v);
+  else window.open(searchURL(v),"_blank","noopener");
+}
+
+function viewScanning(){
+  el.innerHTML =
+    '<div class="camwrap"><video id="cam" playsinline muted autoplay></video><div class="reticle"></div></div>'+
+    '<p class="hint">Hold steady. Flat barcodes read best.</p>'+
+    '<button class="btn ghost" id="stop">Cancel</button>';
+  document.getElementById("stop").onclick = stopCamera;
+  var v=document.getElementById("cam");
+  if (stream){ v.srcObject=stream; v.play().catch(function(){}); }
+}
+
+function viewLooking(){
+  el.innerHTML='<div class="working"><div class="dots"><i></i><i></i><i></i></div>'+
+    '<h2 style="margin-top:14px">Looking up '+esc(lastUPC)+'</h2></div>';
+}
+
+function pips(w){
+  var n=Math.round(w||0), out='<span class="pips">';
+  for (var i=1;i<=5;i++) out += '<i class="'+(i<=n?"f":"")+'"></i>';
+  return out+"</span>";
+}
+
+function players(g){
+  if (!g.min && !g.max) return "";
+  if (g.min && g.max && g.min !== g.max) return g.min+"-"+g.max;
+  return String(g.max || g.min);
+}
+
+function gameCard(g){
+  var facts = [];
+  if (g.rank)      facts.push('<span class="fact"><span>rank</span> <b>#'+g.rank+'</b></span>');
+  if (players(g))  facts.push('<span class="fact"><span>players</span> <b>'+players(g)+'</b></span>');
+  if (g.time)      facts.push('<span class="fact"><span>time</span> <b>'+g.time+' min</b></span>');
+  if (g.weight)    facts.push('<span class="fact"><span>weight</span> <b>'+g.weight.toFixed(1)+'</b> '+pips(g.weight)+'</span>');
+
+  return '<div class="card">'+
+    '<a class="name" href="'+esc(gameURL(g.id))+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
+    '<div class="sub">'+(g.year?g.year+" &middot; ":"")+'tap the name to open BoardGameGeek</div>'+
+    (g.geek ? '<div class="big"><span class="n">'+g.geek.toFixed(1)+'</span>'+
+              '<span class="k">Geek rating'+(g.users?' &middot; '+g.users.toLocaleString()+' ratings':"")+'</span></div>' : "")+
+    (facts.length ? '<div class="facts">'+facts.join("")+'</div>' : "")+
+  '</div>';
+}
+
+function viewResult(){
+  var h = notice();
+
+  if (game){
+    h += gameCard(game);
+  } else if (picks.length === 1 && picks[0].verified){
+    h += '<div class="card"><a class="name" href="'+esc(gameURL(picks[0].id))+'" target="_blank" rel="noopener">'+
+         esc(picks[0].name)+'</a><div class="sub">Confirmed match. Add a token in settings to see the rating here.</div></div>';
+  } else if (picks.length){
+    h += '<h2>Which one is it?</h2>'+
+         '<p class="hint">Not confirmed'+(searchedFor?', matched on "'+esc(searchedFor)+'"':"")+'. Pick the right box.</p>'+
+         picks.map(function(p){
+           return '<button class="pick" data-id="'+esc(p.id)+'" data-name="'+esc(p.name)+'">'+
+                  '<span class="n">'+esc(p.name)+'</span><span class="go">&rarr;</span></button>';
+         }).join("");
+  } else {
+    h += '<h2>Not in the database</h2>'+
+         '<p class="hint">That barcode has no match yet. Try the name.</p>'+
+         '<div class="row"><input id="q2" placeholder="Game name"><button id="q2go">Search</button></div>';
+  }
+
+  h += '<button class="btn ghost" id="again">Scan another</button>';
+  el.innerHTML = h;
+
+  // Picking a candidate loads its details, or opens BGG when there is no token.
+  Array.prototype.forEach.call(el.querySelectorAll("[data-id]"), function(b){
+    b.onclick = function(){
+      if (getToken()) loadGame(b.dataset.id, b.dataset.name);
+      else window.open(gameURL(b.dataset.id),"_blank","noopener");
+    };
+  });
+  var q2=document.getElementById("q2");
+  if (q2){
+    var go=function(){ var v=(q2.value||"").trim(); if(v) window.open(searchURL(v),"_blank","noopener"); };
+    document.getElementById("q2go").onclick=go;
+    q2.onkeydown=function(e){ if(e.key==="Enter") go(); };
+  }
+  document.getElementById("again").onclick=function(){
+    picks=[]; game=null; msg=null; stage="idle"; render();
+  };
+}
+
+/* ---------------------------------------------------------- camera */
+async function startCamera(){
+  msg=null;
+  if (!("BarcodeDetector" in window)){
+    msg="<b>This browser cannot scan barcodes</b>Chrome on Android works. On iPhone, read the number with the Camera app and type it in.";
+    msgBad=true; stage="idle"; render(); return;
+  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    msg="<b>No camera available</b>Type the barcode number instead."; msgBad=true; stage="idle"; render(); return;
+  }
+  try {
+    detector = detector || new window.BarcodeDetector({formats:["ean_13","upc_a","ean_8","upc_e","code_128"]});
+    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
+    stage="scanning"; scanning=true; render(); tick();
+  } catch(e){
+    msg="<b>Camera blocked</b>Allow camera access in your browser settings, or type the number instead.";
+    msgBad=true; stage="idle"; render();
+  }
+}
+
+function stopCamera(){
+  scanning=false;
+  if (stream){ stream.getTracks().forEach(function(t){t.stop();}); stream=null; }
+  if (stage==="scanning"){ stage="idle"; render(); }
+}
+
+async function tick(){
+  if (!scanning) return;
+  var v=document.getElementById("cam");
+  if (v && v.readyState>=2){
+    try {
+      var codes = await detector.detect(v);
+      if (codes && codes.length){
+        var raw=String(codes[0].rawValue||"").replace(/\D/g,"");
+        if (raw){ stopCamera(); lookup(raw); return; }
+      }
+    } catch(e){}
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ---------------------------------------------------------- lookups */
+async function lookup(upc){
+  lastUPC=upc; picks=[]; game=null; searchedFor=""; msg=null;
+  stage="looking"; render();
+  try {
+    var r = await fetch(UPC_URL+encodeURIComponent(upc), {headers:{"x-api-key":UPC_KEY}});
+    if (!r.ok) throw new Error("bad");
+    var d = await r.json();
+    searchedFor = d.searched_for || "";
+    var verified = d.bgg_info_status === "verified";
+    picks = (d.bgg_info||[]).filter(function(g){return g && g.id && g.name;})
+      .map(function(g){ return {id:g.id, name:g.name, verified:verified}; });
+    if (verified) picks = picks.slice(0,1);
+  } catch(e){
+    msg="<b>Could not reach the barcode service</b>Check your signal, or search by name.";
+    msgBad=true; picks=[];
+  }
+  // One confirmed game plus a token means we can go straight to the details.
+  if (picks.length===1 && picks[0].verified && getToken()){
+    return loadGame(picks[0].id, picks[0].name);
+  }
+  stage="result"; render();
+}
+
+function num(node, sel, attr){
+  var e = node.querySelector(sel);
+  if (!e) return null;
+  var v = parseFloat(e.getAttribute(attr || "value"));
+  return isFinite(v) ? v : null;
+}
+
+function parseGame(xml, fallbackName, id){
+  var doc = new DOMParser().parseFromString(xml, "text/xml");
+  if (doc.querySelector("parsererror")) throw new Error("bad xml");
+  var item = doc.querySelector("item");
+  if (!item) throw new Error("no item");
+
+  var nameEl = item.querySelector('name[type="primary"]') || item.querySelector("name");
+  var rank = null;
+  Array.prototype.forEach.call(item.querySelectorAll("ranks rank"), function(r){
+    if (r.getAttribute("name") === "boardgame"){
+      var v = parseInt(r.getAttribute("value"), 10);
+      if (isFinite(v)) rank = v;
+    }
+  });
+
+  return {
+    id: id,
+    name: (nameEl && nameEl.getAttribute("value")) || fallbackName || "Unknown game",
+    year: num(item, "yearpublished"),
+    geek: num(item, "statistics ratings bayesaverage"),
+    avg: num(item, "statistics ratings average"),
+    users: num(item, "statistics ratings usersrated"),
+    weight: num(item, "statistics ratings averageweight"),
+    min: num(item, "minplayers"),
+    max: num(item, "maxplayers"),
+    time: num(item, "playingtime"),
+    rank: rank
+  };
+}
+
+async function loadGame(id, fallbackName){
+  game=null; msg=null; stage="looking"; lastUPC = fallbackName || lastUPC; render();
+  try {
+    var r = await fetch(BGG_URL+encodeURIComponent(id), {
+      headers: { "Authorization": "Bearer " + getToken() }
+    });
+    if (r.status === 401 || r.status === 403){
+      throw new Error("Your token was rejected. Check it in settings.");
+    }
+    if (!r.ok) throw new Error("BoardGameGeek did not answer. Try again in a moment.");
+    game = parseGame(await r.text(), fallbackName, id);
+  } catch(e){
+    // Falling back to the plain link is better than a dead end.
+    msg = "<b>Could not load the rating</b>" + esc(e.message || "Something went wrong.") +
+          " You can still open it on BoardGameGeek.";
+    msgBad = true;
+    game = null;
+    picks = [{ id: id, name: fallbackName || "This game", verified: true }];
+  }
+  stage="result"; render();
+}
+
+render();
+</script>
+</body>
+</html>
