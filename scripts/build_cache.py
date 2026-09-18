@@ -16,6 +16,7 @@ import re
 import sys
 import time
 import unicodedata
+import subprocess
 import xml.etree.ElementTree as ET
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -25,8 +26,10 @@ CSV_URL = "https://boardgamegeek.com/data_dumps/bg_ranks"
 UA = "shelfworthy-cache/2.0"
 TOKEN = os.environ.get("BGG_TOKEN", "").strip()
 
-DELAY = 1.5          # BGG is slow on purpose; being greedy gets you throttled
-BATCH = 100          # ids per thing call
+DELAY = 1.0          # BGG is slow on purpose; being greedy gets you throttled
+BATCH = 40           # small batches: a rejection costs less to split
+BUDGET_MIN = float(os.environ.get("BUDGET_MIN", "90"))   # stop and save by then
+CHECKPOINT_MIN = float(os.environ.get("CHECKPOINT_MIN", "10"))  # save this often
 MAX_TRIES = 5
 MIN_RATINGS = 30     # below this a rating means very little
 
@@ -118,21 +121,20 @@ def ids_from_csv(limit):
     return [int(r[key_id]) for r in rows[:limit] if str(r.get(key_id, "")).isdigit()]
 
 
-def ids_from_sweep(slice_size):
-    """Fallback: walk the id space a slice at a time, resuming each week."""
+def sweep_start():
+    """Where last week's run stopped."""
     try:
         with open(STATE) as f:
-            start = json.load(f).get("next", 1)
-    except (OSError, ValueError):
+            start = int(json.load(f).get("next", 1))
+    except (OSError, ValueError, TypeError):
         start = 1
-    if start > 450000:
-        start = 1                      # wrap round and refresh the whole space
-    end = start + slice_size
+    return 1 if start > 450000 else start      # wrap round and refresh
+
+
+def save_progress(next_id):
     os.makedirs(DATA, exist_ok=True)
     with open(STATE, "w") as f:
-        json.dump({"next": end}, f)
-    log("sweeping ids %d to %d" % (start, end))
-    return list(range(start, end))
+        json.dump({"next": next_id}, f)
 
 
 # ---------------------------------------------------------------- details
@@ -193,25 +195,96 @@ def parse(xml_bytes):
     return out
 
 
+LIMIT = int(os.environ.get("LIMIT", "20000"))
+
+
+def write_cache(games, reached, final=False):
+    """Merge into the existing file and write it out. Safe to call repeatedly."""
+    os.makedirs(DATA, exist_ok=True)
+    path = os.path.join(DATA, "games.json")
+    merged = {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            for g in json.load(f)["g"]:
+                merged[g["i"]] = g
+    except (OSError, ValueError, KeyError):
+        pass
+    carried = len(merged)
+    for g in games:
+        merged[g["i"]] = g
+    if not merged:
+        if final:
+            raise SystemExit("nothing fetched; refusing to publish an empty cache")
+        return
+
+    out = sorted(merged.values(), key=lambda g: (-(g["b"] or 0), g["n"]))[:LIMIT]
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"built": time.strftime("%Y-%m-%d"), "g": out},
+                  f, ensure_ascii=False, separators=(",", ":"))
+    save_progress(reached)
+    size = os.path.getsize(path)
+    with open(os.path.join(DATA, "meta.json"), "w") as f:
+        json.dump({"built": time.strftime("%Y-%m-%d %H:%M UTC"),
+                   "count": len(out), "bytes": size,
+                   "swept_to": reached, "carried_forward": carried}, f, indent=2)
+    if final:
+        log("wrote %d games (%d new), %.0f KB" % (len(out), len(out) - carried, size / 1024))
+
+
 REJECTS = {"n": 0}
 
 
-def fetch_details(ids):
-    got, n = [], len(ids)
+def git_push(message):
+    """Commit whatever is on disk right now.
+
+    Without this, a run that is killed loses everything it gathered, because
+    the workflow's own commit step never gets to run.
+    """
+    if os.environ.get("NO_GIT") == "1":
+        return
+    try:
+        subprocess.run(["git", "config", "user.name", "cache-bot"], check=True, cwd=HERE)
+        subprocess.run(["git", "config", "user.email",
+                        "cache-bot@users.noreply.github.com"], check=True, cwd=HERE)
+        subprocess.run(["git", "add", "data"], check=True, cwd=HERE)
+        r = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=HERE)
+        if r.returncode == 0:
+            return                      # nothing changed
+        subprocess.run(["git", "commit", "-m", message], check=True, cwd=HERE)
+        subprocess.run(["git", "push"], check=True, cwd=HERE)
+        log("  checkpoint pushed: %s" % message)
+    except (subprocess.CalledProcessError, OSError) as e:
+        log("  checkpoint push failed (%s), carrying on" % e)
+
+
+def sweep(start, deadline):
+    """Walk ids upward until the clock runs out. Always returns what it has.
+
+    The run is time-boxed rather than size-boxed, because how far it gets
+    depends on how many batches BGG rejects, which we cannot predict.
+    """
+    got, at = [], start
     REJECTS["n"] = 0
-    for i in range(0, n, BATCH):
-        chunk = ids[i:i + BATCH]
+    next_save = time.time() + CHECKPOINT_MIN * 60
+    while time.time() < deadline:
+        chunk = list(range(at, at + BATCH))
         got.extend(fetch_chunk(chunk))
-        # If everything is being refused, halving turns one bad run into
-        # thousands of requests. Stop and say so instead.
+        at += BATCH
         if REJECTS["n"] > 150 and not got:
             raise SystemExit(
                 "BGG refused every batch (%d rejections, nothing fetched). "
                 "The request shape is wrong, not the ids." % REJECTS["n"])
-        if (i // BATCH) % 10 == 0:
-            log("  %d/%d ids checked, %d games kept" % (min(i + BATCH, n), n, len(got)))
+        if (at - start) % (BATCH * 25) == 0:
+            left = int((deadline - time.time()) / 60)
+            log("  id %d, %d games kept, %d batches split, %d min left"
+                % (at, len(got), REJECTS["n"], left))
+        if time.time() > next_save:
+            write_cache(got, at)
+            git_push("Cache checkpoint at id %d" % at)
+            next_save = time.time() + CHECKPOINT_MIN * 60
         time.sleep(DELAY)
-    return got
+    log("time budget reached at id %d" % at)
+    return got, at
 
 
 def fetch_chunk(chunk, depth=0):
@@ -224,8 +297,6 @@ def fetch_chunk(chunk, depth=0):
         if len(chunk) == 1:
             return []              # that single id is simply not fetchable
         mid = len(chunk) // 2
-        if depth == 0:
-            log("  a batch was rejected, splitting it")
         time.sleep(DELAY)
         return fetch_chunk(chunk[:mid], depth + 1) + fetch_chunk(chunk[mid:], depth + 1)
     except (ET.ParseError, RuntimeError) as e:
@@ -239,53 +310,20 @@ def main():
     if not TOKEN:
         raise SystemExit("No BGG_TOKEN set. Add it as a repository secret.")
 
-    limit = int(os.environ.get("LIMIT", "6000"))
     os.makedirs(DATA, exist_ok=True)
 
-    ids = None
-    if os.environ.get("TRY_CSV") == "1":
-        try:
-            log("trying the ranks CSV")
-            ids = ids_from_csv(limit)
-            log("got %d ids from the CSV" % len(ids))
-        except Exception as e:                  # noqa: BLE001 - any failure falls back
-            log("CSV not usable (%s)" % e)
-            ids = None
-    if ids is None:
-        # The CSV download is gated behind a logged-in browser session, not the
-        # API token, so the sweep is the reliable path. It covers the whole id
-        # space over several weeks and keeps what it finds.
-        ids = ids_from_sweep(int(os.environ.get("SLICE", "60000")))
+    deadline = time.time() + BUDGET_MIN * 60
+    start = sweep_start()
+    log("sweeping from id %d, budget %g minutes" % (start, BUDGET_MIN))
 
-    games = fetch_details(ids)
-    log("%d games cleared the %d-rating floor" % (len(games), MIN_RATINGS))
-
-    # Merge with last week's file so a partial run never shrinks the cache.
-    path = os.path.join(DATA, "games.json")
-    merged = {}
     try:
-        with open(path, encoding="utf-8") as f:
-            for g in json.load(f)["g"]:
-                merged[g["i"]] = g
-        log("carried forward %d from last week" % len(merged))
-    except (OSError, ValueError, KeyError):
-        pass
-    for g in games:
-        merged[g["i"]] = g
+        games, reached = sweep(start, deadline)
+    except KeyboardInterrupt:
+        games, reached = [], start
+    log("%d games cleared the %d-rating floor; next run starts at %d"
+        % (len(games), MIN_RATINGS, reached))
 
-    out = sorted(merged.values(), key=lambda g: (-(g["b"] or 0), g["n"]))[:limit]
-    if len(out) < 200:
-        raise SystemExit("only %d games; refusing to publish that" % len(out))
-
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump({"built": time.strftime("%Y-%m-%d"), "g": out},
-                  f, ensure_ascii=False, separators=(",", ":"))
-    size = os.path.getsize(path)
-    log("wrote %d games, %.0f KB" % (len(out), size / 1024))
-
-    with open(os.path.join(DATA, "meta.json"), "w") as f:
-        json.dump({"built": time.strftime("%Y-%m-%d %H:%M UTC"),
-                   "count": len(out), "bytes": size}, f, indent=2)
+    write_cache(games, reached, final=True)
     return 0
 
 

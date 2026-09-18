@@ -5,9 +5,9 @@ name: Weekly game cache
     - cron: "20 8 * * 0"
   workflow_dispatch:
     inputs:
-      limit:
-        description: How many games to keep
-        default: "6000"
+      budget:
+        description: Minutes to spend fetching
+        default: "90"
 
 permissions:
   contents: write
@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -24,14 +24,18 @@ jobs:
       - name: Build cache
         env:
           BGG_TOKEN: ${{ secrets.BGG_TOKEN }}
-          LIMIT: ${{ inputs.limit || '6000' }}
+          BUDGET_MIN: ${{ inputs.budget || '90' }}
         run: python scripts/build_cache.py
       - name: Show result
-        run: cat data/meta.json
-      - name: Commit
+        if: always()
+        run: cat data/meta.json || echo "no cache written"
+      # The script checkpoints and pushes as it goes, so this only catches
+      # whatever happened after the last checkpoint.
+      - name: Commit anything left over
+        if: always()
         run: |
           git config user.name cache-bot
           git config user.email cache-bot@users.noreply.github.com
           git add data/
           git diff --cached --quiet || git commit -m "Weekly cache $(date -u +%Y-%m-%d)"
-          git push
+          git push || true
