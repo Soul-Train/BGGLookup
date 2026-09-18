@@ -35,6 +35,10 @@ DATA = os.path.join(HERE, "data")
 STATE = os.path.join(DATA, "sweep_state.json")
 
 
+class BadBatch(Exception):
+    """BGG refused this particular set of ids."""
+
+
 def log(m):
     print(m, flush=True)
 
@@ -60,6 +64,10 @@ def get(url, accept="application/xml"):
             if e.code in (401, 403):
                 raise SystemExit(
                     "BGG rejected the token (%d). Check the BGG_TOKEN secret." % e.code)
+            if e.code == 400:
+                # BGG rejects a batch outright if it dislikes any id in it.
+                # Caller splits and retries rather than losing the whole run.
+                raise BadBatch("400 on %d ids" % url.count(",") if "," in url else "400")
             if e.code in (202, 429, 500, 502, 503, 504):
                 time.sleep(delay)
                 delay = min(delay * 2, 60)
@@ -147,6 +155,8 @@ def parse(xml_bytes):
         stats = item.find("statistics/ratings")
         if pn is None or stats is None:
             continue
+        if item.get("type") not in ("boardgame", "boardgameexpansion"):
+            continue                       # videogames, rpgs and the rest
         name = pn.get("value")
         users = num(stats, "usersrated") or 0
         geek = num(stats, "bayesaverage")
@@ -183,20 +193,44 @@ def parse(xml_bytes):
     return out
 
 
+REJECTS = {"n": 0}
+
+
 def fetch_details(ids):
     got, n = [], len(ids)
+    REJECTS["n"] = 0
     for i in range(0, n, BATCH):
         chunk = ids[i:i + BATCH]
-        url = "%s/thing?stats=1&type=boardgame,boardgameexpansion&id=%s" % (
-            API, ",".join(map(str, chunk)))
-        try:
-            got.extend(parse(get(url)))
-        except (ET.ParseError, RuntimeError) as e:
-            log("  batch at %d failed (%s), skipping it" % (i, e))
+        got.extend(fetch_chunk(chunk))
+        # If everything is being refused, halving turns one bad run into
+        # thousands of requests. Stop and say so instead.
+        if REJECTS["n"] > 150 and not got:
+            raise SystemExit(
+                "BGG refused every batch (%d rejections, nothing fetched). "
+                "The request shape is wrong, not the ids." % REJECTS["n"])
         if (i // BATCH) % 10 == 0:
             log("  %d/%d ids checked, %d games kept" % (min(i + BATCH, n), n, len(got)))
         time.sleep(DELAY)
     return got
+
+
+def fetch_chunk(chunk, depth=0):
+    """Fetch one batch, halving it if BGG rejects the set."""
+    url = "%s/thing?stats=1&id=%s" % (API, ",".join(map(str, chunk)))
+    try:
+        return parse(get(url))
+    except BadBatch:
+        REJECTS["n"] += 1
+        if len(chunk) == 1:
+            return []              # that single id is simply not fetchable
+        mid = len(chunk) // 2
+        if depth == 0:
+            log("  a batch was rejected, splitting it")
+        time.sleep(DELAY)
+        return fetch_chunk(chunk[:mid], depth + 1) + fetch_chunk(chunk[mid:], depth + 1)
+    except (ET.ParseError, RuntimeError) as e:
+        log("  batch skipped (%s)" % e)
+        return []
 
 
 # ---------------------------------------------------------------- main
@@ -208,12 +242,19 @@ def main():
     limit = int(os.environ.get("LIMIT", "6000"))
     os.makedirs(DATA, exist_ok=True)
 
-    try:
-        log("trying the ranks CSV")
-        ids = ids_from_csv(limit)
-        log("got %d ids from the CSV" % len(ids))
-    except Exception as e:                      # noqa: BLE001 - any failure falls back
-        log("CSV not usable (%s); falling back to an id sweep" % e)
+    ids = None
+    if os.environ.get("TRY_CSV") == "1":
+        try:
+            log("trying the ranks CSV")
+            ids = ids_from_csv(limit)
+            log("got %d ids from the CSV" % len(ids))
+        except Exception as e:                  # noqa: BLE001 - any failure falls back
+            log("CSV not usable (%s)" % e)
+            ids = None
+    if ids is None:
+        # The CSV download is gated behind a logged-in browser session, not the
+        # API token, so the sweep is the reliable path. It covers the whole id
+        # space over several weeks and keeps what it finds.
         ids = ids_from_sweep(int(os.environ.get("SLICE", "60000")))
 
     games = fetch_details(ids)
