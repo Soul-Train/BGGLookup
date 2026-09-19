@@ -31,7 +31,9 @@ BATCH = 40           # small batches: a rejection costs less to split
 BUDGET_MIN = float(os.environ.get("BUDGET_MIN", "90"))   # stop and save by then
 CHECKPOINT_MIN = float(os.environ.get("CHECKPOINT_MIN", "10"))  # save this often
 MAX_TRIES = 5
-MIN_RATINGS = 30     # below this a rating means very little
+# Below this, a game is too obscure to be sitting on a shop shelf, and every
+# one of them costs space in the file your phone downloads.
+MIN_RATINGS = int(os.environ.get("MIN_RATINGS", "100"))
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(HERE, "data")
@@ -212,6 +214,8 @@ def write_cache(games, reached, final=False):
     carried = len(merged)
     for g in games:
         merged[g["i"]] = g
+    # Re-apply the floor to everything, so raising it prunes older entries too.
+    merged = {i: g for i, g in merged.items() if (g.get("u") or 0) >= MIN_RATINGS}
     if not merged:
         if final:
             raise SystemExit("nothing fetched; refusing to publish an empty cache")
@@ -221,14 +225,30 @@ def write_cache(games, reached, final=False):
     with open(path, "w", encoding="utf-8") as f:
         json.dump({"built": time.strftime("%Y-%m-%d"), "g": out},
                   f, ensure_ascii=False, separators=(",", ":"))
+
+    # What the phone actually downloads. The app uses the cache only to turn a
+    # title into an id, so shipping ratings and weights to it is dead weight.
+    idx = {}
+    for g in out:
+        idx.setdefault(g["k"], g["i"])
+        for k in g.get("a", []):
+            idx.setdefault(k, g["i"])
+    ipath = os.path.join(DATA, "index.json")
+    with open(ipath, "w", encoding="utf-8") as f:
+        json.dump({"built": time.strftime("%Y-%m-%d"), "k": idx},
+                  f, ensure_ascii=False, separators=(",", ":"))
+
     save_progress(reached)
     size = os.path.getsize(path)
+    isize = os.path.getsize(ipath)
     with open(os.path.join(DATA, "meta.json"), "w") as f:
         json.dump({"built": time.strftime("%Y-%m-%d %H:%M UTC"),
                    "count": len(out), "bytes": size,
+                   "index_keys": len(idx), "index_bytes": isize,
                    "swept_to": reached, "carried_forward": carried}, f, indent=2)
     if final:
-        log("wrote %d games (%d new), %.0f KB" % (len(out), len(out) - carried, size / 1024))
+        log("wrote %d games (%d new), %.0f KB; index %d keys, %.0f KB"
+            % (len(out), len(out) - carried, size / 1024, len(idx), isize / 1024))
 
 
 REJECTS = {"n": 0}
