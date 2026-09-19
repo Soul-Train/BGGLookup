@@ -1,11 +1,13 @@
 ﻿BGG ID,Name,Year,Average,Geek Rating,Weight,Rank,Ratings,Is Expansion,BGG Link
 161936,Pandemic Legacy: Season 1,2015,8.5,8.34,2.83,3,57835,No,https://boardgamegeek.com/boardgame/161936
 115746,War of the Ring: Second Edition,2011,8.55,8.2,4.23,8,25583,No,https://boardgamegeek.com/boardgame/115746
+167791,Terraforming Mars,2016,8.33,8.18,3.27,9,115016,No,https://boardgamegeek.com/boardgame/167791
 162886,Spirit Island,2017,8.34,8.14,4.08,11,64683,No,https://boardgamegeek.com/boardgame/162886
 12333,Twilight Struggle,2005,8.23,8.04,3.61,16,52458,No,https://boardgamegeek.com/boardgame/12333
 84876,The Castles of Burgundy,2011,8.16,8.03,2.97,17,70565,No,https://boardgamegeek.com/boardgame/84876
 28720,Brass: Lancashire,2007,8.2,7.96,3.84,22,27727,No,https://boardgamegeek.com/boardgame/28720
 167355,Nemesis,2018,8.24,7.95,3.49,25,38278,No,https://boardgamegeek.com/boardgame/167355
+169786,Scythe,2016,8.09,7.94,3.45,27,94612,No,https://boardgamegeek.com/boardgame/169786
 124361,Concordia,2013,8.07,7.92,2.98,29,46384,No,https://boardgamegeek.com/boardgame/124361
 164928,Orléans,2014,8.05,7.86,3.01,35,36166,No,https://boardgamegeek.com/boardgame/164928
 120677,Terra Mystica,2012,8.03,7.86,3.97,36,51403,No,https://boardgamegeek.com/boardgame/120677
@@ -16,6 +18,7 @@
 3076,Puerto Rico,2002,7.9,7.75,3.27,58,74767,No,https://boardgamegeek.com/boardgame/3076
 102794,Caverna: The Cave Farmers,2013,7.92,7.73,3.78,63,37621,No,https://boardgamegeek.com/boardgame/102794
 31260,Agricola,2007,7.85,7.72,3.64,66,77299,No,https://boardgamegeek.com/boardgame/31260
+170216,Blood Rage,2015,7.89,7.72,2.88,67,52396,No,https://boardgamegeek.com/boardgame/170216
 161533,Lisboa,2017,8.16,7.71,4.56,71,13129,No,https://boardgamegeek.com/boardgame/161533
 40849,Pandemic: On the Brink,2009,8.03,7.69,2.65,,18452,Yes,https://boardgamegeek.com/boardgame/40849
 2651,Power Grid,2004,7.8,7.68,3.25,76,70120,No,https://boardgamegeek.com/boardgame/2651
@@ -47,6 +50,7 @@
 40834,Dominion: Intrigue,2009,7.69,7.5,2.41,135,34847,No,https://boardgamegeek.com/boardgame/40834
 154842,Eldritch Horror: Forsaken Lore,2014,8.31,7.5,3.17,,7171,Yes,https://boardgamegeek.com/boardgame/154842
 122515,Keyflower,2012,7.71,7.5,3.33,136,24833,No,https://boardgamegeek.com/boardgame/122515
+170042,Raiders of the North Sea,2015,7.72,7.5,2.57,137,26751,No,https://boardgamegeek.com/boardgame/170042
 18602,Caylus,2005,7.7,7.49,3.79,142,29999,No,https://boardgamegeek.com/boardgame/18602
 146021,Eldritch Horror,2013,7.74,7.49,3.32,140,39385,No,https://boardgamegeek.com/boardgame/146021
 73439,Troyes,2010,7.7,7.49,3.37,143,25305,No,https://boardgamegeek.com/boardgame/73439
@@ -100,6 +104,7 @@
 70149,Ora et Labora,2011,7.67,7.29,3.89,248,11693,No,https://boardgamegeek.com/boardgame/70149
 17133,Railways of the World,2005,7.66,7.29,3.02,245,12632,No,https://boardgamegeek.com/boardgame/17133
 148228,Splendor,2014,7.42,7.29,1.77,244,91601,No,https://boardgamegeek.com/boardgame/148228
+171131,Captain Sonar,2016,7.5,7.28,2.2,249,24134,No,https://boardgamegeek.com/boardgame/171131
 125403,Dominion: Dark Ages,2012,7.98,7.28,2.7,,6744,Yes,https://boardgamegeek.com/boardgame/125403
 104006,Village,2011,7.48,7.28,3.06,250,24582,No,https://boardgamegeek.com/boardgame/104006
 14105,Commands & Colors: Ancients,2006,7.77,7.27,2.69,257,9151,No,https://boardgamegeek.com/boardgame/14105
@@ -125,6 +130,7 @@
 19857,Glory to Rome,2005,7.49,7.21,2.93,298,14982,No,https://boardgamegeek.com/boardgame/19857
 19777,Indonesia,2005,7.94,7.21,3.98,302,5500,No,https://boardgamegeek.com/boardgame/19777
 156546,Monikers,2015,7.75,7.2,1.09,305,7986,No,https://boardgamegeek.com/boardgame/156546
+169426,Roll Player,2016,7.42,7.2,2.42,307,22779,No,https://boardgamegeek.com/boardgame/169426
 555,The Princes of Florence,2000,7.49,7.2,3.24,311,16132,No,https://boardgamegeek.com/boardgame/555
 127067,King of Tokyo: Power Up!,2012,7.58,7.19,1.72,,12034,Yes,https://boardgamegeek.com/boardgame/127067
 421,1830: Railways & Robber Barons,1986,7.87,7.18,4.17,320,6049,No,https://boardgamegeek.com/boardgame/421
@@ -240,6 +246,7 @@
 17392,Here I Stand,2006,7.88,6.96,4.2,555,4069,No,https://boardgamegeek.com/boardgame/17392
 27162,Kingsburg,2007,7.16,6.96,2.42,557,20170,No,https://boardgamegeek.com/boardgame/27162
 25031,Power Grid: Benelux/Central Europe,2006,8.01,6.96,3.14,,3401,Yes,https://boardgamegeek.com/boardgame/25031
+170771,Sword & Sorcery: Immortal Souls,2017,7.86,6.96,4.12,560,5457,No,https://boardgamegeek.com/boardgame/170771
 158899,Colt Express,2014,7.1,6.95,1.83,566,35847,No,https://boardgamegeek.com/boardgame/158899
 62222,Commands & Colors: Napoleonics,2010,8.05,6.95,2.74,568,3561,No,https://boardgamegeek.com/boardgame/62222
 144189,Fire in the Lake,2014,8.06,6.95,4.17,570,3418,No,https://boardgamegeek.com/boardgame/144189
@@ -265,6 +272,7 @@
 96913,Lancaster,2011,7.38,6.93,2.99,591,7952,No,https://boardgamegeek.com/boardgame/96913
 98778,Hanabi,2010,7.03,6.92,1.69,608,53140,No,https://boardgamegeek.com/boardgame/98778
 20437,Lords of Vegas,2010,7.35,6.92,2.34,610,8205,No,https://boardgamegeek.com/boardgame/20437
+169427,Middara: Unintentional Malum – Act 1,2019,8.49,6.92,4.14,606,2869,No,https://boardgamegeek.com/boardgame/169427
 15062,Shadows over Camelot,2005,7.1,6.92,2.57,602,28620,No,https://boardgamegeek.com/boardgame/15062
 81618,Small World: Be Not Afraid...,2010,7.58,6.92,2.27,,5604,Yes,https://boardgamegeek.com/boardgame/81618
 177,Advanced Civilization,1991,8.01,6.91,3.65,,3417,Yes,https://boardgamegeek.com/boardgame/177
@@ -295,6 +303,7 @@
 29416,Power Grid: The New Power Plants – Set 1,2007,7.79,6.88,2.99,,3664,Yes,https://boardgamegeek.com/boardgame/29416
 17405,1846: The Race for the Midwest,2005,7.86,6.87,3.99,665,3293,No,https://boardgamegeek.com/boardgame/17405
 153938,Camel Up,2014,7.03,6.87,1.5,652,29425,No,https://boardgamegeek.com/boardgame/153938
+170624,Crusaders: Thy Will Be Done,2018,7.48,6.87,2.46,657,5558,No,https://boardgamegeek.com/boardgame/170624
 91312,Discworld: Ankh-Morpork,2011,7.26,6.87,2.21,660,10954,No,https://boardgamegeek.com/boardgame/91312
 28023,Jamaica,2007,7.06,6.87,1.66,653,22519,No,https://boardgamegeek.com/boardgame/28023
 62227,"Labyrinth: The War on Terror, 2001 – ?",2010,7.56,6.87,3.69,659,5237,No,https://boardgamegeek.com/boardgame/62227
@@ -311,6 +320,7 @@
 125618,Libertalia,2012,7.1,6.86,2.23,673,14834,No,https://boardgamegeek.com/boardgame/125618
 146791,Shadows of Brimstone: City of the Ancients,2014,7.95,6.86,3.38,669,4114,No,https://boardgamegeek.com/boardgame/146791
 432,Take 5,1994,6.99,6.86,1.19,674,33179,No,https://boardgamegeek.com/boardgame/432
+170561,Valeria: Card Kingdoms,2016,7.43,6.86,1.96,672,6499,No,https://boardgamegeek.com/boardgame/170561
 90419,Airlines Europe,2011,7.29,6.85,2.43,693,7637,No,https://boardgamegeek.com/boardgame/90419
 4390,Carcassonne: Hunters and Gatherers,2002,7.13,6.85,1.92,698,13839,No,https://boardgamegeek.com/boardgame/4390
 2346,DVONN,2001,7.44,6.85,2.65,684,5803,No,https://boardgamegeek.com/boardgame/2346
@@ -383,6 +393,7 @@
 143519,Quantum,2013,7.22,6.78,2.48,791,8014,No,https://boardgamegeek.com/boardgame/143519
 135219,The Battle of Five Armies,2014,7.82,6.78,3.6,796,3244,No,https://boardgamegeek.com/boardgame/135219
 1353,Time's Up!,1999,7.28,6.78,1.2,802,6313,No,https://boardgamegeek.com/boardgame/1353
+169255,A Game of Thrones: The Card Game (Second Edition),2015,7.48,6.77,3.53,820,5202,No,https://boardgamegeek.com/boardgame/169255
 141648,Battlestar Galactica: The Board Game – Daybreak Expansion,2013,8.27,6.77,3.64,,2166,Yes,https://boardgamegeek.com/boardgame/141648
 96778,Cyclades: Hades,2011,7.98,6.77,2.89,,2757,Yes,https://boardgamegeek.com/boardgame/96778
 100423,Elder Sign,2011,6.97,6.77,2.34,804,26426,No,https://boardgamegeek.com/boardgame/100423
@@ -408,6 +419,7 @@
 167400,Ashes Reborn: Rise of the Phoenixborn,2015,7.3,6.73,2.91,870,6427,No,https://boardgamegeek.com/boardgame/167400
 7717,Carcassonne: The Castle,2003,7.11,6.73,1.99,864,8752,No,https://boardgamegeek.com/boardgame/7717
 30380,Cuba,2007,7.12,6.73,3.26,868,8532,No,https://boardgamegeek.com/boardgame/30380
+168584,Love Letter: Batman,2015,7.28,6.73,1.19,877,5905,No,https://boardgamegeek.com/boardgame/168584
 156336,Onirim (Second Edition),2014,7.03,6.73,1.61,871,11300,No,https://boardgamegeek.com/boardgame/156336
 45,Perudo,1800,6.93,6.73,1.25,875,17117,No,https://boardgamegeek.com/boardgame/45
 119432,Snowdonia,2012,7.3,6.73,2.99,872,5169,No,https://boardgamegeek.com/boardgame/119432
@@ -433,6 +445,7 @@
 30323,Hive: The Mosquito,2007,7.56,6.71,2.23,,3652,Yes,https://boardgamegeek.com/boardgame/30323
 16747,Tumblin' Dice,2004,7.27,6.71,1.05,906,5268,No,https://boardgamegeek.com/boardgame/16747
 165401,Wir sind das Volk!,2014,7.76,6.71,3.75,896,2858,No,https://boardgamegeek.com/boardgame/165401
+168435,Between Two Cities,2015,6.97,6.7,1.81,914,11874,No,https://boardgamegeek.com/boardgame/168435
 21882,Blue Moon City,2006,7.04,6.7,2.29,931,9056,No,https://boardgamegeek.com/boardgame/21882
 153971,Cosmic Encounter: Cosmic Dominion,2014,8.42,6.7,3.05,,1739,Yes,https://boardgamegeek.com/boardgame/153971
 155820,Cyclades: Titans,2014,8.02,6.7,3.06,,2309,Yes,https://boardgamegeek.com/boardgame/155820
@@ -451,6 +464,7 @@
 30450,Railways of Europe,2008,8.05,6.69,2.94,,2069,Yes,https://boardgamegeek.com/boardgame/30450
 155624,Specter Ops,2015,7.15,6.69,2.39,936,6642,No,https://boardgamegeek.com/boardgame/155624
 9823,Advanced Squad Leader: Starter Kit #1,2004,7.84,6.68,3.76,956,2800,No,https://boardgamegeek.com/boardgame/9823
+169654,Deep Sea Adventure,2014,6.86,6.68,1.19,948,21374,No,https://boardgamegeek.com/boardgame/169654
 145325,Dixit: Origins,2013,7.71,6.68,1.27,,2924,Yes,https://boardgamegeek.com/boardgame/145325
 73171,Earth Reborn,2010,7.59,6.68,3.9,964,3394,No,https://boardgamegeek.com/boardgame/73171
 68425,Eminent Domain,2011,6.96,6.68,2.51,955,10768,No,https://boardgamegeek.com/boardgame/68425
@@ -464,6 +478,7 @@
 129432,Star Wars: X-Wing Miniatures Game – Millennium Falcon Expansion Pack,2013,8.1,6.67,2.4,,2152,Yes,https://boardgamegeek.com/boardgame/129432
 116998,Thunderstone Advance: Towers of Ruin,2012,7.31,6.67,2.75,978,4811,No,https://boardgamegeek.com/boardgame/116998
 47185,Warhammer: Invasion,2009,7.23,6.67,2.74,975,6154,No,https://boardgamegeek.com/boardgame/47185
+171273,FUSE,2015,6.98,6.66,1.66,993,9323,No,https://boardgamegeek.com/boardgame/171273
 131260,Qwixx,2012,6.88,6.66,1.11,992,15840,No,https://boardgamegeek.com/boardgame/131260
 156943,Saint Petersburg (Second Edition),2014,7.45,6.66,2.67,986,3625,No,https://boardgamegeek.com/boardgame/156943
 55600,Shipyard,2009,7.31,6.66,3.5,998,4244,No,https://boardgamegeek.com/boardgame/55600
@@ -476,6 +491,7 @@
 2163,Space Hulk,1989,7.49,6.65,2.5,1020,3952,No,https://boardgamegeek.com/boardgame/2163
 162286,Super Motherload,2015,7.32,6.65,2.27,1008,4254,No,https://boardgamegeek.com/boardgame/162286
 30645,Tammany Hall,2007,7.26,6.65,2.77,1022,4674,No,https://boardgamegeek.com/boardgame/30645
+170416,Vast: The Crystal Caverns,2016,7.08,6.65,3.65,1009,7404,No,https://boardgamegeek.com/boardgame/170416
 104590,Castle Panic: The Wizard's Tower,2011,7.44,6.64,2.07,,3595,Yes,https://boardgamegeek.com/boardgame/104590
 29298,Descent: The Road to Legend,2008,7.98,6.64,3.68,,2289,Yes,https://boardgamegeek.com/boardgame/29298
 91872,Dungeons & Dragons: The Legend of Drizzt Board Game,2011,7.2,6.64,2.59,1038,6687,No,https://boardgamegeek.com/boardgame/91872
@@ -584,6 +600,7 @@
 139898,Brew Crafters,2013,7.35,6.55,3.58,1215,3228,No,https://boardgamegeek.com/boardgame/139898
 240,Britannia,1986,7.18,6.55,3.16,1216,4393,No,https://boardgamegeek.com/boardgame/240
 40793,Dice Town,2009,6.87,6.55,1.69,1229,8268,No,https://boardgamegeek.com/boardgame/40793
+169124,Flick 'em Up!,2015,6.84,6.55,1.35,1225,9495,No,https://boardgamegeek.com/boardgame/169124
 106217,Hawaii,2011,7.1,6.55,2.9,1227,4708,No,https://boardgamegeek.com/boardgame/106217
 134352,Two Rooms and a Boom,2013,6.98,6.55,1.48,1230,6369,No,https://boardgamegeek.com/boardgame/134352
 65901,Age of Industry,2010,7.34,6.54,3.35,1247,3129,No,https://boardgamegeek.com/boardgame/65901
@@ -649,8 +666,10 @@
 131646,Merchant of Venus (Second Edition),2012,7.12,6.49,3.01,1365,3989,No,https://boardgamegeek.com/boardgame/131646
 55427,Mr. Jack in New York,2009,7.17,6.49,2.52,1380,3744,No,https://boardgamegeek.com/boardgame/55427
 24068,Shadow Hunters,2005,6.83,6.49,1.82,1366,9328,No,https://boardgamegeek.com/boardgame/24068
+168917,Smash Up: Pretty Pretty Smash Up,2015,7.22,6.49,2.12,1379,3726,No,https://boardgamegeek.com/boardgame/168917
 165838,Space Hulk (Fourth Edition),2014,7.94,6.49,2.71,1373,1934,No,https://boardgamegeek.com/boardgame/165838
 97903,Terror in Meeple City,2013,6.82,6.49,1.48,1372,7722,No,https://boardgamegeek.com/boardgame/97903
+171233,The Big Book of Madness,2015,6.86,6.49,2.7,1377,7278,No,https://boardgamegeek.com/boardgame/171233
 144384,Tokaido: Crossroads,2013,7.47,6.49,1.89,,2603,Yes,https://boardgamegeek.com/boardgame/144384
 6830,Zendo,2001,7.2,6.49,2.52,1369,3457,No,https://boardgamegeek.com/boardgame/6830
 66837,1862: Railway Mania in the Eastern Counties,2013,8.15,6.48,4.59,1391,1419,No,https://boardgamegeek.com/boardgame/66837
@@ -719,6 +738,7 @@
 22605,Commands & Colors: Ancients Expansion Pack #1 – Greece & Eastern Kingdoms,2006,8.28,6.44,2.49,,1270,Yes,https://boardgamegeek.com/boardgame/22605
 149155,Dead Man's Draw,2014,6.86,6.44,1.32,1487,6390,No,https://boardgamegeek.com/boardgame/149155
 147736,Firefly: The Game – Breakin' Atmo,2013,7.8,6.44,2.61,,1798,Yes,https://boardgamegeek.com/boardgame/147736
+169075,Imperial Settlers: Why Can't We Be Friends,2014,7.53,6.44,2.62,,2134,Yes,https://boardgamegeek.com/boardgame/169075
 1526,PitchCar: Extension 1,1997,7.61,6.44,1.09,,1906,Yes,https://boardgamegeek.com/boardgame/1526
 156091,Sons of Anarchy: Men of Mayhem,2014,7.22,6.44,2.58,1498,3122,No,https://boardgamegeek.com/boardgame/156091
 61492,Space Alert: The New Frontier,2010,8.42,6.44,3.33,,1170,Yes,https://boardgamegeek.com/boardgame/61492
@@ -810,6 +830,7 @@
 137649,Level 7 [Omega Protocol],2013,7.41,6.38,3.18,1652,2203,No,https://boardgamegeek.com/boardgame/137649
 167270,Medina (Second Edition),2014,7.26,6.38,2.38,1656,2361,No,https://boardgamegeek.com/boardgame/167270
 50768,Ninjato,2011,7.15,6.38,2.76,1663,2766,No,https://boardgamegeek.com/boardgame/50768
+168703,Pandemic: State of Emergency,2015,7.56,6.38,2.65,,2029,Yes,https://boardgamegeek.com/boardgame/168703
 3228,Pueblo,2002,6.98,6.38,2.23,1652,3541,No,https://boardgamegeek.com/boardgame/3228
 119591,Rialto,2013,6.89,6.38,2.55,1653,4172,No,https://boardgamegeek.com/boardgame/119591
 102889,Runewars: Banners of War,2011,8.23,6.38,3.87,,1237,Yes,https://boardgamegeek.com/boardgame/102889
@@ -965,6 +986,7 @@
 125099,Core Worlds: Galactic Orders,2012,7.86,6.28,3.0,,1158,Yes,https://boardgamegeek.com/boardgame/125099
 101785,D-Day Dice,2012,6.8,6.28,2.04,1973,3696,No,https://boardgamegeek.com/boardgame/101785
 138431,Galaxy Defenders,2014,7.41,6.28,3.23,1961,1841,No,https://boardgamegeek.com/boardgame/138431
+169794,Haspelknecht: The Story of Early Coal Mining,2015,7.2,6.28,3.1,1963,2081,No,https://boardgamegeek.com/boardgame/169794
 115,I'm the Boss!,1994,6.77,6.28,1.97,1964,4191,No,https://boardgamegeek.com/boardgame/115
 57925,La Habana,2009,6.83,6.28,2.22,1981,3376,No,https://boardgamegeek.com/boardgame/57925
 84406,Memoir '44: Winter Wars,2010,8.19,6.28,2.33,,1075,Yes,https://boardgamegeek.com/boardgame/84406
@@ -1062,6 +1084,7 @@
 39861,Memoir '44: Campaign Book Volume 1,2009,8.22,6.23,2.42,,925,Yes,https://boardgamegeek.com/boardgame/39861
 41010,My First Carcassonne,2009,6.65,6.23,1.13,2155,4960,No,https://boardgamegeek.com/boardgame/41010
 13308,Niagara,2004,6.46,6.23,1.83,2152,9133,No,https://boardgamegeek.com/boardgame/13308
+170604,Renegade,2018,7.61,6.23,3.71,2120,1350,No,https://boardgamegeek.com/boardgame/170604
 27627,Talisman: Revised 4th Edition,2007,6.51,6.23,2.17,2160,16305,No,https://boardgamegeek.com/boardgame/27627
 43868,The Adventurers: The Temple of Chac,2009,6.6,6.23,1.66,2158,4951,No,https://boardgamegeek.com/boardgame/43868
 123695,The Lord of the Rings: The Card Game – The Hobbit: Over Hill and Under Hill,2012,7.84,6.23,3.16,,1131,Yes,https://boardgamegeek.com/boardgame/123695
@@ -1074,6 +1097,7 @@
 12750,1860: Railways on the Isle of Wight,2004,7.82,6.22,4.13,2173,1061,No,https://boardgamegeek.com/boardgame/12750
 526,Abalone,1987,6.49,6.22,2.15,2189,8439,No,https://boardgamegeek.com/boardgame/526
 41933,Arctic Scavengers,2009,6.73,6.22,2.27,2181,3616,No,https://boardgamegeek.com/boardgame/41933
+168609,"Artifacts, Inc.",2014,6.73,6.22,2.14,2196,3435,No,https://boardgamegeek.com/boardgame/168609
 5072,Carrom,,7.1,6.22,1.46,2167,2048,No,https://boardgamegeek.com/boardgame/5072
 6351,Gulo Gulo,2003,6.83,6.22,1.08,2202,2871,No,https://boardgamegeek.com/boardgame/6351
 47055,High Frontier,2010,7.34,6.22,4.35,2204,1568,No,https://boardgamegeek.com/boardgame/47055
@@ -1099,6 +1123,7 @@
 986,Babel,2000,6.64,6.21,2.4,2215,4184,No,https://boardgamegeek.com/boardgame/986
 88827,Battle Cry: 150th Civil War Anniversary Edition,2010,7.67,6.21,2.07,2229,1303,No,https://boardgamegeek.com/boardgame/88827
 142131,Dominion: Big Box,2010,7.94,6.21,2.72,,1084,No,https://boardgamegeek.com/boardgame/142131
+171011,Favor of the Pharaoh,2015,6.78,6.21,2.02,2210,3131,No,https://boardgamegeek.com/boardgame/171011
 32125,Felicity: The Cat in the Sack,2007,6.56,6.21,1.4,2209,5160,No,https://boardgamegeek.com/boardgame/32125
 1762,HeroQuest: Kellar's Keep,1989,7.3,6.21,2.12,,1833,Yes,https://boardgamegeek.com/boardgame/1762
 49,Mamma Mia!,1998,6.49,6.21,1.36,2222,6604,No,https://boardgamegeek.com/boardgame/49
@@ -1125,6 +1150,7 @@
 103092,Helvetia,2011,6.97,6.2,3.05,2264,2126,No,https://boardgamegeek.com/boardgame/103092
 1761,HeroQuest: Return of the Witch Lord,1991,7.36,6.2,2.18,,1724,Yes,https://boardgamegeek.com/boardgame/1761
 21920,Leonardo da Vinci,2006,6.72,6.2,3.18,2249,3465,No,https://boardgamegeek.com/boardgame/21920
+169611,Love Letter: The Hobbit – The Battle of the Five Armies,2015,7.13,6.2,1.26,2255,1953,No,https://boardgamegeek.com/boardgame/169611
 140,Pit,1903,6.41,6.2,1.15,2266,10340,No,https://boardgamegeek.com/boardgame/140
 91984,Québec,2011,7.14,6.2,2.98,2276,1767,No,https://boardgamegeek.com/boardgame/91984
 30658,Rise of Empires,2009,7.01,6.2,3.54,2253,2108,No,https://boardgamegeek.com/boardgame/30658
@@ -1193,6 +1219,7 @@
 21551,SPQR (Deluxe Edition),2008,8.03,6.17,3.91,2364,955,No,https://boardgamegeek.com/boardgame/21551
 165458,Small World: A Spider's Web,2014,7.48,6.17,2.08,,1289,Yes,https://boardgamegeek.com/boardgame/165458
 113289,Snake Oil,2010,6.65,6.17,1.13,2371,3685,No,https://boardgamegeek.com/boardgame/113289
+167889,Star Wars: Imperial Assault – Han Solo Ally Pack,2015,8.01,6.17,2.7,,1000,Yes,https://boardgamegeek.com/boardgame/167889
 37387,Steel Driver,2008,6.96,6.17,2.8,2389,1989,No,https://boardgamegeek.com/boardgame/37387
 67051,Talisman (Revised 4th Edition): The Highland Expansion,2010,7.31,6.17,2.3,,1643,Yes,https://boardgamegeek.com/boardgame/67051
 85005,The Boss,2010,6.78,6.17,1.79,2359,2802,No,https://boardgamegeek.com/boardgame/85005
@@ -1210,6 +1237,7 @@
 37911,Memoir '44: Operation Overlord,2008,7.77,6.16,2.45,,1048,Yes,https://boardgamegeek.com/boardgame/37911
 38992,Royal Palace,2008,6.85,6.16,2.78,2410,2275,No,https://boardgamegeek.com/boardgame/38992
 22245,Royal Visit,2006,6.71,6.16,1.66,2392,3105,No,https://boardgamegeek.com/boardgame/22245
+167886,Star Wars: Imperial Assault – Chewbacca Ally Pack,2015,8.01,6.16,2.67,,973,Yes,https://boardgamegeek.com/boardgame/167886
 110926,The Castles of Burgundy: 1st Expansion – New Player Boards,2011,7.93,6.16,2.89,,897,Yes,https://boardgamegeek.com/boardgame/110926
 122967,Thunderstone Advance: Caverns of Bane,2012,7.73,6.16,2.69,,1044,Yes,https://boardgamegeek.com/boardgame/122967
 146418,Warhammer: Diskwars,2013,7.07,6.16,2.77,2393,2086,No,https://boardgamegeek.com/boardgame/146418
@@ -1238,6 +1266,7 @@
 42047,A Touch of Evil: Something Wicked Expansion,2009,7.72,6.14,2.91,,1093,Yes,https://boardgamegeek.com/boardgame/42047
 56931,Arena: Roma II,2009,6.86,6.14,1.94,2477,2194,No,https://boardgamegeek.com/boardgame/56931
 157026,Ascension: Realms Unraveled,2014,7.51,6.14,2.16,2501,1213,No,https://boardgamegeek.com/boardgame/157026
+168681,Beyond Baker Street,2016,6.8,6.14,2.17,2509,2314,No,https://boardgamegeek.com/boardgame/168681
 33458,"Carcassonne: Expansion 6 – Count, King & Robber",2007,6.86,6.14,2.19,,2474,Yes,https://boardgamegeek.com/boardgame/33458
 7707,Carcassonne: King & Scout,2003,6.6,6.14,1.8,,3868,Yes,https://boardgamegeek.com/boardgame/7707
 143404,Castellion,2015,6.86,6.14,2.11,2495,2256,No,https://boardgamegeek.com/boardgame/143404
@@ -1267,6 +1296,7 @@
 442,Um Reifenbreite,1979,6.77,6.14,1.96,2481,2514,No,https://boardgamegeek.com/boardgame/442
 143401,Yunnan,2013,7.13,6.14,3.16,2480,1580,No,https://boardgamegeek.com/boardgame/143401
 7858,Ardennes '44: The Battle of the Bulge,2003,7.99,6.13,3.68,2539,900,No,https://boardgamegeek.com/boardgame/7858
+169318,City of Spies: Estoril 1942,2015,6.99,6.13,2.49,2550,1802,No,https://boardgamegeek.com/boardgame/169318
 118174,Compounded,2013,6.69,6.13,2.44,2557,2876,No,https://boardgamegeek.com/boardgame/118174
 17710,Conquest of the Empire,2005,6.72,6.13,3.07,2531,3099,No,https://boardgamegeek.com/boardgame/17710
 153318,Dimension,2014,6.85,6.13,1.4,2528,2237,No,https://boardgamegeek.com/boardgame/153318
@@ -1293,6 +1323,7 @@
 65515,Nuns on the Run,2010,6.49,6.12,2.07,2578,4319,No,https://boardgamegeek.com/boardgame/65515
 130060,Ohne Furcht und Adel Sonderausgabe,2012,7.03,6.12,2.35,2571,1815,No,https://boardgamegeek.com/boardgame/130060
 1234,Once Upon a Time: The Storytelling Card Game,1993,6.35,6.12,1.37,2573,9297,No,https://boardgamegeek.com/boardgame/1234
+169416,Pathfinder Adventure Card Game: Wrath of the Righteous – Base Set,2015,7.44,6.12,3.09,2586,1243,No,https://boardgamegeek.com/boardgame/169416
 125752,Race! Formula 90,2013,7.88,6.12,3.56,2584,933,No,https://boardgamegeek.com/boardgame/125752
 141736,Sail to India,2013,6.66,6.12,2.21,2591,2738,No,https://boardgamegeek.com/boardgame/141736
 109291,Sails of Glory,2013,7.5,6.12,2.94,2598,1222,No,https://boardgamegeek.com/boardgame/109291
@@ -1318,6 +1349,7 @@
 149975,Las Vegas: Boulevard,2014,7.36,6.11,1.67,,1148,Yes,https://boardgamegeek.com/boardgame/149975
 143063,Last Will: Getting Sacked,2013,7.52,6.11,2.67,,1070,Yes,https://boardgamegeek.com/boardgame/143063
 160154,Machi Koro: Millionaire's Row,2014,6.71,6.11,1.76,,2587,Yes,https://boardgamegeek.com/boardgame/160154
+168998,Marvel Dice Masters: Age of Ultron,2015,7.18,6.11,2.44,2635,1426,No,https://boardgamegeek.com/boardgame/168998
 13551,Oltre Mare,2004,6.64,6.11,2.51,2646,2818,No,https://boardgamegeek.com/boardgame/13551
 1295,Pente,1977,6.65,6.11,2.08,2636,3266,No,https://boardgamegeek.com/boardgame/1295
 17053,Sleeping Queens,2005,6.47,6.11,1.06,2649,5510,No,https://boardgamegeek.com/boardgame/17053
@@ -1428,11 +1460,13 @@
 36946,Red November,2008,6.29,6.08,2.07,2778,8225,No,https://boardgamegeek.com/boardgame/36946
 8107,Risk: The Lord of the Rings Trilogy Edition,2003,6.58,6.08,2.36,2804,4140,No,https://boardgamegeek.com/boardgame/8107
 47389,Roll Through the Ages: The Late Bronze Age,2009,7.29,6.08,1.81,,1120,Yes,https://boardgamegeek.com/boardgame/47389
+168788,Rum & Bones,2015,6.86,6.08,2.34,2783,1952,No,https://boardgamegeek.com/boardgame/168788
 89910,"Run, Fight, or Die!",2014,6.82,6.08,1.94,2808,1987,No,https://boardgamegeek.com/boardgame/89910
 66214,Samarkand: Routes to Riches,2010,6.86,6.08,2.27,2774,1806,No,https://boardgamegeek.com/boardgame/66214
 126951,Sentinels of the Multiverse: Ambuscade Villain Character,2012,7.67,6.08,2.21,,919,Yes,https://boardgamegeek.com/boardgame/126951
 94964,Space Hulk: Death Angel – The Card Game: Mission Pack 1,2011,7.41,6.08,2.15,,1117,Yes,https://boardgamegeek.com/boardgame/94964
 1270,Star Wars Customizable Card Game,1995,6.76,6.08,3.17,2823,2462,No,https://boardgamegeek.com/boardgame/1270
+167885,Star Wars: Imperial Assault – IG-88 Villain Pack,2015,7.91,6.08,2.88,,854,Yes,https://boardgamegeek.com/boardgame/167885
 113225,Summoner Wars: The Filth Faction Deck,2012,8.06,6.08,2.52,,728,Yes,https://boardgamegeek.com/boardgame/113225
 35761,Sylla,2008,6.71,6.08,3.11,2816,2195,No,https://boardgamegeek.com/boardgame/35761
 6779,The Ark of the Covenant,2003,6.95,6.08,1.93,2788,1627,No,https://boardgamegeek.com/boardgame/6779
@@ -1543,17 +1577,20 @@
 10997,Boomtown,2004,6.53,6.04,1.69,3010,2713,No,https://boardgamegeek.com/boardgame/10997
 4491,Cave Troll,2002,6.41,6.04,1.98,2988,3897,No,https://boardgamegeek.com/boardgame/4491
 31483,Constantinopolis,2010,6.87,6.04,3.12,3020,1619,No,https://boardgamegeek.com/boardgame/31483
+170587,Don't Mess with Cthulhu,2014,6.82,6.04,1.15,3021,1709,No,https://boardgamegeek.com/boardgame/170587
 92044,Dungeons & Dragons: Conquest of Nerath Board Game,2011,6.93,6.04,2.64,3004,1669,No,https://boardgamegeek.com/boardgame/92044
 29972,El Capitán,2007,6.76,6.04,2.92,2998,1844,No,https://boardgamegeek.com/boardgame/29972
 3085,Gang of Four,1990,6.62,6.04,1.86,2986,2545,No,https://boardgamegeek.com/boardgame/3085
 118705,Ghost Blitz 2,2012,6.73,6.04,1.17,2997,2130,No,https://boardgamegeek.com/boardgame/118705
 156138,Happy Pigs,2013,6.76,6.04,2.3,2984,1869,No,https://boardgamegeek.com/boardgame/156138
+169147,Letter Tycoon,2015,6.75,6.04,2.0,3028,1907,No,https://boardgamegeek.com/boardgame/169147
 16,MarraCash,1996,7.01,6.04,2.16,3022,1300,No,https://boardgamegeek.com/boardgame/16
 20660,Munchkin 4: The Need for Steed,2005,6.53,6.04,1.86,,3922,Yes,https://boardgamegeek.com/boardgame/20660
 43262,Neuroshima Hex! Duel,2009,7.56,6.04,2.62,,872,No,https://boardgamegeek.com/boardgame/43262
 138704,Northern Pacific,2013,7.04,6.04,1.45,2996,1253,No,https://boardgamegeek.com/boardgame/138704
 37120,Pack & Stack,2008,6.44,6.04,1.27,3019,3266,No,https://boardgamegeek.com/boardgame/37120
 108667,Power Grid: The Robots,2011,7.06,6.04,2.95,,1312,Yes,https://boardgamegeek.com/boardgame/108667
+167884,Star Wars: Imperial Assault – Royal Guard Champion Villain Pack,2015,7.93,6.04,2.93,,783,Yes,https://boardgamegeek.com/boardgame/167884
 114351,The Lord of the Rings: The Card Game – The Watcher in the Water,2012,7.87,6.04,2.8,,730,Yes,https://boardgamegeek.com/boardgame/114351
 72,Verräter,1998,6.68,6.04,2.57,3007,2033,No,https://boardgamegeek.com/boardgame/72
 163841,18CZ,2017,7.61,6.03,4.17,3053,804,No,https://boardgamegeek.com/boardgame/163841
@@ -1614,6 +1651,7 @@
 32441,Bezzerwizzer,2007,6.42,6.01,1.52,3142,3690,No,https://boardgamegeek.com/boardgame/32441
 15839,Bonaparte at Marengo,2003,7.4,6.01,3.18,3149,889,No,https://boardgamegeek.com/boardgame/15839
 90305,Cargo Noir,2011,6.44,6.01,2.09,3139,3087,No,https://boardgamegeek.com/boardgame/90305
+169784,Castle Panic: The Dark Titan,2015,7.23,6.01,2.0,,1054,Yes,https://boardgamegeek.com/boardgame/169784
 8172,Coyote,2003,6.63,6.01,1.18,3175,2031,No,https://boardgamegeek.com/boardgame/8172
 118418,Divinare,2012,6.72,6.01,1.78,3147,1726,No,https://boardgamegeek.com/boardgame/118418
 80771,Dungeon Raiders,2011,6.63,6.01,1.39,3174,2175,No,https://boardgamegeek.com/boardgame/80771
@@ -1645,6 +1683,7 @@
 130882,Cardline: Animals,2012,6.54,6.0,1.12,3204,2340,No,https://boardgamegeek.com/boardgame/130882
 244,Circus Maximus,1979,6.78,6.0,2.62,3200,1715,No,https://boardgamegeek.com/boardgame/244
 41985,Combat Commander: Battle Pack #3 – Normandy,2010,8.54,6.0,2.98,,490,Yes,https://boardgamegeek.com/boardgame/41985
+167763,DC Deck-Building Game: Teen Titans,2015,7.26,6.0,2.13,3238,1069,No,https://boardgamegeek.com/boardgame/167763
 23107,Drakon (Third Edition),2006,6.46,6.0,1.81,3229,2832,No,https://boardgamegeek.com/boardgame/23107
 131415,Eclipse: Pulsar,2012,7.67,6.0,3.49,,751,Yes,https://boardgamegeek.com/boardgame/131415
 137405,Escape: The Curse of the Temple – Expansion 2: Quest,2013,7.59,6.0,1.46,,740,Yes,https://boardgamegeek.com/boardgame/137405
@@ -1668,6 +1707,7 @@
 164812,Roll For It! Deluxe Edition,2014,6.6,6.0,1.08,3212,2404,No,https://boardgamegeek.com/boardgame/164812
 18866,Shear Panic,2005,6.34,6.0,2.22,3192,3898,No,https://boardgamegeek.com/boardgame/18866
 37196,Sorry! Sliders,2008,6.32,6.0,1.06,3180,3955,No,https://boardgamegeek.com/boardgame/37196
+167883,Star Wars: Imperial Assault – General Weiss Villain Pack,2015,7.94,6.0,3.0,,718,Yes,https://boardgamegeek.com/boardgame/167883
 714,Talisman,1983,6.36,6.0,2.18,3233,5784,No,https://boardgamegeek.com/boardgame/714
 25261,Tannhäuser,2007,6.49,6.0,2.73,3213,3303,No,https://boardgamegeek.com/boardgame/25261
 161226,The Builders: Antiquity,2015,6.63,6.0,1.96,3201,1976,No,https://boardgamegeek.com/boardgame/161226
@@ -1703,6 +1743,8 @@
 9215,Revolution: The Dutch Revolt 1568-1648,2004,7.27,5.99,4.25,3268,969,No,https://boardgamegeek.com/boardgame/9215
 511,Silverton,1991,7.13,5.99,3.23,3258,1089,No,https://boardgamegeek.com/boardgame/511
 13315,Space Hulk: Deathwing Expansion,1990,7.97,5.99,2.7,,678,Yes,https://boardgamegeek.com/boardgame/13315
+167888,Star Wars: Imperial Assault – Rebel Saboteurs Ally Pack,2015,7.86,5.99,2.86,,706,Yes,https://boardgamegeek.com/boardgame/167888
+167887,Star Wars: Imperial Assault – Rebel Troopers Ally Pack,2015,7.82,5.99,2.92,,731,Yes,https://boardgamegeek.com/boardgame/167887
 138745,Survive: Escape from Atlantis! – Dolphins & Dive Dice Mini Expansion,2013,7.2,5.99,1.64,,1036,Yes,https://boardgamegeek.com/boardgame/138745
 158979,Talisman (Revised 4th Edition): The Woodland Expansion,2014,7.5,5.99,2.33,,898,Yes,https://boardgamegeek.com/boardgame/158979
 17161,Tempus,2006,6.45,5.99,2.79,3290,2607,No,https://boardgamegeek.com/boardgame/17161
@@ -1723,12 +1765,14 @@
 162616,Flash Point: Fire Rescue – Honor & Duty,2014,7.63,5.98,2.2,,712,Yes,https://boardgamegeek.com/boardgame/162616
 2529,Flat Top,1977,7.36,5.98,4.23,3315,960,No,https://boardgamegeek.com/boardgame/2529
 144811,Fleet: Arctic Bounty,2014,7.48,5.98,2.29,,762,Yes,https://boardgamegeek.com/boardgame/144811
+168679,Flip City,2014,6.29,5.98,1.74,3320,4171,No,https://boardgamegeek.com/boardgame/168679
 142296,Funemployed,2013,6.6,5.98,1.15,3314,2194,No,https://boardgamegeek.com/boardgame/142296
 15390,Harvest,1992,7.26,5.98,1.08,3308,925,No,https://boardgamegeek.com/boardgame/15390
 265,Intrigue,1994,6.39,5.98,1.92,3325,2934,No,https://boardgamegeek.com/boardgame/265
 140535,Koryŏ,2013,6.58,5.98,1.88,3374,1999,No,https://boardgamegeek.com/boardgame/140535
 39927,Last Train to Wensleydale,2009,7.07,5.98,3.25,3317,1027,No,https://boardgamegeek.com/boardgame/39927
 145645,Le Fantôme de l'Opéra,2013,6.98,5.98,2.21,3338,1158,No,https://boardgamegeek.com/boardgame/145645
+168800,Legendary: A Marvel Deck Building Game – Fear Itself,2015,7.4,5.98,2.89,,909,Yes,https://boardgamegeek.com/boardgame/168800
 143092,Mage Wars: Conquest of Kumanjaro – Spell Tome Expansion,2013,8.0,5.98,3.38,,610,Yes,https://boardgamegeek.com/boardgame/143092
 125755,Memoir '44: Equipment Pack,2012,7.83,5.98,2.5,,681,Yes,https://boardgamegeek.com/boardgame/125755
 91523,Mondo,2011,6.46,5.98,1.79,3343,2645,No,https://boardgamegeek.com/boardgame/91523
@@ -1798,6 +1842,7 @@
 30539,Get Bit!,2007,6.14,5.96,1.12,3492,7130,No,https://boardgamegeek.com/boardgame/30539
 59,Giganten,1999,6.69,5.96,2.57,3495,1476,No,https://boardgamegeek.com/boardgame/59
 156501,Greenland,2014,6.92,5.96,3.27,3490,1155,No,https://boardgamegeek.com/boardgame/156501
+168054,Grifters,2015,6.68,5.96,1.79,3467,1627,No,https://boardgamegeek.com/boardgame/168054
 3439,HeroClix,2002,6.52,5.96,2.82,3453,2594,No,https://boardgamegeek.com/boardgame/3439
 42350,Heroscape Expansion Set: Road to the Forgotten Forest,2005,8.06,5.96,2.35,,553,Yes,https://boardgamegeek.com/boardgame/42350
 14634,Homeworlds,2001,7.49,5.96,3.38,3452,790,No,https://boardgamegeek.com/boardgame/14634
@@ -1827,6 +1872,7 @@
 145033,Cthulhu Wars: The Windwalker Expansion,2015,8.45,5.95,3.22,,446,Yes,https://boardgamegeek.com/boardgame/145033
 67600,D-Day at Tarawa,2014,8.23,5.95,3.7,3551,533,No,https://boardgamegeek.com/boardgame/67600
 128445,Darkest Night,2012,7.05,5.95,2.81,3527,1051,No,https://boardgamegeek.com/boardgame/128445
+169464,Defenders of the Last Stand,2016,7.44,5.95,3.0,3503,751,No,https://boardgamegeek.com/boardgame/169464
 153235,Descent: Journeys in the Dark (Second Edition) – Forgotten Souls,2014,7.82,5.95,2.77,,665,Yes,https://boardgamegeek.com/boardgame/153235
 22897,Dreamblade,2006,7.13,5.95,2.69,3518,1011,No,https://boardgamegeek.com/boardgame/22897
 122588,Dungeon Command: Sting of Lolth,2012,7.29,5.95,2.62,3544,936,No,https://boardgamegeek.com/boardgame/122588
@@ -1835,8 +1881,10 @@
 55952,Greed Incorporated,2009,6.96,5.95,3.6,3524,1028,No,https://boardgamegeek.com/boardgame/55952
 29510,Jambo Expansion,2007,7.22,5.95,2.05,,853,Yes,https://boardgamegeek.com/boardgame/29510
 78750,Kaispeicher,2012,7.49,5.95,2.53,,695,Yes,https://boardgamegeek.com/boardgame/78750
+170815,Lancaster: Big Box,2015,7.78,5.95,3.12,,589,No,https://boardgamegeek.com/boardgame/170815
 148290,Longhorn,2013,6.53,5.95,1.77,3551,1860,No,https://boardgamegeek.com/boardgame/148290
 348,Merchants of the Middle Ages,1999,6.74,5.95,3.01,3521,1418,No,https://boardgamegeek.com/boardgame/348
+168274,Mistfall,2015,6.61,5.95,3.95,3560,1860,No,https://boardgamegeek.com/boardgame/168274
 80006,Mord im Arosa,2010,6.53,5.95,1.44,3546,1866,No,https://boardgamegeek.com/boardgame/80006
 8829,Nobody Is Perfect,1992,6.79,5.95,1.53,3563,1295,No,https://boardgamegeek.com/boardgame/8829
 154003,Pagoda,2014,6.62,5.95,1.87,3500,1667,No,https://boardgamegeek.com/boardgame/154003
@@ -1910,6 +1958,7 @@
 3609,Crescendo of Doom: A Squad Leader Gamette,1979,7.32,5.93,4.25,,809,Yes,https://boardgamegeek.com/boardgame/3609
 70519,Cruel Necessity: The English Civil Wars 1640-1653,2013,7.41,5.93,2.77,3690,756,No,https://boardgamegeek.com/boardgame/70519
 44,David & Goliath,1997,6.5,5.93,1.62,3674,1793,No,https://boardgamegeek.com/boardgame/44
+169468,Descent: Journeys in the Dark (Second Edition) – Heirs of Blood,2015,8.38,5.93,3.12,,489,Yes,https://boardgamegeek.com/boardgame/169468
 94902,Dungeons & Dragons Starter Set,2008,7.7,5.93,3.0,3680,647,No,https://boardgamegeek.com/boardgame/94902
 85925,"Fresco: Expansion Modules 4, 5 and 6",2010,7.44,5.93,2.75,,684,Yes,https://boardgamegeek.com/boardgame/85925
 5451,Hanafuda,1701,6.91,5.93,1.72,3699,1195,No,https://boardgamegeek.com/boardgame/5451
@@ -2065,6 +2114,7 @@
 19948,Rum & Pirates,2006,6.44,5.9,1.94,3875,1873,No,https://boardgamegeek.com/boardgame/19948
 166410,Russian Railroads: Mini-Expansion,2014,7.68,5.9,3.67,,539,Yes,https://boardgamegeek.com/boardgame/166410
 33107,Senji,2008,6.53,5.9,2.96,3921,1586,No,https://boardgamegeek.com/boardgame/33107
+171129,Spinderella,2015,6.47,5.9,1.21,3909,1875,No,https://boardgamegeek.com/boardgame/171129
 156548,Super Dungeon Explore: Forgotten King,2015,6.85,5.9,3.22,3881,1248,No,https://boardgamegeek.com/boardgame/156548
 135649,Tales & Games: The Three Little Pigs,2013,6.41,5.9,1.18,3957,1991,No,https://boardgamegeek.com/boardgame/135649
 1737,Talisman: Expansion Set,1986,6.96,5.9,2.15,,1033,Yes,https://boardgamegeek.com/boardgame/1737
@@ -2115,6 +2165,7 @@
 114387,Thebes: The Tomb Raiders,2013,6.84,5.89,2.02,4045,970,No,https://boardgamegeek.com/boardgame/114387
 155708,Tiny Epic Defenders,2015,6.24,5.89,1.82,4002,2993,No,https://boardgamegeek.com/boardgame/155708
 94389,Urbion,2012,6.86,5.89,1.83,4015,988,No,https://boardgamegeek.com/boardgame/94389
+169704,Vault Wars,2015,6.74,5.89,2.09,4032,1162,No,https://boardgamegeek.com/boardgame/169704
 29432,Vexation,2007,7.08,5.89,1.64,,748,Yes,https://boardgamegeek.com/boardgame/29432
 8605,West of Alamein: ASL Module 5,1988,8.05,5.89,4.49,,478,Yes,https://boardgamegeek.com/boardgame/8605
 3236,WildLife,2002,6.59,5.89,3.07,3982,1369,No,https://boardgamegeek.com/boardgame/3236
@@ -2153,7 +2204,9 @@
 66855,The Dark Valley,2013,7.81,5.88,3.4,4114,540,No,https://boardgamegeek.com/boardgame/66855
 40770,The Golden City,2009,6.56,5.88,2.26,4048,1505,No,https://boardgamegeek.com/boardgame/40770
 41569,The Great Fire of London 1666,2010,6.47,5.88,2.56,4049,1642,No,https://boardgamegeek.com/boardgame/41569
+168680,The Werewolves of Miller's Hollow: The Pact,2014,7.39,5.88,2.08,,655,No,https://boardgamegeek.com/boardgame/168680
 147116,The Witcher Adventure Game,2014,6.34,5.88,2.44,4111,2824,No,https://boardgamegeek.com/boardgame/147116
+168433,The World of Smog: On Her Majesty's Service,2015,6.76,5.88,2.5,4087,1152,No,https://boardgamegeek.com/boardgame/168433
 20806,Three-Dragon Ante,2005,6.48,5.88,1.73,4132,1733,No,https://boardgamegeek.com/boardgame/20806
 140951,Thunderstone: Starter Set,2013,6.93,5.88,2.31,4118,916,No,https://boardgamegeek.com/boardgame/140951
 46158,Time's Up! Academy,2009,7.37,5.88,1.09,4058,632,No,https://boardgamegeek.com/boardgame/46158
@@ -2257,6 +2310,7 @@
 132428,BioShock Infinite: The Siege of Columbia,2013,6.65,5.85,2.92,4309,1189,No,https://boardgamegeek.com/boardgame/132428
 149853,Bullfrogs,2015,6.69,5.85,1.89,4341,1115,No,https://boardgamegeek.com/boardgame/149853
 17104,Canasta,1939,6.44,5.85,2.13,4310,1669,No,https://boardgamegeek.com/boardgame/17104
+171033,DC Deck-Building Game: Crisis Expansion Pack 2,2015,7.45,5.85,2.31,,600,Yes,https://boardgamegeek.com/boardgame/171033
 37301,Decktet,2008,7.44,5.85,1.97,4320,541,No,https://boardgamegeek.com/boardgame/37301
 122889,Dominare,2012,6.79,5.85,3.48,4358,912,No,https://boardgamegeek.com/boardgame/122889
 126247,Dungeon Petz: Bonus Pets,2012,7.45,5.85,3.3,,523,Yes,https://boardgamegeek.com/boardgame/126247
@@ -2348,6 +2402,7 @@
 163676,Sentinels of the Multiverse: Omnitron IV Environment,2015,7.86,5.84,2.1,,413,Yes,https://boardgamegeek.com/boardgame/163676
 1459,Sharp Shooters,1994,6.44,5.84,1.24,4442,1407,No,https://boardgamegeek.com/boardgame/1459
 17484,Silent War,2005,7.35,5.84,3.39,4431,620,No,https://boardgamegeek.com/boardgame/17484
+170199,Solarius Mission,2016,7.16,5.84,3.93,4414,612,No,https://boardgamegeek.com/boardgame/170199
 151979,Space Empires: Replicators,2018,8.42,5.84,3.19,,355,Yes,https://boardgamegeek.com/boardgame/151979
 149119,Spirits of the Rice Paddy,2015,6.65,5.84,3.08,4459,1003,No,https://boardgamegeek.com/boardgame/149119
 29663,Star Fleet Battles: Captain's Edition Basic Set,1990,7.6,5.84,4.3,4449,547,No,https://boardgamegeek.com/boardgame/29663
@@ -2409,6 +2464,7 @@
 165461,Neuroshima Hex! 3.0: Smart,2014,8.01,5.83,2.88,,384,Yes,https://boardgamegeek.com/boardgame/165461
 25948,PitchCar: Extension 3 – Long Straights,2006,7.45,5.83,1.12,,474,Yes,https://boardgamegeek.com/boardgame/25948
 38677,PitchCar: Extension 4 – Stunt Race,2008,7.23,5.83,1.18,,563,Yes,https://boardgamegeek.com/boardgame/38677
+169274,Pixel Tactics Deluxe,2015,7.24,5.83,2.69,4581,593,No,https://boardgamegeek.com/boardgame/169274
 27172,Ponte del Diavolo,2007,6.47,5.83,2.32,4537,1291,No,https://boardgamegeek.com/boardgame/27172
 105624,Poseidon's Kingdom,2011,6.75,5.83,2.39,4523,843,No,https://boardgamegeek.com/boardgame/105624
 87627,Railways of Mexico,2010,7.7,5.83,2.78,,417,Yes,https://boardgamegeek.com/boardgame/87627
@@ -2421,6 +2477,7 @@
 160964,Star Wars: Empire vs. Rebellion,2014,6.26,5.83,1.74,4512,2041,No,https://boardgamegeek.com/boardgame/160964
 146757,Star Wars: X-Wing Miniatures Game – Rebel Transport Expansion Pack,2014,7.57,5.83,2.94,,503,Yes,https://boardgamegeek.com/boardgame/146757
 31722,Steam over Holland,2007,7.24,5.83,3.77,4518,555,No,https://boardgamegeek.com/boardgame/31722
+171007,Suburbia 5★,2015,6.93,5.83,2.94,,730,Yes,https://boardgamegeek.com/boardgame/171007
 92869,Summoner Wars: Goodwin's Blade Reinforcement Pack,2011,7.95,5.83,2.6,,389,Yes,https://boardgamegeek.com/boardgame/92869
 82428,Summoner Wars: Rukar's Power Reinforcement Pack,2010,7.9,5.83,2.4,,404,Yes,https://boardgamegeek.com/boardgame/82428
 97357,Sunrise City,2012,6.56,5.83,2.34,4496,1106,No,https://boardgamegeek.com/boardgame/97357
@@ -2492,6 +2549,7 @@
 13297,Ticket to Ride: Mystery Train Expansion,2004,6.64,5.82,1.81,,951,Yes,https://boardgamegeek.com/boardgame/13297
 5684,18EU: Railroading in Europe From the 1830s to the 1930s,2001,7.47,5.81,4.24,4769,436,No,https://boardgamegeek.com/boardgame/5684
 109139,Alhambra: Queenie 1 – The Magical Buildings,2011,7.32,5.81,1.9,,485,Yes,https://boardgamegeek.com/boardgame/109139
+170318,Among the Stars: Revival,2015,7.13,5.81,2.35,4712,547,No,https://boardgamegeek.com/boardgame/170318
 141,Andromeda,1999,6.39,5.81,2.22,4738,1337,No,https://boardgamegeek.com/boardgame/141
 137154,Auf Teufel komm raus,2013,6.89,5.81,1.57,4703,715,No,https://boardgamegeek.com/boardgame/137154
 29259,Axis & Allies:  Guadalcanal,2007,6.94,5.81,2.57,4761,789,No,https://boardgamegeek.com/boardgame/29259
@@ -2524,6 +2582,7 @@
 29687,Leaping Lemmings,2010,6.39,5.81,1.85,4714,1286,No,https://boardgamegeek.com/boardgame/29687
 142039,Lost Legacy,2013,6.44,5.81,1.32,,1202,No,https://boardgamegeek.com/boardgame/142039
 131891,Lost Legends,2013,6.35,5.81,2.44,4702,1475,No,https://boardgamegeek.com/boardgame/131891
+167698,Magic: The Gathering – Arena of the Planeswalkers,2015,6.13,5.81,2.38,4771,3443,No,https://boardgamegeek.com/boardgame/167698
 8147,Maka Bana,2003,6.68,5.81,2.01,4768,898,No,https://boardgamegeek.com/boardgame/8147
 146735,Munchkin Adventure Time,2014,6.46,5.81,1.92,4749,1872,No,https://boardgamegeek.com/boardgame/146735
 151648,Neuroshima Hex! 3.0: Neojungle,2012,7.78,5.81,2.75,,416,Yes,https://boardgamegeek.com/boardgame/151648
@@ -2564,6 +2623,8 @@
 166854,Dark Domains,2019,7.5,5.8,2.96,4818,458,No,https://boardgamegeek.com/boardgame/166854
 71674,Defenders of the Realm: The Barbarian,2010,7.45,5.8,2.56,,460,Yes,https://boardgamegeek.com/boardgame/71674
 158496,Descent: Journeys in the Dark (Second Edition) – Crusade of the Forgotten,2014,8.04,5.8,3.0,,391,Yes,https://boardgamegeek.com/boardgame/158496
+170959,Descent: Journeys in the Dark (Second Edition) – Nature's Ire,2014,7.87,5.8,2.6,,395,Yes,https://boardgamegeek.com/boardgame/170959
+168839,Die Kutschfahrt zur Teufelsburg,2006,6.6,5.8,2.07,4806,947,No,https://boardgamegeek.com/boardgame/168839
 29714,Die Siedler von Catan: Kartenspiel – Zauberer & Drachen,1999,6.69,5.8,2.52,,817,Yes,https://boardgamegeek.com/boardgame/29714
 7804,Dracula,2003,6.23,5.8,1.92,4785,1813,No,https://boardgamegeek.com/boardgame/7804
 144451,Duel of Ages II: Master Set,2013,8.41,5.8,3.71,,283,Yes,https://boardgamegeek.com/boardgame/144451
@@ -2695,6 +2756,7 @@
 1679,Carrier: The Southwest Pacific Campaign – 1942-1943,1990,7.47,5.78,3.99,5052,442,No,https://boardgamegeek.com/boardgame/1679
 125943,Corporate America,2013,7.19,5.78,2.16,5137,525,No,https://boardgamegeek.com/boardgame/125943
 108224,Cyclades: The Manticore,2011,7.43,5.78,2.75,,429,Yes,https://boardgamegeek.com/boardgame/108224
+167762,DC Deck-Building Game: Crossover Pack 1 – Justice Society of America,2015,7.35,5.78,1.92,,483,Yes,https://boardgamegeek.com/boardgame/167762
 8946,Da Vinci Code,2002,6.12,5.78,1.48,5082,2331,No,https://boardgamegeek.com/boardgame/8946
 13005,Dance of Ibexes,2004,6.55,5.78,1.4,5081,892,No,https://boardgamegeek.com/boardgame/13005
 162290,Descent: Journeys in the Dark (Second Edition) – Guardians of Deephall,2014,8.04,5.78,3.0,,370,Yes,https://boardgamegeek.com/boardgame/162290
@@ -2740,6 +2802,7 @@
 149066,Small World: 6 Player Board,2013,7.41,5.78,2.38,,429,Yes,https://boardgamegeek.com/boardgame/149066
 7587,Solitaire ASL,1995,7.7,5.78,4.27,,387,Yes,https://boardgamegeek.com/boardgame/7587
 12140,Stalingrad Pocket: 2nd Edition – The Wehrmacht's Greatest Disaster,1996,7.3,5.78,2.62,5103,481,No,https://boardgamegeek.com/boardgame/12140
+169019,Star Wars: Armada – Rebel Fighter Squadrons Expansion Pack,2015,8.06,5.78,2.88,,317,Yes,https://boardgamegeek.com/boardgame/169019
 17991,TAC,2004,7.11,5.78,1.97,5033,603,No,https://boardgamegeek.com/boardgame/17991
 32838,The Battle for Normandy,2009,7.89,5.78,3.64,5053,365,No,https://boardgamegeek.com/boardgame/32838
 140917,The Lord of the Rings: The Card Game – The Morgul Vale,2013,7.99,5.78,3.0,,311,Yes,https://boardgamegeek.com/boardgame/140917
@@ -2778,6 +2841,7 @@
 156175,Championship Formula Racing,2017,7.66,5.77,2.8,5253,390,No,https://boardgamegeek.com/boardgame/156175
 8672,Chrononauts: Lost Identities,2001,6.7,5.77,1.75,,775,Yes,https://boardgamegeek.com/boardgame/8672
 125924,Clubs,2013,6.49,5.77,1.42,5272,903,No,https://boardgamegeek.com/boardgame/125924
+169521,Commands & Colors: Ancients Expansions #2 and #3 – Rome vs the Barbarians; The Roman Civil Wars,2014,8.49,5.77,2.3,,252,Yes,https://boardgamegeek.com/boardgame/169521
 8552,Corsari,2003,6.43,5.77,1.48,5158,1067,No,https://boardgamegeek.com/boardgame/8552
 145029,Cthulhu Wars: High Priest Expansion Pack,2015,8.1,5.77,2.5,,299,Yes,https://boardgamegeek.com/boardgame/145029
 12234,"DAK2: The Campaign in North Africa, 1940-1942",2004,8.34,5.77,4.37,5217,312,No,https://boardgamegeek.com/boardgame/12234
@@ -2829,6 +2893,9 @@
 70230,Runebound: Mists of Zanaga,2010,7.61,5.77,2.88,,395,Yes,https://boardgamegeek.com/boardgame/70230
 6817,Schafkopf,1780,7.46,5.77,2.75,5184,423,No,https://boardgamegeek.com/boardgame/6817
 3224,Sherlock Holmes Consulting Detective: The Mansion Murders,1983,7.66,5.77,2.62,,350,Yes,https://boardgamegeek.com/boardgame/3224
+169020,Star Wars: Armada – Imperial Fighter Squadrons Expansion Pack,2015,8.03,5.77,2.88,,309,Yes,https://boardgamegeek.com/boardgame/169020
+170728,Star Wars: X-Wing Miniatures Game – Imperial Raider Expansion Pack,2015,7.97,5.77,2.6,,312,Yes,https://boardgamegeek.com/boardgame/170728
+171226,Starfighter,2015,6.65,5.77,2.77,5281,744,No,https://boardgamegeek.com/boardgame/171226
 3730,Statis Pro Baseball,1971,7.24,5.77,2.15,5210,546,No,https://boardgamegeek.com/boardgame/3730
 93544,Steam: Map Expansion #1,2011,7.76,5.77,3.71,,319,Yes,https://boardgamegeek.com/boardgame/93544
 145687,Summoner Wars: Fallen Kingdom – Second Summoner,2013,8.14,5.77,2.5,,288,Yes,https://boardgamegeek.com/boardgame/145687
@@ -2865,12 +2932,14 @@
 10814,Dawn Under,2004,6.36,5.76,1.64,5411,1079,No,https://boardgamegeek.com/boardgame/10814
 146570,Descent: Journeys in the Dark (Second Edition) – Alric Farrow Lieutenant Pack,2013,7.6,5.76,3.0,,422,Yes,https://boardgamegeek.com/boardgame/146570
 146566,Descent: Journeys in the Dark (Second Edition) – Belthir Lieutenant Pack,2013,7.59,5.76,3.0,,427,Yes,https://boardgamegeek.com/boardgame/146566
+171315,Descent: Journeys in the Dark (Second Edition) – Visions of Dawn,2015,8.07,5.76,3.0,,329,Yes,https://boardgamegeek.com/boardgame/171315
 146568,Descent: Journeys in the Dark (Second Edition) – Zachareth Lieutenant Pack,2013,7.61,5.76,2.67,,420,Yes,https://boardgamegeek.com/boardgame/146568
 854,Doge,2000,6.53,5.76,2.55,5344,825,No,https://boardgamegeek.com/boardgame/854
 144386,Dungeon Fighter: Fire at Will,2013,7.3,5.76,2.0,,418,Yes,https://boardgamegeek.com/boardgame/144386
 1339,Dungeon!,1975,6.01,5.76,1.55,5444,4564,No,https://boardgamegeek.com/boardgame/1339
 144388,Elevenses,2013,6.2,5.76,1.39,5445,1464,No,https://boardgamegeek.com/boardgame/144388
 98347,Empires of the Void,2012,6.69,5.76,2.92,5432,702,No,https://boardgamegeek.com/boardgame/98347
+170855,Exodus: Edge of Extinction,2015,7.86,5.76,3.25,,302,Yes,https://boardgamegeek.com/boardgame/170855
 139433,Fields of Fire 2,2019,8.22,5.76,4.5,5450,302,No,https://boardgamegeek.com/boardgame/139433
 789,Focus,1963,6.47,5.76,2.38,5437,892,No,https://boardgamegeek.com/boardgame/789
 132758,Fool's Gold,2015,6.91,5.76,2.12,5346,566,No,https://boardgamegeek.com/boardgame/132758
@@ -2905,6 +2974,7 @@
 40107,"Soviet Dawn: The Russian Civil War, 1918-1921",2009,7.07,5.76,1.68,5389,494,No,https://boardgamegeek.com/boardgame/40107
 7523,Space Crusade: Mission Dreadnought,1991,7.2,5.76,2.6,,517,Yes,https://boardgamegeek.com/boardgame/7523
 156502,Star Trek: Fleet Captains – Dominion,2014,7.88,5.76,3.0,,304,Yes,https://boardgamegeek.com/boardgame/156502
+169018,Star Wars: Armada – Gladiator-class Star Destroyer Expansion Pack,2015,7.98,5.76,2.86,,301,Yes,https://boardgamegeek.com/boardgame/169018
 4214,Stonewall in the Valley,1995,7.75,5.76,3.39,5323,355,No,https://boardgamegeek.com/boardgame/4214
 68,Successors: The Battles for Alexander's Empire (First/Second Edition),1997,7.02,5.76,3.23,5419,519,No,https://boardgamegeek.com/boardgame/68
 145012,Sultaniya,2014,6.5,5.76,2.02,5387,862,No,https://boardgamegeek.com/boardgame/145012
@@ -2951,6 +3021,7 @@
 20038,Catan: Event Cards,2005,6.5,5.75,1.85,,882,Yes,https://boardgamegeek.com/boardgame/20038
 1883,Cataphract,1999,7.59,5.75,3.4,5472,365,No,https://boardgamegeek.com/boardgame/1883
 166187,Caverna: Mini Expansion,2014,7.4,5.75,3.1,,370,Yes,https://boardgamegeek.com/boardgame/166187
+171110,Cosmic Run,2015,7.05,5.75,1.52,5516,476,No,https://boardgamegeek.com/boardgame/171110
 93897,Defenders of the Realm: Hero Expansion #1,2011,7.61,5.75,2.73,,331,Yes,https://boardgamegeek.com/boardgame/93897
 146571,Descent: Journeys in the Dark (Second Edition) – Eliza Farrow Lieutenant Pack,2013,7.5,5.75,2.6,,426,Yes,https://boardgamegeek.com/boardgame/146571
 132022,Dixit: 2012 Asmodee Special Cards,2012,7.43,5.75,1.6,,354,Yes,https://boardgamegeek.com/boardgame/132022
@@ -3045,6 +3116,7 @@
 161363,Eight-Minute Empire: Lost Lands,2015,7.04,5.74,1.91,,451,Yes,https://boardgamegeek.com/boardgame/161363
 90009,Eselsbrücke,2011,6.98,5.74,1.7,5617,562,No,https://boardgamegeek.com/boardgame/90009
 163976,Exoplanets,2015,6.48,5.74,2.38,5707,843,No,https://boardgamegeek.com/boardgame/163976
+169141,Fallen Land: A Post Apocalyptic Board Game,2017,8.11,5.74,3.68,5750,396,No,https://boardgamegeek.com/boardgame/169141
 149796,Firefly: The Game – Wash's Lucky Dinosaurs Promo Card,2013,7.72,5.74,2.62,,322,Yes,https://boardgamegeek.com/boardgame/149796
 706,Frederick the Great: The Campaigns of The Soldier King 1756-1759,1975,6.97,5.74,2.68,5632,528,No,https://boardgamegeek.com/boardgame/706
 125376,Gears of War: Mission Pack 1,2012,7.81,5.74,2.3,,316,Yes,https://boardgamegeek.com/boardgame/125376
@@ -3068,6 +3140,7 @@
 75260,Memoir '44: Disaster at Dieppe,2010,7.84,5.74,1.93,,295,Yes,https://boardgamegeek.com/boardgame/75260
 55834,Mosaix,2009,6.53,5.74,1.39,5746,704,No,https://boardgamegeek.com/boardgame/55834
 31847,Munchkin Cthulhu 3: The Unspeakable Vault,2008,6.54,5.74,1.78,,903,Yes,https://boardgamegeek.com/boardgame/31847
+168633,One Night Ultimate Werewolf: Bonus Pack 1,2015,7.54,5.74,1.44,,333,Yes,https://boardgamegeek.com/boardgame/168633
 5825,Paris Paris,2003,6.22,5.74,1.95,5681,1226,No,https://boardgamegeek.com/boardgame/5825
 97803,Penny Arcade: The Game – Gamers vs. Evil,2011,6.45,5.74,2.24,5743,928,No,https://boardgamegeek.com/boardgame/97803
 123885,Pick-a-Dog,2012,6.14,5.74,1.06,5737,1560,No,https://boardgamegeek.com/boardgame/123885
@@ -3077,12 +3150,14 @@
 157040,"Robinson Crusoe: Adventures on the Cursed Island – ""King Kong"" Scenario",2013,7.6,5.74,3.17,,323,Yes,https://boardgamegeek.com/boardgame/157040
 156823,Robinson Crusoe: Adventures on the Cursed Island – Sailor Character,2014,7.6,5.74,2.33,,328,Yes,https://boardgamegeek.com/boardgame/156823
 18627,Runebound: Relics of Legend,2005,7.01,5.74,2.19,,480,Yes,https://boardgamegeek.com/boardgame/18627
+169649,Sapiens,2015,6.28,5.74,2.64,5656,1122,No,https://boardgamegeek.com/boardgame/169649
 3413,Saratoga,1998,7.13,5.74,2.55,5690,430,No,https://boardgamegeek.com/boardgame/3413
 154510,Shadows of Malice,2014,7.18,5.74,3.18,5704,476,No,https://boardgamegeek.com/boardgame/154510
 74823,Shogun: Tenno's Court,2011,7.13,5.74,2.8,,431,Yes,https://boardgamegeek.com/boardgame/74823
 1705,Slapshot,1982,6.31,5.74,1.3,5642,1073,No,https://boardgamegeek.com/boardgame/1705
 7062,Smarty Party!,2003,6.6,5.74,1.4,5653,682,No,https://boardgamegeek.com/boardgame/7062
 55601,Sneaks & Snitches,2010,6.3,5.74,1.41,5741,976,No,https://boardgamegeek.com/boardgame/55601
+171228,Sons of Anarchy: Men of Mayhem – Calaveras Club Expansion,2015,7.53,5.74,2.83,,341,Yes,https://boardgamegeek.com/boardgame/171228
 3593,Star Wars: Star Warriors,1987,6.9,5.74,3.18,5680,558,No,https://boardgamegeek.com/boardgame/3593
 164166,Star Wars: X-Wing Miniatures Game – M3-A Interceptor Expansion Pack,2014,7.4,5.74,2.0,,379,Yes,https://boardgamegeek.com/boardgame/164166
 38318,Start Player,2008,6.34,5.74,1.0,5618,961,No,https://boardgamegeek.com/boardgame/38318
@@ -3180,6 +3255,7 @@
 222,Space Beans,1999,6.09,5.73,1.38,5787,1581,No,https://boardgamegeek.com/boardgame/222
 117995,"Spot it! 1,2,3",2012,6.28,5.73,1.03,5910,1082,No,https://boardgamegeek.com/boardgame/117995
 143948,Star Trek: Catan – Federation Space,2013,7.41,5.73,2.8,,375,Yes,https://boardgamegeek.com/boardgame/143948
+169017,Star Wars: Armada – Assault Frigate Mark II Expansion Pack,2015,7.85,5.73,3.0,,270,Yes,https://boardgamegeek.com/boardgame/169017
 81250,Stich-Meister,2010,6.74,5.73,1.79,5799,541,No,https://boardgamegeek.com/boardgame/81250
 4210,Stonewall's Last Battle: The Chancellorsville Campaign,1996,7.55,5.73,3.2,5765,338,No,https://boardgamegeek.com/boardgame/4210
 1992,Stop Thief,1979,6.41,5.73,1.67,5809,959,No,https://boardgamegeek.com/boardgame/1992
@@ -3253,6 +3329,7 @@
 134060,Mice and Mystics: Needle Rapier,2012,7.42,5.72,2.67,,328,Yes,https://boardgamegeek.com/boardgame/134060
 66126,Mystery Rummy: Escape from Alcatraz,2009,6.92,5.72,1.38,6042,432,No,https://boardgamegeek.com/boardgame/66126
 120669,No Retreat!: The North African Front,2013,7.27,5.72,3.3,6024,353,No,https://boardgamegeek.com/boardgame/120669
+170669,Old School Tactical: Volume 1 – Fighting on the Eastern Front 1941/42,2016,8.18,5.72,2.8,6049,263,No,https://boardgamegeek.com/boardgame/170669
 42328,Pax Baltica: Great Northern War 1700-1721,2009,7.26,5.72,2.94,5969,368,No,https://boardgamegeek.com/boardgame/42328
 72644,Perplexus,2001,6.91,5.72,1.5,5972,464,No,https://boardgamegeek.com/boardgame/72644
 2281,Pictionary,1985,5.86,5.72,1.22,6057,8703,No,https://boardgamegeek.com/boardgame/2281
@@ -3304,6 +3381,7 @@
 6481,Ada's Library,2003,6.38,5.71,1.68,6163,802,No,https://boardgamegeek.com/boardgame/6481
 76,Air Baron,1996,6.41,5.71,2.55,6285,795,No,https://boardgamegeek.com/boardgame/76
 2125,Amazons,1992,7.22,5.71,2.82,6256,358,No,https://boardgamegeek.com/boardgame/2125
+168823,Android: Netrunner – The Valley,2015,8.3,5.71,3.0,,197,Yes,https://boardgamegeek.com/boardgame/168823
 814,Aquarius,1998,6.06,5.71,1.13,6178,2009,No,https://boardgamegeek.com/boardgame/814
 108161,Aquileia,2011,6.73,5.71,2.92,6281,545,No,https://boardgamegeek.com/boardgame/108161
 34,Arkham Horror,1987,6.69,5.71,2.42,6264,594,No,https://boardgamegeek.com/boardgame/34
@@ -3359,6 +3437,7 @@
 225,Icehouse,1989,6.62,5.71,2.6,6211,610,No,https://boardgamegeek.com/boardgame/225
 1496,Imperium Romanum II,1985,6.65,5.71,3.79,6130,640,No,https://boardgamegeek.com/boardgame/1496
 66193,It Happens..,2010,6.18,5.71,1.4,6107,1153,No,https://boardgamegeek.com/boardgame/66193
+170901,Jarl: The Vikings Tile-Laying Game,2015,6.85,5.71,2.67,6147,464,No,https://boardgamegeek.com/boardgame/170901
 10674,Killer Bunnies and the Quest for the Magic Carrot: ORANGE Booster,2003,6.45,5.71,2.18,,854,Yes,https://boardgamegeek.com/boardgame/10674
 6673,Killer Bunnies and the Quest for the Magic Carrot: VIOLET Booster,2003,6.38,5.71,2.1,,1013,Yes,https://boardgamegeek.com/boardgame/6673
 135273,Kingdom Death: Monster – Spidicules Expansion,2016,8.54,5.71,4.0,,228,Yes,https://boardgamegeek.com/boardgame/135273
@@ -3382,6 +3461,7 @@
 86156,Reverse Charades,2010,6.64,5.71,1.05,6131,572,No,https://boardgamegeek.com/boardgame/86156
 37198,Risk (Revised Edition),2008,5.97,5.71,2.16,6127,3650,No,https://boardgamegeek.com/boardgame/37198
 19989,Robber Knights,2005,6.12,5.71,2.01,6119,1385,No,https://boardgamegeek.com/boardgame/19989
+168215,Saboteur: The Duel,2014,6.0,5.71,1.29,6129,2439,No,https://boardgamegeek.com/boardgame/168215
 129820,Salmon Run,2013,6.5,5.71,1.82,6125,667,No,https://boardgamegeek.com/boardgame/129820
 4488,Scarab Lords,2002,6.02,5.71,1.91,6176,1698,No,https://boardgamegeek.com/boardgame/4488
 159868,Sellswords,2014,6.48,5.71,1.96,6150,672,No,https://boardgamegeek.com/boardgame/159868
@@ -3390,6 +3470,7 @@
 1577,Source of the Nile,1978,6.53,5.71,2.94,6159,647,No,https://boardgamegeek.com/boardgame/1577
 15401,Space Hulk Campaigns,1991,7.66,5.71,2.68,,297,Yes,https://boardgamegeek.com/boardgame/15401
 111502,Star Trek Deck Building Game: The Next Generation – Next Phase,2012,6.66,5.71,2.46,6227,594,No,https://boardgamegeek.com/boardgame/111502
+168928,Star Wars: Armada – CR90 Corellian Corvette Expansion Pack,2015,7.87,5.71,3.0,,250,Yes,https://boardgamegeek.com/boardgame/168928
 3597,Strat-O-Matic Hockey,1978,7.31,5.71,2.29,6247,372,No,https://boardgamegeek.com/boardgame/3597
 138094,Super Dungeon Explore: Von Drakk Manor Level,2013,7.54,5.71,3.1,,300,Yes,https://boardgamegeek.com/boardgame/138094
 202,Targui,1988,6.41,5.71,2.39,6180,800,No,https://boardgamegeek.com/boardgame/202
@@ -3419,6 +3500,7 @@
 7118,Ace of Aces: Handy Rotary Deluxe Edition,1986,7.08,5.7,1.84,6470,365,No,https://boardgamegeek.com/boardgame/7118
 2259,Afrika Korps,1964,6.31,5.7,2.24,6354,1105,No,https://boardgamegeek.com/boardgame/2259
 23189,Age of Steam Expansion: 1830's Pennsylvania / Northern California,2006,7.84,5.7,3.77,,216,Yes,https://boardgamegeek.com/boardgame/23189
+167849,Alchemists: Ring of Favor,2014,7.52,5.7,3.69,,279,Yes,https://boardgamegeek.com/boardgame/167849
 8273,Alexandros,2003,6.2,5.7,2.36,6319,1032,No,https://boardgamegeek.com/boardgame/8273
 17923,Anno Domini: Flopps,2001,6.8,5.7,1.39,6411,446,No,https://boardgamegeek.com/boardgame/17923
 156059,Arcadia Quest: The Nameless Campaign,2014,7.72,5.7,2.25,,252,Yes,https://boardgamegeek.com/boardgame/156059
@@ -3429,6 +3511,7 @@
 6923,BattleTech: CityTech,1986,6.85,5.7,3.4,6458,439,No,https://boardgamegeek.com/boardgame/6923
 123847,Battles of Westeros: House Baratheon Army Expansion,2012,7.85,5.7,3.12,,240,Yes,https://boardgamegeek.com/boardgame/123847
 77849,Battles of Westeros: Wardens of the North,2010,7.59,5.7,2.76,,287,Yes,https://boardgamegeek.com/boardgame/77849
+169341,Birds of a Feather,2015,6.64,5.7,1.23,6363,562,No,https://boardgamegeek.com/boardgame/169341
 132019,Blood & Roses,2014,7.46,5.7,2.85,6501,274,No,https://boardgamegeek.com/boardgame/132019
 34227,Blox,2008,6.53,5.7,2.08,6342,606,No,https://boardgamegeek.com/boardgame/34227
 19743,Blue Moon: Emissaries & Inquisitors – Blessings,2005,6.91,5.7,2.33,,416,Yes,https://boardgamegeek.com/boardgame/19743
@@ -3500,6 +3583,7 @@
 5571,Siege,1983,7.12,5.7,2.33,6445,374,No,https://boardgamegeek.com/boardgame/5571
 3895,Silent Death,1990,7.0,5.7,2.73,6302,408,No,https://boardgamegeek.com/boardgame/3895
 5071,Sjoelen,1870,6.84,5.7,1.16,6307,444,No,https://boardgamegeek.com/boardgame/5071
+168927,Star Wars: Armada – Victory-class Star Destroyer Expansion Pack,2015,7.87,5.7,3.0,,243,Yes,https://boardgamegeek.com/boardgame/168927
 145363,Star Wars: The Card Game – Balance of the Force,2013,7.35,5.7,3.09,,316,Yes,https://boardgamegeek.com/boardgame/145363
 22359,Steel Wolves: Germany's Submarine Campaign Against British & Allied Shipping – Vol 1 1939-43,2010,7.71,5.7,4.03,6457,267,No,https://boardgamegeek.com/boardgame/22359
 158886,Stonewall's Sword: The Battle of Cedar Mountain,2015,7.95,5.7,3.1,6322,253,No,https://boardgamegeek.com/boardgame/158886
@@ -3615,6 +3699,8 @@
 147241,Oaxaca: Crafts of a Culture,2018,6.93,5.69,1.92,6718,395,No,https://boardgamegeek.com/boardgame/147241
 69234,"Operation Dauntless: The Battles for Fontenay and Rauray, France, June 1944",2016,7.73,5.69,4.08,6692,253,No,https://boardgamegeek.com/boardgame/69234
 28302,Oware,550,6.59,5.69,2.04,6625,536,No,https://boardgamegeek.com/boardgame/28302
+169215,Peak Oil,2017,6.48,5.69,3.08,6670,588,No,https://boardgamegeek.com/boardgame/169215
+169275,Pixel Tactics 4,2015,6.98,5.69,1.67,6559,389,No,https://boardgamegeek.com/boardgame/169275
 113,"Plotters, Inc.",1999,6.78,5.69,1.85,6650,405,No,https://boardgamegeek.com/boardgame/113
 28044,Pocket Civ,2005,6.59,5.69,2.76,6633,537,No,https://boardgamegeek.com/boardgame/28044
 43264,Pocket Rockets,2009,6.28,5.69,1.49,6627,805,No,https://boardgamegeek.com/boardgame/43264
@@ -3634,6 +3720,7 @@
 13530,Sole Mio!,2004,6.24,5.69,1.45,6507,824,No,https://boardgamegeek.com/boardgame/13530
 7529,Space Crusade: Eldar Attack,1991,7.17,5.69,2.6,,368,Yes,https://boardgamegeek.com/boardgame/7529
 165877,Spellcaster,2014,6.52,5.69,1.48,6646,568,No,https://boardgamegeek.com/boardgame/165877
+168929,Star Wars: Armada – Nebulon-B Frigate Expansion Pack,2015,7.76,5.69,3.0,,236,Yes,https://boardgamegeek.com/boardgame/168929
 137182,Star Wars: The Card Game – A Dark Time,2013,7.61,5.69,3.25,,273,Yes,https://boardgamegeek.com/boardgame/137182
 137847,Star Wars: The Card Game – Assault on Echo Base,2013,7.61,5.69,3.08,,257,Yes,https://boardgamegeek.com/boardgame/137847
 158392,Stay Away!,2014,6.11,5.69,1.24,6706,1533,No,https://boardgamegeek.com/boardgame/158392
@@ -3684,6 +3771,7 @@
 56157,"Catan: Treasures, Dragons & Adventurers",2009,7.5,5.68,2.22,,280,Yes,https://boardgamegeek.com/boardgame/56157
 161943,Chosŏn,2014,6.49,5.68,2.14,6792,549,No,https://boardgamegeek.com/boardgame/161943
 144566,Circus Train (Second Edition),2013,7.07,5.68,2.45,6787,329,No,https://boardgamegeek.com/boardgame/144566
+167825,Clash of Cultures: Civilizations – Aztecs,2014,8.0,5.68,3.67,,184,Yes,https://boardgamegeek.com/boardgame/167825
 26447,Clash of Monarchs: The Seven Years War in Europe 1756-1763,2008,7.06,5.68,4.06,6843,369,No,https://boardgamegeek.com/boardgame/26447
 67917,Colonialism,2013,6.72,5.68,2.95,6827,407,No,https://boardgamegeek.com/boardgame/67917
 10989,ConHex,2002,6.87,5.68,2.8,6724,401,No,https://boardgamegeek.com/boardgame/10989
@@ -3704,6 +3792,7 @@
 9735,Duell,2004,6.32,5.68,1.33,6828,644,No,https://boardgamegeek.com/boardgame/9735
 157088,ESSEN The Game: SPIEL'13,2014,6.64,5.68,2.82,6835,473,No,https://boardgamegeek.com/boardgame/157088
 264,Enemy in Sight,1988,6.28,5.68,1.68,6901,715,No,https://boardgamegeek.com/boardgame/264
+168770,Epic PVP: Fantasy,2015,6.37,5.68,2.07,6944,729,No,https://boardgamegeek.com/boardgame/168770
 88594,Eruption,2011,6.08,5.68,2.02,6817,1199,No,https://boardgamegeek.com/boardgame/88594
 19419,Euphrates & Tigris: Contest of Kings,2005,6.06,5.68,2.74,6837,1305,No,https://boardgamegeek.com/boardgame/19419
 160744,Far Space Foundry,2015,6.64,5.68,2.75,6769,450,No,https://boardgamegeek.com/boardgame/160744
@@ -3720,6 +3809,7 @@
 23053,Guatemala Café,2006,6.24,5.68,2.57,6836,804,No,https://boardgamegeek.com/boardgame/23053
 165628,HINT,2014,6.59,5.68,1.25,6783,584,No,https://boardgamegeek.com/boardgame/165628
 3495,Harry Potter Trading Card Game,2001,6.18,5.68,1.96,6734,1141,No,https://boardgamegeek.com/boardgame/3495
+171261,Hocus,2016,6.5,5.68,2.26,6772,563,No,https://boardgamegeek.com/boardgame/171261
 155496,Holdfast: Russia 1941-42,2014,7.64,5.68,2.12,6749,242,No,https://boardgamegeek.com/boardgame/155496
 5369,Hordes of the Things,1991,7.37,5.68,2.47,6965,280,No,https://boardgamegeek.com/boardgame/5369
 162865,"I, Spy",2015,7.21,5.68,3.13,6826,294,No,https://boardgamegeek.com/boardgame/162865
@@ -3782,6 +3872,7 @@
 143025,The Lord of the Rings: The Card Game – The Stone of Erech,2013,8.08,5.68,2.9,,189,Yes,https://boardgamegeek.com/boardgame/143025
 114667,The New Science,2013,6.39,5.68,2.62,6895,670,No,https://boardgamegeek.com/boardgame/114667
 126,The Really Nasty Horse Racing Game,1989,6.28,5.68,1.65,6756,915,No,https://boardgamegeek.com/boardgame/126
+168857,The Red Dragon Inn: Allies – Wrench,2015,7.67,5.68,2.0,,278,Yes,https://boardgamegeek.com/boardgame/168857
 38735,The Swarm,2008,6.31,5.68,2.54,6923,639,No,https://boardgamegeek.com/boardgame/38735
 165070,Thunder Alley: Expansion Tracks,2015,7.97,5.68,1.5,,208,Yes,https://boardgamegeek.com/boardgame/165070
 160409,Too Many Cinderellas,2014,6.35,5.68,1.3,6778,657,No,https://boardgamegeek.com/boardgame/160409
@@ -3831,6 +3922,7 @@
 53708,Chrononauts: The Gore Years,2009,6.53,5.67,1.86,,523,Yes,https://boardgamegeek.com/boardgame/53708
 11568,Civilization: Expansion Trade Cards Set,1982,7.81,5.67,3.0,,197,Yes,https://boardgamegeek.com/boardgame/11568
 4008,Cobra: Game of the Normandy Breakout,1977,6.82,5.67,2.82,7172,380,No,https://boardgamegeek.com/boardgame/4008
+169076,Combat Commander: Battle Pack #7 – Leader of Men: Tournament Battle Pack,2015,8.32,5.67,2.44,,159,Yes,https://boardgamegeek.com/boardgame/169076
 165469,Council of Verona (Second Edition),2014,6.42,5.67,1.59,,586,No,https://boardgamegeek.com/boardgame/165469
 3093,Croak!,1999,6.49,5.67,1.56,7123,538,No,https://boardgamegeek.com/boardgame/3093
 129615,DOG Royal,2012,6.56,5.67,1.96,6991,527,No,https://boardgamegeek.com/boardgame/129615
@@ -4000,8 +4092,11 @@
 34166,Finito!,2008,6.11,5.66,1.11,7272,842,No,https://boardgamegeek.com/boardgame/34166
 105023,Fleet Commander: Nimitz – The WWII Pacific Ocean Solitaire Strategy Game,2014,7.23,5.66,2.76,7261,324,No,https://boardgamegeek.com/boardgame/105023
 4944,Formula Dé Circuits 31 & 32: Zhuhai & Sepang,2000,7.64,5.66,1.86,,201,Yes,https://boardgamegeek.com/boardgame/4944
+170813,Francis Drake: The Expansions,2015,7.4,5.66,2.5,,226,Yes,https://boardgamegeek.com/boardgame/170813
 1448,Freight Train,1993,6.37,5.66,2.03,7275,542,No,https://boardgamegeek.com/boardgame/1448
 28739,Garibaldi: The Escape,2007,6.55,5.66,1.94,7419,445,No,https://boardgamegeek.com/boardgame/28739
+169475,Ghostel,2017,7.02,5.66,2.0,7362,338,No,https://boardgamegeek.com/boardgame/169475
+170969,Gigamons,2014,6.54,5.66,1.15,7197,469,No,https://boardgamegeek.com/boardgame/170969
 13286,Gloria Mundi,2006,6.04,5.66,2.61,7211,1124,No,https://boardgamegeek.com/boardgame/13286
 107998,Glory to Rome: Promo Cards,2011,7.48,5.66,2.62,,218,Yes,https://boardgamegeek.com/boardgame/107998
 2076,Gulf Strike,1983,6.71,5.66,4.37,7338,451,No,https://boardgamegeek.com/boardgame/2076
@@ -4104,6 +4199,7 @@
 83697,Agricola: The Legen*dairy Forest-Deck,2010,6.39,5.65,2.57,,546,Yes,https://boardgamegeek.com/boardgame/83697
 43,Airlines,1990,6.57,5.65,2.42,7615,390,No,https://boardgamegeek.com/boardgame/43
 980,Al Cabohne,2000,5.97,5.65,1.77,7524,1295,No,https://boardgamegeek.com/boardgame/980
+171046,Ancient Terrible Things: The Lost Charter,2015,6.94,5.65,2.0,,284,Yes,https://boardgamegeek.com/boardgame/171046
 31897,Anno 1701: Das Brettspiel,2007,6.71,5.65,2.3,7576,336,No,https://boardgamegeek.com/boardgame/31897
 88406,Astra Titanus: Starfleets vs. Planetbusters!,2010,7.16,5.65,2.11,7555,251,No,https://boardgamegeek.com/boardgame/88406
 1667,Battle Hymn: Leatherneck,1988,7.86,5.65,3.29,,183,Yes,https://boardgamegeek.com/boardgame/1667
@@ -4134,6 +4230,7 @@
 4716,Cosmic Encounter: Expansion Set #2,1977,8.15,5.65,2.43,,146,Yes,https://boardgamegeek.com/boardgame/4716
 33150,Cranium WOW,2007,6.07,5.65,1.38,7694,1058,No,https://boardgamegeek.com/boardgame/33150
 153073,DC Deck-Building Game: Starfire,2014,7.46,5.65,1.76,,229,Yes,https://boardgamegeek.com/boardgame/153073
+170225,DRCongo,2015,6.9,5.65,3.66,7499,285,No,https://boardgamegeek.com/boardgame/170225
 4014,Dawn Patrol: Role Playing Game of WW I Air Combat,1982,6.97,5.65,2.38,7561,368,No,https://boardgamegeek.com/boardgame/4014
 90568,Democracy under Siege,2011,7.38,5.65,3.68,7687,216,No,https://boardgamegeek.com/boardgame/90568
 1309,Die Magier von Pangea,2001,6.2,5.65,2.33,7692,682,No,https://boardgamegeek.com/boardgame/1309
@@ -4192,6 +4289,7 @@
 1796,Pampas Railroads,2001,7.07,5.65,3.32,7698,248,No,https://boardgamegeek.com/boardgame/1796
 85770,"Panzer: Game Expansion Set, Nr 1 – The Shape of Battle on the Eastern Front 1943-45",2012,8.26,5.65,3.35,,158,Yes,https://boardgamegeek.com/boardgame/85770
 73365,Papayoo,2010,6.09,5.65,1.06,7512,958,No,https://boardgamegeek.com/boardgame/73365
+170960,Pathfinder Adventure Card Game: Wrath of the Righteous – Character Add-On Deck,2015,7.85,5.65,2.4,,175,Yes,https://boardgamegeek.com/boardgame/170960
 2580,Persian Gulf: Battle for the Middle East,1986,7.37,5.65,3.48,7630,229,No,https://boardgamegeek.com/boardgame/2580
 154479,Piña Pirata,2014,6.12,5.65,1.24,7519,931,No,https://boardgamegeek.com/boardgame/154479
 121764,Plato 3000,2012,6.46,5.65,1.59,7487,465,No,https://boardgamegeek.com/boardgame/121764
@@ -4203,6 +4301,7 @@
 27968,"Red Star Rising: The War in Russia, 1941-1944",2007,7.48,5.65,3.26,7587,225,No,https://boardgamegeek.com/boardgame/27968
 1711,Richthofen's War: The Air War 1916-1918,1972,6.17,5.65,2.39,7707,958,No,https://boardgamegeek.com/boardgame/1711
 72800,RoadZters,2010,6.7,5.65,1.26,7676,330,No,https://boardgamegeek.com/boardgame/72800
+167828,Roll Through the Ages: The Iron Age with Mediterranean Expansion,2014,6.95,5.65,2.3,,273,No,https://boardgamegeek.com/boardgame/167828
 163377,Rolling Japan,2014,6.27,5.65,1.54,7633,570,No,https://boardgamegeek.com/boardgame/163377
 23510,Runebound: Avatars of Kelnov,2006,7.14,5.65,2.42,,269,Yes,https://boardgamegeek.com/boardgame/23510
 28873,Runebound: Beasts and Bandits,2008,7.51,5.65,2.14,,216,Yes,https://boardgamegeek.com/boardgame/28873
@@ -4224,6 +4323,7 @@
 18794,SuperGang,1985,7.14,5.65,2.87,7734,240,No,https://boardgamegeek.com/boardgame/18794
 118776,Tahiti,2012,6.33,5.65,1.9,7567,553,No,https://boardgamegeek.com/boardgame/118776
 4,Tal der Könige,1992,6.6,5.65,2.69,7739,368,No,https://boardgamegeek.com/boardgame/4
+169254,Talisman (Revised 4th Edition): The Deep Realms Expansion,2015,7.13,5.65,2.0,,272,Yes,https://boardgamegeek.com/boardgame/169254
 3733,Talisman (Third Edition): City of Adventure,1994,6.77,5.65,1.96,,357,Yes,https://boardgamegeek.com/boardgame/3733
 1739,Talisman Dragons,1993,6.51,5.65,2.24,,511,Yes,https://boardgamegeek.com/boardgame/1739
 2780,Tarock,1425,7.41,5.65,3.52,7494,236,No,https://boardgamegeek.com/boardgame/2780
@@ -4244,6 +4344,7 @@
 123045,Uncharted: The Board Game,2012,6.37,5.65,2.31,7468,574,No,https://boardgamegeek.com/boardgame/123045
 13456,Vampire: Prince of the City,2006,6.38,5.65,3.15,7541,648,No,https://boardgamegeek.com/boardgame/13456
 25645,Verflixxt nochmal,2006,6.81,5.65,1.44,,313,Yes,https://boardgamegeek.com/boardgame/25645
+171278,Victory Roads: From Bagration to the Fall of Berlin 1944-1945,2015,8.03,5.65,3.53,7543,175,No,https://boardgamegeek.com/boardgame/171278
 366,Viva Pamplona!,1992,6.39,5.65,1.38,7743,467,No,https://boardgamegeek.com/boardgame/366
 5357,Von Manstein's Backhand Blow,2002,7.26,5.65,3.12,7557,254,No,https://boardgamegeek.com/boardgame/5357
 65217,Warhammer: Invasion – Arcane Fire,2010,7.47,5.65,2.33,,210,Yes,https://boardgamegeek.com/boardgame/65217
@@ -4342,12 +4443,15 @@
 129293,Gauntlet of Fools,2012,5.98,5.64,1.46,8001,1167,No,https://boardgamegeek.com/boardgame/129293
 43526,Germantown,2010,7.45,5.64,3.0,7991,187,No,https://boardgamegeek.com/boardgame/43526
 427,Grass,1980,6.03,5.64,1.54,7855,1226,No,https://boardgamegeek.com/boardgame/427
+168947,Hakkaa Päälle!: ASL Module 14,2015,8.45,5.64,4.21,,147,Yes,https://boardgamegeek.com/boardgame/168947
 2944,Halli Galli,1990,5.81,5.64,1.02,7995,3790,No,https://boardgamegeek.com/boardgame/2944
 84834,Heights of Courage: The Battle for the Golan Heights,2013,7.4,5.64,2.32,7846,206,No,https://boardgamegeek.com/boardgame/84834
+169697,Heldentaufe,2017,7.21,5.64,2.07,7924,263,No,https://boardgamegeek.com/boardgame/169697
 100169,Hero of Weehawken: The Aaron Burr Conspiracy 1805-1807,2011,7.49,5.64,2.16,8050,176,No,https://boardgamegeek.com/boardgame/100169
 150881,Heroes of Normandie: D-DAY Scenarios Pack,2014,8.03,5.64,2.6,,163,Yes,https://boardgamegeek.com/boardgame/150881
 80889,Heroscape Expansion Set D3: Moltenclaw's Invasion,2010,7.76,5.64,3.0,,165,Yes,https://boardgamegeek.com/boardgame/80889
 162378,Holiday Fluxx,2014,6.32,5.64,1.12,8026,559,No,https://boardgamegeek.com/boardgame/162378
+167848,Hyperborea: Promo Set,2014,7.43,5.64,3.0,,192,Yes,https://boardgamegeek.com/boardgame/167848
 165348,In the Year of the Dragon: The Great Wall of China & The Super Events,2009,7.24,5.64,2.57,,201,Yes,https://boardgamegeek.com/boardgame/165348
 133405,Island Siege,2013,6.7,5.64,1.89,8058,329,No,https://boardgamegeek.com/boardgame/133405
 105024,Israeli Air Force Leader,2017,7.91,5.64,2.62,7983,180,No,https://boardgamegeek.com/boardgame/105024
@@ -4388,6 +4492,7 @@
 130959,"Panzer: Game Expansion Set, Nr 3 – Drive to the Rhine: The Second Front 1944-45",2014,8.36,5.64,3.6,,142,Yes,https://boardgamegeek.com/boardgame/130959
 43530,Party Alias,2009,6.16,5.64,1.21,7842,986,No,https://boardgamegeek.com/boardgame/43530
 146632,"Pathfinder Adventure Card Game: Rise of the Runelords – ""Poog of Zarongel"" Promo Card",2013,7.72,5.64,2.58,,166,Yes,https://boardgamegeek.com/boardgame/146632
+171136,Pingo Pingo,2015,6.34,5.64,1.31,7912,505,No,https://boardgamegeek.com/boardgame/171136
 160783,Revolution! Anarchy,2014,7.53,5.64,2.5,,180,Yes,https://boardgamegeek.com/boardgame/160783
 131261,Risk: StarCraft Collector's Edition,2012,6.52,5.64,2.22,7848,517,No,https://boardgamegeek.com/boardgame/131261
 147370,Robot Turtles,2013,5.92,5.64,1.34,7827,1353,No,https://boardgamegeek.com/boardgame/147370
@@ -4411,6 +4516,7 @@
 90,Star Wars: Episode 1 – Clash of the Lightsabers,1999,6.2,5.64,1.43,7788,621,No,https://boardgamegeek.com/boardgame/90
 160556,Star Wars: The Card Game – Between The Shadows,2015,7.87,5.64,3.25,,161,Yes,https://boardgamegeek.com/boardgame/160556
 4454,Statis Pro Football,1973,6.65,5.64,2.57,7785,427,No,https://boardgamegeek.com/boardgame/4454
+169146,Stone Garden,2014,6.78,5.64,2.68,7890,316,No,https://boardgamegeek.com/boardgame/169146
 103814,Streams,2011,6.71,5.64,1.17,7974,480,No,https://boardgamegeek.com/boardgame/103814
 41612,Struggle for the Galactic Empire,2009,6.85,5.64,2.98,7858,296,No,https://boardgamegeek.com/boardgame/41612
 130705,Super Big Boggle,2012,7.16,5.64,1.33,7772,243,No,https://boardgamegeek.com/boardgame/130705
@@ -4446,6 +4552,7 @@
 64651,Warhammer: Invasion – The Warpstone Chronicles,2010,7.53,5.64,2.0,,200,Yes,https://boardgamegeek.com/boardgame/64651
 2667,What Were You Thinking?,1998,6.92,5.64,1.2,7861,267,No,https://boardgamegeek.com/boardgame/2667
 166988,Wizards of the Wild,2015,6.64,5.64,2.0,8011,324,No,https://boardgamegeek.com/boardgame/166988
+170300,Wombat Rescue,2015,6.44,5.64,2.1,7792,430,No,https://boardgamegeek.com/boardgame/170300
 94614,Yggdrasil: Frigg Promo,2011,6.89,5.64,2.42,,253,Yes,https://boardgamegeek.com/boardgame/94614
 147363,Yu-Gi-Oh! Dice Masters,2015,6.8,5.64,2.0,8063,296,No,https://boardgamegeek.com/boardgame/147363
 153639,Zeppelin Attack!,2014,6.67,5.64,2.32,7959,334,No,https://boardgamegeek.com/boardgame/153639
@@ -4528,6 +4635,7 @@
 102897,Farmageddon,2012,6.08,5.63,1.62,8361,794,No,https://boardgamegeek.com/boardgame/102897
 36,Federation & Empire,1986,6.46,5.63,4.36,8355,439,No,https://boardgamegeek.com/boardgame/36
 3692,Firepower,1984,6.3,5.63,3.63,8088,566,No,https://boardgamegeek.com/boardgame/3692
+168849,Flash Point: Fire Rescue – Extreme Danger Kickstarter Bonus Pack,2013,7.61,5.63,2.17,,155,Yes,https://boardgamegeek.com/boardgame/168849
 125315,FlowerFall,2012,5.97,5.63,1.04,8405,904,No,https://boardgamegeek.com/boardgame/125315
 951,Football Strategy,1959,6.46,5.63,1.59,8139,451,No,https://boardgamegeek.com/boardgame/951
 3945,Forbidden Bridge,1992,6.32,5.63,1.35,8188,567,No,https://boardgamegeek.com/boardgame/3945
@@ -4617,6 +4725,7 @@
 154394,Sheepshead,1830,7.65,5.63,2.71,8133,155,No,https://boardgamegeek.com/boardgame/154394
 163683,Sheriff of Nottingham: Royal Summons Promo Card,2014,7.1,5.63,1.8,,210,Yes,https://boardgamegeek.com/boardgame/163683
 562,Silberzwerg,2000,6.4,5.63,2.51,8293,430,No,https://boardgamegeek.com/boardgame/562
+170041,Splash!,2014,6.27,5.63,1.0,8263,514,No,https://boardgamegeek.com/boardgame/170041
 5711,Squad Seven,2002,6.41,5.63,1.32,8263,409,No,https://boardgamegeek.com/boardgame/5711
 12055,Streets of Stalingrad (Third Edition),2003,7.46,5.63,4.17,8405,201,No,https://boardgamegeek.com/boardgame/12055
 129544,Summoner Wars: Bodgan,2012,7.54,5.63,2.5,,171,Yes,https://boardgamegeek.com/boardgame/129544
@@ -4652,6 +4761,7 @@
 151384,Warfighter: Expansion #1 – Reloading!,2014,7.76,5.63,2.7,,164,Yes,https://boardgamegeek.com/boardgame/151384
 151386,Warfighter: Expansion #3 – Support,2014,7.78,5.63,2.64,,159,Yes,https://boardgamegeek.com/boardgame/151386
 164680,"Warhammer 40,000: Conquest – Gift of the Ethereals",2014,7.62,5.63,3.0,,181,Yes,https://boardgamegeek.com/boardgame/164680
+168677,"Warhammer 40,000: Conquest – The Threat Beyond",2015,7.69,5.63,3.43,,172,Yes,https://boardgamegeek.com/boardgame/168677
 166897,"Warhammer 40,000: Conquest – Zogwort's Curse",2015,7.57,5.63,3.38,,178,Yes,https://boardgamegeek.com/boardgame/166897
 138110,Warhammer: Invasion – Cataclysm,2013,7.71,5.63,3.17,,164,Yes,https://boardgamegeek.com/boardgame/138110
 68722,Warhammer: Invasion – The Burning of Derricksburg,2010,7.54,5.63,2.33,,170,Yes,https://boardgamegeek.com/boardgame/68722
@@ -4704,6 +4814,7 @@
 1541,Block Mania: Mega-Mania,1987,6.79,5.62,2.35,,238,Yes,https://boardgamegeek.com/boardgame/1541
 69136,"Bloody April, 1917: Air War Over Arras, France",2012,7.23,5.62,4.09,8482,230,No,https://boardgamegeek.com/boardgame/69136
 133518,"Blue Cross, White Ensign",2014,7.55,5.62,3.55,8554,160,No,https://boardgamegeek.com/boardgame/133518
+168421,Bohnanza: Ladies & Gangsters,2015,6.96,5.62,1.67,,239,No,https://boardgamegeek.com/boardgame/168421
 7824,Break the Safe,2003,6.08,5.62,1.46,8436,836,No,https://boardgamegeek.com/boardgame/7824
 359,Bucket Brigade,1998,6.02,5.62,1.26,8634,738,No,https://boardgamegeek.com/boardgame/359
 40258,Buffalo Wings,2010,8.12,5.62,2.88,8414,157,No,https://boardgamegeek.com/boardgame/40258
@@ -4725,6 +4836,8 @@
 8066,CrossFire: Rules and Organizations for Company Level WW II Gaming,1996,7.64,5.62,2.57,8734,169,No,https://boardgamegeek.com/boardgame/8066
 145037,Cthulhu Wars: Yuggoth Map Expansion,2015,8.04,5.62,4.0,,133,Yes,https://boardgamegeek.com/boardgame/145037
 61028,D-Day Dice: Free Trial Version,2009,6.62,5.62,1.82,8803,282,No,https://boardgamegeek.com/boardgame/61028
+169642,DC Deck-Building Game: Crossover Pack 2 – Arrow,2015,6.59,5.62,1.73,,349,Yes,https://boardgamegeek.com/boardgame/169642
+170146,Dark Seas,2015,6.17,5.62,1.96,8663,558,No,https://boardgamegeek.com/boardgame/170146
 8495,De Bellis Multitudinis: Wargames Rules for Ancient and Medieval Battles – 3000 BC to 1500 AD,1993,6.69,5.62,3.86,8770,274,No,https://boardgamegeek.com/boardgame/8495
 146207,Dead Man's Hand,2013,7.81,5.62,2.14,8456,151,No,https://boardgamegeek.com/boardgame/146207
 35477,Dead of Winter: The Battle of Stones River (Second Edition),2009,7.31,5.62,3.83,8649,199,No,https://boardgamegeek.com/boardgame/35477
@@ -4732,6 +4845,7 @@
 8939,Der wahre Walter,1989,7.17,5.62,1.2,8645,184,No,https://boardgamegeek.com/boardgame/8939
 62327,Descent / Runebound / Runewars Figure: Tobin Farslayer,2009,7.52,5.62,1.75,,167,Yes,https://boardgamegeek.com/boardgame/62327
 160673,Dominion: Die Intrige – Erweiterung,2014,7.55,5.62,2.33,,153,Yes,https://boardgamegeek.com/boardgame/160673
+171009,Doomtown: Reloaded – Double Dealin',2015,7.81,5.62,3.0,,136,Yes,https://boardgamegeek.com/boardgame/171009
 126021,Dropzone Commander: Core Rulebook,2012,7.51,5.62,3.42,8639,175,No,https://boardgamegeek.com/boardgame/126021
 29017,Dschungelschatz,2006,6.74,5.62,1.16,8564,274,No,https://boardgamegeek.com/boardgame/29017
 16138,Dungeons & Dragons: The Fantasy Adventure Board Game – Forbidden Forest Expansion Pack,2004,6.86,5.62,2.09,,255,Yes,https://boardgamegeek.com/boardgame/16138
@@ -4744,6 +4858,7 @@
 128011,Extra! Extra!,2015,6.69,5.62,3.23,8706,279,No,https://boardgamegeek.com/boardgame/128011
 720,Fast Food Franchise,1992,6.34,5.62,2.14,8721,409,No,https://boardgamegeek.com/boardgame/720
 8017,Feurio!,2003,6.14,5.62,2.0,8443,590,No,https://boardgamegeek.com/boardgame/8017
+170202,Floating Market,2015,6.2,5.62,1.65,8793,512,No,https://boardgamegeek.com/boardgame/170202
 44489,Fluxx Promo Cards,1997,6.68,5.62,1.33,,305,Yes,https://boardgamegeek.com/boardgame/44489
 145602,Freedom: The Underground Railroad – Promo Cards,2013,7.78,5.62,2.86,,141,Yes,https://boardgamegeek.com/boardgame/145602
 145501,Fun Farm,2013,6.27,5.62,1.05,8497,591,No,https://boardgamegeek.com/boardgame/145501
@@ -4831,6 +4946,7 @@
 5686,Stargrunt II,1996,7.53,5.62,2.96,8631,167,No,https://boardgamegeek.com/boardgame/5686
 9615,Station Master,2004,6.12,5.62,1.53,8650,592,No,https://boardgamegeek.com/boardgame/9615
 155042,Steam Donkey,2014,6.52,5.62,2.14,8491,331,No,https://boardgamegeek.com/boardgame/155042
+170537,Swords and Bagpipes,2014,6.52,5.62,2.22,8714,327,No,https://boardgamegeek.com/boardgame/170537
 31259,Tannhäuser: Wolf,2007,7.15,5.62,2.32,,199,Yes,https://boardgamegeek.com/boardgame/31259
 39332,Tasso,2004,6.15,5.62,1.31,8767,541,No,https://boardgamegeek.com/boardgame/39332
 137406,Templar: The Secret Treasures,2013,6.37,5.62,2.23,8441,431,No,https://boardgamegeek.com/boardgame/137406
@@ -4854,6 +4970,7 @@
 490,Warangel,2000,7.76,5.62,2.51,8764,287,No,https://boardgamegeek.com/boardgame/490
 153905,Warband: Against the Darkness,2015,6.65,5.62,2.93,8658,294,No,https://boardgamegeek.com/boardgame/153905
 151385,Warfighter: Expansion #2 – Stealth,2014,7.74,5.62,2.6,,160,Yes,https://boardgamegeek.com/boardgame/151385
+170276,"Warhammer 40,000: Conquest – Descendants of Isha",2015,7.66,5.62,3.29,,161,Yes,https://boardgamegeek.com/boardgame/170276
 143775,Warhammer: Invasion – Hidden Kingdoms,2013,7.87,5.62,3.0,,135,Yes,https://boardgamegeek.com/boardgame/143775
 28681,Warmachine Prime Remix,2006,7.89,5.62,3.76,,148,Yes,https://boardgamegeek.com/boardgame/28681
 1072,Wat'n dat!?,1996,6.53,5.62,1.18,8526,335,No,https://boardgamegeek.com/boardgame/1072
@@ -4883,6 +5000,7 @@
 142649,Alien Frontiers: Faction Pack #4,2014,7.55,5.61,2.6,,144,Yes,https://boardgamegeek.com/boardgame/142649
 138546,Among the Stars: Hythian,2013,7.18,5.61,2.25,,166,Yes,https://boardgamegeek.com/boardgame/138546
 27028,Anima Tactics,2006,7.37,5.61,2.64,8992,176,No,https://boardgamegeek.com/boardgame/27028
+169244,Arcadia Quest: McHammer,2014,7.8,5.61,1.67,,138,Yes,https://boardgamegeek.com/boardgame/169244
 101513,"Ascension: Return of the Fallen – Kythis, the Gatekeeper Promo",2011,6.98,5.61,1.82,,197,Yes,https://boardgamegeek.com/boardgame/101513
 121657,Axis & Allies Air Force Miniatures: Angels 20,2012,7.13,5.61,2.3,8927,216,No,https://boardgamegeek.com/boardgame/121657
 147918,BANG! Dodge City with High Noon expansion,2008,7.06,5.61,1.8,,243,Yes,https://boardgamegeek.com/boardgame/147918
@@ -4903,7 +5021,9 @@
 3341,Burn Rate,2002,6.08,5.61,1.58,9077,686,No,https://boardgamegeek.com/boardgame/3341
 30324,Ca$h 'n Gun$: Live,2007,6.38,5.61,1.39,8819,353,No,https://boardgamegeek.com/boardgame/30324
 2960,Camden,2002,6.28,5.61,1.91,8808,480,No,https://boardgamegeek.com/boardgame/2960
+168936,Cards Against Humanity: Ten Days or Whatever of Kwanzaa,2014,6.54,5.61,1.31,,358,Yes,https://boardgamegeek.com/boardgame/168936
 29411,Castle Knights,2007,6.49,5.61,1.05,9209,293,No,https://boardgamegeek.com/boardgame/29411
+170223,Centauri Saga,2016,6.51,5.61,2.94,8926,344,No,https://boardgamegeek.com/boardgame/170223
 26458,"Chandragupta: Great Battles of the Mauryan Empire – India, 319-261 BC",2008,7.61,5.61,3.78,8893,142,No,https://boardgamegeek.com/boardgame/26458
 289,Chariot Lords,1999,6.71,5.61,2.75,9180,243,No,https://boardgamegeek.com/boardgame/289
 35339,Cheesy Gonzola,2008,7.07,5.61,1.69,,182,Yes,https://boardgamegeek.com/boardgame/35339
@@ -4929,6 +5049,9 @@
 28436,Deutschland: Finden Sie Minden,2007,6.36,5.61,1.58,9106,350,No,https://boardgamegeek.com/boardgame/28436
 156719,Dino Race,2014,6.16,5.61,1.39,9037,535,No,https://boardgamegeek.com/boardgame/156719
 1525,Dixie: Bull Run,1994,6.37,5.61,2.04,9013,398,No,https://boardgamegeek.com/boardgame/1525
+171037,Doctor Panic,2016,6.17,5.61,1.25,9145,506,No,https://boardgamegeek.com/boardgame/171037
+169247,Dogs of War: Tactic Cards & Order of Battle Tiles,2014,7.81,5.61,2.4,,124,Yes,https://boardgamegeek.com/boardgame/169247
+171008,Doomtown: Reloaded – Election Day Slaughter,2015,7.86,5.61,2.82,,121,Yes,https://boardgamegeek.com/boardgame/171008
 32288,Dou Dizhu,,6.99,5.61,2.27,9005,219,No,https://boardgamegeek.com/boardgame/32288
 29055,Down in Flames: Locked-On,2018,7.76,5.61,1.86,9136,152,No,https://boardgamegeek.com/boardgame/29055
 165404,Dragonscroll,2014,6.5,5.61,2.1,9285,301,No,https://boardgamegeek.com/boardgame/165404
@@ -4942,6 +5065,7 @@
 53624,Empires in America: The French and Indian War,2009,7.21,5.61,2.33,8868,175,No,https://boardgamegeek.com/boardgame/53624
 938,Enchanted Forest,1981,5.74,5.61,1.24,8935,3378,No,https://boardgamegeek.com/boardgame/938
 131121,Equinox,2012,6.54,5.61,2.07,9220,274,No,https://boardgamegeek.com/boardgame/131121
+167909,Escape: The Curse of the Temple – Queenie 5: Quest Chambers,2014,7.52,5.61,1.4,,142,Yes,https://boardgamegeek.com/boardgame/167909
 7109,Fifth Corps: The Soviet Breakthrough at Fulda,1980,7.02,5.61,3.24,8888,218,No,https://boardgamegeek.com/boardgame/7109
 14940,Figure It,1975,6.56,5.61,1.3,8963,292,No,https://boardgamegeek.com/boardgame/14940
 4643,Fire and Ice,2002,6.75,5.61,2.95,8876,238,No,https://boardgamegeek.com/boardgame/4643
@@ -4990,6 +5114,7 @@
 23741,Killer Bunnies and the Quest for the Magic Carrot: Ominous Onyx Booster,2007,6.45,5.61,2.29,,372,Yes,https://boardgamegeek.com/boardgame/23741
 20621,Killer Bunnies and the Quest for the Magic Carrot: Wacky KHAKI Booster,2006,6.46,5.61,2.33,,387,Yes,https://boardgamegeek.com/boardgame/20621
 41100,King Philip's War,2010,6.99,5.61,2.28,8919,220,No,https://boardgamegeek.com/boardgame/41100
+168296,King's Forge: Apprentices,2015,7.31,5.61,3.0,,161,Yes,https://boardgamegeek.com/boardgame/168296
 18165,Kingmaker: Variant Event Cards,1977,7.29,5.61,2.74,,169,Yes,https://boardgamegeek.com/boardgame/18165
 5394,"Kolin: Frederick's First Defeat – June 18, 1757",1994,7.88,5.61,3.95,8899,136,No,https://boardgamegeek.com/boardgame/5394
 141998,Krosmaster: Arena – Exp #1 – Fire & Ice,2013,7.25,5.61,3.0,,178,Yes,https://boardgamegeek.com/boardgame/141998
@@ -5029,17 +5154,20 @@
 473,Olé!,1996,6.64,5.61,1.43,8809,270,No,https://boardgamegeek.com/boardgame/473
 138081,Once Upon a Time: Seafaring Tales,2013,6.99,5.61,1.38,,209,Yes,https://boardgamegeek.com/boardgame/138081
 142503,One Night Werewolf,2012,6.1,5.61,1.22,8891,643,No,https://boardgamegeek.com/boardgame/142503
+168537,Pandemonium,2017,7.37,5.61,3.08,8982,340,No,https://boardgamegeek.com/boardgame/168537
 159446,Panthalos,2014,6.76,5.61,3.0,9161,219,No,https://boardgamegeek.com/boardgame/159446
 137,Pass the Bomb,1994,5.84,5.61,1.29,8917,1772,No,https://boardgamegeek.com/boardgame/137
 20082,Pecunia non olet: Geld stinkt nicht,2005,6.22,5.61,1.3,9220,453,No,https://boardgamegeek.com/boardgame/20082
 13347,Plunder,2004,6.13,5.61,2.19,8937,582,No,https://boardgamegeek.com/boardgame/13347
 39940,Prague: The Empty Triumph,2014,8.59,5.61,4.1,,105,No,https://boardgamegeek.com/boardgame/39940
+170472,Prelude to Rebellion: Mobilization & Unrest in Lower Canada 1834-1837,2018,7.92,5.61,2.58,9162,117,No,https://boardgamegeek.com/boardgame/170472
 9354,Privacy,2004,6.37,5.61,1.1,8953,403,No,https://boardgamegeek.com/boardgame/9354
 11122,Proud Monster: The Barbarossa Campaign,1994,7.24,5.61,3.07,9184,170,No,https://boardgamegeek.com/boardgame/11122
 46080,Realm of Chaos: The Lost and the Damned,1990,8.23,5.61,4.0,,108,Yes,https://boardgamegeek.com/boardgame/46080
 6861,Red Badge of Courage,2001,7.49,5.61,3.85,8891,154,No,https://boardgamegeek.com/boardgame/6861
 4657,Replay Baseball,1973,8.12,5.61,2.5,9128,135,No,https://boardgamegeek.com/boardgame/4657
 277,Res Publica,1991,5.9,5.61,1.7,8898,1066,No,https://boardgamegeek.com/boardgame/277
+169530,Resistor_,2015,6.4,5.61,2.13,9280,400,No,https://boardgamegeek.com/boardgame/169530
 88871,"Roads to Moscow: Battles of Mozhaysk and Mtsensk, 1941",2013,7.42,5.61,3.36,8957,163,No,https://boardgamegeek.com/boardgame/88871
 40243,Roads to Stalingrad: Campaign Commander Series,2009,7.58,5.61,2.46,9282,148,No,https://boardgamegeek.com/boardgame/40243
 104640,Robin Hood,2011,7.01,5.61,1.5,8858,213,No,https://boardgamegeek.com/boardgame/104640
@@ -5074,6 +5202,7 @@
 1743,Talisman: Timescape,1988,5.96,5.61,2.15,,1016,Yes,https://boardgamegeek.com/boardgame/1743
 31209,Tannhäuser: Ramirez,2008,7.29,5.61,1.93,,176,Yes,https://boardgamegeek.com/boardgame/31209
 55833,Tarantel Tango,2009,6.05,5.61,1.2,9113,703,No,https://boardgamegeek.com/boardgame/55833
+169370,Tash-Kalar: Arena of Legends – Legendary Summoner Promo,2014,7.57,5.61,3.0,,131,Yes,https://boardgamegeek.com/boardgame/169370
 16444,The Battle of the Bulge,1965,6.24,5.61,2.22,9216,493,No,https://boardgamegeek.com/boardgame/16444
 2883,The Book of Classic Board Games,1991,6.6,5.61,1.83,,281,No,https://boardgamegeek.com/boardgame/2883
 135193,The Eastern Front: 1914-1917,2012,8.39,5.61,3.27,,110,No,https://boardgamegeek.com/boardgame/135193
@@ -5108,6 +5237,7 @@
 72322,Warhammer: Invasion – The Silent Forge,2010,7.54,5.61,2.38,,146,Yes,https://boardgamegeek.com/boardgame/72322
 74408,Warhammer: The Island of Blood,2010,7.0,5.61,3.67,9031,219,No,https://boardgamegeek.com/boardgame/74408
 138104,Warmachine: High Command,2013,6.13,5.61,2.34,8935,638,No,https://boardgamegeek.com/boardgame/138104
+169366,Waterloo 200,2015,7.85,5.61,2.72,9033,142,No,https://boardgamegeek.com/boardgame/169366
 121993,We Will Wok You,2012,6.25,5.61,1.56,9143,414,No,https://boardgamegeek.com/boardgame/121993
 7634,Western Desert,1982,7.55,5.61,3.67,9022,158,No,https://boardgamegeek.com/boardgame/7634
 5772,What's It to Ya?,2003,6.58,5.61,1.2,9232,284,No,https://boardgamegeek.com/boardgame/5772
@@ -5147,6 +5277,8 @@
 602,Animal Poker,1988,6.35,5.6,1.42,9816,349,No,https://boardgamegeek.com/boardgame/602
 27802,Anno 1701: Das Kartenspiel,2007,6.33,5.6,2.2,9750,326,No,https://boardgamegeek.com/boardgame/27802
 17030,Anno Domini: Lifestyle,1998,6.65,5.6,1.5,9463,229,No,https://boardgamegeek.com/boardgame/17030
+169243,Arcadia Quest: Hassan,2014,7.9,5.6,1.33,,121,Yes,https://boardgamegeek.com/boardgame/169243
+169415,Arcadia Quest: Leeroy,2014,7.7,5.6,1.0,,125,Yes,https://boardgamegeek.com/boardgame/169415
 165216,Arcadia Quest: Zahra,2014,7.7,5.6,1.5,,129,Yes,https://boardgamegeek.com/boardgame/165216
 7719,Arena Maximus,2003,5.88,5.6,1.82,9518,990,No,https://boardgamegeek.com/boardgame/7719
 25594,Ark Extra Mix,2006,6.54,5.6,2.37,,250,Yes,https://boardgamegeek.com/boardgame/25594
@@ -5208,10 +5340,12 @@
 103670,Dust Warfare: Core Rulebook,2012,7.51,5.6,3.39,9308,148,No,https://boardgamegeek.com/boardgame/103670
 137872,EONS,2013,6.68,5.6,2.7,9418,254,No,https://boardgamegeek.com/boardgame/137872
 7338,Epaminondas,1975,7.14,5.6,2.86,9733,164,No,https://boardgamegeek.com/boardgame/7338
+167910,Escape: The Curse of the Temple – Queenie 7: New Characters,2014,7.43,5.6,1.4,,129,Yes,https://boardgamegeek.com/boardgame/167910
 4386,Fanorona,1680,6.44,5.6,2.44,9808,292,No,https://boardgamegeek.com/boardgame/4386
 62291,Fatal Alliances: The Great War 1914-1918,2016,8.02,5.6,4.13,9783,127,No,https://boardgamegeek.com/boardgame/62291
 21371,Federation Commander: Klingon Attack,2006,7.89,5.6,3.33,,116,Yes,https://boardgamegeek.com/boardgame/21371
 11038,Fiasco,2003,6.9,5.6,1.2,9647,207,No,https://boardgamegeek.com/boardgame/11038
+169148,Fief: France 1429 – Tactics,2015,7.93,5.6,3.71,,110,Yes,https://boardgamegeek.com/boardgame/169148
 1358,Field Command,1991,7.08,5.6,2.33,9818,178,No,https://boardgamegeek.com/boardgame/1358
 21704,Fiji,2006,5.85,5.6,1.76,9577,948,No,https://boardgamegeek.com/boardgame/21704
 37906,Firestorm Armada,2009,7.19,5.6,3.04,9740,173,No,https://boardgamegeek.com/boardgame/37906
@@ -5224,6 +5358,7 @@
 120447,Get Lucky,2014,6.02,5.6,1.58,9407,694,No,https://boardgamegeek.com/boardgame/120447
 123920,Ghost Stories: Crazy Shaman,2009,7.23,5.6,3.0,,153,Yes,https://boardgamegeek.com/boardgame/123920
 137480,Gold am Orinoko,2013,6.47,5.6,1.44,9615,263,No,https://boardgamegeek.com/boardgame/137480
+168037,Good Cop Bad Cop: Bombers and Traitors,2015,6.54,5.6,1.67,,261,Yes,https://boardgamegeek.com/boardgame/168037
 11432,Harpoon 4: Modern Tactical Naval Warfare,1997,7.4,5.6,4.38,9436,160,No,https://boardgamegeek.com/boardgame/11432
 123878,Hawaii: Kamapua'as Gunst,2012,7.07,5.6,2.62,,172,Yes,https://boardgamegeek.com/boardgame/123878
 161316,Heart of Crown: Six City Alliance,2014,8.13,5.6,2.5,,105,Yes,https://boardgamegeek.com/boardgame/161316
@@ -5249,6 +5384,7 @@
 155495,KUNE v LAKIA: A Chronicle Of A Royal Lapine Divorce Foretold,2015,6.44,5.6,2.25,9305,304,No,https://boardgamegeek.com/boardgame/155495
 2298,"Kasserine: Rommel's Battle for Tunisia, 1943",2001,7.15,5.6,3.36,9489,172,No,https://boardgamegeek.com/boardgame/2298
 4207,"Kharkov: The Soviet Spring Offensive, 1942",1978,6.65,5.6,2.56,9419,260,No,https://boardgamegeek.com/boardgame/4207
+168700,Kigi,2014,6.24,5.6,1.23,9368,419,No,https://boardgamegeek.com/boardgame/168700
 2252,King of the Tabletop,1983,6.92,5.6,1.89,9453,207,No,https://boardgamegeek.com/boardgame/2252
 26468,Klaverjassen,1890,6.97,5.6,2.89,9716,174,No,https://boardgamegeek.com/boardgame/26468
 155192,Knightmare Chess (Third Edition),2014,7.22,5.6,3.0,,159,Yes,https://boardgamegeek.com/boardgame/155192
@@ -5320,6 +5456,7 @@
 160908,Plus Ultra: The Court of the Emperor Charles V,2016,7.14,5.6,3.35,9699,179,No,https://boardgamegeek.com/boardgame/160908
 154125,Pocket Battles: Confederacy vs Union,2014,6.78,5.6,2.09,9453,226,No,https://boardgamegeek.com/boardgame/154125
 131458,Power Grid: Oracle & Industrial Espionage,2012,6.82,5.6,2.94,,199,Yes,https://boardgamegeek.com/boardgame/131458
+168232,Project Dreamscape,2015,6.5,5.6,1.75,9640,273,No,https://boardgamegeek.com/boardgame/168232
 26218,Prophecy: Dragon Realm,2003,6.87,5.6,2.17,,214,Yes,https://boardgamegeek.com/boardgame/26218
 13875,Quoridor Junior,2004,6.31,5.6,1.4,9773,340,No,https://boardgamegeek.com/boardgame/13875
 6929,Ranger,1984,7.2,5.6,2.5,9744,173,No,https://boardgamegeek.com/boardgame/6929
@@ -5344,6 +5481,7 @@
 160524,Soccer Blast Pro Soccer Game,2014,8.22,5.6,2.44,9717,119,No,https://boardgamegeek.com/boardgame/160524
 91739,Somme 1918: Bloody Spring,2012,8.03,5.6,3.62,9626,110,No,https://boardgamegeek.com/boardgame/91739
 158292,Sons of Anarchy: Men of Mayhem – Grim Bastards promo card,2014,7.2,5.6,2.25,,156,Yes,https://boardgamegeek.com/boardgame/158292
+170245,Spartacus: Champions of House Batiatus Card Set,2014,7.93,5.6,1.5,,114,Yes,https://boardgamegeek.com/boardgame/170245
 2794,Spinball,2001,6.93,5.6,1.19,9422,183,No,https://boardgamegeek.com/boardgame/2794
 3595,Squint,2002,5.97,5.6,1.36,9362,763,No,https://boardgamegeek.com/boardgame/3595
 37061,Star Fleet Battles (Designer's Edition),1979,7.53,5.6,3.86,9779,136,No,https://boardgamegeek.com/boardgame/37061
@@ -5371,6 +5509,7 @@
 21691,The Ogre Book,1982,7.53,5.6,2.12,,135,Yes,https://boardgamegeek.com/boardgame/21691
 11967,The Seven Days of 1809: Napoleon and the Archduke Charles,2004,7.56,5.6,3.06,9827,128,No,https://boardgamegeek.com/boardgame/11967
 144789,The Sheep Race,2013,6.63,5.6,1.5,9306,278,No,https://boardgamegeek.com/boardgame/144789
+168230,The Supershow,2014,8.15,5.6,1.71,9449,368,No,https://boardgamegeek.com/boardgame/168230
 21419,The Sword of Rome: 5th Player Expansion,2007,6.91,5.6,3.35,,200,Yes,https://boardgamegeek.com/boardgame/21419
 37257,The Uncharted Seas: Rules for Fantasy Naval Combat,2008,7.07,5.6,2.82,9754,166,No,https://boardgamegeek.com/boardgame/37257
 1144,The Warlock of Firetop Mountain,1986,6.0,5.6,1.88,9821,771,No,https://boardgamegeek.com/boardgame/1144
@@ -5394,8 +5533,10 @@
 140045,Viticulture: Kickstarter Promotional Cards,2013,7.25,5.6,2.57,,147,Yes,https://boardgamegeek.com/boardgame/140045
 83283,Volo,2010,7.58,5.6,2.71,9702,122,No,https://boardgamegeek.com/boardgame/83283
 24082,Voltage,2006,6.07,5.6,1.5,9461,521,No,https://boardgamegeek.com/boardgame/24082
+169800,Vudù: Ninjas vs Pygmies,2015,6.83,5.6,1.0,,228,Yes,https://boardgamegeek.com/boardgame/169800
 18401,Wacht Am Rhein,2005,7.58,5.6,4.39,9389,165,No,https://boardgamegeek.com/boardgame/18401
 15410,Walk the Dogs,2004,6.14,5.6,1.19,9830,462,No,https://boardgamegeek.com/boardgame/15410
+169671,Warfighter: Expansion #5 – Speedball,2015,7.95,5.6,2.83,,113,Yes,https://boardgamegeek.com/boardgame/169671
 75996,Warhammer: Invasion – Redemption of a Mage,2010,7.52,5.6,2.2,,140,Yes,https://boardgamegeek.com/boardgame/75996
 80311,Warhammer: Invasion – The Fourth Waystone,2010,7.54,5.6,2.33,,127,Yes,https://boardgamegeek.com/boardgame/80311
 42276,Wealth of Nations: War Clouds,2010,7.08,5.6,3.4,,154,Yes,https://boardgamegeek.com/boardgame/42276
@@ -5441,6 +5582,7 @@
 40483,Anima: Beyond Good and Evil,2008,6.23,5.59,2.31,9941,460,No,https://boardgamegeek.com/boardgame/40483
 5801,Apples to Apples: Expansion Set #3,2001,6.66,5.59,1.06,,221,Yes,https://boardgamegeek.com/boardgame/5801
 10964,"April's Harvest: The Battle of Shiloh, April 6 & 7, 1862",1995,7.1,5.59,3.29,9853,178,No,https://boardgamegeek.com/boardgame/10964
+170127,Arcadia Quest: Yun,2015,7.76,5.59,1.5,,112,Yes,https://boardgamegeek.com/boardgame/170127
 139747,Arena Rex,2013,8.25,5.59,2.4,10040,109,No,https://boardgamegeek.com/boardgame/139747
 62214,Aspern-Essling 1809,2009,7.78,5.59,2.64,10148,126,No,https://boardgamegeek.com/boardgame/62214
 158793,Atlantic Wall: D-Day to Falaise,2014,8.27,5.59,4.21,10218,106,No,https://boardgamegeek.com/boardgame/158793
@@ -5476,9 +5618,11 @@
 134,Cape Horn,1999,6.0,5.59,2.02,9902,579,No,https://boardgamegeek.com/boardgame/134
 131676,Carcassonne: Die Windrosen,2012,6.47,5.59,1.64,,264,Yes,https://boardgamegeek.com/boardgame/131676
 166505,Carcassonne: Goldrausch – Der Sheriff,2014,7.2,5.59,2.2,,134,Yes,https://boardgamegeek.com/boardgame/166505
+168292,Cards Against Humanity: Science Pack,2014,6.52,5.59,1.11,,311,Yes,https://boardgamegeek.com/boardgame/168292
 40759,Cartagena: Die Meuterei,2009,6.43,5.59,2.11,10377,243,No,https://boardgamegeek.com/boardgame/40759
 117878,Catacombs: Horde of Vermin,2012,7.32,5.59,2.0,,131,Yes,https://boardgamegeek.com/boardgame/117878
 39292,Caylus Magna Carta: The Library,2007,6.81,5.59,2.25,,166,Yes,https://boardgamegeek.com/boardgame/39292
+170909,Caçadores da Galáxia,2015,7.59,5.59,3.0,10156,133,No,https://boardgamegeek.com/boardgame/170909
 1827,Chainsaw Warrior,1987,5.95,5.59,1.92,10161,771,No,https://boardgamegeek.com/boardgame/1827
 268,Cheops,1998,6.31,5.59,2.14,9938,325,No,https://boardgamegeek.com/boardgame/268
 9962,Chez Goth,2004,5.95,5.59,1.42,10056,719,No,https://boardgamegeek.com/boardgame/9962
@@ -5503,12 +5647,14 @@
 153703,Darkest Night: Necromancer Bundle,2013,7.53,5.59,2.8,,122,No,https://boardgamegeek.com/boardgame/153703
 38364,Days of Steam,2009,5.92,5.59,2.0,9937,729,No,https://boardgamegeek.com/boardgame/38364
 21097,De Kolonisten van Catan: De Koloniën,2005,7.16,5.59,2.29,,149,Yes,https://boardgamegeek.com/boardgame/21097
+171217,Dead of Winter: Lucky Luke Smith,2014,7.83,5.59,,,105,Yes,https://boardgamegeek.com/boardgame/171217
 5482,Devil's Den,1980,6.79,5.59,3.21,10073,214,No,https://boardgamegeek.com/boardgame/5482
 3339,Diceland: Deep White Sea,2002,6.4,5.59,1.92,10099,271,No,https://boardgamegeek.com/boardgame/3339
 137933,Dicht dran,2013,6.38,5.59,1.45,9992,270,No,https://boardgamegeek.com/boardgame/137933
 13503,Dicke Dämonen,2004,6.65,5.59,1.88,10334,184,No,https://boardgamegeek.com/boardgame/13503
 131452,Die dunkle Prophezeiung,2012,7.09,5.59,2.6,,147,Yes,https://boardgamegeek.com/boardgame/131452
 1814,Dilbert: Corporate Shuffle,1997,5.96,5.59,1.31,9896,647,No,https://boardgamegeek.com/boardgame/1814
+169639,"Dixit: ""Pumpkinhead"" and ""Santa"" Promo Cards",2014,7.31,5.59,1.0,,132,Yes,https://boardgamegeek.com/boardgame/169639
 161921,Dolmen,2015,6.82,5.59,2.57,10305,160,No,https://boardgamegeek.com/boardgame/161921
 142132,Dominion: Big Box,2011,7.81,5.59,2.5,,113,No,https://boardgamegeek.com/boardgame/142132
 41243,Down in Flames: WWII-Guns Blazing,2010,7.14,5.59,2.13,10124,155,No,https://boardgamegeek.com/boardgame/41243
@@ -5529,9 +5675,11 @@
 22544,Epic Dungeoneer: Call of the Lich Lord,2006,6.29,5.59,2.54,10145,347,No,https://boardgamegeek.com/boardgame/22544
 79282,Era of Inventions,2010,5.98,5.59,2.93,10138,597,No,https://boardgamegeek.com/boardgame/79282
 26884,Escalation!,2007,5.83,5.59,1.07,10352,996,No,https://boardgamegeek.com/boardgame/26884
+167911,Escape: The Curse of the Temple – Queenie 6: The Maze,2014,7.36,5.59,1.25,,125,Yes,https://boardgamegeek.com/boardgame/167911
 6646,Excalibur,1989,6.27,5.59,3.03,10343,347,No,https://boardgamegeek.com/boardgame/6646
 133689,"Fall Blau: Army Group South, June to December 1942",2016,7.96,5.59,2.92,9889,115,No,https://boardgamegeek.com/boardgame/133689
 7976,Fantasy Pub,2003,6.17,5.59,1.61,10082,430,No,https://boardgamegeek.com/boardgame/7976
+169149,Fief: France 1429 – Politics,2015,7.63,5.59,3.67,,108,Yes,https://boardgamegeek.com/boardgame/169149
 31542,Field of Glory: Ancient and Medieval Wargaming Rules,2008,6.73,5.59,3.62,9998,214,No,https://boardgamegeek.com/boardgame/31542
 74596,Flash Point,2010,6.82,5.59,2.14,10373,167,No,https://boardgamegeek.com/boardgame/74596
 10164,Fliegen klatschen,2004,6.0,5.59,1.05,10188,628,No,https://boardgamegeek.com/boardgame/10164
@@ -5683,6 +5831,7 @@
 140524,The Daedalus Sentence,2016,6.6,5.59,2.0,10105,237,No,https://boardgamegeek.com/boardgame/140524
 4270,The Far Seas,1987,7.17,5.59,2.43,10372,151,No,https://boardgamegeek.com/boardgame/4270
 11202,The First World War,2004,6.09,5.59,2.32,10270,483,No,https://boardgamegeek.com/boardgame/11202
+170951,The Foreign King,2015,6.34,5.59,2.23,10360,261,No,https://boardgamegeek.com/boardgame/170951
 22604,The Halls of Montezuma,2009,6.52,5.59,3.14,10076,246,No,https://boardgamegeek.com/boardgame/22604
 2798,The Ironclads: Expansion Kit,1980,7.63,5.59,3.1,,115,Yes,https://boardgamegeek.com/boardgame/2798
 20044,The Lord of the Rings: The Mines of Moria,2005,6.96,5.59,2.89,10300,165,No,https://boardgamegeek.com/boardgame/20044
@@ -5745,6 +5894,7 @@
 39179,A Castle for All Seasons: Winter Cards,2008,6.81,5.58,2.5,,176,Yes,https://boardgamegeek.com/boardgame/39179
 5827,A Winter War,1992,7.29,5.58,3.5,10645,129,No,https://boardgamegeek.com/boardgame/5827
 126426,A.D. 30,2012,6.7,5.58,2.22,10704,197,No,https://boardgamegeek.com/boardgame/126426
+169814,AEG Black Friday Black Box,2014,6.98,5.58,2.5,,147,No,https://boardgamegeek.com/boardgame/169814
 146144,AEGIS: Combining Robot Strategy Game,2018,7.36,5.58,2.2,10635,181,No,https://boardgamegeek.com/boardgame/146144
 22020,APBA Major League Baseball Master Game,1975,7.5,5.58,3.3,,124,Yes,https://boardgamegeek.com/boardgame/22020
 51195,Adaptoid,2009,6.9,5.58,2.12,11014,149,No,https://boardgamegeek.com/boardgame/51195
@@ -5778,6 +5928,7 @@
 216,Atlanteon,1992,5.87,5.58,2.03,10626,774,No,https://boardgamegeek.com/boardgame/216
 5485,Atlantic Wall: The Invasion of Europe June 1944,1978,6.86,5.58,4.0,10669,179,No,https://boardgamegeek.com/boardgame/5485
 3765,Babylon 5 Wars,1997,6.6,5.58,3.61,10717,198,No,https://boardgamegeek.com/boardgame/3765
+170825,Bad Medicine,2015,6.45,5.58,1.46,11041,232,No,https://boardgamegeek.com/boardgame/170825
 156843,Balance of Powers,2015,7.72,5.58,3.42,10735,110,No,https://boardgamegeek.com/boardgame/156843
 2641,"Barbarian, Kingdom & Empire",1983,7.13,5.58,2.76,10849,130,No,https://boardgamegeek.com/boardgame/2641
 3706,Batik,1997,5.93,5.58,1.11,10637,630,No,https://boardgamegeek.com/boardgame/3706
@@ -5801,6 +5952,7 @@
 59008,Canadian Crucible: Brigade Fortress at Norrey,2013,7.81,5.58,3.9,10517,101,No,https://boardgamegeek.com/boardgame/59008
 144382,Canalis,2013,6.24,5.58,2.76,10696,285,No,https://boardgamegeek.com/boardgame/144382
 166518,Carcassonne: Die Belagerer,2013,7.14,5.58,2.0,,115,Yes,https://boardgamegeek.com/boardgame/166518
+169392,Carcassonne: Halb so wild II,2014,6.86,5.58,2.0,,165,Yes,https://boardgamegeek.com/boardgame/169392
 130998,Carcassonne: Little Buildings,2012,6.38,5.58,1.83,,286,Yes,https://boardgamegeek.com/boardgame/130998
 93822,Catacombs:  Dark Passageways,2011,6.84,5.58,1.79,,164,Yes,https://boardgamegeek.com/boardgame/93822
 4362,"Champion Hill: May 16th, 1863 – The Road to Vicksburg",1996,7.2,5.58,3.38,10878,130,No,https://boardgamegeek.com/boardgame/4362
@@ -5822,6 +5974,7 @@
 305,Der Fliegende Holländer,1992,6.1,5.58,2.48,10559,371,No,https://boardgamegeek.com/boardgame/305
 59223,Diego Drachenzahn,2009,6.09,5.58,1.14,10436,401,No,https://boardgamegeek.com/boardgame/59223
 154902,Diner,2014,6.06,5.58,1.23,10624,403,No,https://boardgamegeek.com/boardgame/154902
+170477,Dino Dude Ranch,2016,7.13,5.58,1.5,10830,162,No,https://boardgamegeek.com/boardgame/170477
 119407,Dixit Jinx,2012,5.74,5.58,1.19,10775,1231,No,https://boardgamegeek.com/boardgame/119407
 158791,Dodekka,2014,6.23,5.58,1.0,10973,292,No,https://boardgamegeek.com/boardgame/158791
 3163,Doom of the Eldar,1993,6.45,5.58,2.42,10902,216,No,https://boardgamegeek.com/boardgame/3163
@@ -5836,6 +5989,7 @@
 125493,DrunkQuest,2013,6.21,5.58,1.89,10982,415,No,https://boardgamegeek.com/boardgame/125493
 10445,Duel Masters Trading Card Game,2004,6.42,5.58,2.09,10631,297,No,https://boardgamegeek.com/boardgame/10445
 18229,Duel of Ages: Scrye Add-On Pack,2003,7.24,5.58,2.93,,114,Yes,https://boardgamegeek.com/boardgame/18229
+167665,Dungeon Roll Legends: Hero Booster Pack #2,2014,6.48,5.58,1.22,,295,Yes,https://boardgamegeek.com/boardgame/167665
 150233,Dungeon Roll: Winter Heroes Pack,2014,6.12,5.58,1.42,,372,Yes,https://boardgamegeek.com/boardgame/150233
 139042,Días de Radio,2014,6.99,5.58,1.38,11021,150,No,https://boardgamegeek.com/boardgame/139042
 10672,"Easy Come, Easy Go",2004,5.98,5.58,1.02,10513,544,No,https://boardgamegeek.com/boardgame/10672
@@ -5911,6 +6065,7 @@
 141418,LEADERS: The Combined Strategy Game,2013,6.68,5.58,2.67,10990,307,No,https://boardgamegeek.com/boardgame/141418
 13995,La Bataille d'Espagnol-Talavera,1979,7.26,5.58,3.92,10465,145,No,https://boardgamegeek.com/boardgame/13995
 11438,La Bataille de Corunna-Espagnol,1995,7.52,5.58,3.72,10583,127,No,https://boardgamegeek.com/boardgame/11438
+167650,"Last Battle: Ie Shima, 1945",2015,7.3,5.58,2.18,10535,140,No,https://boardgamegeek.com/boardgame/167650
 88040,Last Night on Earth 'Advanced Abilities' Supplement,2010,7.18,5.58,2.0,,126,Yes,https://boardgamegeek.com/boardgame/88040
 86455,Le Havre: Le Grand Hameau – Rattletrap car,2010,7.31,5.58,3.67,,109,Yes,https://boardgamegeek.com/boardgame/86455
 86456,Le Havre: Le Grand Hameau – Wholesale Bakery,2010,7.47,5.58,3.67,,107,Yes,https://boardgamegeek.com/boardgame/86456
@@ -5930,6 +6085,7 @@
 150996,Lords of War: Templars versus Undead,2014,6.49,5.58,2.3,11002,249,No,https://boardgamegeek.com/boardgame/150996
 147883,Lost Legacy: Hyakunen Senso to Ryu no Miko,2013,7.12,5.58,1.14,10677,134,No,https://boardgamegeek.com/boardgame/147883
 5351,"Lost Victory: Manstein At Kharkov, Winter 1943",1994,7.06,5.58,3.48,10446,165,No,https://boardgamegeek.com/boardgame/5351
+170799,Lost Woods,2015,6.61,5.58,1.5,11095,196,No,https://boardgamegeek.com/boardgame/170799
 35801,Lungarno,2008,6.15,5.58,2.17,10579,428,No,https://boardgamegeek.com/boardgame/35801
 131232,Mafia City,2012,6.71,5.58,2.5,10446,194,No,https://boardgamegeek.com/boardgame/131232
 127839,"Mage Tower, A Tower Defense Card Game",2013,6.65,5.58,2.83,10469,194,No,https://boardgamegeek.com/boardgame/127839
@@ -5942,11 +6098,13 @@
 166109,Meteor,2014,6.05,5.58,1.86,10426,512,No,https://boardgamegeek.com/boardgame/166109
 28828,Modern Naval Battles: Global Warfare,2008,6.69,5.58,1.85,10825,181,No,https://boardgamegeek.com/boardgame/28828
 98122,Monster Trap,2011,6.1,5.58,1.14,10597,378,No,https://boardgamegeek.com/boardgame/98122
+169062,Monsters vs. Heroes: Victorian Nightmares,2015,6.08,5.58,1.28,10688,489,No,https://boardgamegeek.com/boardgame/169062
 25087,More Kung Fu Fighting,2008,6.72,5.58,1.29,,168,Yes,https://boardgamegeek.com/boardgame/25087
 138960,Munchkin Game Changers,2013,6.6,5.58,1.89,,236,Yes,https://boardgamegeek.com/boardgame/138960
 147475,Munchkin Gets Promoted,2013,7.13,5.58,2.0,,149,Yes,https://boardgamegeek.com/boardgame/147475
 164110,Munchkin Gloom,2015,6.24,5.58,1.78,10610,343,No,https://boardgamegeek.com/boardgame/164110
 133572,Munchkin Holiday Surprise,2012,6.75,5.58,2.0,,226,Yes,https://boardgamegeek.com/boardgame/133572
+171199,Munchkin Legends Deluxe,2014,6.41,5.58,1.75,,288,No,https://boardgamegeek.com/boardgame/171199
 128034,Munchkin Naughty & Nice,2012,6.85,5.58,2.22,,191,Yes,https://boardgamegeek.com/boardgame/128034
 41034,Munchkin Promo Cards,,6.77,5.58,1.71,,231,Yes,https://boardgamegeek.com/boardgame/41034
 103291,Munchkin Reindeer Games,2011,6.71,5.58,2.0,,219,Yes,https://boardgamegeek.com/boardgame/103291
@@ -5964,6 +6122,7 @@
 7531,Ogre Reinforcement Pack,1987,7.38,5.58,2.33,,104,Yes,https://boardgamegeek.com/boardgame/7531
 41982,Okko: Era of the Karasu,2009,7.29,5.58,2.0,,141,Yes,https://boardgamegeek.com/boardgame/41982
 161620,"Omertà, el poder de la mafia",2015,7.24,5.58,2.62,10866,142,No,https://boardgamegeek.com/boardgame/161620
+168017,Onirim (Second Edition): Mirrors Promo Cards,2014,7.55,5.58,1.5,,100,Yes,https://boardgamegeek.com/boardgame/168017
 159515,Operation F.A.U.S.T.,2015,6.16,5.58,1.85,10919,350,No,https://boardgamegeek.com/boardgame/159515
 63928,"Operation Jubilee: Dieppe, August 1942",2010,7.34,5.58,2.93,10603,117,No,https://boardgamegeek.com/boardgame/63928
 147884,Ore: The Mining Game,2013,7.18,5.58,2.29,10694,121,No,https://boardgamegeek.com/boardgame/147884
@@ -5998,6 +6157,7 @@
 7831,Risorgimento 1859: the Second Italian War of Independence,2000,7.03,5.58,3.26,10649,151,No,https://boardgamegeek.com/boardgame/7831
 165048,Rivet Wars: Battle of Brighton,2014,7.58,5.58,2.83,,105,Yes,https://boardgamegeek.com/boardgame/165048
 2192,Rivets,1977,6.42,5.58,2.0,11062,232,No,https://boardgamegeek.com/boardgame/2192
+170907,"Robinson Crusoe: Adventures on the Cursed Island – ""Treasure Island"" Junior Scenario",2014,7.25,5.58,2.5,,128,Yes,https://boardgamegeek.com/boardgame/170907
 3567,Roller Coaster Tycoon,2002,6.07,5.58,1.58,10722,493,No,https://boardgamegeek.com/boardgame/3567
 165522,Rory's Story Cubes: Intergalactic,2014,6.56,5.58,1.0,10520,201,No,https://boardgamegeek.com/boardgame/165522
 21402,Runebound: Battlemage Character Deck,2006,6.67,5.58,2.18,,197,Yes,https://boardgamegeek.com/boardgame/21402
@@ -6023,6 +6183,7 @@
 22377,Spartacus: Crisis in the Roman Republic  80-71 B.C.,2008,6.77,5.58,3.25,10794,191,No,https://boardgamegeek.com/boardgame/22377
 132553,Spartacus: Hadrianus Promo Card,2012,7.52,5.58,1.33,,105,Yes,https://boardgamegeek.com/boardgame/132553
 21469,Spectral Rails,2011,6.3,5.58,2.5,10687,272,No,https://boardgamegeek.com/boardgame/21469
+169436,Speedy Words,2014,6.15,5.58,1.0,10890,351,No,https://boardgamegeek.com/boardgame/169436
 6976,St-Lô: Normandy 1944 – The Breakout Begins,1986,7.23,5.58,2.94,10684,127,No,https://boardgamegeek.com/boardgame/6976
 1901,Star Fleet Battle Force,2001,6.55,5.58,2.03,10804,241,No,https://boardgamegeek.com/boardgame/1901
 164343,Star Realms: Starmarket Promo Card,2014,7.26,5.58,1.6,,117,Yes,https://boardgamegeek.com/boardgame/164343
@@ -6055,6 +6216,7 @@
 66080,"The Lost Cause: The American Civil War, 1861-1865",2010,7.31,5.58,2.57,10459,136,No,https://boardgamegeek.com/boardgame/66080
 2256,The Magnificent Race,1975,6.33,5.58,1.16,10481,314,No,https://boardgamegeek.com/boardgame/2256
 317,The Mob,1993,6.46,5.58,1.85,10757,232,No,https://boardgamegeek.com/boardgame/317
+168662,"The Siege of Orgun: Afghanistan, 1983",2015,7.38,5.58,2.7,10831,109,No,https://boardgamegeek.com/boardgame/168662
 5021,The Struggle of Nations,1982,6.33,5.58,4.3,11033,295,No,https://boardgamegeek.com/boardgame/5021
 3966,The Succession Wars,1987,6.43,5.58,2.97,10824,280,No,https://boardgamegeek.com/boardgame/3966
 140638,The Walking Dead Board Game: The Best Defense,2013,6.01,5.58,2.02,10550,644,No,https://boardgamegeek.com/boardgame/140638
@@ -6155,6 +6317,7 @@
 31419,Bohnröschen,2007,6.57,5.57,2.0,,165,Yes,https://boardgamegeek.com/boardgame/31419
 3053,Bonaparte in Italy,1979,7.19,5.57,3.08,11123,126,No,https://boardgamegeek.com/boardgame/3053
 1160,Boom Town,1990,6.54,5.57,1.84,11529,170,No,https://boardgamegeek.com/boardgame/1160
+169544,Bright Future,2015,6.65,5.57,2.79,11511,243,No,https://boardgamegeek.com/boardgame/169544
 147790,Buccaneer Bones,2013,5.82,5.57,1.06,11639,674,No,https://boardgamegeek.com/boardgame/147790
 671,Bull Run: The First Major Battle of the American Civil War,1983,6.42,5.57,2.84,11834,241,No,https://boardgamegeek.com/boardgame/671
 88559,Bullfrog Goldfield,2011,6.66,5.57,3.56,11715,152,No,https://boardgamegeek.com/boardgame/88559
@@ -6204,6 +6367,7 @@
 397,Diskwars,1999,5.96,5.57,2.37,11340,544,No,https://boardgamegeek.com/boardgame/397
 23828,Dixie: Gettysburg,1994,6.55,5.57,2.13,11279,197,No,https://boardgamegeek.com/boardgame/23828
 23829,Dixie: Shiloh,1994,6.56,5.57,2.35,11720,190,No,https://boardgamegeek.com/boardgame/23829
+168582,Dragon Racer,2015,6.52,5.57,2.0,11187,223,No,https://boardgamegeek.com/boardgame/168582
 73510,Drakborgen II,1987,7.0,5.57,2.22,,145,Yes,https://boardgamegeek.com/boardgame/73510
 3624,Drakon Expansion 1,2002,6.62,5.57,2.08,,174,Yes,https://boardgamegeek.com/boardgame/3624
 139140,Drum Roll: Kickstarter Promo Cards,2013,7.28,5.57,2.44,,110,Yes,https://boardgamegeek.com/boardgame/139140
@@ -6212,6 +6376,7 @@
 158227,Dungeon Dice: Guilds,2014,7.18,5.57,2.5,,132,Yes,https://boardgamegeek.com/boardgame/158227
 150130,"Dungeon Fighter: Marielle, the Mermaid",2013,7.07,5.57,1.75,,118,Yes,https://boardgamegeek.com/boardgame/150130
 148975,Dungeon Guilds,2013,6.48,5.57,1.47,11174,190,No,https://boardgamegeek.com/boardgame/148975
+170415,Dungeon of Fortune,2015,5.97,5.57,1.47,11261,530,No,https://boardgamegeek.com/boardgame/170415
 18212,Dungeons & Dragons Adventure Game,1999,6.5,5.57,2.44,11895,188,No,https://boardgamegeek.com/boardgame/18212
 4746,Dungeons & Dragons Computer Labyrinth Game,1980,6.12,5.57,1.7,11825,383,No,https://boardgamegeek.com/boardgame/4746
 142401,Dwarven Miner,2013,6.33,5.57,1.92,11516,254,No,https://boardgamegeek.com/boardgame/142401
@@ -6303,6 +6468,7 @@
 9108,Masquerade,2003,6.02,5.57,2.29,11816,408,No,https://boardgamegeek.com/boardgame/9108
 107638,Master Merchant,2011,6.06,5.57,2.1,11687,347,No,https://boardgamegeek.com/boardgame/107638
 1501,Masterpiece,1970,5.78,5.57,1.44,11318,1950,No,https://boardgamegeek.com/boardgame/1501
+167819,Medieval Academy: Expansion «Gallantry» and «Magic»,2014,7.05,5.57,1.8,,107,Yes,https://boardgamegeek.com/boardgame/167819
 157451,Mein erster Spieleschatz,2010,6.53,5.57,1.18,11745,168,No,https://boardgamegeek.com/boardgame/157451
 34060,Memoir '44: Winter 2007 Scenario,2007,7.39,5.57,1.56,,112,Yes,https://boardgamegeek.com/boardgame/34060
 26961,Moai,2007,6.28,5.57,2.72,11220,255,No,https://boardgamegeek.com/boardgame/26961
@@ -6323,6 +6489,8 @@
 836,New England Railways,2000,6.58,5.57,2.59,11540,167,No,https://boardgamegeek.com/boardgame/836
 1251,New World,1990,6.04,5.57,2.55,11536,366,No,https://boardgamegeek.com/boardgame/1251
 20235,Niagara: Diamond Joe,2005,6.27,5.57,1.77,,242,Yes,https://boardgamegeek.com/boardgame/20235
+168549,Night Clan,2014,6.41,5.57,1.43,11799,205,No,https://boardgamegeek.com/boardgame/168549
+169986,Night of Man,2015,7.58,5.57,2.64,11733,101,No,https://boardgamegeek.com/boardgame/169986
 5641,Nightmare,1991,5.96,5.57,1.78,11197,1134,No,https://boardgamegeek.com/boardgame/5641
 158247,Ninja Dice: Location Cards,2013,6.55,5.57,1.67,,185,Yes,https://boardgamegeek.com/boardgame/158247
 19918,No Stress Chess,2004,6.25,5.57,2.29,11414,277,No,https://boardgamegeek.com/boardgame/19918
@@ -6484,6 +6652,7 @@
 40825,Zooloretto: Rio Grande Games Expansion Pack #2,2009,6.93,5.57,1.93,,124,Yes,https://boardgamegeek.com/boardgame/40825
 2212,eBay Electronic Talking Auction Game,2001,5.95,5.57,1.26,11791,410,No,https://boardgamegeek.com/boardgame/2212
 165022,€uro Crisis,2015,7.09,5.57,3.1,11544,115,No,https://boardgamegeek.com/boardgame/165022
+170430,12 Days of Christmas,2015,5.99,5.56,1.24,12391,384,No,https://boardgamegeek.com/boardgame/170430
 114252,1st & Goal: Northwest Division,2011,7.18,5.56,1.6,,102,Yes,https://boardgamegeek.com/boardgame/114252
 114253,1st & Goal: Southwest Division,2011,7.15,5.56,1.6,,101,Yes,https://boardgamegeek.com/boardgame/114253
 2173,4 Player Chess,1881,5.97,5.56,2.89,12385,508,No,https://boardgamegeek.com/boardgame/2173
@@ -6574,6 +6743,7 @@
 3231,Die Sieben Weisen,2002,6.02,5.56,2.4,11931,320,No,https://boardgamegeek.com/boardgame/3231
 75313,"Dixit 2: ""The American"" Promo Card",2010,7.04,5.56,1.14,,114,Yes,https://boardgamegeek.com/boardgame/75313
 138728,Domus Domini,2015,6.54,5.56,2.5,12212,154,No,https://boardgamegeek.com/boardgame/138728
+169513,Dorasure,2014,6.37,5.56,1.78,12039,218,No,https://boardgamegeek.com/boardgame/169513
 23055,Dragons of Kir,2005,6.62,5.56,1.91,12357,153,No,https://boardgamegeek.com/boardgame/23055
 12135,Drive on Stalingrad (Second Edition),2002,6.94,5.56,2.33,12809,117,No,https://boardgamegeek.com/boardgame/12135
 5480,Drive on Stalingrad: Battle for Southern Russia Game,1977,6.55,5.56,3.35,12056,193,No,https://boardgamegeek.com/boardgame/5480
@@ -6589,6 +6759,7 @@
 104736,Et Toque!,2011,6.91,5.56,1.5,12147,112,No,https://boardgamegeek.com/boardgame/104736
 15386,Eye to Eye,2004,6.42,5.56,1.05,12185,167,No,https://boardgamegeek.com/boardgame/15386
 3181,Farkle,1930,5.69,5.56,1.11,12246,3758,No,https://boardgamegeek.com/boardgame/3181
+170756,Fast & Furious: Full Throttle,2015,6.78,5.56,2.0,11963,141,No,https://boardgamegeek.com/boardgame/170756
 162383,"Festung Europa: The Campaign for Western Europe, 1943-1945",2016,6.91,5.56,3.0,12431,111,No,https://boardgamegeek.com/boardgame/162383
 74233,Fictionaire,2010,6.15,5.56,1.1,12195,251,No,https://boardgamegeek.com/boardgame/74233
 23658,Fiery Dragons,2006,6.1,5.56,1.2,12510,281,No,https://boardgamegeek.com/boardgame/23658
@@ -6633,6 +6804,7 @@
 128114,Hooyah: Navy Seals Card Game,2012,6.22,5.56,2.04,12491,223,No,https://boardgamegeek.com/boardgame/128114
 9616,Horus,2008,5.87,5.56,2.19,12586,491,No,https://boardgamegeek.com/boardgame/9616
 154499,Hot Tin Roof,2014,6.1,5.56,1.94,12311,288,No,https://boardgamegeek.com/boardgame/154499
+169375,How to Serve Man,2016,6.4,5.56,2.07,12729,201,No,https://boardgamegeek.com/boardgame/169375
 7501,Hunters from the Sky,1994,6.73,5.56,3.29,12261,133,No,https://boardgamegeek.com/boardgame/7501
 60056,Igel Ärgern + Tante Tarantel,2009,6.86,5.56,1.33,,117,No,https://boardgamegeek.com/boardgame/60056
 13933,Im Auftrag des Königs,2004,6.08,5.56,2.09,12326,291,No,https://boardgamegeek.com/boardgame/13933
@@ -6654,6 +6826,7 @@
 585,Kardinal,2000,6.53,5.56,2.17,12419,142,No,https://boardgamegeek.com/boardgame/585
 2204,Kill Doctor Lucky: Craigdarroch,1998,6.38,5.56,1.55,,173,Yes,https://boardgamegeek.com/boardgame/2204
 20772,King of Chicago,2005,6.58,5.56,2.55,12483,188,No,https://boardgamegeek.com/boardgame/20772
+167897,King of New York: 55 Central Park West,2013,6.75,5.56,1.6,,125,Yes,https://boardgamegeek.com/boardgame/167897
 164247,King of New York: Monster Idol,2014,6.89,5.56,1.67,,126,Yes,https://boardgamegeek.com/boardgame/164247
 771,Kings and Castles,2000,6.61,5.56,2.62,11913,149,No,https://boardgamegeek.com/boardgame/771
 135812,Knot Dice,2016,6.57,5.56,1.25,12849,139,No,https://boardgamegeek.com/boardgame/135812
@@ -6744,6 +6917,7 @@
 50719,RisiKo! Prestige,1998,6.37,5.56,2.08,11968,253,No,https://boardgamegeek.com/boardgame/50719
 40638,Risk: Halo Wars Collector's Edition,2009,6.26,5.56,2.22,12630,281,No,https://boardgamegeek.com/boardgame/40638
 470,Road to the White House,1992,6.18,5.56,3.55,12560,270,No,https://boardgamegeek.com/boardgame/470
+168588,Robinson Crusoe: Adventures on the Cursed Island – Gamer Character,2015,7.11,5.56,,,104,Yes,https://boardgamegeek.com/boardgame/168588
 162604,Robinson Crusoe: Adventures on the Cursed Island – Spyglass of Illusory Hope,2014,6.15,5.56,1.14,,243,Yes,https://boardgamegeek.com/boardgame/162604
 29382,Rock of the Marne,2008,6.59,5.56,2.48,12286,177,No,https://boardgamegeek.com/boardgame/29382
 165521,Rory's Story Cubes: Medic,2014,6.59,5.56,,12004,152,No,https://boardgamegeek.com/boardgame/165521
@@ -6759,6 +6933,7 @@
 163326,Seasons: Crystal Titan,2014,7.06,5.56,2.5,,103,Yes,https://boardgamegeek.com/boardgame/163326
 36623,Second World War at Sea: Coral Sea,2010,7.37,5.56,3.07,12580,104,No,https://boardgamegeek.com/boardgame/36623
 5702,Second World War at Sea: Eastern Fleet,2001,7.28,5.56,2.73,12254,109,No,https://boardgamegeek.com/boardgame/5702
+168792,Secret Weapons of the Third Reich,2015,6.81,5.56,3.89,12125,134,No,https://boardgamegeek.com/boardgame/168792
 7064,Senjutsu: Dynamic Samurai Combat,2003,6.61,5.56,2.1,12427,158,No,https://boardgamegeek.com/boardgame/7064
 161992,Shadowrun: Crossfire – Character Expansion Pack 1,2014,6.42,5.56,2.17,,169,Yes,https://boardgamegeek.com/boardgame/161992
 129904,Shadows over Camelot: The Card Game,2012,5.7,5.56,1.94,11927,1295,No,https://boardgamegeek.com/boardgame/129904
@@ -6768,6 +6943,7 @@
 7994,"Silver Bayonet: The First Team in Vietnam, 1965",1990,6.69,5.56,3.0,11983,157,No,https://boardgamegeek.com/boardgame/7994
 5241,"Sinai: The Arab-Israeli Wars – '56, '67 and '73",1973,6.22,5.56,2.59,12173,256,No,https://boardgamegeek.com/boardgame/5241
 59161,Sitting Ducks Deluxe,2009,6.08,5.56,1.33,12799,256,No,https://boardgamegeek.com/boardgame/59161
+171234,Skulldug!,2015,6.49,5.56,2.0,12693,171,No,https://boardgamegeek.com/boardgame/171234
 19081,Skyline of the World,2005,6.4,5.56,2.47,12529,204,No,https://boardgamegeek.com/boardgame/19081
 129280,Skyway Robbery,2015,6.55,5.56,2.57,12104,161,No,https://boardgamegeek.com/boardgame/129280
 2995,Sniper!,1973,6.28,5.56,3.29,11955,275,No,https://boardgamegeek.com/boardgame/2995
@@ -6866,6 +7042,7 @@
 160352,World of Tanks: Rush – Второй фронт,2014,6.94,5.56,1.75,,118,Yes,https://boardgamegeek.com/boardgame/160352
 1579,Wrasslin',1990,5.93,5.56,1.59,12454,398,No,https://boardgamegeek.com/boardgame/1579
 153510,Xalapa,2014,6.67,5.56,2.43,12440,132,No,https://boardgamegeek.com/boardgame/153510
+169114,Yardmaster Express: Caboose Expansion,2014,6.2,5.56,1.08,,231,Yes,https://boardgamegeek.com/boardgame/169114
 20178,Zauberschwert & Drachenei: Helden & Zaubersprüche,2005,6.61,5.56,2.43,,129,Yes,https://boardgamegeek.com/boardgame/20178
 37177,Zombie Fluxx: Flame-Thrower Expansion Pack,2008,6.43,5.56,1.67,,168,Yes,https://boardgamegeek.com/boardgame/37177
 125394,Zombies!!! 11: Death Inc.,2012,6.56,5.56,1.67,,161,Yes,https://boardgamegeek.com/boardgame/125394
@@ -6892,6 +7069,7 @@
 6039,Antietam: Burnished Rows of Steel,1993,6.75,5.55,2.32,13048,121,No,https://boardgamegeek.com/boardgame/6039
 10681,Apples to Apples Junior,2002,5.72,5.55,1.13,13733,1278,No,https://boardgamegeek.com/boardgame/10681
 30505,Apples to Apples: British Isles Edition,2007,6.53,5.55,1.0,13907,116,No,https://boardgamegeek.com/boardgame/30505
+169368,Arbos Apfel,2013,6.68,5.55,1.0,13675,128,No,https://boardgamegeek.com/boardgame/169368
 162391,Archaeologia,2014,6.65,5.55,2.17,13705,111,No,https://boardgamegeek.com/boardgame/162391
 28060,Archaeology,2007,6.26,5.55,1.08,13947,178,No,https://boardgamegeek.com/boardgame/28060
 126404,Area 1851,2015,6.43,5.55,2.29,13930,155,No,https://boardgamegeek.com/boardgame/126404
@@ -6912,6 +7090,7 @@
 10223,Blood Bowl: Death Zone,1987,6.56,5.55,2.75,,136,Yes,https://boardgamegeek.com/boardgame/10223
 11139,"Bloody April: The Battle of Shiloh, 1862",1979,6.92,5.55,4.29,12856,108,No,https://boardgamegeek.com/boardgame/11139
 32048,Bobbin' Bumblebee,2007,6.17,5.55,1.0,13684,183,No,https://boardgamegeek.com/boardgame/32048
+170922,Boomtown Bandits,2015,6.4,5.55,1.75,13021,206,No,https://boardgamegeek.com/boardgame/170922
 133777,Boss Monster: Power-Up Pack,2013,6.67,5.55,2.25,,121,Yes,https://boardgamegeek.com/boardgame/133777
 166633,Bounce-Off,2013,5.79,5.55,1.31,13022,783,No,https://boardgamegeek.com/boardgame/166633
 12604,Box of Golf: A Classic Golf Board Game,2003,6.29,5.55,1.32,13851,154,No,https://boardgamegeek.com/boardgame/12604
@@ -7065,6 +7244,7 @@
 2965,Kendo,1976,6.1,5.55,2.39,13525,221,No,https://boardgamegeek.com/boardgame/2965
 72848,Kill the Overlord,2012,5.87,5.55,1.38,13698,406,No,https://boardgamegeek.com/boardgame/72848
 154945,King of Tokyo: The Horde Promo Card,2014,6.87,5.55,1.75,,104,Yes,https://boardgamegeek.com/boardgame/154945
+170431,King's Kilt,2015,6.03,5.55,1.58,13204,288,No,https://boardgamegeek.com/boardgame/170431
 3078,Knockabout,2001,6.76,5.55,2.56,13391,100,No,https://boardgamegeek.com/boardgame/3078
 10829,Krieg! World War II in Europe,1996,6.64,5.55,3.46,13454,123,No,https://boardgamegeek.com/boardgame/10829
 155822,Krosmaster Junior,2014,5.97,5.55,1.0,13723,339,No,https://boardgamegeek.com/boardgame/155822
@@ -7151,6 +7331,7 @@
 112118,RED,2011,6.99,5.55,2.33,12856,105,No,https://boardgamegeek.com/boardgame/112118
 4020,Race For Tunis,1992,6.61,5.55,2.45,13505,125,No,https://boardgamegeek.com/boardgame/4020
 60228,Race for Berlin: The Final Struggle,2010,7.06,5.55,2.5,13237,102,No,https://boardgamegeek.com/boardgame/60228
+168882,Race to the North Pole,2015,6.01,5.55,1.78,13669,379,No,https://boardgamegeek.com/boardgame/168882
 164147,Rayguns and Rocketships,2017,6.65,5.55,2.33,13504,178,No,https://boardgamegeek.com/boardgame/164147
 65582,Regatta,2010,6.03,5.55,1.33,13611,270,No,https://boardgamegeek.com/boardgame/65582
 5697,Reiner Knizia's Amazing Flea Circus,2003,5.76,5.55,1.06,13459,646,No,https://boardgamegeek.com/boardgame/5697
@@ -7220,7 +7401,9 @@
 10269,"The Balkan Wars: Prelude to Disaster, 1912-1913",1993,6.62,5.55,2.91,13974,110,No,https://boardgamegeek.com/boardgame/10269
 10301,"The Battle of Nations: The Encirclement at Leipzig, 16-19 October 1813",1975,6.6,5.55,2.07,14151,112,No,https://boardgamegeek.com/boardgame/10301
 6240,The Crusades: Western Invasions of the Holy Land 1097-1191 A.D.,1978,6.34,5.55,2.9,13070,193,No,https://boardgamegeek.com/boardgame/6240
+170437,The Curse of the Black Dice,2015,6.09,5.55,1.74,13484,267,No,https://boardgamegeek.com/boardgame/170437
 12501,The Franco-Prussian War,1992,6.7,5.55,3.09,13259,116,No,https://boardgamegeek.com/boardgame/12501
+169658,The Guardians: Explore,2016,6.91,5.55,3.2,13185,152,No,https://boardgamegeek.com/boardgame/169658
 2918,The Last Crusade,1995,6.66,5.55,2.62,13995,109,No,https://boardgamegeek.com/boardgame/2918
 126443,The Lord of the Rings: The Battle for Middle-Earth,2012,5.86,5.55,1.21,14138,593,No,https://boardgamegeek.com/boardgame/126443
 19048,The Nacho Incident,2005,5.97,5.55,1.94,14046,254,No,https://boardgamegeek.com/boardgame/19048
@@ -7275,6 +7458,7 @@
 39356,World of Warcraft: The Adventure Game – Brandon Lightstone Character Pack,2008,6.83,5.55,2.15,,118,Yes,https://boardgamegeek.com/boardgame/39356
 39355,World of Warcraft: The Adventure Game – Zowka Shattertusk   Character Pack,2008,6.88,5.55,2.08,,109,Yes,https://boardgamegeek.com/boardgame/39355
 137140,Wunderland,2013,6.09,5.55,1.58,12885,244,No,https://boardgamegeek.com/boardgame/137140
+168512,X-Men: Mutant Revolution,2015,6.17,5.55,3.22,13299,226,No,https://boardgamegeek.com/boardgame/168512
 9961,"Year of the Rat: Vietnam, 1972",1972,6.84,5.55,2.76,12952,124,No,https://boardgamegeek.com/boardgame/9961
 434,Yucata',1996,5.76,5.55,1.7,13735,581,No,https://boardgamegeek.com/boardgame/434
 41372,Zombie in My Pocket,2010,5.82,5.55,1.38,12936,539,No,https://boardgamegeek.com/boardgame/41372
@@ -7308,11 +7492,13 @@
 24303,Apples to Apples: Party Box Expansion TWO,2006,6.41,5.54,1.62,,109,Yes,https://boardgamegeek.com/boardgame/24303
 99770,Arcanum,2011,5.91,5.54,2.64,14698,302,No,https://boardgamegeek.com/boardgame/99770
 8626,Assyrian Wars,2005,6.54,5.54,3.81,14913,120,No,https://boardgamegeek.com/boardgame/8626
+170344,Atak Zombie,2014,6.09,5.54,2.67,14552,271,No,https://boardgamegeek.com/boardgame/170344
 2706,Attack of the Mutants!,1981,6.42,5.54,1.81,14888,128,No,https://boardgamegeek.com/boardgame/2706
 130223,Auf die Nüsse!,2012,6.19,5.54,1.75,15597,135,No,https://boardgamegeek.com/boardgame/130223
 88316,Autokrator,2012,6.23,5.54,2.5,15805,138,No,https://boardgamegeek.com/boardgame/88316
 57885,BANG! Johnny Kisch,2007,6.58,5.54,1.5,,106,Yes,https://boardgamegeek.com/boardgame/57885
 60381,BANG! Uncle Will,2004,6.51,5.54,1.88,,121,Yes,https://boardgamegeek.com/boardgame/60381
+168752,BANG!: Heroes of the Storm,2014,6.26,5.54,1.4,14700,179,No,https://boardgamegeek.com/boardgame/168752
 25453,Balance Duels,2005,6.12,5.54,1.62,14254,208,No,https://boardgamegeek.com/boardgame/25453
 3102,Banque Fatale,1997,6.37,5.54,1.75,14268,130,No,https://boardgamegeek.com/boardgame/3102
 3251,Barbarian Kings,1980,6.08,5.54,2.34,15408,205,No,https://boardgamegeek.com/boardgame/3251
@@ -7335,6 +7521,7 @@
 166210,Blend Off!,2016,6.29,5.54,1.33,14288,160,No,https://boardgamegeek.com/boardgame/166210
 5990,Blood & Iron,1993,6.46,5.54,2.48,14466,127,No,https://boardgamegeek.com/boardgame/5990
 143509,Bluff in Zoo,2013,6.21,5.54,1.1,15404,132,No,https://boardgamegeek.com/boardgame/143509
+168425,Bohnanza: Princes & Pirates,2015,6.33,5.54,2.0,,114,Yes,https://boardgamegeek.com/boardgame/168425
 129735,Boom Boom Balloon,2012,5.92,5.54,1.0,14398,314,No,https://boardgamegeek.com/boardgame/129735
 38886,Boot Hill,1975,6.61,5.54,2.14,14855,113,No,https://boardgamegeek.com/boardgame/38886
 645,Bosworth,1998,5.82,5.54,2.1,15502,383,No,https://boardgamegeek.com/boardgame/645
@@ -7449,6 +7636,7 @@
 143255,Goblins vs Zombies,2013,6.28,5.54,2.0,15418,127,No,https://boardgamegeek.com/boardgame/143255
 160125,Gods' Gambit,2014,6.18,5.54,1.57,14734,195,No,https://boardgamegeek.com/boardgame/160125
 1367,Grand National Derby,1996,6.37,5.54,1.71,14906,112,No,https://boardgamegeek.com/boardgame/1367
+169795,Haithabu,2015,6.07,5.54,3.54,15384,207,No,https://boardgamegeek.com/boardgame/169795
 23848,Hameln,2006,5.84,5.54,2.88,14383,321,No,https://boardgamegeek.com/boardgame/23848
 142645,Havok & Hijinks,2014,6.69,5.54,1.6,15522,133,No,https://boardgamegeek.com/boardgame/142645
 132532,"Here, Fishy, Fishy!",2012,5.82,5.54,1.0,15613,340,No,https://boardgamegeek.com/boardgame/132532
@@ -7609,6 +7797,7 @@
 23329,Skybridge,2006,5.93,5.54,1.93,14159,319,No,https://boardgamegeek.com/boardgame/23329
 165633,Slap .45,2015,6.3,5.54,1.33,15280,168,No,https://boardgamegeek.com/boardgame/165633
 148209,Slash: Romance without boundaries,2013,6.47,5.54,1.14,15419,132,No,https://boardgamegeek.com/boardgame/148209
+169102,Slaughterville,2015,6.37,5.54,2.6,15094,153,No,https://boardgamegeek.com/boardgame/169102
 70767,Smash Monster Rampage!,2010,6.47,5.54,2.08,14203,121,No,https://boardgamegeek.com/boardgame/70767
 6009,Soldiers of the Queen: Battles at Isandhlwana and Omdurman,1984,6.45,5.54,2.77,15573,107,No,https://boardgamegeek.com/boardgame/6009
 97655,Space Maze,2011,5.89,5.54,2.14,14741,295,No,https://boardgamegeek.com/boardgame/97655
@@ -7799,6 +7988,7 @@
 20120,Comrade Koba,2005,6.15,5.53,1.43,15961,151,No,https://boardgamegeek.com/boardgame/20120
 3705,Contraband,1950,5.91,5.53,1.35,16412,289,No,https://boardgamegeek.com/boardgame/3705
 387,Corruption,2000,5.79,5.53,1.84,15868,353,No,https://boardgamegeek.com/boardgame/387
+169503,Crabs Adjust Humidity: Volume Four (fan expansion for Cards Against Humanity),2014,6.47,5.53,2.5,,101,Yes,https://boardgamegeek.com/boardgame/169503
 159045,Crabs Adjust Humidity: Volume Three (fan expansion for Cards Against Humanity),2014,6.24,5.53,2.5,,139,Yes,https://boardgamegeek.com/boardgame/159045
 18835,Credit Mobilier,2005,5.92,5.53,2.08,17892,163,No,https://boardgamegeek.com/boardgame/18835
 1341,Crib Wars,1997,6.11,5.53,1.5,17324,123,No,https://boardgamegeek.com/boardgame/1341
@@ -7906,6 +8096,7 @@
 32466,Kogworks,2007,6.06,5.53,1.55,16549,207,No,https://boardgamegeek.com/boardgame/32466
 7694,Krypto,1963,6.36,5.53,1.86,17806,101,No,https://boardgamegeek.com/boardgame/7694
 40843,Krysis,2009,6.0,5.53,2.56,16256,283,No,https://boardgamegeek.com/boardgame/40843
+169675,L'osti d'jeu,2014,5.8,5.53,1.0,16564,364,No,https://boardgamegeek.com/boardgame/169675
 533,Labyrinth: The Card Game,2000,5.59,5.53,1.21,17734,1703,No,https://boardgamegeek.com/boardgame/533
 42195,Labyrinth: The Duel,2009,5.97,5.53,1.33,16877,181,No,https://boardgamegeek.com/boardgame/42195
 161849,Land 6,2014,6.03,5.53,1.67,16989,179,No,https://boardgamegeek.com/boardgame/161849
@@ -8085,6 +8276,7 @@
 7184,Weapons & Warriors: Pirate Battle,1996,6.21,5.53,1.12,17285,116,No,https://boardgamegeek.com/boardgame/7184
 2721,Wembley,1952,6.14,5.53,1.25,17013,141,No,https://boardgamegeek.com/boardgame/2721
 4451,When Darkness Comes: The Horror Within,2002,6.23,5.53,2.75,,116,Yes,https://boardgamegeek.com/boardgame/4451
+170555,Who Knows Where?,2014,6.35,5.53,1.4,17837,122,No,https://boardgamegeek.com/boardgame/170555
 12065,Wig Out!,2004,5.96,5.53,1.0,16415,223,No,https://boardgamegeek.com/boardgame/12065
 23550,WordSpot,2006,6.1,5.53,1.28,17570,207,No,https://boardgamegeek.com/boardgame/23550
 142691,World Series of Yahtzee,2012,6.2,5.53,1.0,16914,138,No,https://boardgamegeek.com/boardgame/142691
@@ -8174,6 +8366,7 @@
 18880,Daddy Cool,2004,5.93,5.52,1.09,18213,147,No,https://boardgamegeek.com/boardgame/18880
 1719,Dark Emperor,1985,5.8,5.52,3.14,21236,201,No,https://boardgamegeek.com/boardgame/1719
 19351,"Dark Millennium: The Warhammer 40,000 Collectible Card Game",2005,5.98,5.52,2.2,21385,100,No,https://boardgamegeek.com/boardgame/19351
+168544,De Stijl,2014,5.81,5.52,1.6,19072,212,No,https://boardgamegeek.com/boardgame/168544
 8184,Deadwood: On Location,2003,6.02,5.52,1.5,,101,Yes,https://boardgamegeek.com/boardgame/8184
 122271,Defenders of the Realm: Battlefields,2012,5.93,5.52,2.17,19624,160,No,https://boardgamegeek.com/boardgame/122271
 123162,Democracy: Majority Rules,2013,6.09,5.52,2.29,19432,103,No,https://boardgamegeek.com/boardgame/123162
@@ -8195,6 +8388,7 @@
 2836,Dragonlance Mage Stones,1990,6.04,5.52,1.45,18660,125,No,https://boardgamegeek.com/boardgame/2836
 680,Dune,1984,5.75,5.52,2.16,20166,374,No,https://boardgamegeek.com/boardgame/680
 6742,Dungeons & Dragons Chainmail,2001,6.0,5.52,3.11,19114,120,No,https://boardgamegeek.com/boardgame/6742
+170337,Dwarfest,2014,5.99,5.52,1.75,20536,106,No,https://boardgamegeek.com/boardgame/170337
 155582,ERA,2025,6.23,5.52,2.25,18636,101,No,https://boardgamegeek.com/boardgame/155582
 154904,Easy Breezy Travel Agency,2014,5.72,5.52,1.2,18980,240,No,https://boardgamegeek.com/boardgame/154904
 103392,Eaten By Zombies!: We Have the Bomb! Promo,2011,5.88,5.52,1.6,,121,Yes,https://boardgamegeek.com/boardgame/103392
@@ -8288,6 +8482,7 @@
 158968,Maha Yodha,2014,6.17,5.52,2.11,19932,114,No,https://boardgamegeek.com/boardgame/158968
 146290,Malacca,2013,6.07,5.52,2.0,19995,107,No,https://boardgamegeek.com/boardgame/146290
 26033,Maratón Clásico,1985,6.21,5.52,1.38,21338,110,No,https://boardgamegeek.com/boardgame/26033
+170381,Mars Attacks: Ten-Minute Takedown,2015,5.66,5.52,1.07,20435,331,No,https://boardgamegeek.com/boardgame/170381
 129971,Master Plan,2012,6.03,5.52,1.29,18662,130,No,https://boardgamegeek.com/boardgame/129971
 6979,Match of the Penguins,2003,5.68,5.52,1.13,20888,296,No,https://boardgamegeek.com/boardgame/6979
 60574,Mausgeflippt,2009,5.88,5.52,1.12,20837,132,No,https://boardgamegeek.com/boardgame/60574
@@ -8299,6 +8494,7 @@
 41835,Minotaurus,2009,5.63,5.52,1.16,20896,1084,No,https://boardgamegeek.com/boardgame/41835
 6982,Mission Command Air,2003,5.75,5.52,1.34,19552,265,No,https://boardgamegeek.com/boardgame/6982
 37983,Monkey Lab,2009,5.77,5.52,1.85,20306,286,No,https://boardgamegeek.com/boardgame/37983
+169743,Moons,2017,5.75,5.52,1.5,18330,306,No,https://boardgamegeek.com/boardgame/169743
 108679,Mow Money,2016,5.79,5.52,1.7,21132,194,No,https://boardgamegeek.com/boardgame/108679
 130764,Mr. Card Game,2014,5.89,5.52,2.56,20369,177,No,https://boardgamegeek.com/boardgame/130764
 39392,Munchkin Coins,2007,6.2,5.52,2.07,,102,Yes,https://boardgamegeek.com/boardgame/39392
@@ -8495,6 +8691,7 @@
 13654,Yut Nori,500,5.84,5.52,1.29,19297,221,No,https://boardgamegeek.com/boardgame/13654
 102792,Zero,2011,5.75,5.52,1.25,18546,256,No,https://boardgamegeek.com/boardgame/102792
 11456,Zilch,1972,5.94,5.52,1.23,20353,116,No,https://boardgamegeek.com/boardgame/11456
+167850,Zombie Mania!,2014,5.99,5.52,1.0,21085,110,No,https://boardgamegeek.com/boardgame/167850
 79312,Zombie Survival: The Board Game,2010,5.67,5.52,2.0,20656,333,No,https://boardgamegeek.com/boardgame/79312
 3499,3-D Chess,1851,5.92,5.51,4.07,23655,131,No,https://boardgamegeek.com/boardgame/3499
 80908,4 Monkeys,2010,5.68,5.51,1.5,23155,154,No,https://boardgamegeek.com/boardgame/80908
@@ -8596,6 +8793,7 @@
 61902,Disney Apples to Apples,2009,5.65,5.51,1.0,23553,303,No,https://boardgamegeek.com/boardgame/61902
 15163,Disney Magic Kingdom Game,2004,5.81,5.51,1.55,22674,186,No,https://boardgamegeek.com/boardgame/15163
 40801,Docker,2008,5.74,5.51,1.44,24640,139,No,https://boardgamegeek.com/boardgame/40801
+168446,Doggy GO!,2014,5.81,5.51,1.0,23671,114,No,https://boardgamegeek.com/boardgame/168446
 1859,Doomtrooper,1994,5.76,5.51,2.11,23648,530,No,https://boardgamegeek.com/boardgame/1859
 131450,DrachenSchatten,2012,5.67,5.51,1.0,24283,100,No,https://boardgamegeek.com/boardgame/131450
 26124,Draco Mundis,2006,5.77,5.51,2.18,21793,177,No,https://boardgamegeek.com/boardgame/26124
@@ -8799,6 +8997,8 @@
 2725,Star Wars: Escape From The Death Star,1990,5.69,5.51,1.96,22548,173,No,https://boardgamegeek.com/boardgame/2725
 6810,Star Wars: The Interactive Video Board Game,1996,5.78,5.51,1.85,24555,206,No,https://boardgamegeek.com/boardgame/6810
 5837,Steam Tunnel,2003,5.61,5.51,1.53,24821,158,No,https://boardgamegeek.com/boardgame/5837
+168654,Stier zoekt Bier,2014,5.86,5.51,1.4,22430,106,No,https://boardgamegeek.com/boardgame/168654
+169984,Stowaway 52,2015,5.6,5.51,1.0,24632,114,No,https://boardgamegeek.com/boardgame/169984
 1622,Strata 5,1984,5.83,5.51,2.33,22187,129,No,https://boardgamegeek.com/boardgame/1622
 130841,Stratego Card Game,2012,5.74,5.51,1.33,23792,181,No,https://boardgamegeek.com/boardgame/130841
 12963,Succession: Intrigue in the Royal Court,2004,5.71,5.51,2.03,22199,283,No,https://boardgamegeek.com/boardgame/12963
@@ -8824,6 +9024,7 @@
 8652,The Haunted Clock Tower,1994,5.91,5.51,1.0,22280,189,No,https://boardgamegeek.com/boardgame/8652
 15739,The Haunting House 3: A Ghost Story,2005,5.85,5.51,1.43,,110,Yes,https://boardgamegeek.com/boardgame/15739
 37680,The Heavens of Olympus,2011,5.67,5.51,2.69,24301,142,No,https://boardgamegeek.com/boardgame/37680
+168728,The Hen Commandments,2015,5.89,5.51,2.0,23861,105,No,https://boardgamegeek.com/boardgame/168728
 38328,The Looney Bin,2008,6.3,5.51,1.38,23453,122,No,https://boardgamegeek.com/boardgame/38328
 6460,The Testimony of Jacob Hollow,2003,5.7,5.51,1.73,21615,245,No,https://boardgamegeek.com/boardgame/6460
 2139,The X-Files Collectible Card Game,1996,5.71,5.51,2.45,24332,402,No,https://boardgamegeek.com/boardgame/2139
@@ -8944,6 +9145,7 @@
 125028,Colorpop,2011,5.51,5.5,1.2,26591,821,No,https://boardgamegeek.com/boardgame/125028
 23576,CooCoo the Rocking Clown!,2005,5.49,5.5,1.07,27406,139,No,https://boardgamegeek.com/boardgame/23576
 2674,Coppertwaddle,2000,5.63,5.5,1.92,25209,109,No,https://boardgamegeek.com/boardgame/2674
+168895,Corrupted Kingdoms,2016,5.56,5.5,1.33,26470,130,No,https://boardgamegeek.com/boardgame/168895
 121295,Coven,2015,5.68,5.5,3.25,25304,112,No,https://boardgamegeek.com/boardgame/121295
 13284,Cowpoker,2006,5.5,5.5,1.52,26354,276,No,https://boardgamegeek.com/boardgame/13284
 1397,Crash Pilot,1999,5.43,5.5,1.12,26777,112,No,https://boardgamegeek.com/boardgame/1397
@@ -8998,6 +9200,7 @@
 1908,G.O.O.T.M.U.,1992,5.53,5.5,1.44,26191,127,No,https://boardgamegeek.com/boardgame/1908
 7270,GOLO,1999,5.62,5.5,1.16,27086,273,No,https://boardgamegeek.com/boardgame/7270
 146146,Galapagos,2013,5.48,5.5,1.4,26550,128,No,https://boardgamegeek.com/boardgame/146146
+167892,Gang Up!,2015,5.71,5.5,1.4,27562,129,No,https://boardgamegeek.com/boardgame/167892
 1247,Gangland!,1996,5.57,5.5,2.3,26391,103,No,https://boardgamegeek.com/boardgame/1247
 20499,Gangster II: Le Pro,2004,5.75,5.5,1.45,26022,179,No,https://boardgamegeek.com/boardgame/20499
 135431,Geek Battle: The Game Of Extreme Geekdom,2012,5.59,5.5,1.0,26749,207,No,https://boardgamegeek.com/boardgame/135431
@@ -9029,6 +9232,7 @@
 1480,Imperator,1992,5.53,5.5,2.1,26998,103,No,https://boardgamegeek.com/boardgame/1480
 142653,IncrediBrawl,2014,5.67,5.5,1.57,24946,110,No,https://boardgamegeek.com/boardgame/142653
 1450,Jagd der Vampire,1991,5.71,5.5,1.23,25704,205,No,https://boardgamegeek.com/boardgame/1450
+171087,Jenga Quake,2013,5.66,5.5,1.0,25811,100,No,https://boardgamegeek.com/boardgame/171087
 24159,Jewish Fluxx,2006,5.53,5.5,1.8,,121,Yes,https://boardgamegeek.com/boardgame/24159
 336,Jumpin,1964,5.52,5.5,1.59,26648,231,No,https://boardgamegeek.com/boardgame/336
 16160,Junior Alias,1994,5.44,5.5,1.17,27379,136,No,https://boardgamegeek.com/boardgame/16160
@@ -9127,6 +9331,7 @@
 2974,Scoop,1953,5.77,5.5,1.5,25112,146,No,https://boardgamegeek.com/boardgame/2974
 19028,Secret Tijuana Deathmatch,2005,5.58,5.5,1.72,25373,190,No,https://boardgamegeek.com/boardgame/19028
 12296,Senator,2004,5.53,5.5,2.03,26576,520,No,https://boardgamegeek.com/boardgame/12296
+168204,"Sesam, puzzle dich!",2012,5.58,5.5,1.67,26539,111,No,https://boardgamegeek.com/boardgame/168204
 65889,Seven Card Samurai,2010,5.57,5.5,1.27,26772,176,No,https://boardgamegeek.com/boardgame/65889
 160413,Shadow of the Elder Gods,2015,5.53,5.5,2.12,27154,121,No,https://boardgamegeek.com/boardgame/160413
 32968,Shark Alarm!!!,2008,5.51,5.5,1.13,27143,250,No,https://boardgamegeek.com/boardgame/32968
@@ -9178,6 +9383,7 @@
 103714,The Lord of the Rings: Nazgul,2012,5.58,5.5,3.0,25975,244,No,https://boardgamegeek.com/boardgame/103714
 108711,The Mystery of the Templars,2013,5.66,5.5,3.95,25152,169,No,https://boardgamegeek.com/boardgame/108711
 3575,The Plot to Assassinate Hitler,1976,5.7,5.5,2.86,25442,238,No,https://boardgamegeek.com/boardgame/3575
+169459,The Princess Bride: A Battle of Wits,2015,5.54,5.5,1.08,26138,209,No,https://boardgamegeek.com/boardgame/169459
 136117,The Walking Dead Card Game,2013,5.5,5.5,1.27,27197,519,No,https://boardgamegeek.com/boardgame/136117
 30952,The Witcher: The Adventure Card Game,2007,5.66,5.5,2.04,25978,294,No,https://boardgamegeek.com/boardgame/30952
 138201,They Who Were 8,2013,5.42,5.5,1.88,26903,204,No,https://boardgamegeek.com/boardgame/138201
@@ -9280,6 +9486,7 @@
 75,Falling,1998,5.5,5.49,1.22,28899,1447,No,https://boardgamegeek.com/boardgame/75
 40480,Fantasía S.A.,2008,5.4,5.49,1.57,27980,135,No,https://boardgamegeek.com/boardgame/40480
 1524,Fight City,1999,5.45,5.49,1.83,28555,189,No,https://boardgamegeek.com/boardgame/1524
+169502,Firefly: Fistful of Credits,2015,5.37,5.49,2.62,28339,107,No,https://boardgamegeek.com/boardgame/169502
 38337,Fishing for Terrorists Version 2.0,2008,5.3,5.49,1.12,28713,104,No,https://boardgamegeek.com/boardgame/38337
 10565,Fits,1999,5.49,5.49,1.0,28009,125,No,https://boardgamegeek.com/boardgame/10565
 7960,Flags of the World,1998,5.43,5.49,1.56,28276,230,No,https://boardgamegeek.com/boardgame/7960
@@ -9314,6 +9521,7 @@
 5272,Hilarium,2001,5.44,5.49,1.08,27834,160,No,https://boardgamegeek.com/boardgame/5272
 150925,Hold Your Breath!,2014,5.47,5.49,1.36,27903,198,No,https://boardgamegeek.com/boardgame/150925
 3160,Holy War,1979,5.26,5.49,2.07,29055,109,No,https://boardgamegeek.com/boardgame/3160
+169256,Hoverkraft,2014,5.36,5.49,1.0,27701,118,No,https://boardgamegeek.com/boardgame/169256
 62854,Humpty Dumpty's Wall Game,2009,5.21,5.49,1.0,28948,102,No,https://boardgamegeek.com/boardgame/62854
 38504,Hurry'Cup!,2008,5.46,5.49,1.31,28454,347,No,https://boardgamegeek.com/boardgame/38504
 14423,Husker Du?,1970,5.56,5.49,1.09,28406,126,No,https://boardgamegeek.com/boardgame/14423
@@ -9366,6 +9574,7 @@
 50912,Nichtlustig: Labor Chaos,2009,5.48,5.49,1.21,27949,269,No,https://boardgamegeek.com/boardgame/50912
 154602,Night of the Grand Octopus,2014,5.47,5.49,1.39,28206,425,No,https://boardgamegeek.com/boardgame/154602
 8522,Ninja Burger,2003,5.59,5.49,1.63,28186,1315,No,https://boardgamegeek.com/boardgame/8522
+169558,Noches de Sangre,2015,5.46,5.49,1.64,28860,226,No,https://boardgamegeek.com/boardgame/169558
 4096,Nodwick: The Card Game,2002,5.53,5.49,1.08,27931,188,No,https://boardgamegeek.com/boardgame/4096
 13460,Obscura Tempora,2005,5.38,5.49,1.48,28356,146,No,https://boardgamegeek.com/boardgame/13460
 2314,Off to the Tower,1978,5.19,5.49,1.0,28828,106,No,https://boardgamegeek.com/boardgame/2314
@@ -9420,6 +9629,7 @@
 9201,Spy,2004,5.49,5.49,1.26,28236,695,No,https://boardgamegeek.com/boardgame/9201
 21150,Stack Market,2004,5.44,5.49,1.36,27836,372,No,https://boardgamegeek.com/boardgame/21150
 297,Stadens nyckel,1998,5.28,5.49,2.3,28422,127,No,https://boardgamegeek.com/boardgame/297
+169045,Star Wars Galactic Dice Game,2014,5.25,5.49,1.0,28688,104,No,https://boardgamegeek.com/boardgame/169045
 24627,Star Wars Miniatures: Starship Battles,2006,5.48,5.49,1.66,28567,439,No,https://boardgamegeek.com/boardgame/24627
 5244,Star Wars: Destroy Death Star Game,1977,5.53,5.49,1.14,27916,117,No,https://boardgamegeek.com/boardgame/5244
 13478,StrataGem,2004,5.21,5.49,1.73,29063,117,No,https://boardgamegeek.com/boardgame/13478
@@ -9431,6 +9641,7 @@
 4558,Take Off!,1987,5.52,5.49,1.28,28458,182,No,https://boardgamegeek.com/boardgame/4558
 124833,Tentacle Bento,2012,5.51,5.49,1.27,28085,341,No,https://boardgamegeek.com/boardgame/124833
 5996,"The Battle for Cassino: Assaulting the Gustav Line, 1944",1978,5.45,5.49,3.16,28311,174,No,https://boardgamegeek.com/boardgame/5996
+167669,The Best of TV and Movies,2012,5.53,5.49,1.0,27847,149,No,https://boardgamegeek.com/boardgame/167669
 131530,The Hobbit: An Unexpected Journey,2012,5.52,5.49,1.3,28245,168,No,https://boardgamegeek.com/boardgame/131530
 3378,The Inventors,1974,5.54,5.49,1.36,29172,377,No,https://boardgamegeek.com/boardgame/3378
 42892,The Isle of Doctor Necreaux,2009,5.47,5.49,1.92,28593,611,No,https://boardgamegeek.com/boardgame/42892
@@ -9500,6 +9711,7 @@
 50458,Billy Biber,2009,5.23,5.48,1.0,29860,230,No,https://boardgamegeek.com/boardgame/50458
 32743,Black Stories: Mystery Edition,2007,5.46,5.48,1.12,29297,371,No,https://boardgamegeek.com/boardgame/32743
 89222,Bloodsuckers,2011,5.29,5.48,2.3,29339,139,No,https://boardgamegeek.com/boardgame/89222
+170395,BoardGameGeek: The Card Game,2015,5.36,5.48,1.2,29542,178,No,https://boardgamegeek.com/boardgame/170395
 153116,Bravest Warriors Co-operative Dice Game,2014,5.37,5.48,1.29,29230,160,No,https://boardgamegeek.com/boardgame/153116
 67486,Bubble Talk,2010,5.41,5.48,1.06,29264,295,No,https://boardgamegeek.com/boardgame/67486
 128028,CLASH: Jihad vs. McWorld,2012,5.1,5.48,1.69,29926,170,No,https://boardgamegeek.com/boardgame/128028
@@ -10111,6 +10323,7 @@
 40347,Monopoly: Here and Now – The World Edition,2008,5.13,5.43,1.65,30948,381,No,https://boardgamegeek.com/boardgame/40347
 5758,Monopoly: Pokémon,1995,5.43,5.43,1.91,30991,748,No,https://boardgamegeek.com/boardgame/5758
 5029,Monopoly: Star Wars Episode I,1999,5.26,5.43,1.84,30973,618,No,https://boardgamegeek.com/boardgame/5029
+170274,Never Have I Ever: The Game of Poor Life Decisions,2014,4.76,5.43,1.0,30972,228,No,https://boardgamegeek.com/boardgame/170274
 101420,Ninety-Nine,,4.73,5.43,1.25,30992,245,No,https://boardgamegeek.com/boardgame/101420
 23694,Pirates of the Caribbean DVD Treasure Hunt,2006,4.83,5.43,1.22,30939,215,No,https://boardgamegeek.com/boardgame/23694
 133425,Quartett,,4.5,5.43,1.0,30996,183,No,https://boardgamegeek.com/boardgame/133425
@@ -10142,6 +10355,7 @@
 8983,I.Q. 2000,1984,4.96,5.42,1.56,31005,396,No,https://boardgamegeek.com/boardgame/8983
 36783,Jishaku,2008,5.06,5.42,1.04,31000,474,No,https://boardgamegeek.com/boardgame/36783
 24000,Monopoly: Nintendo Collector's Edition,2006,4.93,5.42,1.69,31002,301,No,https://boardgamegeek.com/boardgame/24000
+167715,Moral Dilemma,2014,4.59,5.42,1.0,31037,217,No,https://boardgamegeek.com/boardgame/167715
 3886,Nine Men's Morris,-1400,5.39,5.42,1.76,31025,1939,No,https://boardgamegeek.com/boardgame/3886
 6090,Pack of Flies,2003,4.92,5.42,1.12,30997,341,No,https://boardgamegeek.com/boardgame/6090
 15064,Pimp: The Backhanding,2005,5.18,5.42,1.36,31020,540,No,https://boardgamegeek.com/boardgame/15064
