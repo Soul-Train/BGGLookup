@@ -1,9 +1,9 @@
 {
-  "built": "2026-09-19 17:32 UTC",
-  "count": 8633,
-  "bytes": 1342674,
-  "index_keys": 16555,
-  "index_bytes": 485835,
-  "swept_to": 138201,
-  "carried_forward": 8484
+  "built": "2026-09-19 17:43 UTC",
+  "count": 8802,
+  "bytes": 1369400,
+  "index_keys": 16804,
+  "index_bytes": 494655,
+  "swept_to": 141921,
+  "carried_forward": 8633
 }
