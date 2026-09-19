@@ -238,6 +238,18 @@ def write_cache(games, reached, final=False):
         json.dump({"built": time.strftime("%Y-%m-%d"), "k": idx},
                   f, ensure_ascii=False, separators=(",", ":"))
 
+    # A readable copy, for opening in Excel or Power BI without touching JSON.
+    cpath = os.path.join(DATA, "games.csv")
+    with open(cpath, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["BGG ID", "Name", "Year", "Average", "Geek Rating",
+                    "Weight", "Rank", "Ratings", "Is Expansion", "BGG Link"])
+        for g in out:
+            w.writerow([g["i"], g["n"], g["y"] or "", g["g"] or "", g["b"] or "",
+                        g["w"] or "", g["r"] or "", g["u"] or "",
+                        "Yes" if g["x"] else "No",
+                        "https://boardgamegeek.com/boardgame/%d" % g["i"]])
+
     save_progress(reached)
     size = os.path.getsize(path)
     isize = os.path.getsize(ipath)
