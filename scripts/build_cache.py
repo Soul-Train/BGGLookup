@@ -29,6 +29,8 @@ TOKEN = os.environ.get("BGG_TOKEN", "").strip()
 DELAY = 1.0          # BGG is slow on purpose; being greedy gets you throttled
 BATCH = 40           # small batches: a rejection costs less to split
 BUDGET_MIN = float(os.environ.get("BUDGET_MIN", "90"))   # stop and save by then
+CEILING = int(os.environ.get("CEILING", "460000"))       # top of BGG's id space
+NEW_OVERLAP = 2000   # re-check a little below the frontier, in case of gaps
 CHECKPOINT_MIN = float(os.environ.get("CHECKPOINT_MIN", "10"))  # save this often
 MAX_TRIES = 5
 # Below this, a game is too obscure to be sitting on a shop shelf, and every
@@ -123,20 +125,50 @@ def ids_from_csv(limit):
     return [int(r[key_id]) for r in rows[:limit] if str(r.get(key_id, "")).isdigit()]
 
 
-def sweep_start():
-    """Where last week's run stopped."""
+def read_state():
     try:
         with open(STATE) as f:
-            start = int(json.load(f).get("next", 1))
-    except (OSError, ValueError, TypeError):
-        start = 1
-    return 1 if start > 450000 else start      # wrap round and refresh
+            s = json.load(f)
+        return {"next": int(s.get("next", 1)),
+                "frontier": int(s.get("frontier", 0)),
+                "filled": bool(s.get("filled", False))}
+    except (OSError, ValueError, TypeError, AttributeError):
+        return {"next": 1, "frontier": 0, "filled": False}
 
 
-def save_progress(next_id):
+def save_progress(next_id, frontier=None, filled=None):
     os.makedirs(DATA, exist_ok=True)
+    s = read_state()
+    s["next"] = next_id
+    if frontier is not None:
+        s["frontier"] = frontier
+    if filled is not None:
+        s["filled"] = filled
     with open(STATE, "w") as f:
-        json.dump({"next": next_id}, f)
+        json.dump(s, f)
+
+
+def plan_run():
+    """Decide what this run covers.
+
+    While filling, walk upward from where the last run stopped. Once the whole
+    id space has been covered, start each run at the frontier instead, because
+    the newest games always get the highest ids. New releases then show up
+    within a week rather than whenever a refresh pass happens to reach them.
+    """
+    s = read_state()
+
+    if s["filled"]:
+        start = max(s["frontier"] - NEW_OVERLAP, 1)
+        log("refresh mode: checking for new ids from %d" % start)
+        return {"start": start, "filled": True, "frontier": s["frontier"]}
+
+    if s["next"] > CEILING:
+        start = max(s["frontier"] - NEW_OVERLAP, 1)
+        log("id space covered; switching to new-games-first from %d" % start)
+        return {"start": start, "filled": True, "frontier": s["frontier"]}
+
+    return {"start": s["next"], "filled": False, "frontier": s["frontier"]}
 
 
 # ---------------------------------------------------------------- details
@@ -345,17 +377,25 @@ def main():
     os.makedirs(DATA, exist_ok=True)
 
     deadline = time.time() + BUDGET_MIN * 60
-    start = sweep_start()
+    plan = plan_run()
+    start = plan["start"]
     log("sweeping from id %d, budget %g minutes" % (start, BUDGET_MIN))
 
     try:
         games, reached = sweep(start, deadline)
     except KeyboardInterrupt:
         games, reached = [], start
+
+    # The frontier is the highest id ever confirmed as a real game.
+    frontier = max(plan["frontier"], max([g["i"] for g in games], default=0))
+    save_progress(reached, frontier=frontier, filled=plan["filled"])
     log("%d games cleared the %d-rating floor; next run starts at %d"
         % (len(games), MIN_RATINGS, reached))
 
     write_cache(games, reached, final=True)
+    save_progress(reached, frontier=frontier, filled=plan["filled"])
+    log("frontier is id %d%s"
+        % (frontier, "; in refresh mode" if plan["filled"] else ""))
     return 0
 
 
