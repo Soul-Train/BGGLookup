@@ -424,7 +424,7 @@ var K_CACHE = "shelfworthy.cache.url", K_CACHED = "shelfworthy.cache.data";
 var K_HIST = "shelfworthy.history";
 var K_TOKEN = "shelfworthy.bgg.token", K_GEM = "shelfworthy.gemini.key",
     K_STAR  = "shelfworthy.starred",   K_OWN = "shelfworthy.owned",
-    K_MODEL = "shelfworthy.gemini.model";
+    K_MODEL = "shelfworthy.gemini.model.v2";
 
 /* ============================ storage =========================== */
 function ls(k, v){
@@ -728,6 +728,44 @@ function toB64(file){
   });
 }
 
+// A phone photo is often 3 to 8 MB. Box titles are legible at a fraction of
+// that, and a small image uploads faster on store signal and reads faster too.
+var MAX_EDGE = 1600, JPEG_Q = 0.82;
+
+function shrinkPhoto(file){
+  var fallback = function(){
+    return toB64(file).then(function(b){ return { b64: b, type: file.type || "image/jpeg" }; });
+  };
+  var probe = typeof document !== "undefined" && document.createElement("canvas");
+  if (!probe || !probe.getContext || !probe.getContext("2d")) return fallback();
+
+  var decode = (typeof createImageBitmap === "function")
+    ? createImageBitmap(file)
+    : new Promise(function(res, rej){
+        var im = new Image();
+        im.onload = function(){ res(im); };
+        im.onerror = rej;
+        im.src = URL.createObjectURL(file);
+      });
+  // If decoding stalls, send the original rather than leaving the spinner up.
+  var load = Promise.race([decode, new Promise(function(_, rej){
+    setTimeout(function(){ rej(new Error("decode timeout")); }, 4000); })]);
+
+  return load.then(function(img){
+    var w = img.width, h = img.height;
+    if (!w || !h) return fallback();
+    var k = Math.min(1, MAX_EDGE / Math.max(w, h));
+    var c = document.createElement("canvas");
+    c.width = Math.round(w * k); c.height = Math.round(h * k);
+    var ctx = c.getContext("2d");
+    if (!ctx) return fallback();
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    var url = c.toDataURL("image/jpeg", JPEG_Q);
+    if (!url || url.indexOf("data:image/jpeg") !== 0) return fallback();
+    return { b64: url.split(",")[1], type: "image/jpeg" };
+  }).catch(fallback);
+}
+
 // Model names on this API get renamed and retired often, so rather than hard
 // code one, ask which models this key can actually use and remember the choice.
 function modelList(){
@@ -744,11 +782,12 @@ function modelList(){
           !/embed|aqa|tts|image-generation|live|native-audio/.test(m.name);
       }).map(function(m){ return m.name.replace(/^models\//, ""); });
       if (!usable.length) throw new Error("That Gemini key has no usable models.");
-      // Prefer a current flash model: fast, cheap, and handles images.
+      // Prefer a current flash model. The lite variant first: reading titles
+      // off boxes is easy, and lite is quicker and less often overloaded.
       var score = function(n){
         var s = 0;
         if (/flash/.test(n)) s += 100;
-        if (/lite/.test(n)) s -= 20;
+        if (/lite/.test(n)) s += 15;
         if (/preview|exp/.test(n)) s -= 40;
         var v = (n.match(/(\d+(?:\.\d+)?)/) || [0,0])[1];
         return s + parseFloat(v) * 5;
@@ -797,17 +836,19 @@ function gemini(parts){
         busyNote = ""; return d;
       }).catch(function(e){
         var busyErr = e.status === 503 || e.status === 500 || e.status === 502;
-        if (busyErr && tries < 3){
+        // One quick retry, then try a different model. Waiting out an
+        // overloaded model is slower than simply asking another one.
+        if (busyErr && tries < 1){
           busyNote = "Gemini is busy, retrying\u2026";
           if (screen === "busy") render();
-          return sleep(700 * (tries + 1)).then(function(){ return attempt(mi, tries + 1); });
+          return sleep(400).then(function(){ return attempt(mi, tries + 1); });
         }
         if (e.status === 404){
           ls(K_MODEL, "");
           if (mi + 1 < models.length) return attempt(mi + 1, 0);
         }
         if (busyErr && mi + 1 < models.length){
-          busyNote = "Trying " + models[mi + 1] + "\u2026";
+          busyNote = "Busy, trying another model\u2026";
           if (screen === "busy") render();
           return attempt(mi + 1, 0);
         }
@@ -832,9 +873,9 @@ function jsonFrom(text, open, close){
 }
 
 function readTitles(file){
-  return toB64(file).then(function(b64){
+  return shrinkPhoto(file).then(function(img){
     return gemini([
-      { inline_data: { mime_type: file.type || "image/jpeg", data: b64 } },
+      { inline_data: { mime_type: img.type, data: img.b64 } },
       { text:
 "List the board game titles visible in this photo, left to right. Boxes may be face out or " +
 "turned on their side showing only the spine; read both.\n\n" +
