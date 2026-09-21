@@ -73,11 +73,12 @@
   .card .name:hover{color:var(--pine);text-decoration:underline}
   .card .sub{color:var(--slate);font-size:12.5px;margin-top:4px}
 
-  .big{display:flex;align-items:baseline;gap:9px;margin:14px 0 2px}
+  /* the two label lines sit centred against the number, not hanging off its baseline */
+  .big{display:flex;align-items:center;gap:11px;margin:12px 0 2px}
   .big .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:40px;line-height:1;
     letter-spacing:-1.5px;color:var(--pine);font-variant-numeric:tabular-nums}
-  .big .k{font-size:12.5px;color:var(--slate);line-height:1.3}
-  .big .k small{font-size:11.5px}
+  .big .k{font-size:13px;color:var(--slate);line-height:1.35;padding-top:3px}
+  .big .k small{font-size:12px;display:block}
 
   .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:13px;
     background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden}
@@ -321,6 +322,8 @@
   .pen:hover{color:#0F2A20}
   .fixopts .pen{color:var(--flag);margin-top:4px}
 
+  .timing{font-size:11.5px;color:var(--slate);margin:8px 0 0;opacity:.85}
+
   .bigact{display:flex;align-items:center;gap:15px;width:100%;text-align:left;
     background:var(--card);border:1.5px solid var(--line);border-radius:14px;
     padding:17px 16px;margin-top:10px;cursor:pointer;font-family:inherit;color:var(--ink);
@@ -449,7 +452,7 @@ var K_CACHE = "shelfworthy.cache.url", K_CACHED = "shelfworthy.cache.data";
 var K_HIST = "shelfworthy.history";
 var K_TOKEN = "shelfworthy.bgg.token", K_GEM = "shelfworthy.gemini.key",
     K_STAR  = "shelfworthy.starred",   K_OWN = "shelfworthy.owned",
-    K_MODEL = "shelfworthy.gemini.model.v2";
+    K_MODEL = "shelfworthy.gemini.model.v3";
 
 /* ============================ storage =========================== */
 function ls(k, v){
@@ -718,7 +721,8 @@ function loadOne(id){
     });
 }
 function loadMany(ids){
-  return bggFetch("thing?stats=1&marketplace=1&id=" + ids.join(","))
+  // The table never shows prices; the game page fetches its own when opened.
+  return bggFetch("thing?stats=1&id=" + ids.join(","))
     .then(function(x){
       var out = {};
       parseItems(x).forEach(function(g){ out[g.id] = g; });
@@ -809,13 +813,19 @@ function modelList(){
       if (!usable.length) throw new Error("That Gemini key has no usable models.");
       // Prefer a current flash model. The lite variant first: reading titles
       // off boxes is easy, and lite is quicker and less often overloaded.
+      // Speed matters more than cleverness for reading box titles. The 2.5
+      // Flash models can have thinking switched fully off, so they come first.
+      // Gemini 3 models cannot, so they are fallbacks, set to think as little
+      // as they allow. Newer is not better here.
       var score = function(n){
         var s = 0;
         if (/flash/.test(n)) s += 100;
         if (/lite/.test(n)) s += 15;
+        if (/^gemini-2\.5-flash/.test(n)) s += 60;
+        if (/^gemini-3/.test(n)) s += 20;
+        if (/pro/.test(n)) s -= 80;
         if (/preview|exp/.test(n)) s -= 40;
-        var v = (n.match(/(\d+(?:\.\d+)?)/) || [0,0])[1];
-        return s + parseFloat(v) * 5;
+        return s;
       };
       usable.sort(function(a,b){ return score(b) - score(a); });
       usable = usable.slice(0, 4);   // keep a couple of fallbacks for busy days
@@ -838,11 +848,26 @@ function gerr(status, body){
 
 var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
 
-function callModel(model, parts){
+// Reading titles off boxes needs no reasoning. The 2.5 Flash models think
+// before answering unless told not to, which only adds seconds here. Other
+// models reject this setting, so it is only sent where it is understood.
+function genConfig(model, json){
+  var c = {};
+  if (json) c.responseMimeType = "application/json";
+  // The two families take different, mutually exclusive settings. Sending the
+  // wrong one, or both, is rejected outright.
+  if (/^gemini-2\.5-flash/.test(model)) c.thinkingConfig = { thinkingBudget: 0 };
+  else if (/^gemini-3/.test(model) && /flash/.test(model))
+    c.thinkingConfig = { thinkingLevel: "low" };
+  return c;
+}
+
+function callModel(model, parts, json){
   return fetch(GAPI + "/" + model, {
     method: "POST",
     headers: proxyHeaders({ "Content-Type": "application/json" }),
-    body: JSON.stringify({ contents: [{ parts: parts }] })
+    body: JSON.stringify({ contents: [{ parts: parts }],
+                           generationConfig: genConfig(model, json) })
   }).then(function(r){
     return r.json().catch(function(){ return {}; }).then(function(d){
       if (r.ok) return d;
@@ -853,11 +878,11 @@ function callModel(model, parts){
 
 // 503 means that model is momentarily overloaded, which is common and transient.
 // Wait and retry, then try the next model rather than failing the whole photo.
-function gemini(parts){
+function gemini(parts, json){
   return modelList().then(function(models){
     var attempt = function(mi, tries){
       var model = models[mi];
-      return callModel(model, parts).then(function(d){
+      return callModel(model, parts, json).then(function(d){
         busyNote = ""; return d;
       }).catch(function(e){
         var busyErr = e.status === 503 || e.status === 500 || e.status === 502;
@@ -909,7 +934,7 @@ function readTitles(file){
 'Set "sure" false when the title is legible but ambiguous, for example when you cannot tell a ' +
 'base game from its expansion, and put a short reason in "why". Skip any box you cannot read at ' +
 'all rather than guessing. If you can read none, return [].' }
-    ]);
+    ], true);
   }).then(function(text){
     return jsonFrom(text, "[", "]")
       .filter(function(o){ return o && typeof o.title === "string" && o.title.trim(); })
@@ -929,7 +954,7 @@ function summarise(g){
 "Return ONLY a JSON array, no prose and no markdown fences, at most 3 praise and 3 criticism:\n" +
 '[{"dir":"up","point":"one short sentence","n":12,"i":3}]\n\n' +
 '"dir" is up for praise and down for criticism. "n" is roughly how many comments make that point. ' +
-'"i" is the number of the single comment that puts it best.' }])
+'"i" is the number of the single comment that puts it best.' }], true)
   .then(function(text){
     return jsonFrom(text, "[", "]").filter(function(s){
       return s && s.point && g.comments[s.i];
@@ -1023,7 +1048,7 @@ function card(g){
       '<a class="name" href="'+gameURL(g.id)+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
       (g.year ? '<div class="sub">'+g.year+'</div>' : "")+
       (g.avg ? '<div class="big"><span class="n">'+g.avg.toFixed(1)+'</span>'+
-        '<span class="k">Average'+(g.users?'<br><small>'+g.users.toLocaleString()+
+        '<span class="k">Average'+(g.users?'<small>'+g.users.toLocaleString()+
         ' ratings</small>':"")+'</span></div>' : "")+
     '</div></div>'+
     '<div class="facts">'+facts(g)+'</div>'+priceBlock(g)+tags(g)+markBtns(g)+'</div>';
@@ -1143,6 +1168,7 @@ function shelfView(){
     '</div>'+
     shelfTable()+
     '<div class="swipe">&#8596; swipe the table for more columns</div>'+
+    timingLine()+
     '<button class="btn ghost" data-go="idle">Start over</button>';
 }
 
@@ -1200,6 +1226,16 @@ function idleView(){
 
 var showShot = false;   // only while that photo is actually being read
 
+// Where the seconds went on the last photo, so slowness can be pinned down.
+var lastTiming = null;
+function timingLine(){
+  if (!lastTiming || Date.now() - lastTiming.at > 5 * 60 * 1000) return "";
+  var s = function(ms){ return (ms / 1000).toFixed(1) + "s"; };
+  var total = lastTiming.read + lastTiming.match + lastTiming.details;
+  return '<p class="timing">Took ' + s(total) + ': reading the photo ' + s(lastTiming.read) +
+    ' &middot; matching ' + s(lastTiming.match) + ' &middot; details ' + s(lastTiming.details) + '</p>';
+}
+
 function busyView(){
   return (showShot && shotURL ? '<img class="shot" src="'+shotURL+'" alt="Your photo">' : "")+
     '<div class="working"><div class="dots"><i></i><i></i><i></i></div>'+
@@ -1221,6 +1257,7 @@ function detailView(g){
     '<div class="wrongbar"><span>Not the right game?</span>'+
     '<button data-fixthis="1">Fix it</button></div>'+
     saysBlock(g)+
+    (shelf.length <= 1 ? timingLine() : "")+
     '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">'+
     (shelf.length?"Back to the shelf":"Scan another")+'</button>';
 }
@@ -1831,7 +1868,9 @@ function readPhoto(file, fixIndex){
   shotURL = URL.createObjectURL(file);
   busy = "Reading the boxes"; screen = "busy"; showShot = true; render();
   cacheIndex();
+  var T0 = Date.now(), T1 = 0, T2 = 0;
   readTitles(file).then(function(list){
+    T1 = Date.now();
     if (!list.length) throw new Error("No titles were legible. Get closer, or square up to the shelf.");
     reads = list;
     busy = "Matching " + list.length + " on BoardGameGeek"; render();
@@ -1841,8 +1880,11 @@ function readPhoto(file, fixIndex){
       });
     }));
   }).then(function(found){
+    T2 = Date.now();
     var ids = found.filter(function(f){ return f.id; }).map(function(f){ return f.id; });
     return (ids.length ? loadMany(ids) : Promise.resolve({})).then(function(det){
+      var T3 = Date.now();
+      lastTiming = { read: T1 - T0, match: T2 - T1, details: T3 - T2, at: T3 };
       var rows = found.map(function(f){
         return { read:f.read, conf:f.conf, why:f.why, game: (f.id && det[f.id]) || null };
       });
