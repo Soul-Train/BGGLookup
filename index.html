@@ -411,6 +411,12 @@ var K_PASS = "shelfworthy.pass";
 function password(){ try { return localStorage.getItem(K_PASS) || ""; } catch(e){ return ""; } }
 function setPassword(v){ try { v ? localStorage.setItem(K_PASS, v)
   : localStorage.removeItem(K_PASS); } catch(e){} }
+
+function proxyHeaders(extra){
+  var h = { "X-Shelf-Pass": password() };
+  for (var k in (extra || {})) h[k] = extra[k];
+  return h;
+}
 var BGG      = PROXY + "/bgg/";
 var GAPI     = PROXY + "/gemini";
 var CACHE_URL = "";   // set in settings, e.g. the raw games.json link on GitHub
@@ -580,7 +586,7 @@ function searchURL(q){ return "https://boardgamegeek.com/geeksearch.php?action=s
 
 /* ============================ BGG =============================== */
 function bggFetch(path){
-  return fetch(BGG + path, { headers: { "X-Shelf-Pass": password() } })
+  return fetch(BGG + path, { headers: proxyHeaders() })
     .then(function(r){
       if (r.status === 403){ askPassword(true); throw new Error("PASSWORD"); }
       if (r.status === 401)
@@ -727,7 +733,7 @@ function toB64(file){
 function modelList(){
   var saved = ls(K_MODEL);
   if (saved) return Promise.resolve(saved.split(","));
-  return fetch(GAPI + "/models", { headers: { "X-Shelf-Pass": password() } })
+  return fetch(GAPI + "/models", { headers: proxyHeaders() })
     .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){
       if (!r.ok) throw new Error(gerr(r.status, d));
       return d;
@@ -771,7 +777,7 @@ var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); });
 function callModel(model, parts){
   return fetch(GAPI + "/" + model, {
     method: "POST",
-    headers: { "Content-Type": "application/json", "X-Shelf-Pass": password() },
+    headers: proxyHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ contents: [{ parts: parts }] })
   }).then(function(r){
     return r.json().catch(function(){ return {}; }).then(function(d){
@@ -1328,14 +1334,15 @@ function passView(){
     '</p>'+
     '<div class="row"><input id="passin" type="text" autocomplete="off" autocapitalize="none" '+
       'spellcheck="false" placeholder="Password"></div>'+
+
     '<button class="btn" id="passgo">Continue</button>'+
     '<div id="passout"></div>';
 }
 
 function tryPassword(){
   var v = (document.getElementById("passin").value || "").trim();
-  if (!v) return;
   var out = document.getElementById("passout");
+  if (!v) return;
   out.innerHTML = '<p class="hint" style="margin-top:10px">Checking\u2026</p>';
   // Ask the server rather than trusting the phone: the check is only real there.
   fetch(PROXY + "/bgg/thing?id=224517", { headers: { "X-Shelf-Pass": v } })
