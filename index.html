@@ -322,6 +322,8 @@
   .pen:hover{color:#0F2A20}
   .fixopts .pen{color:var(--flag);margin-top:4px}
 
+  .ver{margin-top:10px;font-size:11px;opacity:.7;font-variant-numeric:tabular-nums}
+
   .timing{font-size:11.5px;color:var(--slate);margin:8px 0 0;opacity:.85}
 
   .bigact{display:flex;align-items:center;gap:15px;width:100%;text-align:left;
@@ -423,11 +425,15 @@
     Barcode matching by <a href="https://gameupc.com" target="_blank" rel="noopener">GameUPC</a>.
     Game data from <a href="https://boardgamegeek.com" target="_blank" rel="noopener">BoardGameGeek</a>,
     shown unmodified.
+    <div class="ver" id="ver"></div>
   </div>
 </div>
 <div id="modal"></div>
 <script>
 /* ============================ config ============================ */
+// Bump this with every upload, so a glance at the footer confirms which build
+// a phone is running.
+var APP_VERSION = "1.0.1";
 var UPC_URL  = "https://api.gameupc.com/test/upc/";
 var UPC_KEY  = "test_test_test_test_test";
 /* The proxy holds the BoardGameGeek token and the Gemini key, so no phone
@@ -1519,6 +1525,7 @@ function renderSheet(){
   modal.innerHTML =
     '<div class="sheet" id="scrim"><div class="inner">'+
       '<h2>Settings</h2>'+
+      '<p class="hint" style="margin:-2px 0 10px">Version '+esc(APP_VERSION)+'</p>'+
       '<p class="hint">Nothing to set up. Ratings and photo reading go through a '+
       'shared server, so there are no keys to paste.</p>'+
       '<p class="hint" style="margin:16px 0 6px"><b>Game cache</b> (optional). '+
@@ -1935,6 +1942,7 @@ function replaceRow(i, title){
 }
 
 document.getElementById("gear").onclick = function(){ sheet = true; render(); };
+document.getElementById("ver").textContent = "Version " + APP_VERSION;
 cacheIndex();
 render();
 </script>
