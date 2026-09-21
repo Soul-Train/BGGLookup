@@ -270,15 +270,16 @@
   .marks.big .mk2.star.on{background:var(--ochre);border-color:var(--ochre);color:#16241E}
   .marks.big .mk2.own.on{background:var(--pine);border-color:var(--pine);color:#F6F7F3}
 
-  .price{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+  .price{margin-top:11px;padding-top:10px;border-top:1px solid var(--line)}
   .ph{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;
-    color:var(--slate);margin-bottom:9px}
+    color:var(--slate);margin-bottom:10px}
   .ph span{font-weight:600;color:var(--ink);font-size:13px}
-  .bar{position:relative;height:6px;border-radius:3px;background:var(--line);margin:0 0 7px}
+  .bar{position:relative;height:6px;border-radius:3px;background:var(--line);margin:0 0 9px}
   .bar .fill{position:absolute;top:0;bottom:0;border-radius:3px;background:#C3CDBF}
   .bar .dot{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;
     transform:translate(-50%,-50%)}
-  .bar .dot.med{background:var(--slate);border:2px solid var(--card)}
+  .bar .dot.med{background:var(--pine);border:3px solid var(--card);width:20px;height:20px;
+    box-shadow:0 0 0 1px var(--line)}
   .bar .dot.shelf{background:var(--ochre);border:2px solid var(--card);width:15px;height:15px}
   .pl{display:flex;justify-content:space-between;font-size:12px;color:var(--slate);
     font-variant-numeric:tabular-nums}
@@ -313,6 +314,30 @@
   .ht{display:block;font-weight:600;font-size:14px;overflow:hidden;
     text-overflow:ellipsis;white-space:nowrap}
   .hw{display:block;font-size:12px;color:var(--slate);margin-top:1px}
+
+  .pen{border:none;background:none;color:var(--pine);font-family:inherit;font-size:13.5px;
+    font-weight:600;padding:10px 4px;cursor:pointer;text-decoration:underline;
+    text-underline-offset:3px;min-height:40px}
+  .pen:hover{color:#0F2A20}
+  .fixopts .pen{color:var(--flag);margin-top:4px}
+
+  .bigact{display:flex;align-items:center;gap:15px;width:100%;text-align:left;
+    background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+    padding:17px 16px;margin-top:10px;cursor:pointer;font-family:inherit;color:var(--ink);
+    box-sizing:border-box}
+  .bigact:hover{border-color:var(--pine)}
+  .bigact .ai{flex:none;width:48px;height:48px;border-radius:12px;display:flex;
+    align-items:center;justify-content:center;background:#DDE2D7;color:var(--pine)}
+  .bigact .ai svg{width:28px;height:28px}
+  .bigact .at{flex:1;min-width:0}
+  .bigact .at b{display:block;font-size:16.5px;font-weight:700}
+  .bigact .at small{display:block;font-size:12.5px;color:var(--slate);margin-top:2px;line-height:1.35}
+  .bigact.main{background:var(--pine);border-color:var(--pine);color:#F6F7F3;padding:21px 16px}
+  .bigact.main .ai{background:rgba(246,247,243,.14);color:#F6F7F3;width:54px;height:54px}
+  .bigact.main .ai svg{width:32px;height:32px}
+  .bigact.main .at b{font-size:18px}
+  .bigact.main .at small{color:rgba(246,247,243,.78)}
+  .bigact.main:hover{background:#18382C}
 
   .typelink{text-align:center;margin-top:14px}
 
@@ -974,29 +999,13 @@ function tags(g){
 function priceBlock(g){
   if (!g.us) return "";
   var lo=g.us[0], med=g.us[1], hi=g.us[2], n=g.us[3];
-  var shelfP = PRICE_IN[g.id];
-  var verdict = "";
-  if (shelfP){
-    var pct = Math.round((shelfP - med) / med * 100);
-    var good = pct <= -5, bad = pct >= 15;
-    verdict = '<div class="verdict '+(good?"good":bad?"bad":"")+'">'+
-      (good ? "Under the usual price" : bad ? "Above the usual price" : "About the usual price")+
-      ' &middot; '+(pct>0?"+":"")+pct+'% vs $'+med+' typical</div>';
-  }
   var span = hi - lo || 1;
   return '<div class="price">'+
-    '<div class="ph"><span>US selling price</span><small>'+n+' listings</small></div>'+
+    '<div class="ph"><span>US price</span><small>'+n+' listings</small></div>'+
     '<div class="bar"><div class="fill" style="left:0;right:0"></div>'+
       '<div class="dot med" style="left:'+Math.round((med-lo)/span*100)+'%"></div>'+
-      (shelfP ? '<div class="dot shelf" style="left:'+
-        Math.max(0,Math.min(100,Math.round((shelfP-lo)/span*100)))+'%"></div>' : "")+
     '</div>'+
     '<div class="pl"><span>$'+lo+'</span><b>$'+med+' typical</b><span>$'+hi+'</span></div>'+
-    (shelfP
-      ? '<div class="shelfrow2">You entered <b>$'+shelfP+'</b>'+
-        '<button class="pen" data-clearprice="'+g.id+'">change</button></div>'+verdict
-      : '<div class="askprice"><input inputmode="decimal" placeholder="Store price" '+
-        'data-priceinput="'+g.id+'"><button data-setprice="'+g.id+'">Compare</button></div>')+
     '</div>';
 }
 
@@ -1150,16 +1159,30 @@ function photoOut(label, primary){
       'class="shotalt" hidden></label></div>';
 }
 
+// Drawn inline so they look the same on every phone, unlike emoji.
+var ICON_CAMERA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2A1.5 1.5 0 0 1 9.8 5h4.4'+
+  'a1.5 1.5 0 0 1 1.2.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" '+
+  'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>'+
+  '<circle cx="12" cy="13.2" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+var ICON_BARCODE = '<svg viewBox="0 0 24 24" aria-hidden="true">'+
+  '<rect x="3" y="4" width="2" height="16" rx=".5" fill="currentColor"/>'+
+  '<rect x="6.6" y="4" width="3.6" height="16" rx=".5" fill="currentColor"/>'+
+  '<rect x="11.8" y="4" width="1.7" height="16" rx=".5" fill="currentColor"/>'+
+  '<rect x="15.1" y="4" width="3" height="16" rx=".5" fill="currentColor"/>'+
+  '<rect x="19.6" y="4" width="1.9" height="16" rx=".5" fill="currentColor"/></svg>';
+
 function idleView(){
   return notice()+
     '<h2>Find a game</h2>'+
-    '<p class="hint">Scan one box, or photograph a whole row and get them all at once.</p>'+
-    '<button class="btn" id="startcam">Scan one barcode</button>'+
-    '<label class="btn ghost" style="display:block;text-align:center" tabindex="0">'+
-      'Photograph a shelf'+
+    '<label class="bigact main" tabindex="0">'+
+      '<span class="ai">'+ICON_CAMERA+'</span>'+
+      '<span class="at"><b>Photograph a shelf</b>'+
+        '<small>Every title in the photo at once. One box works too.</small></span>'+
       '<input type="file" accept="image/*" capture="environment" id="shot" hidden></label>'+
-    '<p class="hint" style="margin:8px 0 0;text-align:center;font-size:12px">'+
-      'A shelf photo reads every title in frame. One box works too.</p>'+
+    '<button class="bigact" id="startcam">'+
+      '<span class="ai">'+ICON_BARCODE+'</span>'+
+      '<span class="at"><b>Scan a barcode</b>'+
+        '<small>One game, fastest when the code is known.</small></span></button>'+
     (starCount() ? '<button class="btn ghost" data-go="compare">&#9733; '+starCount()+
       ' shortlisted</button>' : "")+
     '<div class="typelink"><button class="pen" id="tl">Type a title instead</button></div>'+
@@ -1175,8 +1198,10 @@ function idleView(){
       : "");
 }
 
+var showShot = false;   // only while that photo is actually being read
+
 function busyView(){
-  return (shotURL ? '<img class="shot" src="'+shotURL+'" alt="Your photo">' : "")+
+  return (showShot && shotURL ? '<img class="shot" src="'+shotURL+'" alt="Your photo">' : "")+
     '<div class="working"><div class="dots"><i></i><i></i><i></i></div>'+
     '<h2 style="margin-top:14px">'+esc(busy)+'</h2>'+
     (busyNote ? '<p class="hint" style="margin-top:6px">'+esc(busyNote)+'</p>' : "")+
@@ -1194,7 +1219,7 @@ function detailView(g){
   return '<button class="back" data-go="'+(shelf.length?"shelf":"idle")+'">&larr; back</button>'+
     notice()+card(g)+
     '<div class="wrongbar"><span>Not the right game?</span>'+
-    '<button data-fixgo="1">Fix it</button></div>'+
+    '<button data-fixthis="1">Fix it</button></div>'+
     saysBlock(g)+
     '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">'+
     (shelf.length?"Back to the shelf":"Scan another")+'</button>';
@@ -1271,6 +1296,31 @@ function compareView(){
     '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">Back</button>';
 }
 
+// When you fix from a game's own page, you mean that game, not the whole list.
+var fixFocus = null, fixSingle = false;
+
+function startFixThis(){
+  if (!game) return;
+  var idx = -1;
+  for (var i = 0; i < shelf.length; i++)
+    if (shelf[i].game && shelf[i].game.id === game.id){ idx = i; break; }
+  if (idx < 0){
+    // Opened from a barcode or history, not a shelf: fix it on its own.
+    shelf = [{ read: game.name, conf: true, game: game }];
+    idx = 0; fixSingle = true;
+  } else fixSingle = false;
+  fixFocus = idx; msg = null;
+  screen = "fix"; render(); window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// After a focused fix, show the corrected game rather than the list.
+function afterFix(i){
+  if (fixFocus === null || !shelf[i] || !shelf[i].game) return false;
+  fixFocus = null;
+  openGame(shelf[i].game.id);
+  return true;
+}
+
 function fixView(){
   var flagged = shelf.filter(function(r){ return !r.game || r.conf===false; });
   var clean   = shelf.filter(function(r){ return r.game && r.conf!==false; });
@@ -1296,6 +1346,19 @@ function fixView(){
           '<button data-fixset="'+i+'">Set</button></div>'+
         '<button class="pen" data-fixdrop="'+i+'">Remove from the list</button>'+
       '</div>';
+  }
+  if (fixFocus !== null && shelf[fixFocus]){
+    var f = shelf[fixFocus];
+    var html = row(f)
+      .replace('data-opts="'+fixFocus+'" hidden', 'data-opts="'+fixFocus+'"')
+      .replace(/<button class="fixbtn"[^>]*>Change<\/button>/, "")
+      .replace(/<small>[^<]*<\/small>/, f.game && f.game.year ? "<small>"+f.game.year+"</small>" : "");
+    return '<button class="back" data-go="detail">&larr; back to the game</button>'+
+      notice()+'<h2>Fix this game</h2>'+
+      '<p class="hint">Read it again, scan its barcode, or type the right title.</p>'+
+      html+
+      (fixSingle ? "" : '<button class="pen" data-fixall="1" style="margin-top:10px">'+
+        'See the whole list instead</button>');
   }
   return '<button class="back" data-go="shelf">&larr; back to the shelf</button>'+
     notice()+'<h2>Fix the list</h2>'+
@@ -1491,6 +1554,7 @@ function renderSheet(){
 function go(s){ screen = s; msg = null; render(); window.scrollTo({top:0,behavior:"smooth"}); }
 
 function render(){
+  if (screen !== "busy") showShot = false;
   var prev = document.querySelector(".scroller");
   var keepX = prev ? prev.scrollLeft : 0;
 
@@ -1560,7 +1624,11 @@ function wire(){
     openGame(b.dataset.open); }; });
 
   each("[data-fixgo]", function(b){ b.onclick = function(ev){
-    ev.stopPropagation(); go("fix"); }; });
+    ev.stopPropagation(); fixFocus = null; go("fix"); }; });
+  each("[data-fixthis]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation(); startFixThis(); }; });
+  each("[data-fixall]", function(b){ b.onclick = function(){
+    fixFocus = null; render(); }; });
 
   each("[data-star]", function(b){ b.onclick = function(ev){
     ev.stopPropagation();
@@ -1604,8 +1672,12 @@ function wire(){
     var o = document.querySelector('[data-opts="'+b.dataset.fixi+'"]');
     if (o) o.hidden = !o.hidden; }; });
   each("[data-fixdrop]", function(b){ b.onclick = function(){
+    var wasFocused = fixFocus !== null;
     shelf.splice(+b.dataset.fixdrop, 1);
-    if (!shelf.length) go("idle"); else render(); }; });
+    fixFocus = null; game = null;
+    if (!shelf.length || fixSingle){ fixSingle = false; shelf = []; go("idle"); }
+    else if (wasFocused) go("shelf");
+    else render(); }; });
   each("[data-fixscan]", function(b){ b.onclick = function(){ startCamera(+b.dataset.fixscan); }; });
   each("[data-fixset]", function(b){ b.onclick = function(){
     var inp = document.querySelector('[data-fixtitle="'+b.dataset.fixset+'"]');
@@ -1633,7 +1705,7 @@ function needToken(){ return false; }   // the server holds the keys
 
 function openGame(id){
   if (needToken()) return;
-  busy = "Loading the game"; screen = "busy"; render();
+  busy = "Loading the game"; screen = "busy"; showShot = false; render();
   loadOne(id)
     .then(function(g){
       game = g;
@@ -1757,7 +1829,7 @@ function readPhoto(file, fixIndex){
   if (correcting){ startCorrection(); fixTarget = fixIndex; }
   else newCapture();
   shotURL = URL.createObjectURL(file);
-  busy = "Reading the boxes"; screen = "busy"; render();
+  busy = "Reading the boxes"; screen = "busy"; showShot = true; render();
   cacheIndex();
   readTitles(file).then(function(list){
     if (!list.length) throw new Error("No titles were legible. Get closer, or square up to the shelf.");
@@ -1778,10 +1850,12 @@ function readPhoto(file, fixIndex){
       if (correcting){
         // Put the best read into the row being corrected and go back to the list.
         var pick = rows.filter(function(r){ return r.game; })[0] || rows[0];
+        var fixedAt = fixTarget;
         shelf[fixTarget] = { read: pick.read, conf: pick.conf !== false, game: pick.game };
         fixTarget = null;
         if (rows.length > 1)
           msg = "<b>Read " + rows.length + " titles</b>Used the first match for that row.";
+        if (afterFix(fixedAt)) return;
         screen = "fix"; render();
         return;
       }
@@ -1801,10 +1875,12 @@ function readPhoto(file, fixIndex){
 
 /* --- corrections --- */
 function replaceRowById(i, id){
-  busy = "Loading the game"; screen = "busy"; render();
+  busy = "Loading the game"; screen = "busy"; showShot = false; render();
   return loadOne(id).then(function(g){
     if (shelf[i]) shelf[i] = { read:g.name, conf:true, game:g };
-    fixTarget = null; screen = shelf.length ? "fix" : "idle"; render();
+    fixTarget = null;
+    if (afterFix(i)) return;
+    screen = shelf.length ? "fix" : "idle"; render();
   }).catch(function(e){ fail(e); screen = "fix"; render(); });
 }
 function replaceRow(i, title){
