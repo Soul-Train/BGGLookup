@@ -433,7 +433,7 @@
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "1.0.1";
+var APP_VERSION = "1.0.4";
 var UPC_URL  = "https://api.gameupc.com/test/upc/";
 var UPC_KEY  = "test_test_test_test_test";
 /* The proxy holds the BoardGameGeek token and the Gemini key, so no phone
@@ -458,7 +458,7 @@ var K_CACHE = "shelfworthy.cache.url", K_CACHED = "shelfworthy.cache.data";
 var K_HIST = "shelfworthy.history";
 var K_TOKEN = "shelfworthy.bgg.token", K_GEM = "shelfworthy.gemini.key",
     K_STAR  = "shelfworthy.starred",   K_OWN = "shelfworthy.owned",
-    K_MODEL = "shelfworthy.gemini.model.v3";
+    K_MODEL = "shelfworthy.gemini.model.v5";
 
 /* ============================ storage =========================== */
 function ls(k, v){
@@ -823,18 +823,28 @@ function modelList(){
       // Flash models can have thinking switched fully off, so they come first.
       // Gemini 3 models cannot, so they are fallbacks, set to think as little
       // as they allow. Newer is not better here.
+      // Free-tier daily allowances differ hugely: the Flash-Lite models get
+      // around 500 requests a day, full Flash models around 20. So every
+      // fallback stays among the Lite models, and a full Flash model is only
+      // tried once every Lite model has failed.
+      // Ranked by free daily allowance, from your AI Studio dashboard:
+      // 3.x Flash-Lite ~500/day, 2.5 Flash-Lite 20/day, full Flash 20/day.
+      // Pro and older models are not on the free tier at all.
       var score = function(n){
         var s = 0;
         if (/flash/.test(n)) s += 100;
-        if (/lite/.test(n)) s += 15;
-        if (/^gemini-2\.5-flash/.test(n)) s += 60;
-        if (/^gemini-3/.test(n)) s += 20;
-        if (/pro/.test(n)) s -= 80;
+        if (/lite/.test(n)) s += 200;
+        if (/^gemini-3/.test(n)) s += 50;
+        if (/pro/.test(n)) s -= 400;
+        if (/tts|image|live|audio/.test(n)) s -= 400;
         if (/preview|exp/.test(n)) s -= 40;
-        return s;
+        var v = parseFloat((n.match(/gemini-(\d+(?:\.\d+)?)/) || [0, 0])[1]) || 0;
+        return s + v;                     // newer wins only between equals
       };
       usable.sort(function(a,b){ return score(b) - score(a); });
-      usable = usable.slice(0, 4);   // keep a couple of fallbacks for busy days
+      // Keep a long list: if one model is capped, the app keeps looking
+      // rather than giving up.
+      usable = usable.filter(function(n){ return score(n) > 0; }).slice(0, 8);
       ls(K_MODEL, usable.join(","));
       return usable;
     });
@@ -845,7 +855,12 @@ function gerr(status, body){
   if (status === 403){ askPassword(true); return "PASSWORD"; }
   if (status === 400 || status === 401)
     return "Gemini rejected the request" + (m ? ": " + m : ".");
-  if (status === 429) return "Gemini is rate limiting. Wait a minute and try again.";
+  if (status === 429){
+    var daily = m && /per.?day|daily|PerDay/i.test(m);
+    return daily
+      ? "Gemini's daily free allowance is used up. It resets overnight (Pacific time)."
+      : "Gemini is rate limiting. Wait a minute and try again.";
+  }
   if (status === 404)
     return "Gemini could not find that model" + (m ? ": " + m : "") +
            " Remove and re-save your key in settings to pick a new one.";
@@ -853,6 +868,15 @@ function gerr(status, body){
 }
 
 var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+
+// A model that just hit its limit is skipped for a while, so the next call
+// does not waste a round trip being told the same thing.
+var COOL = {};
+function coolDown(model, daily){ COOL[model] = Date.now() + (daily ? 6 * 3600e3 : 65e3); }
+function usableNow(models){
+  var ok = models.filter(function(m){ return !(COOL[m] > Date.now()); });
+  return ok.length ? ok : models;       // if everything is capped, try anyway
+}
 
 // Reading titles off boxes needs no reasoning. The 2.5 Flash models think
 // before answering unless told not to, which only adds seconds here. Other
@@ -884,8 +908,13 @@ function callModel(model, parts, json){
 
 // 503 means that model is momentarily overloaded, which is common and transient.
 // Wait and retry, then try the next model rather than failing the whole photo.
-function gemini(parts, json){
-  return modelList().then(function(models){
+function gemini(parts, json, offset){
+  return modelList().then(function(all){
+    var models = usableNow(all);
+    // Start later in the list when asked, so different jobs spend different
+    // models' allowances instead of competing for one per-minute cap.
+    if (offset && models.length > offset)
+      models = models.slice(offset).concat(models.slice(0, offset));
     var attempt = function(mi, tries){
       var model = models[mi];
       return callModel(model, parts, json).then(function(d){
@@ -902,6 +931,14 @@ function gemini(parts, json){
         if (e.status === 404){
           ls(K_MODEL, "");
           if (mi + 1 < models.length) return attempt(mi + 1, 0);
+        }
+        // Free-tier limits are counted per model, so another model usually
+        // still has room even when this one is capped.
+        if (e.status === 429) coolDown(model, /daily/.test(e.message));
+        if (e.status === 429 && mi + 1 < models.length){
+          busyNote = "Limit reached, trying another model\u2026";
+          if (screen === "busy") render();
+          return attempt(mi + 1, 0);
         }
         if (busyErr && mi + 1 < models.length){
           busyNote = "Busy, trying another model\u2026";
@@ -950,8 +987,31 @@ function readTitles(file){
 }
 
 // Comments are shown verbatim; the model only groups and points at them.
+var K_SAYS = "shelfworthy.says";
+function saysCache(){ try { return JSON.parse(ls(K_SAYS) || "{}"); } catch(e){ return {}; } }
+
 function summarise(g){
   if (!gemKey() || !g.comments.length) return Promise.resolve(null);
+  // Comments barely change week to week. Reuse a summary for 30 days rather
+  // than spending a Gemini call every time the same game is opened.
+  var cache = saysCache(), hit = cache[g.id];
+  if (hit && Date.now() - hit.t < 30 * 864e5) return Promise.resolve(hit.s);
+  return summariseFresh(g).then(function(s){
+    if (s && s.length){
+      var c = saysCache();
+      c[g.id] = { t: Date.now(), s: s };
+      var keys = Object.keys(c);
+      if (keys.length > 150){                       // keep storage small
+        keys.sort(function(a,b){ return c[a].t - c[b].t; });
+        keys.slice(0, keys.length - 150).forEach(function(k){ delete c[k]; });
+      }
+      try { ls(K_SAYS, JSON.stringify(c)); } catch(e){}
+    }
+    return s;
+  });
+}
+
+function summariseFresh(g){
   var numbered = g.comments.map(function(c, i){ return i + ". " + c.text; }).join("\n");
   return gemini([{ text:
 "Here are user comments about the board game \"" + g.name + "\", each numbered.\n\n" + numbered +
@@ -960,7 +1020,7 @@ function summarise(g){
 "Return ONLY a JSON array, no prose and no markdown fences, at most 3 praise and 3 criticism:\n" +
 '[{"dir":"up","point":"one short sentence","n":12,"i":3}]\n\n' +
 '"dir" is up for praise and down for criticism. "n" is roughly how many comments make that point. ' +
-'"i" is the number of the single comment that puts it best.' }], true)
+'"i" is the number of the single comment that puts it best.' }], true, 1)
   .then(function(text){
     return jsonFrom(text, "[", "]").filter(function(s){
       return s && s.point && g.comments[s.i];
