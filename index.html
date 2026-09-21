@@ -3,419 +3,1361 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Shelfworthy</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Circle">
+<meta name="theme-color" content="#E9EAE4">
+<title>Circle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --board:#E9EBE4; --card:#F6F7F3; --ink:#16241E; --pine:#1F4536;
-    --ochre:#C6941F; --slate:#55655C; --line:#CFD5CB; --flag:#8C3A2B;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--board);color:var(--ink);
-    font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.45;
-    -webkit-font-smoothing:antialiased}
-  .app{max-width:460px;margin:0 auto;padding:20px 16px calc(40px + env(safe-area-inset-bottom))}
+:root{
+  --paper:#E9EAE4;
+  --card:#FBFBF9;
+  --ink:#23271F;
+  --muted:#6E7368;
+  --line:#D4D6CD;
+  --accent:#3F6B52;
+  --accent-soft:#E2EAE3;
+  --flag:#A8412A;
+  --flag-soft:#F5E3DD;
+  --radius:14px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;
+  font-family:'Karla',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:16px;
+  line-height:1.5;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-  .top{display:flex;align-items:flex-start;gap:10px}
-  .top .who{flex:1;min-width:0}
-  h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:26px;color:var(--pine);
-    margin:0 0 3px;letter-spacing:-.4px}
-  .tag{color:var(--slate);font-size:13.5px;margin:0 0 18px}
-  .gear{border:1.5px solid var(--line);background:var(--card);border-radius:9px;
-    width:40px;height:40px;flex:none;font-size:17px;color:var(--slate);line-height:1}
-  .gear:hover{border-color:var(--pine)}
-  .gear.off{border-color:var(--ochre);color:var(--ochre)}
+.wrap{max-width:640px;margin:0 auto;padding:18px 16px 8px}
+.vstamp{position:fixed;top:calc(6px + env(safe-area-inset-top,0px));right:12px;z-index:70;
+  font-size:.68rem;font-weight:600;color:var(--muted);opacity:.75;pointer-events:none}
+.screen{display:none}
+.screen.on{display:block}
 
-  h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:18px;margin:0 0 3px}
-  .hint{color:var(--slate);font-size:13px;margin:0 0 14px}
+h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin:0 0 2px}
+h2{font-size:1.05rem;font-weight:600;margin:0 0 10px}
+.sub{color:var(--muted);font-size:.88rem;margin:0 0 20px}
 
-  button{font-family:inherit;font-size:15px;cursor:pointer}
-  button:focus-visible,input:focus-visible{outline:2.5px solid var(--ochre);outline-offset:2px}
-  .btn{width:100%;border:none;border-radius:10px;background:var(--pine);color:#F6F7F3;
-    padding:15px;font-weight:600;margin-top:10px}
-  .btn.ghost{background:transparent;color:var(--pine);border:1.5px solid var(--line);padding:13px}
-  .btn.ghost:hover{border-color:var(--pine)}
+/* capture */
+.mic-zone{text-align:center;padding:14px 0 6px}
+.mic{
+  width:132px;height:132px;border-radius:50%;
+  background:var(--accent);color:#F7FAF7;
+  display:inline-flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 0 #2E5240;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.mic:active{transform:translateY(4px);box-shadow:0 2px 0 #2E5240}
+.mic svg{width:52px;height:52px}
+.mic.live{background:var(--flag);box-shadow:0 6px 0 #7D3020;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.78}}
+.mic-hint{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
 
-  .row{display:flex;gap:8px}
-  .row input{flex:1;padding:13px;font-size:16px;font-family:inherit;border:1.5px solid var(--line);
-    border-radius:10px;background:#FFF;color:var(--ink);min-width:0}
-  .row button{border:none;background:var(--pine);color:#F6F7F3;border-radius:10px;
-    padding:0 18px;font-weight:600}
+textarea{
+  width:100%;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:12px 13px;resize:vertical;line-height:1.55;
+}
+textarea.big{min-height:120px}
+textarea.huge{min-height:220px}
 
-  #cam{width:100%;border-radius:14px;background:#0D1512;display:block;aspect-ratio:4/3;object-fit:cover}
-  .camwrap{position:relative;margin-bottom:12px}
-  .reticle{position:absolute;left:12%;right:12%;top:38%;height:24%;
-    border:2px solid rgba(246,247,243,.85);border-radius:8px;pointer-events:none}
-  .reticle:after{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;
-    background:var(--ochre);opacity:.9}
+.row{display:flex;gap:10px;align-items:center}
+.row.wrap-row{flex-wrap:wrap}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:10px}
 
-  .pick{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);
-    border-radius:10px;padding:13px;margin-bottom:8px;text-decoration:none;color:inherit;width:100%;
-    text-align:left;font-size:15px}
-  .pick:hover{border-color:var(--pine);background:#FFF}
-  .pick .n{flex:1;font-weight:600;min-width:0}
-  .pick .go{color:var(--slate);font-size:19px;flex:none}
+.btn{
+  border-radius:11px;padding:11px 16px;font-weight:600;font-size:.95rem;
+  background:var(--accent);color:#F7FAF7;border:1px solid transparent;
+}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.quiet{background:transparent;color:var(--muted);padding:9px 4px;font-weight:500}
+.btn.danger{background:transparent;color:var(--flag);border-color:var(--flag)}
+.btn.block{width:100%;display:block;text-align:center}
+.btn:disabled{opacity:.45;cursor:default}
 
-  .card{background:var(--card);border:1.5px solid var(--pine);border-radius:12px;
-    padding:16px;margin-bottom:12px}
-  .card .name{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:21px;
-    letter-spacing:-.3px;line-height:1.2;text-decoration:none;color:var(--ink);display:block}
-  .card .name:hover{color:var(--pine);text-decoration:underline}
-  .card .sub{color:var(--slate);font-size:12.5px;margin-top:4px}
+.seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card)}
+.seg button{flex:1;padding:9px 6px;font-size:.88rem;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
 
-  .big{display:flex;align-items:baseline;gap:9px;margin:14px 0 2px}
-  .big .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:40px;line-height:1;
-    letter-spacing:-1.5px;color:var(--pine);font-variant-numeric:tabular-nums}
-  .big .k{font-size:12.5px;color:var(--slate)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:12px}
+.card.flagged{border-color:var(--flag);background:var(--flag-soft)}
 
-  .facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-  .fact{background:#FFF;border:1px solid var(--line);border-radius:7px;padding:6px 10px;font-size:12.5px}
-  .fact b{font-weight:600}
-  .fact span{color:var(--slate)}
+label.fld{display:block;margin:0 0 12px}
+label.fld > span{display:block;font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:5px}
+input[type=text],input[type=date],select{
+  width:100%;background:var(--card);border:1px solid var(--line);
+  border-radius:11px;padding:11px 12px;
+}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
 
-  .pips{display:inline-flex;gap:2.5px;align-items:center;vertical-align:-1px}
-  .pips i{width:6px;height:6px;border-radius:50%;background:var(--line)}
-  .pips i.f{background:var(--ochre)}
+.picker{display:flex;flex-wrap:wrap;gap:7px;margin:-6px 0 16px}
+.picker:empty{display:none}
+.picker .new{color:var(--accent);border-style:dashed;border-color:var(--accent)}
 
-  .note{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--ochre);
-    border-radius:10px;padding:12px;font-size:13.5px;margin-bottom:12px}
-  .note b{display:block;margin-bottom:3px}
-  .note.bad{border-left-color:var(--flag);background:#F7E9E6;border-color:#D9B5AC}
+.waiting{display:flex;align-items:center;gap:7px;width:100%;margin-top:13px;padding-top:11px;
+  border-top:1px solid var(--line);color:var(--muted);font-size:.82rem;font-weight:600;text-align:left}
 
-  .dots{display:inline-flex;gap:6px}
-  .dots i{width:9px;height:9px;border-radius:50%;background:var(--pine);animation:p 1.05s ease-in-out infinite}
-  .dots i:nth-child(2){animation-delay:.16s}
-  .dots i:nth-child(3){animation-delay:.32s}
-  @keyframes p{0%,100%{opacity:.25}50%{opacity:1}}
-  @media (prefers-reduced-motion:reduce){.dots i{animation:none;opacity:.6}}
-  .working{text-align:center;padding:36px 0}
+.rvhead{font-size:.8rem;color:var(--muted);font-weight:700;margin:16px 0 8px;
+  text-transform:uppercase;letter-spacing:.04em}
 
-  .sheet{position:fixed;inset:0;background:rgba(22,36,30,.55);display:flex;align-items:flex-end;
-    justify-content:center;z-index:9}
-  .sheet .inner{background:var(--board);border-radius:16px 16px 0 0;padding:20px 16px
-    calc(24px + env(safe-area-inset-bottom));width:100%;max-width:460px}
-  @media (min-width:520px){ .sheet{align-items:center} .sheet .inner{border-radius:16px} }
-  .sheet code{background:#FFF;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
+.askcard{border:1px solid var(--flag);background:var(--flag-soft);border-radius:var(--radius);
+  padding:13px;margin-bottom:6px}
+.askhead{font-size:.7rem;font-weight:700;color:var(--flag);margin:0 0 8px;letter-spacing:.06em}
+.askrow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.asktext{font-size:.95rem;line-height:1.45;margin:0}
+.askx{color:var(--flag);font-size:1.15rem;line-height:1;padding:0 2px;flex:none}
+.askdate{font-size:.72rem;color:var(--muted);margin:2px 0 9px}
+.askrow:last-of-type + .askdate{margin-bottom:0}
+.askwho{font-size:.78rem;font-weight:700;color:var(--flag);margin-bottom:4px}
 
-  .foot{margin-top:24px;font-size:12px;color:var(--slate);line-height:1.5}
-  .foot a{color:var(--slate)}
+.standrow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.standlab{font-size:.72rem;color:var(--muted);width:58px;flex:none;padding-top:3px;font-weight:600}
+.standtext{font-size:.95rem;line-height:1.45;margin:0}
+.standtext.empty{color:var(--muted)}
+.standdate{font-size:.72rem;color:var(--muted);margin:2px 0 0}
+.standhist{color:var(--muted);flex:none;padding:0 4px;font-size:1rem}
+
+.tl{display:flex;gap:11px}
+.tlrail{flex:none;display:flex;flex-direction:column;align-items:center;padding-top:5px}
+.tldot{width:7px;height:7px;border-radius:50%;background:var(--line);flex:none}
+.tldot.now{background:var(--accent)}
+.tlline{width:1px;flex:1;background:var(--line);margin-top:4px}
+.tlbody{flex:1;padding-bottom:18px;min-width:0}
+.tldate{font-size:.72rem;color:var(--muted);margin:0 0 4px}
+.tltext{font-size:.95rem;line-height:1.5;margin:0;word-wrap:break-word}
+.tltext mark{background:#F2E3B0;color:inherit;border-radius:3px;padding:0 2px}
+.tlacts{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.tlacts button{font-size:.76rem;color:var(--muted);font-weight:600}
+.tlacts button.warn{color:var(--flag)}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:999px;padding:7px 13px;font-size:.86rem;font-weight:600;
+}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#F7FAF7}
+.chip.read{cursor:default}
+
+.toggle{
+  display:flex;align-items:center;gap:11px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:11px;background:var(--card);margin-bottom:10px;
+}
+.toggle input{width:20px;height:20px;accent-color:var(--accent);flex:none}
+.toggle span{font-size:.92rem}
+.toggle small{display:block;color:var(--muted);font-size:.79rem;line-height:1.35}
+
+.search{position:relative;margin-bottom:12px}
+.search input{padding-left:38px}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+
+.plist{list-style:none;margin:14px 0 0;padding:0}
+.plist li{border-bottom:1px solid var(--line)}
+.plist button{width:100%;text-align:left;padding:14px 2px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.pname{font-weight:600;font-size:1.02rem}
+.pmeta{color:var(--muted);font-size:.8rem;flex:none}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--flag);margin-left:7px;vertical-align:middle}
+
+.empty{color:var(--muted);font-size:.92rem;padding:28px 2px;line-height:1.6}
+
+.backlink{color:var(--muted);font-size:.88rem;font-weight:600;padding:4px 0;margin-bottom:8px;display:inline-block}
+
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
+.facts label{margin:0}
+.facts label.full{grid-column:1 / -1}
+
+.catcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:9px;overflow:hidden}
+.cathead{width:100%;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:13px 14px;text-align:left}
+.catname{font-size:.78rem;color:var(--muted);font-weight:700;margin-bottom:3px}
+.catnow{font-size:.97rem;line-height:1.45}
+.catcount{color:var(--muted);font-size:.8rem;flex:none;padding-top:2px}
+.cathist{border-top:1px solid var(--line);padding:4px 14px 10px;display:none}
+.catcard.open .cathist{display:block}
+.hist{padding:11px 0;border-bottom:1px solid var(--line)}
+.hist:last-child{border-bottom:none}
+.histdate{font-size:.76rem;color:var(--muted);font-weight:600;margin-bottom:3px}
+.histtext{font-size:.94rem;line-height:1.5}
+.histacts{display:flex;gap:14px;margin-top:7px}
+.histacts button{font-size:.8rem;color:var(--muted);font-weight:600}
+.histacts button.warn{color:var(--flag)}
+
+.histtext mark{background:#F2E3B0;color:inherit;border-radius:3px;padding:0 2px}
+.loop{font-size:.78rem;font-weight:700;color:var(--flag);margin-bottom:4px}
+
+nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:var(--card);border-top:1px solid var(--line);
+  display:flex;padding-bottom:env(safe-area-inset-bottom,0px);
+}
+nav button{flex:1;padding:11px 4px 13px;color:var(--muted);font-size:.72rem;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px}
+nav button svg{width:21px;height:21px}
+nav button[aria-current="page"]{color:var(--accent)}
+nav .badge{position:absolute;transform:translate(15px,-4px);background:var(--flag);color:#fff;border-radius:999px;font-size:.62rem;padding:1px 5px;font-weight:700}
+
+.queue{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:10px}
+.toast{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(88px + env(safe-area-inset-bottom,0px));
+  background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;
+  font-size:.88rem;font-weight:600;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s;
+}
+.toast.on{opacity:1}
+.divider{height:1px;background:var(--line);margin:22px 0 18px;border:none}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="top">
-    <div class="who">
-      <h1>Shelfworthy</h1>
-      <p class="tag">Scan a box. See if it is worth it.</p>
+
+<div class="vstamp" id="vstamp"></div>
+
+<div class="wrap">
+
+  <!-- ============ CAPTURE ============ -->
+  <section id="s-capture" class="screen on">
+    <h1>What happened?</h1>
+    <p class="sub">Talk, type, or paste. You confirm the details next.</p>
+
+    <div class="mic-zone">
+      <button class="mic" id="micBtn" aria-label="Start voice capture">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <rect x="9" y="2.5" width="6" height="11.5" rx="3"/>
+          <path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5V21.5"/>
+        </svg>
+      </button>
+      <p class="mic-hint" id="micHint">Tap and start talking</p>
     </div>
-    <button class="gear" id="gear" title="Settings" aria-label="Settings">&#9881;</button>
-  </div>
-  <div id="stage"></div>
-  <div class="foot">
-    Barcode matching by <a href="https://gameupc.com" target="_blank" rel="noopener">GameUPC</a>.
-    Game data from <a href="https://boardgamegeek.com" target="_blank" rel="noopener">BoardGameGeek</a>,
-    shown unmodified.
-  </div>
+
+    <textarea id="captureText" class="big" placeholder="Or type it here. &quot;Had lunch with Dave, he's interviewing at Stripe next Thursday and just picked up bouldering.&quot;"></textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn ghost" id="laterBtn" style="flex:1">Save for later</button>
+      <button class="btn" id="reviewBtn" style="flex:1">Review and file</button>
+    </div>
+    <button class="waiting" id="waitingLine" hidden></button>
+
+    <hr class="divider">
+
+    <h2>Import old notes</h2>
+    <p class="sub" style="margin-bottom:12px">Paste a wall of text. Blank lines separate entries. Dates at the start of a line get picked up.</p>
+    <textarea id="bulkText" class="huge" placeholder="3/14/25 Dave got the promotion, celebrating at Halyard.&#10;&#10;Jan 2 Met Priya's sister Anjali, visiting from Pune."></textarea>
+    <div class="row" style="margin-top:10px">
+      <button class="btn ghost block" id="bulkBtn">Parse and review</button>
+    </div>
+  </section>
+
+  <!-- ============ CONFIRM ============ -->
+  <section id="s-confirm" class="screen">
+    <button class="backlink" data-back="capture">&larr; Discard</button>
+    <h1>Check this</h1>
+    <p class="sub" id="confirmSub">Fix anything that landed wrong.</p>
+    <p class="queue" id="queueInfo" hidden></p>
+
+    <label class="fld"><span>Who</span>
+      <input type="text" id="cPerson" placeholder="Name" autocomplete="off">
+    </label>
+    <div class="picker" id="cPicker"></div>
+
+    <label class="fld"><span>When it happened</span>
+      <input type="date" id="cDate">
+    </label>
+
+    <label class="toggle"><input type="checkbox" id="cSaw">
+      <span>I saw them in person<small>Keeps your last-seen date current.</small></span>
+    </label>
+
+    <label class="fld"><span>Note</span>
+      <textarea id="cText" class="big"></textarea>
+    </label>
+
+    <label class="toggle"><input type="checkbox" id="cAsk">
+      <span>Add to their ask list<small>Something to raise next time you talk.</small></span>
+    </label>
+
+    <div class="row" style="margin-top:16px">
+      <button class="btn ghost" id="skipBtn" hidden>Skip</button>
+      <button class="btn block" id="saveBtn">Save note</button>
+    </div>
+  </section>
+
+  <!-- ============ PEOPLE ============ -->
+  <section id="s-people" class="screen">
+    <h1>People</h1>
+    <p class="sub">Everyone you keep notes on.</p>
+
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="text" id="search" placeholder="Search names and notes" autocomplete="off">
+    </div>
+    <div class="seg" role="group" aria-label="Sort people">
+      <button id="sortRecent" aria-pressed="true">Recently noted</button>
+      <button id="sortAlpha" aria-pressed="false">A to Z</button>
+    </div>
+
+    <ul class="plist" id="peopleListEl"></ul>
+    <div class="empty" id="peopleEmpty" hidden>No one yet. Capture your first note and they will show up here.</div>
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section id="s-profile" class="screen">
+    <button class="backlink" data-back="people">&larr; People</button>
+    <h1 id="pTitle">Name</h1>
+    <p class="sub" id="pSub"></p>
+
+    <div id="pAsk"></div>
+    <div id="pStand"></div>
+
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="text" id="pSearch" placeholder="Search these notes" autocomplete="off">
+    </div>
+
+    <p class="rvhead">Timeline</p>
+    <div id="pTimeline"></div>
+
+    <hr class="divider">
+    <h2>About them</h2>
+    <div class="facts" id="pFacts"></div>
+
+    <hr class="divider">
+    <label class="fld"><span>Merge this person into another</span>
+      <select id="mergeSel"><option value="">Pick someone</option></select>
+    </label>
+    <div class="row">
+      <button class="btn ghost" id="mergeBtn">Merge</button>
+      <button class="btn danger" id="delPersonBtn">Delete person</button>
+    </div>
+  </section>
+
+  <!-- ============ FOLLOW UPS ============ -->
+  <section id="s-loops" class="screen">
+    <h1>Ask</h1>
+    <p class="sub">Things worth raising next time you talk.</p>
+    <div id="pendList"></div>
+    <div id="loopList"></div>
+    <div class="empty" id="loopEmpty" hidden>Nothing here yet. Add something to a person's ask list and it shows up.</div>
+    <hr class="divider">
+    <button class="btn quiet" id="exportBtn">Copy everything as plain text</button>
+  </section>
+
 </div>
-<div id="modal"></div>
+
+<nav>
+  <button data-go="capture" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5V21.5"/></svg>
+    Capture
+  </button>
+  <button data-go="people">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 20c0-3.6 2.8-5.6 6.2-5.6s6.2 2 6.2 5.6"/><path d="M16.5 5.2a3.4 3.4 0 0 1 0 6.4"/><path d="M18 14.8c2.2.6 3.6 2.4 3.6 5.2"/></svg>
+    People
+  </button>
+  <button data-go="loops">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3.2a8.8 8.8 0 1 1-8.8 8.8"/><path d="M3.2 12V7.4"/><path d="M3.2 12h4.6"/><path d="M12 7.6V12l3 1.8"/></svg>
+    Ask
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
 
 <script>
-var UPC_URL = "https://api.gameupc.com/test/upc/";
-var UPC_KEY = "test_test_test_test_test";
-var BGG_URL = "https://boardgamegeek.com/xmlapi2/thing?stats=1&id=";
-var STORE = "shelfworthy.bgg.token";
+"use strict";
 
-var stage="idle", stream=null, detector=null, scanning=false;
-var picks=[], game=null, lastUPC="", searchedFor="", msg=null, msgBad=false, sheet=false;
-var el=document.getElementById("stage"), modal=document.getElementById("modal");
+/* ---------------- storage ---------------- */
+const VERSION = "0.9";
+const KEY = "circle.v1";
+let db = { people: [], notes: [], pending: [] };
 
-function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
-  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function load(){
+  try{
+    let raw = localStorage.getItem(KEY);
+    if(!raw){
+      const old = localStorage.getItem("keep.v1");   // app was called Keep briefly
+      if(old){ raw = old; localStorage.setItem(KEY, old); }
+    }
+    if(raw) db = JSON.parse(raw);
+  }catch(e){ /* start fresh */ }
+  if(!Array.isArray(db.people)) db.people = [];
+  if(!Array.isArray(db.notes)) db.notes = [];
+  if(!Array.isArray(db.pending)) db.pending = [];
+  // Notes used to be one row per capture. They are now one row per line, grouped
+  // by captureId, so a paragraph can sit in several category cards without the
+  // whole paragraph showing up in each one.
+  db.people.forEach(p => {
+    if(!p.slots) p.slots = {};
+    if(!p.slotHist) p.slotHist = {};
+    if(!Array.isArray(p.asks)) p.asks = [];
+  });
 
-// The token lives on this device only. It is never sent anywhere except BGG.
-function getToken(){ try { return localStorage.getItem(STORE) || ""; } catch(e){ return ""; } }
-function setToken(v){ try { v ? localStorage.setItem(STORE,v) : localStorage.removeItem(STORE); } catch(e){} }
-
-function gameURL(id){ return "https://boardgamegeek.com/boardgame/"+encodeURIComponent(id); }
-function searchURL(q){ return "https://boardgamegeek.com/geeksearch.php?action=search&objecttype=boardgame&q="+encodeURIComponent(q); }
-
-function render(){
-  document.getElementById("gear").className = "gear" + (getToken() ? "" : " off");
-  if (stage==="scanning") viewScanning();
-  else if (stage==="looking") viewLooking();
-  else if (stage==="result") viewResult();
-  else viewIdle();
-  renderSheet();
-}
-
-function notice(){ return msg ? '<div class="note'+(msgBad?" bad":"")+'">'+msg+'</div>' : ""; }
-
-/* ---------------------------------------------------------- settings */
-function renderSheet(){
-  if (!sheet){ modal.innerHTML=""; return; }
-  var t = getToken();
-  modal.innerHTML =
-    '<div class="sheet" id="scrim"><div class="inner">'+
-      '<h2>BoardGameGeek token</h2>'+
-      '<p class="hint">Paste the token from your approved application. It is saved on this device only, and is only ever sent to BoardGameGeek.</p>'+
-      '<div class="row"><input id="tok" placeholder="Paste token" value="'+esc(t)+'" autocomplete="off" spellcheck="false"></div>'+
-      '<button class="btn" id="savetok">Save</button>'+
-      (t ? '<button class="btn ghost" id="cleartok">Remove token</button>' : "")+
-      '<button class="btn ghost" id="closetok">Close</button>'+
-      '<p class="hint" style="margin-top:14px">Without a token this still scans and links to BGG. With one, ratings show here.</p>'+
-    '</div></div>';
-
-  document.getElementById("savetok").onclick = function(){
-    setToken((document.getElementById("tok").value||"").trim());
-    sheet=false; msg=null; render();
-  };
-  var c = document.getElementById("cleartok");
-  if (c) c.onclick = function(){ setToken(""); sheet=false; render(); };
-  document.getElementById("closetok").onclick = function(){ sheet=false; render(); };
-  document.getElementById("scrim").onclick = function(e){
-    if (e.target.id === "scrim"){ sheet=false; render(); }
-  };
-}
-document.getElementById("gear").onclick = function(){ sheet=true; render(); };
-
-/* ---------------------------------------------------------- screens */
-function viewIdle(){
-  el.innerHTML = notice()+
-    '<h2>Scan a barcode</h2>'+
-    '<p class="hint">Point the camera at the barcode on the box.</p>'+
-    '<button class="btn" id="start">Open camera</button>'+
-    '<button class="btn ghost" id="mt">Type it instead</button>'+
-    '<div id="manual" hidden style="margin-top:14px">'+
-      '<div class="row"><input id="q" placeholder="Barcode digits or game name"><button id="qgo">Go</button></div>'+
-    '</div>';
-  document.getElementById("start").onclick = startCamera;
-  document.getElementById("mt").onclick = function(){
-    var m=document.getElementById("manual"); m.hidden=!m.hidden;
-    if(!m.hidden) document.getElementById("q").focus();
-  };
-  document.getElementById("qgo").onclick = submitManual;
-  document.getElementById("q").onkeydown = function(e){ if(e.key==="Enter") submitManual(); };
-}
-
-function submitManual(){
-  var v=(document.getElementById("q").value||"").trim();
-  if(!v) return;
-  if (/^[0-9]{6,14}$/.test(v)) lookup(v);
-  else window.open(searchURL(v),"_blank","noopener");
-}
-
-function viewScanning(){
-  el.innerHTML =
-    '<div class="camwrap"><video id="cam" playsinline muted autoplay></video><div class="reticle"></div></div>'+
-    '<p class="hint">Hold steady. Flat barcodes read best.</p>'+
-    '<button class="btn ghost" id="stop">Cancel</button>';
-  document.getElementById("stop").onclick = stopCamera;
-  var v=document.getElementById("cam");
-  if (stream){ v.srcObject=stream; v.play().catch(function(){}); }
-}
-
-function viewLooking(){
-  el.innerHTML='<div class="working"><div class="dots"><i></i><i></i><i></i></div>'+
-    '<h2 style="margin-top:14px">Looking up '+esc(lastUPC)+'</h2></div>';
-}
-
-function pips(w){
-  var n=Math.round(w||0), out='<span class="pips">';
-  for (var i=1;i<=5;i++) out += '<i class="'+(i<=n?"f":"")+'"></i>';
-  return out+"</span>";
-}
-
-function players(g){
-  if (!g.min && !g.max) return "";
-  if (g.min && g.max && g.min !== g.max) return g.min+"-"+g.max;
-  return String(g.max || g.min);
-}
-
-function gameCard(g){
-  var facts = [];
-  if (g.rank)      facts.push('<span class="fact"><span>rank</span> <b>#'+g.rank+'</b></span>');
-  if (players(g))  facts.push('<span class="fact"><span>players</span> <b>'+players(g)+'</b></span>');
-  if (g.time)      facts.push('<span class="fact"><span>time</span> <b>'+g.time+' min</b></span>');
-  if (g.weight)    facts.push('<span class="fact"><span>weight</span> <b>'+g.weight.toFixed(1)+'</b> '+pips(g.weight)+'</span>');
-
-  return '<div class="card">'+
-    '<a class="name" href="'+esc(gameURL(g.id))+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
-    '<div class="sub">'+(g.year?g.year+" &middot; ":"")+'tap the name to open BoardGameGeek</div>'+
-    (g.geek ? '<div class="big"><span class="n">'+g.geek.toFixed(1)+'</span>'+
-              '<span class="k">Geek rating'+(g.users?' &middot; '+g.users.toLocaleString()+' ratings':"")+'</span></div>' : "")+
-    (facts.length ? '<div class="facts">'+facts.join("")+'</div>' : "")+
-  '</div>';
-}
-
-function viewResult(){
-  var h = notice();
-
-  if (game){
-    h += gameCard(game);
-  } else if (picks.length === 1 && picks[0].verified){
-    h += '<div class="card"><a class="name" href="'+esc(gameURL(picks[0].id))+'" target="_blank" rel="noopener">'+
-         esc(picks[0].name)+'</a><div class="sub">Confirmed match. Add a token in settings to see the rating here.</div></div>';
-  } else if (picks.length){
-    h += '<h2>Which one is it?</h2>'+
-         '<p class="hint">Not confirmed'+(searchedFor?', matched on "'+esc(searchedFor)+'"':"")+'. Pick the right box.</p>'+
-         picks.map(function(p){
-           return '<button class="pick" data-id="'+esc(p.id)+'" data-name="'+esc(p.name)+'">'+
-                  '<span class="n">'+esc(p.name)+'</span><span class="go">&rarr;</span></button>';
-         }).join("");
-  } else {
-    h += '<h2>Not in the database</h2>'+
-         '<p class="hint">That barcode has no match yet. Try the name.</p>'+
-         '<div class="row"><input id="q2" placeholder="Game name"><button id="q2go">Search</button></div>';
-  }
-
-  h += '<button class="btn ghost" id="again">Scan another</button>';
-  el.innerHTML = h;
-
-  // Picking a candidate loads its details, or opens BGG when there is no token.
-  Array.prototype.forEach.call(el.querySelectorAll("[data-id]"), function(b){
-    b.onclick = function(){
-      if (getToken()) loadGame(b.dataset.id, b.dataset.name);
-      else window.open(gameURL(b.dataset.id),"_blank","noopener");
+  // Notes were briefly stored one row per line. Put each capture back together as
+  // one note, because splitting every note to feed the summary was more work than
+  // the summary was worth.
+  const groups = {};
+  db.notes.forEach(n => {
+    const k = n.captureId || n.id;
+    (groups[k] = groups[k] || []).push(n);
+  });
+  const rebuilt = [];
+  Object.values(groups).forEach(rows => {
+    rows.sort((a,b) => (a.order||0) - (b.order||0));
+    const first = rows[0];
+    const merged = {
+      id: first.id,
+      personId: first.personId,
+      date: first.date,
+      text: rows.map(r => r.text).join(" ").replace(/\s+/g," ").trim(),
+      saw: rows.some(r => r.saw),
+      created: first.created || Date.now(),
+      raw: first.raw || ""
     };
-  });
-  var q2=document.getElementById("q2");
-  if (q2){
-    var go=function(){ var v=(q2.value||"").trim(); if(v) window.open(searchURL(v),"_blank","noopener"); };
-    document.getElementById("q2go").onclick=go;
-    q2.onkeydown=function(e){ if(e.key==="Enter") go(); };
-  }
-  document.getElementById("again").onclick=function(){
-    picks=[]; game=null; msg=null; stage="idle"; render();
-  };
-}
-
-/* ---------------------------------------------------------- camera */
-async function startCamera(){
-  msg=null;
-  if (!("BarcodeDetector" in window)){
-    msg="<b>This browser cannot scan barcodes</b>Chrome on Android works. On iPhone, read the number with the Camera app and type it in.";
-    msgBad=true; stage="idle"; render(); return;
-  }
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-    msg="<b>No camera available</b>Type the barcode number instead."; msgBad=true; stage="idle"; render(); return;
-  }
-  try {
-    detector = detector || new window.BarcodeDetector({formats:["ean_13","upc_a","ean_8","upc_e","code_128"]});
-    stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
-    stage="scanning"; scanning=true; render(); tick();
-  } catch(e){
-    msg="<b>Camera blocked</b>Allow camera access in your browser settings, or type the number instead.";
-    msgBad=true; stage="idle"; render();
-  }
-}
-
-function stopCamera(){
-  scanning=false;
-  if (stream){ stream.getTracks().forEach(function(t){t.stop();}); stream=null; }
-  if (stage==="scanning"){ stage="idle"; render(); }
-}
-
-async function tick(){
-  if (!scanning) return;
-  var v=document.getElementById("cam");
-  if (v && v.readyState>=2){
-    try {
-      var codes = await detector.detect(v);
-      if (codes && codes.length){
-        var raw=String(codes[0].rawValue||"").replace(/\D/g,"");
-        if (raw){ stopCamera(); lookup(raw); return; }
-      }
-    } catch(e){}
-  }
-  requestAnimationFrame(tick);
-}
-
-/* ---------------------------------------------------------- lookups */
-async function lookup(upc){
-  lastUPC=upc; picks=[]; game=null; searchedFor=""; msg=null;
-  stage="looking"; render();
-  try {
-    var r = await fetch(UPC_URL+encodeURIComponent(upc), {headers:{"x-api-key":UPC_KEY}});
-    if (!r.ok) throw new Error("bad");
-    var d = await r.json();
-    searchedFor = d.searched_for || "";
-    var verified = d.bgg_info_status === "verified";
-    picks = (d.bgg_info||[]).filter(function(g){return g && g.id && g.name;})
-      .map(function(g){ return {id:g.id, name:g.name, verified:verified}; });
-    if (verified) picks = picks.slice(0,1);
-  } catch(e){
-    msg="<b>Could not reach the barcode service</b>Check your signal, or search by name.";
-    msgBad=true; picks=[];
-  }
-  // One confirmed game plus a token means we can go straight to the details.
-  if (picks.length===1 && picks[0].verified && getToken()){
-    return loadGame(picks[0].id, picks[0].name);
-  }
-  stage="result"; render();
-}
-
-function num(node, sel, attr){
-  var e = node.querySelector(sel);
-  if (!e) return null;
-  var v = parseFloat(e.getAttribute(attr || "value"));
-  return isFinite(v) ? v : null;
-}
-
-function parseGame(xml, fallbackName, id){
-  var doc = new DOMParser().parseFromString(xml, "text/xml");
-  if (doc.querySelector("parsererror")) throw new Error("bad xml");
-  var item = doc.querySelector("item");
-  if (!item) throw new Error("no item");
-
-  var nameEl = item.querySelector('name[type="primary"]') || item.querySelector("name");
-  var rank = null;
-  Array.prototype.forEach.call(item.querySelectorAll("ranks rank"), function(r){
-    if (r.getAttribute("name") === "boardgame"){
-      var v = parseInt(r.getAttribute("value"), 10);
-      if (isFinite(v)) rank = v;
+    // Anything flagged under the old model becomes something to ask about.
+    const person = db.people.find(x => x.id === merged.personId);
+    if(person){
+      rows.filter(r => r.loop && !r.resolved).forEach(r => {
+        if(!person.asks.some(q => q.text === r.text))
+          person.asks.push({ id: uid(), text: r.text, date: r.date });
+      });
     }
+    rebuilt.push(merged);
   });
+  db.notes = rebuilt;
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(db)); }
+  catch(e){ toast("Could not save. Storage may be full."); }
+}
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
 
+/* ---------------- taxonomy ---------------- */
+const SLOTS = [
+  { id:"work",   label:"work"   },
+  { id:"home",   label:"home"   },
+  { id:"lately", label:"lately" }
+];
+const SLOTNAME = Object.fromEntries(SLOTS.map(x => [x.id, x.label]));
+
+const ASK_HINTS = ["interview","waiting to hear","coming up","next week","next month","applying","will find out","should ask","hoping to hear","results","find out","decision","offer","due in","expecting"];
+
+/* ---------------- parsing ---------------- */
+const STOP = new Set(["i","he","she","they","we","you","it","the","a","an","and","but","so","then","had","has","have","just","last","next","this","that","my","his","her","their","our","today","yesterday","tomorrow","met","saw","talked","lunch","dinner","coffee","monday","tuesday","wednesday","thursday","friday","saturday","sunday","january","february","march","april","may","june","july","august","september","october","november","december"]);
+
+function todayISO(){
+  const d = new Date();
+  return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+}
+function shiftISO(days){
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+}
+
+const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+
+function guessDate(text){
+  const t = text.toLowerCase();
+  let m = t.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/);
+  if(m){
+    let yr = m[3] ? parseInt(m[3],10) : new Date().getFullYear();
+    if(yr < 100) yr += 2000;
+    const d = new Date(yr, parseInt(m[1],10)-1, parseInt(m[2],10));
+    if(!isNaN(d)) return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  }
+  m = t.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?/);
+  if(m){
+    const yr = m[3] ? parseInt(m[3],10) : new Date().getFullYear();
+    const d = new Date(yr, MONTHS[m[1]], parseInt(m[2],10));
+    if(!isNaN(d)) return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  }
+  if(/\byesterday\b/.test(t)) return shiftISO(-1);
+  if(/\blast night\b/.test(t)) return shiftISO(-1);
+  if(/\blast week\b/.test(t)) return shiftISO(-7);
+  if(/\blast month\b/.test(t)) return shiftISO(-30);
+  return todayISO();
+}
+
+function guessAsk(text){
+  const t = text.toLowerCase();
+  return ASK_HINTS.some(h => t.includes(h));
+}
+
+function guessSaw(text){
+  return /\b(lunch|dinner|coffee|drinks|met up|saw|hung out|visited|brunch|party|came over|stopped by)\b/i.test(text);
+}
+
+function guessPerson(text){
+  // known people win
+  const lower = text.toLowerCase();
+  let best = null;
+  for(const p of db.people){
+    const first = p.name.split(/\s+/)[0].toLowerCase();
+    if(new RegExp("\\b" + first.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + "\\b").test(lower)){
+      if(!best || p.name.length > best.length) best = p.name;
+    }
+  }
+  if(best) return best;
+  // otherwise first capitalized word that isn't a common opener
+  const words = text.split(/[^A-Za-z'’-]+/).filter(Boolean);
+  for(const w of words){
+    if(/^[A-Z][a-z'’-]{1,}$/.test(w) && !STOP.has(w.toLowerCase())) return w;
+  }
+  return "";
+}
+
+function parseOne(text){
   return {
-    id: id,
-    name: (nameEl && nameEl.getAttribute("value")) || fallbackName || "Unknown game",
-    year: num(item, "yearpublished"),
-    geek: num(item, "statistics ratings bayesaverage"),
-    avg: num(item, "statistics ratings average"),
-    users: num(item, "statistics ratings usersrated"),
-    weight: num(item, "statistics ratings averageweight"),
-    min: num(item, "minplayers"),
-    max: num(item, "maxplayers"),
-    time: num(item, "playingtime"),
-    rank: rank
+    person: guessPerson(text),
+    date: guessDate(text),
+    text: text.trim(),
+    saw: guessSaw(text),
+    ask: guessAsk(text),
+    raw: text.trim()
   };
 }
 
-async function loadGame(id, fallbackName){
-  game=null; msg=null; stage="looking"; lastUPC = fallbackName || lastUPC; render();
-  try {
-    var r = await fetch(BGG_URL+encodeURIComponent(id), {
-      headers: { "Authorization": "Bearer " + getToken() }
-    });
-    if (r.status === 401 || r.status === 403){
-      throw new Error("Your token was rejected. Check it in settings.");
+function parseBulk(blob){
+  const blocks = blob.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+  const out = [];
+  for(const b of blocks){
+    // a block with many lines each starting with a date splits further
+    const lines = b.split(/\n/).map(s => s.trim()).filter(Boolean);
+    const dated = lines.filter(l => /^(\d{1,2}\/\d{1,2}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(l));
+    if(lines.length > 1 && dated.length === lines.length){
+      lines.forEach(l => out.push(parseOne(l)));
+    }else{
+      out.push(parseOne(b));
     }
-    if (!r.ok) throw new Error("BoardGameGeek did not answer. Try again in a moment.");
-    game = parseGame(await r.text(), fallbackName, id);
-  } catch(e){
-    // Falling back to the plain link is better than a dead end.
-    msg = "<b>Could not load the rating</b>" + esc(e.message || "Something went wrong.") +
-          " You can still open it on BoardGameGeek.";
-    msgBad = true;
-    game = null;
-    picks = [{ id: id, name: fallbackName || "This game", verified: true }];
   }
-  stage="result"; render();
+  return out;
 }
 
-render();
+/* ---------------- people helpers ---------------- */
+function findPerson(name){
+  const n = name.trim().toLowerCase();
+  return db.people.find(p => p.name.toLowerCase() === n) || null;
+}
+function ensurePerson(name){
+  const found = findPerson(name);
+  if(found) return found;
+  const p = { id:uid(), name:name.trim(), met:"", closeness:"", energy:"", enneagram:"", birthday:"",
+              slots:{}, slotHist:{}, asks:[] };
+  db.people.push(p);
+  return p;
+}
+function notesFor(pid){
+  return db.notes.filter(n => n.personId === pid)
+    .sort((a,b) => b.date.localeCompare(a.date) || b.created - a.created);
+}
+function lastNoted(pid){
+  const ns = notesFor(pid);
+  return ns.length ? ns[0].date : "";
+}
+function lastSeen(pid){
+  const ns = notesFor(pid).filter(n => n.saw);
+  return ns.length ? ns[0].date : "";
+}
+function asksFor(pid){
+  const p = db.people.find(x => x.id === pid);
+  return p && Array.isArray(p.asks) ? p.asks : [];
+}
+function allAsks(){
+  const out = [];
+  db.people.forEach(p => (p.asks||[]).forEach(q => out.push({ person:p, ask:q })));
+  return out;
+}
+function prettyDate(iso){
+  if(!iso) return "";
+  const [y,m,d] = iso.split("-").map(Number);
+  return new Date(y, m-1, d).toLocaleDateString(undefined,{month:"short", day:"numeric", year:"numeric"});
+}
+function agoDays(iso){
+  if(!iso) return Infinity;
+  const [y,m,d] = iso.split("-").map(Number);
+  return Math.round((Date.now() - new Date(y,m-1,d).getTime()) / 86400000);
+}
+
+/* ---------------- ui plumbing ---------------- */
+const $ = id => document.getElementById(id);
+let current = "capture";
+let profileId = null;
+let queue = [];
+let sortMode = "recent";
+
+function show(name){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
+  $("s-" + name).classList.add("on");
+  document.querySelectorAll("nav button").forEach(b =>
+    b.toggleAttribute("aria-current", b.dataset.go === name));
+  document.querySelectorAll("nav button").forEach(b => {
+    if(b.dataset.go === name) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
+  current = name;
+  window.scrollTo(0,0);
+}
+function toast(msg){
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("on");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("on"), 1900);
+}
+
+document.querySelectorAll("nav button").forEach(b =>
+  b.addEventListener("click", () => {
+    const go = b.dataset.go;
+    if(go === "people") renderPeople();
+    if(go === "loops") renderLoops();
+    show(go);
+  }));
+document.querySelectorAll("[data-back]").forEach(b =>
+  b.addEventListener("click", () => {
+    const back = b.dataset.back;
+    if(back === "people") renderPeople();
+    if(back === "capture"){ queue = []; }
+    show(back);
+  }));
+
+/* ---------------- voice ---------------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+/* ===== Listening in rounds =====
+   Continuous mode is what caused the repeating text on Android: Chrome re-delivers earlier
+   segments in later events, and any attempt to assemble them stacks the sentence on itself.
+   Single utterance mode fixes that and brings a worse problem, because it ends at the first
+   pause, so pausing for breath ended the recording.
+
+   So each round is single utterance, and when a round ends on its own the finished sentence is
+   banked and a new round starts. Nothing stacks, because every round returns one clean sentence
+   and banked text is never re-delivered. Listening stops when you tap, or when the silence runs
+   long enough that you have clearly finished. */
+
+const REC_QUIET_MS = 10000;
+
+let rec = null;
+let recOn = false;
+let recBase = "";    // sentences banked from finished rounds
+let recFinal = "";   // recBase plus this round's best result
+let recQuiet = null;
+
+const setHint = m => { $("micHint").textContent = m; };
+
+function showHeard(interim){
+  $("captureText").value = (recFinal + " " + (interim || "")).replace(/\s+/g," ").trim();
+}
+
+function armQuiet(){
+  clearTimeout(recQuiet);
+  recQuiet = setTimeout(() => {
+    if(recOn){ stopRec("Stopped after a pause. Tap to add more."); }
+  }, REC_QUIET_MS);
+}
+
+function stopRec(msg){
+  recOn = false;
+  clearTimeout(recQuiet);
+  try{ if(rec) rec.stop(); }catch(e){}
+  $("micBtn").classList.remove("live");
+  $("micBtn").setAttribute("aria-label","Start voice capture");
+  setHint(msg || "Tap and start talking");
+}
+
+function beginRound(){
+  rec = new SR();
+  rec.continuous = false;
+  rec.interimResults = true;
+  rec.lang = navigator.language || "en-US";
+
+  rec.onresult = e => {
+    // Take the single best final rather than joining a list. Belt and braces: if a browser
+    // still hands back a growing chain where each piece repeats the one before, keep the
+    // longest rather than gluing them together.
+    let best = "", interim = "";
+    for(let i = 0; i < e.results.length; i++){
+      const r = e.results[i], t = (r[0] && r[0].transcript) || "";
+      if(r.isFinal){ if(t.length > best.length) best = t; }
+      else if(t.length > interim.length) interim = t;
+    }
+    recFinal = (recBase + " " + best).trim();
+    showHeard(interim.trim());
+    armQuiet();   // you are still talking, so the clock starts again
+  };
+
+  // Silence is not a failure here, it is what a pause looks like from the inside, so it is
+  // left to the round below to restart.
+  rec.onerror = ev => {
+    const err = ev && ev.error;
+    if(err === "no-speech" || err === "aborted") return;
+    stopRec(err === "not-allowed" || err === "service-not-allowed"
+      ? "Microphone blocked. Allow it in your browser settings, or type below."
+      : "Voice stopped. Tap to try again.");
+  };
+
+  // The usual exit is a pause, not the end of what you were saying, so bank it and go again.
+  rec.onend = () => {
+    if(!recOn) return;          // you tapped done, already handled
+    recBase = recFinal;
+    try{ rec.start(); }catch(e){ stopRec("Voice stopped. Tap to try again."); }
+  };
+
+  try{ rec.start(); return true; }catch(e){ return false; }
+}
+
+function startRec(){
+  if(!SR){ setHint("Voice is not supported in this browser. Type below instead."); return; }
+  if(recOn){ stopRec("Saved. Tap to add more."); return; }
+
+  // Carry forward anything already in the box rather than talking over it.
+  recBase = $("captureText").value.trim();
+  recFinal = recBase;
+
+  if(!beginRound()){ setHint("The microphone would not start here. Type below instead."); return; }
+  recOn = true;
+  armQuiet();
+  $("micBtn").classList.add("live");
+  $("micBtn").setAttribute("aria-label","Stop voice capture");
+  setHint("Listening. Tap when you are done.");
+}
+
+if(!SR){
+  setHint("Voice is not supported in this browser. Type below instead.");
+  $("micBtn").disabled = true;
+}
+$("micBtn").addEventListener("click", startRec);
+
+/* ---------------- capture -> confirm ---------------- */
+
+let pendingId = null;
+
+function openConfirm(){
+  const item = queue[0];
+  $("cPerson").value = item.person;
+  renderPicker();
+  $("cDate").value = item.date;
+  $("cText").value = item.text;
+  $("cSaw").checked = item.saw;
+  $("cAsk").checked = item.ask;
+
+  const many = queue.length > 1;
+  $("queueInfo").hidden = !many;
+  $("queueInfo").textContent = many ? queue.length + " entries left to review" : "";
+  $("skipBtn").hidden = !many;
+  $("confirmSub").textContent = item.person
+    ? "Fix anything that landed wrong."
+    : "Add a name, then fix anything else that landed wrong.";
+
+  show("confirm");
+}
+
+function renderPicker(){
+  const box = $("cPicker");
+  const typed = $("cPerson").value.trim().toLowerCase();
+  box.innerHTML = "";
+  const matches = db.people
+    .filter(p => !typed || p.name.toLowerCase().includes(typed))
+    .sort((a,b) => (lastNoted(b.id) || "").localeCompare(lastNoted(a.id) || ""))
+    .slice(0,12);
+  matches.forEach(p => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = p.name;
+    b.setAttribute("aria-pressed", typed === p.name.toLowerCase() ? "true" : "false");
+    b.addEventListener("click", () => { $("cPerson").value = p.name; renderPicker(); });
+    box.appendChild(b);
+  });
+  const exact = typed && db.people.some(p => p.name.toLowerCase() === typed);
+  if(typed && !exact){
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip new";
+    b.textContent = "+ New: " + $("cPerson").value.trim();
+    b.addEventListener("click", () => renderPicker());
+    box.appendChild(b);
+  }
+}
+$("cPerson").addEventListener("input", renderPicker);
+
+/* ---------------- capture buttons ---------------- */
+$("reviewBtn").addEventListener("click", () => {
+  const txt = $("captureText").value.trim();
+  if(!txt) return toast("Nothing to file yet.");
+  if(recOn) stopRec();
+  queue = [parseOne(txt)];
+  openConfirm();
+});
+
+$("laterBtn").addEventListener("click", () => {
+  const txt = $("captureText").value.trim();
+  if(!txt) return toast("Nothing to save yet.");
+  if(recOn) stopRec();
+  const g = parseOne(txt);
+  db.pending.push({ id: uid(), date: g.date, text: txt, raw: txt, guess: g.person, created: Date.now() });
+  save();
+  $("captureText").value = "";
+  refreshBadge(); renderWaiting();
+  toast("Saved. File it when you have a minute.");
+});
+
+function renderWaiting(){
+  const b = $("waitingLine");
+  const n = db.pending.length;
+  b.hidden = n === 0;
+  b.textContent = n === 1 ? "1 note waiting to be filed" : n + " notes waiting to be filed";
+}
+$("waitingLine").addEventListener("click", () => { renderLoops(); show("loops"); });
+
+$("bulkBtn").addEventListener("click", () => {
+  const blob = $("bulkText").value.trim();
+  if(!blob) return toast("Paste some notes first.");
+  queue = parseBulk(blob);
+  if(!queue.length) return toast("Could not find any entries in that.");
+  openConfirm();
+});
+
+$("skipBtn").addEventListener("click", () => {
+  queue.shift();
+  if(queue.length) openConfirm();
+  else { show("capture"); toast("Done reviewing."); }
+});
+
+$("saveBtn").addEventListener("click", () => {
+  const name = $("cPerson").value.trim();
+  if(!name) return toast("Who is this about?");
+  const text = $("cText").value.trim();
+  if(!text) return toast("The note is empty.");
+
+  const person = ensurePerson(name);
+  const date = $("cDate").value || todayISO();
+
+  db.notes.push({
+    id: uid(), personId: person.id, date, text,
+    saw: $("cSaw").checked, created: Date.now(),
+    raw: queue[0] ? queue[0].raw : text
+  });
+
+  if($("cAsk").checked) person.asks.push({ id: uid(), text, date });
+
+  if(pendingId){
+    db.pending = db.pending.filter(x => x.id !== pendingId);
+    pendingId = null;
+  }
+  save(); renderWaiting();
+
+  queue.shift();
+  if(queue.length){
+    openConfirm();
+  }else{
+    $("captureText").value = ""; $("bulkText").value = "";
+    show("capture");
+    toast("Filed under " + person.name + ".");
+  }
+});
+
+/* ---------------- people list ---------------- */
+$("sortRecent").addEventListener("click", () => { sortMode = "recent"; renderPeople(); });
+$("sortAlpha").addEventListener("click", () => { sortMode = "alpha"; renderPeople(); });
+$("search").addEventListener("input", renderPeople);
+
+function renderPeople(){
+  $("sortRecent").setAttribute("aria-pressed", sortMode === "recent" ? "true" : "false");
+  $("sortAlpha").setAttribute("aria-pressed", sortMode === "alpha" ? "true" : "false");
+
+  const q = $("search").value.trim().toLowerCase();
+  let list = db.people.slice();
+
+  if(q){
+    list = list.filter(p => {
+      if(p.name.toLowerCase().includes(q)) return true;
+      return notesFor(p.id).some(n => n.text.toLowerCase().includes(q));
+    });
+  }
+
+  if(sortMode === "alpha") list.sort((a,b) => a.name.localeCompare(b.name));
+  else list.sort((a,b) => (lastNoted(b.id) || "").localeCompare(lastNoted(a.id) || ""));
+
+  const ul = $("peopleListEl");
+  ul.innerHTML = "";
+  list.forEach(p => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    const loops = asksFor(p.id).length;
+    const days = agoDays(lastNoted(p.id));
+    let when = "no notes";
+    if(days === 0) when = "today";
+    else if(days === 1) when = "1 day ago";
+    else if(days < 60) when = days + " days ago";
+    else if(isFinite(days)) when = Math.round(days/30) + " months ago";
+
+    btn.innerHTML = '<span class="pname">' + esc(p.name) +
+      (loops ? '<span class="dot" title="' + loops + ' to ask about"></span>' : '') +
+      '</span><span class="pmeta">' + when + '</span>';
+    btn.addEventListener("click", () => openProfile(p.id));
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+
+  $("peopleEmpty").hidden = list.length > 0;
+  if(q && !list.length) $("peopleEmpty").textContent = "Nothing matches that.";
+  else $("peopleEmpty").textContent = "No one yet. Capture your first note and they will show up here.";
+}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+/* ---------------- profile ---------------- */
+const FACTS = [
+  { id:"met",       label:"How we met",  type:"text", full:true, ph:"Swing class, 2019" },
+  { id:"closeness", label:"Closeness",   type:"select", opts:["","Acquaintance","Work friend","Friend","Close friend","Family"] },
+  { id:"energy",    label:"Energy",      type:"select", opts:["","Introvert","Extrovert","Somewhere between"] },
+  { id:"enneagram", label:"Enneagram",   type:"select", opts:["","1","2","3","4","5","6","7","8","9"] },
+  { id:"birthday",  label:"Birthday",    type:"text", ph:"Mar 14" }
+];
+
+function renderAskCard(pid){
+  const p = db.people.find(x => x.id === pid);
+  const box = $("pAsk");
+  box.innerHTML = "";
+  if(!p.asks.length) return;
+
+  const card = document.createElement("div");
+  card.className = "askcard";
+  const h = document.createElement("p");
+  h.className = "askhead";
+  h.textContent = "ASK ABOUT";
+  card.appendChild(h);
+
+  p.asks.forEach(q => {
+    const row = document.createElement("div");
+    row.className = "askrow";
+    const t = document.createElement("p");
+    t.className = "asktext";
+    t.textContent = q.text;
+    const x = document.createElement("button");
+    x.className = "askx";
+    x.textContent = "\u00d7";
+    x.setAttribute("aria-label", "Remove from ask list");
+    x.addEventListener("click", () => {
+      p.asks = p.asks.filter(a => a.id !== q.id);
+      save(); openProfile(pid);
+    });
+    row.appendChild(t); row.appendChild(x);
+    const d = document.createElement("p");
+    d.className = "askdate";
+    d.textContent = "came up " + prettyDate(q.date);
+    card.appendChild(row); card.appendChild(d);
+  });
+  box.appendChild(card);
+}
+
+function renderStanding(pid){
+  const p = db.people.find(x => x.id === pid);
+  const box = $("pStand");
+  box.innerHTML = "";
+
+  const h = document.createElement("p");
+  h.className = "rvhead";
+  h.style.marginTop = "16px";
+  h.textContent = "Where things stand";
+  box.appendChild(h);
+
+  SLOTS.forEach(sl => {
+    const cur = p.slots[sl.id];
+    const hist = p.slotHist[sl.id] || [];
+
+    const row = document.createElement("div");
+    row.className = "standrow";
+
+    const lab = document.createElement("span");
+    lab.className = "standlab";
+    lab.textContent = sl.label;
+
+    const mid = document.createElement("div");
+    mid.style.flex = "1";
+    const t = document.createElement("p");
+    t.className = "standtext" + (cur ? "" : " empty");
+    t.textContent = cur ? cur.text : "not set";
+    mid.appendChild(t);
+    if(cur){
+      const d = document.createElement("p");
+      d.className = "standdate";
+      d.textContent = prettyDate(cur.date) + (hist.length ? "  \u00b7  " + hist.length + " earlier" : "");
+      mid.appendChild(d);
+    }
+    mid.addEventListener("click", () => {
+      const v = prompt("Where things stand on " + sl.label, cur ? cur.text : "");
+      if(v === null) return;
+      setSlot(pid, sl.id, v.trim(), todayISO());
+      openProfile(pid);
+    });
+
+    row.appendChild(lab); row.appendChild(mid);
+
+    if(hist.length){
+      const hb = document.createElement("button");
+      hb.className = "standhist";
+      hb.textContent = "\u22ef";
+      hb.setAttribute("aria-label", "Earlier values");
+      hb.addEventListener("click", () => {
+        const lines = hist.slice().reverse()
+          .map(x => prettyDate(x.date) + "  " + x.text).join("\n\n");
+        alert(sl.label + "\n\n" + lines);
+      });
+      row.appendChild(hb);
+    }
+    box.appendChild(row);
+  });
+}
+
+// The old value is kept rather than overwritten, so a slot doubles as a record of
+// how something changed.
+function setSlot(pid, slot, text, date){
+  const p = db.people.find(x => x.id === pid);
+  if(!p) return;
+  const cur = p.slots[slot];
+  if(!text){ delete p.slots[slot]; save(); return; }
+  if(cur && cur.text !== text){
+    p.slotHist[slot] = p.slotHist[slot] || [];
+    p.slotHist[slot].push(cur);
+  }
+  p.slots[slot] = { text, date: date || todayISO() };
+  save();
+}
+
+function renderTimeline(pid){
+  const p = db.people.find(x => x.id === pid);
+  const box = $("pTimeline");
+  box.innerHTML = "";
+
+  const q = $("pSearch").value.trim().toLowerCase();
+  const all = notesFor(pid).filter(n => !q || n.text.toLowerCase().includes(q));
+
+  if(!all.length){
+    const e = document.createElement("div");
+    e.className = "empty";
+    e.textContent = q ? "Nothing matches that." : "No notes on " + p.name + " yet.";
+    box.appendChild(e);
+    return;
+  }
+
+  all.forEach((n, i) => {
+    const row = document.createElement("div");
+    row.className = "tl";
+
+    const rail = document.createElement("div");
+    rail.className = "tlrail";
+    const dot = document.createElement("i");
+    dot.className = "tldot" + (i === 0 ? " now" : "");
+    rail.appendChild(dot);
+    if(i < all.length - 1){
+      const line = document.createElement("i");
+      line.className = "tlline";
+      rail.appendChild(line);
+    }
+
+    const body = document.createElement("div");
+    body.className = "tlbody";
+    const d = document.createElement("p");
+    d.className = "tldate";
+    d.textContent = prettyDate(n.date) + (n.saw ? "  \u00b7  saw them" : "");
+    const t = document.createElement("p");
+    t.className = "tltext";
+    t.innerHTML = mark(n.text, q);
+    body.appendChild(d); body.appendChild(t);
+
+    const acts = document.createElement("div");
+    acts.className = "tlacts";
+
+    SLOTS.forEach(sl => {
+      const b = document.createElement("button");
+      b.textContent = "\u2192 " + sl.label;
+      b.title = "Make this the current " + sl.label;
+      b.addEventListener("click", () => {
+        // Prefilled so a long note can be trimmed down to the line that matters.
+        const v = prompt("Current " + sl.label + "?", n.text);
+        if(v === null || !v.trim()) return;
+        setSlot(pid, sl.id, v.trim(), n.date);
+        openProfile(pid);
+      });
+      acts.appendChild(b);
+    });
+
+    const ask = document.createElement("button");
+    ask.textContent = "\u2192 ask";
+    ask.addEventListener("click", () => {
+      const v = prompt("What should you ask about?", n.text);
+      if(v === null || !v.trim()) return;
+      p.asks.push({ id: uid(), text: v.trim(), date: n.date });
+      save(); openProfile(pid);
+    });
+    acts.appendChild(ask);
+
+    const ed = document.createElement("button");
+    ed.textContent = "edit";
+    ed.addEventListener("click", () => {
+      const v = prompt("Edit note", n.text);
+      if(v !== null && v.trim()){ n.text = v.trim(); save(); openProfile(pid); }
+    });
+    acts.appendChild(ed);
+
+    const del = document.createElement("button");
+    del.className = "warn";
+    del.textContent = "delete";
+    del.addEventListener("click", () => {
+      if(!confirm("Delete this note?")) return;
+      db.notes = db.notes.filter(x => x.id !== n.id);
+      save(); openProfile(pid);
+    });
+    acts.appendChild(del);
+
+    body.appendChild(acts);
+    row.appendChild(rail); row.appendChild(body);
+    box.appendChild(row);
+  });
+}
+
+function mark(text, q){
+  const safe = esc(text);
+  if(!q) return safe;
+  const rx = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig");
+  return safe.replace(rx, '<mark>$1</mark>');
+}
+
+function openProfile(pid){
+  const reopening = profileId === pid;
+  profileId = pid;
+  if(!reopening) $("pSearch").value = "";
+  const p = db.people.find(x => x.id === pid);
+  if(!p) return;
+
+  $("pTitle").textContent = p.name;
+  const seen = lastSeen(pid), noted = lastNoted(pid);
+  $("pSub").textContent = [
+    noted ? "Last noted " + prettyDate(noted) : "No notes yet",
+    seen ? "last seen " + prettyDate(seen) : null
+  ].filter(Boolean).join(", ");
+
+  renderAskCard(pid);
+  renderStanding(pid);
+  renderTimeline(pid);
+
+  const fb = $("pFacts");
+  fb.innerHTML = "";
+  FACTS.forEach(f => {
+    const lab = document.createElement("label");
+    lab.className = "fld" + (f.full ? " full" : "");
+    const sp = document.createElement("span");
+    sp.textContent = f.label;
+    lab.appendChild(sp);
+    let input;
+    if(f.type === "select"){
+      input = document.createElement("select");
+      f.opts.forEach(o => {
+        const opt = document.createElement("option");
+        opt.value = o;
+        opt.textContent = o === "" ? "Not sure yet" : o;
+        input.appendChild(opt);
+      });
+    }else{
+      input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = f.ph || "";
+    }
+    input.value = p[f.id] || "";
+    input.addEventListener("change", () => { p[f.id] = input.value; save(); });
+    lab.appendChild(input);
+    fb.appendChild(lab);
+  });
+
+  const sel = $("mergeSel");
+  sel.innerHTML = '<option value="">Pick someone</option>';
+  db.people.filter(x => x.id !== pid).sort((a,b) => a.name.localeCompare(b.name)).forEach(x => {
+    const o = document.createElement("option");
+    o.value = x.id; o.textContent = x.name;
+    sel.appendChild(o);
+  });
+
+  show("profile");
+}
+
+$("pSearch").addEventListener("input", () => { if(profileId) renderTimeline(profileId); });
+
+$("mergeBtn").addEventListener("click", () => {
+  const target = $("mergeSel").value;
+  if(!target) return toast("Pick who to merge into.");
+  const from = db.people.find(p => p.id === profileId);
+  const into = db.people.find(p => p.id === target);
+  if(!from || !into) return;
+  if(!confirm("Move all of " + from.name + "'s notes into " + into.name + "?")) return;
+
+  db.notes.forEach(n => { if(n.personId === from.id) n.personId = into.id; });
+  FACTS.forEach(f => { if(!into[f.id] && from[f.id]) into[f.id] = from[f.id]; });
+  SLOTS.forEach(sl => { if(!into.slots[sl.id] && from.slots[sl.id]) into.slots[sl.id] = from.slots[sl.id]; });
+  into.asks = [...into.asks, ...(from.asks || [])];
+  db.people = db.people.filter(p => p.id !== from.id);
+  save();
+  toast("Merged into " + into.name + ".");
+  openProfile(into.id);
+});
+
+$("delPersonBtn").addEventListener("click", () => {
+  const p = db.people.find(x => x.id === profileId);
+  if(!p) return;
+  if(!confirm("Delete " + p.name + " and every note on them? This cannot be undone.")) return;
+  db.notes = db.notes.filter(n => n.personId !== p.id);
+  db.people = db.people.filter(x => x.id !== p.id);
+  save(); refreshBadge(); renderPeople(); show("people");
+  toast("Deleted.");
+});
+
+/* ---------------- follow ups ---------------- */
+function renderLoops(){
+  renderPending();
+  const box = $("loopList");
+  box.innerHTML = "";
+  const rows = allAsks();
+
+  rows.forEach(({person, ask}) => {
+    const d = document.createElement("div");
+    d.className = "card";
+    d.innerHTML = '<div class="askwho">' + esc(person.name) + '</div>' +
+      '<div class="histtext">' + esc(ask.text) + '</div>' +
+      '<div class="histdate" style="margin-top:6px">came up ' + prettyDate(ask.date) + '</div>';
+
+    const acts = document.createElement("div");
+    acts.className = "histacts";
+    const done = document.createElement("button");
+    done.textContent = "Remove";
+    done.addEventListener("click", () => {
+      person.asks = person.asks.filter(a => a.id !== ask.id);
+      save(); renderLoops();
+    });
+    acts.appendChild(done);
+    const go = document.createElement("button");
+    go.textContent = "Open " + person.name;
+    go.addEventListener("click", () => openProfile(person.id));
+    acts.appendChild(go);
+    d.appendChild(acts);
+    box.appendChild(d);
+  });
+
+  $("loopEmpty").hidden = rows.length > 0 || db.pending.length > 0;
+}
+
+function renderPending(){
+  const box = $("pendList");
+  box.innerHTML = "";
+  if(!db.pending.length) return;
+
+  const h = document.createElement("p");
+  h.className = "rvhead";
+  h.style.marginTop = "0";
+  h.textContent = "Waiting to be filed";
+  box.appendChild(h);
+
+  db.pending.slice().sort((a,b) => a.created - b.created).forEach(pn => {
+    const d = document.createElement("div");
+    d.className = "card";
+    d.innerHTML = '<div class="histtext">' + esc(pn.text) + '</div>' +
+      '<div class="histdate" style="margin-top:6px">' + prettyDate(pn.date) +
+      (pn.guess ? " \u00b7 " + esc(pn.guess) + "?" : " \u00b7 who is this about?") + '</div>';
+
+    const acts = document.createElement("div");
+    acts.className = "histacts";
+    const go = document.createElement("button");
+    go.textContent = "File it";
+    go.addEventListener("click", () => {
+      queue = [parseOne(pn.text)];
+      queue[0].date = pn.date;
+      openConfirm();
+      rv.pendingId = pn.id;
+    });
+    acts.appendChild(go);
+    const del = document.createElement("button");
+    del.className = "warn";
+    del.textContent = "Discard";
+    del.addEventListener("click", () => {
+      if(!confirm("Discard this note?")) return;
+      db.pending = db.pending.filter(x => x.id !== pn.id);
+      save(); refreshBadge(); renderWaiting(); renderLoops();
+    });
+    acts.appendChild(del);
+    d.appendChild(acts);
+    box.appendChild(d);
+  });
+
+  const hr = document.createElement("p");
+  hr.className = "rvhead";
+  hr.textContent = "Ask about";
+  box.appendChild(hr);
+}
+
+// No count badge on the tab. Some of these never resolve, and a number you
+// cannot clear just becomes noise.
+function refreshBadge(){}
+
+/* ---------------- export ---------------- */
+$("exportBtn").addEventListener("click", async () => {
+  const lines = [];
+  db.people.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(p => {
+    lines.push("== " + p.name + " ==");
+    FACTS.forEach(f => { if(p[f.id]) lines.push(f.label + ": " + p[f.id]); });
+    SLOTS.forEach(sl => { if(p.slots[sl.id]) lines.push(sl.label + ": " + p.slots[sl.id].text); });
+    (p.asks || []).forEach(q => lines.push("ask: " + q.text));
+    notesFor(p.id).slice().reverse().forEach(n => {
+      lines.push(n.date + (n.saw ? " (saw them)" : "") + " - " + n.text);
+    });
+    lines.push("");
+  });
+  if(db.pending.length){
+    lines.push("== not yet filed ==");
+    db.pending.forEach(pn => lines.push(pn.date + " - " + pn.text));
+  }
+  const txt = lines.join("\n");
+  try{
+    await navigator.clipboard.writeText(txt);
+    toast("Copied.");
+  }catch(e){
+    const w = window.open("", "_blank");
+    if(w) w.document.write("<pre>" + esc(txt) + "</pre>");
+    else toast("Could not copy. Allow clipboard access.");
+  }
+});
+
+/* ---------------- installable ---------------- */
+(function manifest(){
+  const icon = "data:image/svg+xml;base64," + btoa(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+    '<rect width="512" height="512" rx="110" fill="#3F6B52"/>' +
+    '<g fill="none" stroke="#F7FAF7" stroke-width="30" stroke-linecap="round">' +
+    '<rect x="199" y="112" width="114" height="200" rx="57"/>' +
+    '<path d="M140 290a116 116 0 0 0 232 0"/><path d="M256 406v56"/></g></svg>');
+  const m = {
+    name:"Circle", short_name:"Circle", start_url:".", display:"standalone",
+    background_color:"#E9EAE4", theme_color:"#E9EAE4",
+    icons:[{src:icon, sizes:"512x512", type:"image/svg+xml", purpose:"any"}]
+  };
+  const link = document.createElement("link");
+  link.rel = "manifest";
+  link.href = URL.createObjectURL(new Blob([JSON.stringify(m)], {type:"application/manifest+json"}));
+  document.head.appendChild(link);
+  const apple = document.createElement("link");
+  apple.rel = "apple-touch-icon";
+  apple.href = icon;
+  document.head.appendChild(apple);
+})();
+
+/* ---------------- boot ---------------- */
+$("vstamp").textContent = "v" + VERSION;
+load();
+refreshBadge();
+renderWaiting();
+renderPeople();
 </script>
 </body>
 </html>
