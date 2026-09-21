@@ -433,7 +433,7 @@
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "1.0.4";
+var APP_VERSION = "1.0.5";
 var UPC_URL  = "https://api.gameupc.com/test/upc/";
 var UPC_KEY  = "test_test_test_test_test";
 /* The proxy holds the BoardGameGeek token and the Gemini key, so no phone
@@ -1597,8 +1597,8 @@ function renderSheet(){
         ' titles, built '+esc(CACHE.built||"")+'.</p>' : "")+
       '<button class="btn" id="savetok">Save</button>'+
       '<button class="btn ghost" id="testkeys">Test the connection</button>'+
-      '<button class="btn ghost" id="forgetpass">Change password</button>'+
       '<div id="testout"></div>'+
+      '<button class="btn ghost" id="forgetpass">Change password</button>'+
       '<button class="btn ghost" data-go="glossary">What do Weight, Rank and the rest mean?</button>'+
       '<button class="btn ghost" id="closetok">Close</button>'+
     '</div></div>';
