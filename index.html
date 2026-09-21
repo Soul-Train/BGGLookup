@@ -3,1361 +3,1774 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shelfworthy</title>
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Circle">
-<meta name="theme-color" content="#E9EAE4">
-<title>Circle</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Shelfworthy">
+<meta name="theme-color" content="#1F4536">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --paper:#E9EAE4;
-  --card:#FBFBF9;
-  --ink:#23271F;
-  --muted:#6E7368;
-  --line:#D4D6CD;
-  --accent:#3F6B52;
-  --accent-soft:#E2EAE3;
-  --flag:#A8412A;
-  --flag-soft:#F5E3DD;
-  --radius:14px;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-}
-*,*::before,*::after{box-sizing:inherit}
-html{-webkit-text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{
-  margin:0;
-  font-family:'Karla',system-ui,-apple-system,'Segoe UI',sans-serif;
-  background:var(--paper);
-  color:var(--ink);
-  font-size:16px;
-  line-height:1.5;
-  padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));
-  -webkit-font-smoothing:antialiased;
-}
-button,input,select,textarea{font:inherit;color:inherit}
-button{cursor:pointer;background:none;border:none}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-.wrap{max-width:640px;margin:0 auto;padding:18px 16px 8px}
-.vstamp{position:fixed;top:calc(6px + env(safe-area-inset-top,0px));right:12px;z-index:70;
-  font-size:.68rem;font-weight:600;color:var(--muted);opacity:.75;pointer-events:none}
-.screen{display:none}
-.screen.on{display:block}
+  :root {
+    --board:#E9EBE4; --card:#F6F7F3; --ink:#16241E; --pine:#1F4536;
+    --ochre:#C6941F; --slate:#55655C; --line:#CFD5CB; --flag:#8C3A2B;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--board);color:var(--ink);
+    font-family:Archivo,system-ui,sans-serif;font-size:15px;line-height:1.45;
+    -webkit-font-smoothing:antialiased}
+  .app{max-width:460px;margin:0 auto;padding:20px 16px calc(40px + env(safe-area-inset-bottom))}
 
-h1{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin:0 0 2px}
-h2{font-size:1.05rem;font-weight:600;margin:0 0 10px}
-.sub{color:var(--muted);font-size:.88rem;margin:0 0 20px}
+  .top{display:flex;align-items:flex-start;gap:10px}
+  .top .who{flex:1;min-width:0}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:26px;color:var(--pine);
+    margin:0 0 3px;letter-spacing:-.4px}
+  .tag{color:var(--slate);font-size:13.5px;margin:0 0 18px}
+  .gear{border:1.5px solid var(--line);background:var(--card);border-radius:9px;
+    width:40px;height:40px;flex:none;font-size:17px;color:var(--slate);line-height:1}
+  .gear:hover{border-color:var(--pine)}
+  .gear.off{border-color:var(--ochre);color:var(--ochre)}
 
-/* capture */
-.mic-zone{text-align:center;padding:14px 0 6px}
-.mic{
-  width:132px;height:132px;border-radius:50%;
-  background:var(--accent);color:#F7FAF7;
-  display:inline-flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 0 #2E5240;
-  transition:transform .12s ease, box-shadow .12s ease;
-}
-.mic:active{transform:translateY(4px);box-shadow:0 2px 0 #2E5240}
-.mic svg{width:52px;height:52px}
-.mic.live{background:var(--flag);box-shadow:0 6px 0 #7D3020;animation:pulse 1.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.78}}
-.mic-hint{color:var(--muted);font-size:.85rem;margin:14px 0 0;min-height:1.4em}
+  h2{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:18px;margin:0 0 3px}
+  .hint{color:var(--slate);font-size:13px;margin:0 0 14px}
 
-textarea{
-  width:100%;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--radius);padding:12px 13px;resize:vertical;line-height:1.55;
-}
-textarea.big{min-height:120px}
-textarea.huge{min-height:220px}
+  button{font-family:inherit;font-size:15px;cursor:pointer}
+  button:focus-visible,input:focus-visible{outline:2.5px solid var(--ochre);outline-offset:2px}
+  .btn{width:100%;border:none;border-radius:10px;background:var(--pine);color:#F6F7F3;
+    padding:15px;font-weight:600;margin-top:10px}
+  .btn.ghost{background:transparent;color:var(--pine);border:1.5px solid var(--line);padding:13px}
+  .btn.ghost:hover{border-color:var(--pine)}
 
-.row{display:flex;gap:10px;align-items:center}
-.row.wrap-row{flex-wrap:wrap}
-.spread{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .row{display:flex;gap:8px}
+  .row input{flex:1;padding:13px;font-size:16px;font-family:inherit;border:1.5px solid var(--line);
+    border-radius:10px;background:#FFF;color:var(--ink);min-width:0}
+  .row button{border:none;background:var(--pine);color:#F6F7F3;border-radius:10px;
+    padding:0 18px;font-weight:600}
 
-.btn{
-  border-radius:11px;padding:11px 16px;font-weight:600;font-size:.95rem;
-  background:var(--accent);color:#F7FAF7;border:1px solid transparent;
-}
-.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn.quiet{background:transparent;color:var(--muted);padding:9px 4px;font-weight:500}
-.btn.danger{background:transparent;color:var(--flag);border-color:var(--flag)}
-.btn.block{width:100%;display:block;text-align:center}
-.btn:disabled{opacity:.45;cursor:default}
+  #cam{width:100%;border-radius:14px;background:#0D1512;display:block;aspect-ratio:4/3;object-fit:cover}
+  .camwrap{position:relative;margin-bottom:12px}
+  .reticle{position:absolute;left:12%;right:12%;top:38%;height:24%;
+    border:2px solid rgba(246,247,243,.85);border-radius:8px;pointer-events:none}
+  .reticle:after{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;
+    background:var(--ochre);opacity:.9}
 
-.seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card)}
-.seg button{flex:1;padding:9px 6px;font-size:.88rem;font-weight:600;color:var(--muted)}
-.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
+  .pick{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);
+    border-radius:10px;padding:13px;margin-bottom:8px;text-decoration:none;color:inherit;width:100%;
+    text-align:left;font-size:15px}
+  .pick:hover{border-color:var(--pine);background:#FFF}
+  .pick .n{flex:1;font-weight:600;min-width:0}
+  .pick .go{color:var(--slate);font-size:19px;flex:none}
 
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:12px}
-.card.flagged{border-color:var(--flag);background:var(--flag-soft)}
+  .card{background:var(--card);border:1.5px solid var(--pine);border-radius:12px;
+    padding:16px;margin-bottom:12px}
+  .card .name{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:21px;
+    letter-spacing:-.3px;line-height:1.2;text-decoration:none;color:var(--ink);display:block}
+  .card .name:hover{color:var(--pine);text-decoration:underline}
+  .card .sub{color:var(--slate);font-size:12.5px;margin-top:4px}
 
-label.fld{display:block;margin:0 0 12px}
-label.fld > span{display:block;font-size:.8rem;color:var(--muted);font-weight:600;margin-bottom:5px}
-input[type=text],input[type=date],select{
-  width:100%;background:var(--card);border:1px solid var(--line);
-  border-radius:11px;padding:11px 12px;
-}
-select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+  .big{display:flex;align-items:baseline;gap:9px;margin:14px 0 2px}
+  .big .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:40px;line-height:1;
+    letter-spacing:-1.5px;color:var(--pine);font-variant-numeric:tabular-nums}
+  .big .k{font-size:12.5px;color:var(--slate);line-height:1.3}
+  .big .k small{font-size:11.5px}
 
-.picker{display:flex;flex-wrap:wrap;gap:7px;margin:-6px 0 16px}
-.picker:empty{display:none}
-.picker .new{color:var(--accent);border-style:dashed;border-color:var(--accent)}
+  .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:13px;
+    background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .fact{background:#FFF;padding:10px 12px;font-size:14px;min-width:0}
+  /* labels wrap rather than truncate: a clipped label is worse than two lines */
+  /* two lines are reserved whether or not a label wraps, so a wrapping label
+     on a narrow phone never makes one row taller than its neighbours */
+  .fact k{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.3px;
+    color:var(--slate);font-weight:600;margin-bottom:4px;line-height:1.25;
+    min-height:25px}
+  .fact b{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* direct child only: the weight dots are also <i>, nested inside .pips */
+  .fact b > i{font-style:normal;font-weight:600;color:var(--slate);font-size:12.5px;
+    margin-left:4px}
+  .fact k s,.fact b s{text-decoration:none;margin:0 3px;color:#9AA79E;font-weight:500}
+  .fact b s{margin:0 2px 0 6px}
+  .fact .pips{display:inline-flex;margin:0 0 0 7px;vertical-align:1px}
 
-.waiting{display:flex;align-items:center;gap:7px;width:100%;margin-top:13px;padding-top:11px;
-  border-top:1px solid var(--line);color:var(--muted);font-size:.82rem;font-weight:600;text-align:left}
+  .pips{display:inline-flex;gap:2.5px;align-items:center;vertical-align:-1px}
+  .pips i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+  .pips i.f{background:var(--ochre)}
 
-.rvhead{font-size:.8rem;color:var(--muted);font-weight:700;margin:16px 0 8px;
-  text-transform:uppercase;letter-spacing:.04em}
+  .sortbar{display:flex;gap:6px;margin-bottom:14px}
+  .sortbar button{flex:1;border:1.5px solid var(--line);background:var(--card);color:var(--slate);
+    border-radius:8px;padding:9px;font-size:13px}
+  .sortbar button.sel{background:var(--pine);border-color:var(--pine);color:#F6F7F3;font-weight:600}
 
-.askcard{border:1px solid var(--flag);background:var(--flag-soft);border-radius:var(--radius);
-  padding:13px;margin-bottom:6px}
-.askhead{font-size:.7rem;font-weight:700;color:var(--flag);margin:0 0 8px;letter-spacing:.06em}
-.askrow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.asktext{font-size:.95rem;line-height:1.45;margin:0}
-.askx{color:var(--flag);font-size:1.15rem;line-height:1;padding:0 2px;flex:none}
-.askdate{font-size:.72rem;color:var(--muted);margin:2px 0 9px}
-.askrow:last-of-type + .askdate{margin-bottom:0}
-.askwho{font-size:.78rem;font-weight:700;color:var(--flag);margin-bottom:4px}
+  .shelfrow{display:flex;gap:11px;align-items:flex-start;background:var(--card);
+    border:1.5px solid var(--line);border-radius:10px;padding:13px;margin-bottom:8px}
+  .shelfrow .body{flex:1;min-width:0}
+  .shelfrow .name{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16.5px;
+    letter-spacing:-.2px;text-decoration:none;color:var(--ink);display:block;line-height:1.2}
+  .shelfrow .name:hover{color:var(--pine);text-decoration:underline}
+  .shelfrow .sub{color:var(--slate);font-size:12px;margin-top:2px}
+  .shelfrow .score{text-align:right;flex:none;width:52px}
+  .shelfrow .score .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:26px;line-height:1;
+    letter-spacing:-1px;color:var(--pine);font-variant-numeric:tabular-nums}
+  .shelfrow .score .k{font-size:10.5px;color:var(--slate);margin-top:2px}
 
-.standrow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
-.standlab{font-size:.72rem;color:var(--muted);width:58px;flex:none;padding-top:3px;font-weight:600}
-.standtext{font-size:.95rem;line-height:1.45;margin:0}
-.standtext.empty{color:var(--muted)}
-.standdate{font-size:.72rem;color:var(--muted);margin:2px 0 0}
-.standhist{color:var(--muted);flex:none;padding:0 4px;font-size:1rem}
+  .note{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--ochre);
+    border-radius:10px;padding:12px;font-size:13.5px;margin-bottom:12px}
+  .note b{display:block;margin-bottom:3px}
+  .note.bad{border-left-color:var(--flag);background:#F7E9E6;border-color:#D9B5AC}
 
-.tl{display:flex;gap:11px}
-.tlrail{flex:none;display:flex;flex-direction:column;align-items:center;padding-top:5px}
-.tldot{width:7px;height:7px;border-radius:50%;background:var(--line);flex:none}
-.tldot.now{background:var(--accent)}
-.tlline{width:1px;flex:1;background:var(--line);margin-top:4px}
-.tlbody{flex:1;padding-bottom:18px;min-width:0}
-.tldate{font-size:.72rem;color:var(--muted);margin:0 0 4px}
-.tltext{font-size:.95rem;line-height:1.5;margin:0;word-wrap:break-word}
-.tltext mark{background:#F2E3B0;color:inherit;border-radius:3px;padding:0 2px}
-.tlacts{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
-.tlacts button{font-size:.76rem;color:var(--muted);font-weight:600}
-.tlacts button.warn{color:var(--flag)}
+  .dots{display:inline-flex;gap:6px}
+  .dots i{width:9px;height:9px;border-radius:50%;background:var(--pine);animation:p 1.05s ease-in-out infinite}
+  .dots i:nth-child(2){animation-delay:.16s}
+  .dots i:nth-child(3){animation-delay:.32s}
+  @keyframes p{0%,100%{opacity:.25}50%{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.dots i{animation:none;opacity:.6}}
+  .working{text-align:center;padding:36px 0}
 
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{
-  border:1px solid var(--line);background:var(--card);color:var(--muted);
-  border-radius:999px;padding:7px 13px;font-size:.86rem;font-weight:600;
-}
-.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#F7FAF7}
-.chip.read{cursor:default}
+  .sheet{position:fixed;inset:0;background:rgba(22,36,30,.55);display:flex;align-items:flex-end;
+    justify-content:center;z-index:9}
+  .sheet .inner{background:var(--board);border-radius:16px 16px 0 0;padding:20px 16px
+    calc(24px + env(safe-area-inset-bottom));width:100%;max-width:460px}
+  @media (min-width:520px){ .sheet{align-items:center} .sheet .inner{border-radius:16px} }
+  .sheet code{background:#FFF;border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12.5px}
 
-.toggle{
-  display:flex;align-items:center;gap:11px;padding:11px 13px;
-  border:1px solid var(--line);border-radius:11px;background:var(--card);margin-bottom:10px;
-}
-.toggle input{width:20px;height:20px;accent-color:var(--accent);flex:none}
-.toggle span{font-size:.92rem}
-.toggle small{display:block;color:var(--muted);font-size:.79rem;line-height:1.35}
+  .foot{margin-top:24px;font-size:12px;color:var(--slate);line-height:1.5}
+  .foot a{color:var(--slate)}
 
-.search{position:relative;margin-bottom:12px}
-.search input{padding-left:38px}
-.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted)}
+  
+  .scroller{overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;
+    margin-bottom:12px;border-bottom:1px solid var(--line)}
+  .tbl{border-collapse:separate;border-spacing:0;font-size:13px;min-width:100%}
+  .tbl thead tr{--rowbg:#DDE2D7}
+  .tbl th{position:sticky;top:0;z-index:4;
+    font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--pine);
+    font-weight:600;text-align:center;padding:10px 0 10px 16px;
+    box-shadow:inset 0 -1.5px 0 var(--line);
+    white-space:nowrap;cursor:pointer;background:var(--rowbg)}
+  .tbl th:hover{background:#CBD3C4}
+  .tbl th.on{color:#0F2A20;background:#CBD3C4}
+  .tbl th .ar{font-size:9px;margin-left:2px}
+  .tbl th:nth-child(1),.tbl td:nth-child(1){position:sticky;left:0;z-index:3;
+    text-align:left;padding-left:0;padding-right:0;
+    width:24px;min-width:24px;max-width:24px;background:var(--rowbg);text-align:left}
+  .tbl th:nth-child(2),.tbl td:nth-child(2){position:sticky;left:24px;z-index:3;
+    text-align:left;padding-left:0;padding-right:14px;
+    width:184px;min-width:184px;max-width:184px;background:var(--rowbg);text-align:left;
+    box-shadow:6px 0 6px -6px rgba(22,36,30,.16)}
+  /* first scrolling column needs breathing room past the pinned edge */
+  .tbl thead th:nth-child(1),.tbl thead th:nth-child(2){z-index:5}
+  .tbl th:nth-child(3),.tbl td:nth-child(3){padding-left:18px}
+  .tbl th:nth-child(n+3),.tbl td:nth-child(n+3){min-width:54px}
+  .tbl td.r{min-width:58px}
+  .tbl td:nth-child(1){color:var(--slate);font-size:12px}
+  .tbl th:nth-child(1){padding-left:0}
+  .tbl tbody tr{--rowbg:var(--board)}
+  .tbl tbody tr:nth-child(even){--rowbg:#DFE3D9}
+  .tbl tbody tr:hover{--rowbg:#D6DCD0}
+  .tbl td{padding:10px 0 10px 16px;border-bottom:1px solid var(--line);text-align:center;
+    color:var(--slate);font-variant-numeric:tabular-nums;white-space:nowrap;
+    background:var(--rowbg)}
+  .tbl tbody tr:last-child td{border-bottom:none}
+  .tbl tr.rw{cursor:pointer}
+  .tbl .gm{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
+  .tbl .gm .t{font-weight:600;font-size:14px;color:var(--ink);overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+  .tbl tr.rw:hover .t{color:var(--pine);text-decoration:underline}
+  .tbl td.r{color:var(--pine);font-weight:700;font-family:Fraunces,Georgia,serif;font-size:16px}
+  .tbl tr.miss .t{color:var(--slate);font-weight:500;font-style:italic}
 
-.plist{list-style:none;margin:14px 0 0;padding:0}
-.plist li{border-bottom:1px solid var(--line)}
-.plist button{width:100%;text-align:left;padding:14px 2px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.pname{font-weight:600;font-size:1.02rem}
-.pmeta{color:var(--muted);font-size:.8rem;flex:none}
-.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--flag);margin-left:7px;vertical-align:middle}
+  .thumb{flex:none;width:34px;height:34px;border-radius:5px;display:flex;align-items:center;
+    justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:700;color:#FFF;
+    font-size:12px;letter-spacing:-.4px;overflow:hidden}
+  .thumb.lg{width:70px;height:70px;font-size:22px;border-radius:8px}
 
-.empty{color:var(--muted);font-size:.92rem;padding:28px 2px;line-height:1.6}
+  .back{border:none;background:none;color:var(--slate);font-size:13px;padding:4px 0 12px;
+    display:inline-flex;align-items:center;gap:5px}
+  .back:hover{color:var(--pine)}
 
-.backlink{color:var(--muted);font-size:.88rem;font-weight:600;padding:4px 0;margin-bottom:8px;display:inline-block}
+  .cardtop{display:flex;gap:13px;align-items:flex-start}
+  .cardtop .who2{flex:1;min-width:0}
 
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
-.facts label{margin:0}
-.facts label.full{grid-column:1 / -1}
+  /* the last two are prose, not figures, so they read left-aligned */
+  .tbl td.ty,.tbl td.mx{font-size:12px;white-space:nowrap;text-align:left}
+  .tbl th.hty,.tbl th.hmx{text-align:left}
+  .tbl th:last-child,.tbl td:last-child{padding-right:4px}
+  .flag{position:absolute;right:-7px;bottom:-7px;width:22px;height:22px;border-radius:50%;
+    background:var(--ochre);color:#16241E;font-size:12px;font-weight:700;line-height:1;
+    text-align:center;border:2px solid var(--rowbg,var(--board));padding:0;cursor:pointer}
+  /* the visible dot stays small; the tap target is a full 44px */
+  .flag:after{content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;
+    transform:translate(-50%,-50%)}
+  .flag:hover{background:#B0821A}
+  .flag.bad{background:var(--flag);color:#F6F7F3}
+  .thumbwrap{position:relative;flex:none;display:inline-flex}
 
-.catcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:9px;overflow:hidden}
-.cathead{width:100%;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:13px 14px;text-align:left}
-.catname{font-size:.78rem;color:var(--muted);font-weight:700;margin-bottom:3px}
-.catnow{font-size:.97rem;line-height:1.45}
-.catcount{color:var(--muted);font-size:.8rem;flex:none;padding-top:2px}
-.cathist{border-top:1px solid var(--line);padding:4px 14px 10px;display:none}
-.catcard.open .cathist{display:block}
-.hist{padding:11px 0;border-bottom:1px solid var(--line)}
-.hist:last-child{border-bottom:none}
-.histdate{font-size:.76rem;color:var(--muted);font-weight:600;margin-bottom:3px}
-.histtext{font-size:.94rem;line-height:1.5}
-.histacts{display:flex;gap:14px;margin-top:7px}
-.histacts button{font-size:.8rem;color:var(--muted);font-weight:600}
-.histacts button.warn{color:var(--flag)}
+  .photoout{display:flex;gap:11px;align-items:center;background:var(--card);
+    border:1.5px solid var(--line);border-radius:11px;padding:13px;margin:14px 0 10px}
+  .photoout.primary{border-color:var(--pine);background:#FFF}
+  .photoout .ic{font-size:21px;flex:none;line-height:1}
+  .photoout .tx{flex:1;min-width:0;font-size:13.5px}
+  .photoout .tx b{display:block;margin-bottom:2px}
+  .photoout .tx small{color:var(--slate);font-size:12px;line-height:1.4;display:block}
+  .photoout .pobtn{flex:none;border:1.5px solid var(--pine);background:transparent;
+    color:var(--pine);border-radius:8px;padding:12px 14px;font-size:13px;font-weight:600;
+    cursor:pointer}
+  .photoout.primary .pobtn{background:var(--pine);color:#F6F7F3}
+  .photoout button{flex:none;border:1.5px solid var(--pine);background:transparent;
+    color:var(--pine);border-radius:8px;padding:11px 14px;font-size:13px;font-weight:600;
+    min-height:44px}
+  .photoout button:hover{background:var(--pine);color:#F6F7F3}
+  .photoout.primary button{background:var(--pine);color:#F6F7F3}
 
-.histtext mark{background:#F2E3B0;color:inherit;border-radius:3px;padding:0 2px}
-.loop{font-size:.78rem;font-weight:700;color:var(--flag);margin-bottom:4px}
+  .term{background:var(--card);border:1.5px solid var(--line);border-radius:10px;
+    padding:12px;margin-bottom:7px}
+  .term b{display:block;font-family:Fraunces,Georgia,serif;font-size:15px;margin-bottom:3px}
+  .term span{font-size:13.5px;color:var(--slate);line-height:1.45}
 
-nav{
-  position:fixed;left:0;right:0;bottom:0;z-index:40;
-  background:var(--card);border-top:1px solid var(--line);
-  display:flex;padding-bottom:env(safe-area-inset-bottom,0px);
-}
-nav button{flex:1;padding:11px 4px 13px;color:var(--muted);font-size:.72rem;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px}
-nav button svg{width:21px;height:21px}
-nav button[aria-current="page"]{color:var(--accent)}
-nav .badge{position:absolute;transform:translate(15px,-4px);background:var(--flag);color:#fff;border-radius:999px;font-size:.62rem;padding:1px 5px;font-weight:700}
+  .statusbar{display:flex;flex-wrap:wrap;gap:6px;margin:-2px 0 12px}
+  .chip{border:1.5px solid var(--line);background:var(--card);color:var(--slate);
+    border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:600;min-height:38px;
+    display:inline-flex;align-items:center;cursor:pointer;font-family:inherit}
+  .chip:hover{border-color:var(--pine);color:var(--pine)}
+  .chip.warn{border-color:#E0C071;background:#FFF7E4;color:#7A5A10}
+  .chip.star{border-color:var(--ochre);color:#7A5A10}
 
-.queue{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:10px}
-.toast{
-  position:fixed;left:50%;transform:translateX(-50%);
-  bottom:calc(88px + env(safe-area-inset-bottom,0px));
-  background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;
-  font-size:.88rem;font-weight:600;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s;
-}
-.toast.on{opacity:1}
-.divider{height:1px;background:var(--line);margin:22px 0 18px;border:none}
+  .starbar{display:flex;align-items:center;gap:10px;background:#FFF7E4;
+    border:1.5px solid #E8D49A;border-radius:10px;padding:10px 12px;margin-bottom:12px;
+    font-size:13.5px}
+  .starbar span{flex:1;color:var(--slate)}
+  .starbar b{color:var(--ink)}
+  .starbar button{border:1.5px solid var(--pine);background:transparent;color:var(--pine);
+    border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;min-height:44px}
+  .starbar button:hover{background:var(--pine);color:#F6F7F3}
+
+  .cmptbl th.hg{text-align:center;min-width:112px;padding-bottom:12px}
+  .cmptbl .ch{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .cmptbl .cn{font-size:12px;font-weight:600;color:var(--ink);text-transform:none;
+    letter-spacing:0;line-height:1.25;white-space:normal;max-width:104px}
+  .cmptbl td.lb{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+    color:var(--slate);width:96px;min-width:96px;max-width:96px}
+  .cmptbl td{font-size:14px;color:var(--ink)}
+  .cmptbl td.win{color:var(--pine);font-weight:700}
+
+  /* the table only reports state; you change it on the game's own page */
+  .pin{flex:none;font-size:11px;line-height:1;margin-left:5px}
+  .pin.star{color:var(--ochre)}
+  .pin.own{color:var(--pine)}
+
+  .marks.big{display:flex;gap:8px;margin:13px 0 0;padding-top:13px;flex-wrap:wrap;
+    border-top:1px solid var(--line)}
+  .marks.big .mk2{flex:1;justify-content:center;min-width:132px}
+  .marks.big .mk2{border:1.5px solid var(--line);background:var(--card);color:var(--slate);
+    border-radius:9px;height:42px;padding:0 15px;font-size:13.5px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px}
+  .marks.big .mk2.star.on{background:var(--ochre);border-color:var(--ochre);color:#16241E}
+  .marks.big .mk2.own.on{background:var(--pine);border-color:var(--pine);color:#F6F7F3}
+
+  .price{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+  .ph{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;
+    color:var(--slate);margin-bottom:9px}
+  .ph span{font-weight:600;color:var(--ink);font-size:13px}
+  .bar{position:relative;height:6px;border-radius:3px;background:var(--line);margin:0 0 7px}
+  .bar .fill{position:absolute;top:0;bottom:0;border-radius:3px;background:#C3CDBF}
+  .bar .dot{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;
+    transform:translate(-50%,-50%)}
+  .bar .dot.med{background:var(--slate);border:2px solid var(--card)}
+  .bar .dot.shelf{background:var(--ochre);border:2px solid var(--card);width:15px;height:15px}
+  .pl{display:flex;justify-content:space-between;font-size:12px;color:var(--slate);
+    font-variant-numeric:tabular-nums}
+  .pl b{color:var(--ink)}
+  .askprice{display:flex;gap:7px;margin-top:11px}
+  .askprice input{flex:1;min-width:0;padding:10px;font-size:15px;font-family:inherit;
+    border:1.5px solid var(--line);border-radius:8px;background:#FFF;color:var(--ink)}
+  .askprice button{flex:none;border:1.5px solid var(--pine);background:transparent;
+    color:var(--pine);border-radius:8px;padding:0 15px;font-size:13.5px;font-weight:600;
+    min-height:44px}
+  .askprice button:hover{background:var(--pine);color:#F6F7F3}
+
+  .shelfrow2{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;
+    color:var(--slate)}
+  .shelfrow2 b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .verdict{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--slate)}
+  .verdict.good{color:var(--pine)}
+  .verdict.bad{color:var(--flag)}
+
+  .hist{margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
+  .histhead{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+  .histhead h3{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;margin:0;flex:1}
+  .histhead button{border:none;background:none;color:var(--pine);font-size:12.5px;
+    font-weight:600;text-decoration:underline;padding:6px 0}
+  .hrow{display:flex;gap:11px;align-items:center;width:100%;text-align:left;
+    background:var(--card);border:1.5px solid var(--line);border-radius:10px;
+    padding:11px;margin-bottom:7px;font-family:inherit;cursor:pointer}
+  .hrow:hover{border-color:var(--pine)}
+  .hn{flex:none;font-size:11px;font-weight:600;color:var(--slate);width:58px;
+    text-transform:uppercase;letter-spacing:.3px;line-height:1.2}
+  .hb{flex:1;min-width:0}
+  .ht{display:block;font-weight:600;font-size:14px;overflow:hidden;
+    text-overflow:ellipsis;white-space:nowrap}
+  .hw{display:block;font-size:12px;color:var(--slate);margin-top:1px}
+
+  .typelink{text-align:center;margin-top:14px}
+
+  .readback{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--slate);
+    background:var(--card);border:1.5px solid var(--line);border-radius:9px;
+    padding:9px 11px;margin-bottom:12px}
+  .readback b{color:var(--ink)}
+  .readback button{margin-left:auto;border:1.5px solid var(--line);background:transparent;
+    color:var(--pine);border-radius:7px;padding:7px 11px;font-size:12.5px;font-weight:600}
+
+  .wrongbar{display:flex;align-items:center;gap:10px;margin:-4px 0 14px;padding:11px 12px;
+    background:var(--card);border:1.5px solid var(--line);border-radius:10px;font-size:13.5px}
+  .wrongbar span{flex:1;color:var(--slate)}
+  .wrongbar button{border:1.5px solid var(--pine);background:transparent;color:var(--pine);
+    border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600}
+  .wrongbar button:hover{background:var(--pine);color:#F6F7F3}
+
+  .heads-up{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--ochre);
+    border-radius:10px;padding:11px 12px;font-size:13px;margin-bottom:12px;
+    display:flex;gap:10px;align-items:center}
+  .heads-up .txt{flex:1}
+  .heads-up button{border:1.5px solid var(--pine);background:transparent;color:var(--pine);
+    border-radius:8px;padding:7px 11px;font-size:12.5px;font-weight:600;white-space:nowrap}
+
+  .sortbar button.edit{flex:none;padding-left:14px;padding-right:14px}
+  .sortbar button.info{padding:0;width:38px;font-family:Fraunces,Georgia,serif;
+    font-style:italic;font-weight:700;font-size:15px}
+
+  .fixrow{display:flex;align-items:center;gap:11px;background:var(--card);
+    border:1.5px solid var(--line);border-radius:10px;padding:11px;margin-bottom:7px}
+  .fixrow.flagged{border-left:4px solid var(--ochre)}
+  .fixbtn{flex:none;border:1.5px solid var(--pine);background:transparent;color:var(--pine);
+    border-radius:8px;padding:11px 16px;font-size:13.5px;font-weight:600;min-height:44px}
+  .fixbtn:hover{background:var(--pine);color:#F6F7F3}
+  .fixrow .t{flex:1;font-weight:600;font-size:14px;min-width:0}
+  .fixrow .t small{display:block;font-weight:400;font-size:12px;color:var(--slate)}
+  .fixopts{border-left:2px solid var(--line);margin:-2px 0 10px 22px;padding:2px 0 2px 12px}
+  .fixopts .btn{margin-top:6px}
+  .swipe{font-size:11.5px;color:var(--slate);margin:-6px 0 12px;display:flex;
+    align-items:center;gap:5px}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;padding-top:11px;
+    border-top:1px solid var(--line)}
+  .tg{font-size:11.5px;color:var(--slate);background:transparent;border:1px solid var(--line);
+    border-radius:999px;padding:3px 9px}
+  .says{margin-top:14px}
+  .says h3{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;margin:0 0 8px}
+  .says .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--slate);
+    font-weight:600;margin:12px 0 6px}
+  .say{background:var(--card);border:1.5px solid var(--line);border-radius:9px;
+    margin-bottom:6px;overflow:hidden}
+  .say>button{width:100%;display:flex;gap:9px;align-items:flex-start;background:none;border:none;
+    padding:11px 12px;text-align:left;font-size:13.5px;color:var(--ink);line-height:1.4}
+  .say .mk{flex:none;font-weight:700;font-size:13px;line-height:1.45}
+  .say.up .mk{color:var(--pine)}
+  .say.down .mk{color:var(--flag)}
+  .say .cnt{flex:none;color:var(--slate);font-size:11.5px;padding-top:2px}
+  .say .body{border-top:1px solid var(--line);padding:11px 12px;background:#FFF}
+  .say .quote{font-size:13.5px;line-height:1.5}
+  .say .by{font-size:11.5px;color:var(--slate);margin-top:7px;display:flex;
+    justify-content:space-between;gap:10px}
+  .say .by a{color:var(--pine)}
+
+
+  #cam{width:100%;border-radius:14px;background:#0D1512;display:block;aspect-ratio:4/3;object-fit:cover}
+  .shot{width:100%;border-radius:12px;display:block;margin-bottom:12px;border:1px solid var(--line)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </head>
 <body>
-
-<div class="vstamp" id="vstamp"></div>
-
-<div class="wrap">
-
-  <!-- ============ CAPTURE ============ -->
-  <section id="s-capture" class="screen on">
-    <h1>What happened?</h1>
-    <p class="sub">Talk, type, or paste. You confirm the details next.</p>
-
-    <div class="mic-zone">
-      <button class="mic" id="micBtn" aria-label="Start voice capture">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <rect x="9" y="2.5" width="6" height="11.5" rx="3"/>
-          <path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5V21.5"/>
-        </svg>
-      </button>
-      <p class="mic-hint" id="micHint">Tap and start talking</p>
+<div class="app">
+  <div class="top">
+    <div class="who">
+      <h1>Shelfworthy</h1>
+      <p class="tag">Scan a box. See if it is worth it.</p>
     </div>
-
-    <textarea id="captureText" class="big" placeholder="Or type it here. &quot;Had lunch with Dave, he's interviewing at Stripe next Thursday and just picked up bouldering.&quot;"></textarea>
-    <div class="row" style="margin-top:10px">
-      <button class="btn ghost" id="laterBtn" style="flex:1">Save for later</button>
-      <button class="btn" id="reviewBtn" style="flex:1">Review and file</button>
-    </div>
-    <button class="waiting" id="waitingLine" hidden></button>
-
-    <hr class="divider">
-
-    <h2>Import old notes</h2>
-    <p class="sub" style="margin-bottom:12px">Paste a wall of text. Blank lines separate entries. Dates at the start of a line get picked up.</p>
-    <textarea id="bulkText" class="huge" placeholder="3/14/25 Dave got the promotion, celebrating at Halyard.&#10;&#10;Jan 2 Met Priya's sister Anjali, visiting from Pune."></textarea>
-    <div class="row" style="margin-top:10px">
-      <button class="btn ghost block" id="bulkBtn">Parse and review</button>
-    </div>
-  </section>
-
-  <!-- ============ CONFIRM ============ -->
-  <section id="s-confirm" class="screen">
-    <button class="backlink" data-back="capture">&larr; Discard</button>
-    <h1>Check this</h1>
-    <p class="sub" id="confirmSub">Fix anything that landed wrong.</p>
-    <p class="queue" id="queueInfo" hidden></p>
-
-    <label class="fld"><span>Who</span>
-      <input type="text" id="cPerson" placeholder="Name" autocomplete="off">
-    </label>
-    <div class="picker" id="cPicker"></div>
-
-    <label class="fld"><span>When it happened</span>
-      <input type="date" id="cDate">
-    </label>
-
-    <label class="toggle"><input type="checkbox" id="cSaw">
-      <span>I saw them in person<small>Keeps your last-seen date current.</small></span>
-    </label>
-
-    <label class="fld"><span>Note</span>
-      <textarea id="cText" class="big"></textarea>
-    </label>
-
-    <label class="toggle"><input type="checkbox" id="cAsk">
-      <span>Add to their ask list<small>Something to raise next time you talk.</small></span>
-    </label>
-
-    <div class="row" style="margin-top:16px">
-      <button class="btn ghost" id="skipBtn" hidden>Skip</button>
-      <button class="btn block" id="saveBtn">Save note</button>
-    </div>
-  </section>
-
-  <!-- ============ PEOPLE ============ -->
-  <section id="s-people" class="screen">
-    <h1>People</h1>
-    <p class="sub">Everyone you keep notes on.</p>
-
-    <div class="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input type="text" id="search" placeholder="Search names and notes" autocomplete="off">
-    </div>
-    <div class="seg" role="group" aria-label="Sort people">
-      <button id="sortRecent" aria-pressed="true">Recently noted</button>
-      <button id="sortAlpha" aria-pressed="false">A to Z</button>
-    </div>
-
-    <ul class="plist" id="peopleListEl"></ul>
-    <div class="empty" id="peopleEmpty" hidden>No one yet. Capture your first note and they will show up here.</div>
-  </section>
-
-  <!-- ============ PROFILE ============ -->
-  <section id="s-profile" class="screen">
-    <button class="backlink" data-back="people">&larr; People</button>
-    <h1 id="pTitle">Name</h1>
-    <p class="sub" id="pSub"></p>
-
-    <div id="pAsk"></div>
-    <div id="pStand"></div>
-
-    <div class="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input type="text" id="pSearch" placeholder="Search these notes" autocomplete="off">
-    </div>
-
-    <p class="rvhead">Timeline</p>
-    <div id="pTimeline"></div>
-
-    <hr class="divider">
-    <h2>About them</h2>
-    <div class="facts" id="pFacts"></div>
-
-    <hr class="divider">
-    <label class="fld"><span>Merge this person into another</span>
-      <select id="mergeSel"><option value="">Pick someone</option></select>
-    </label>
-    <div class="row">
-      <button class="btn ghost" id="mergeBtn">Merge</button>
-      <button class="btn danger" id="delPersonBtn">Delete person</button>
-    </div>
-  </section>
-
-  <!-- ============ FOLLOW UPS ============ -->
-  <section id="s-loops" class="screen">
-    <h1>Ask</h1>
-    <p class="sub">Things worth raising next time you talk.</p>
-    <div id="pendList"></div>
-    <div id="loopList"></div>
-    <div class="empty" id="loopEmpty" hidden>Nothing here yet. Add something to a person's ask list and it shows up.</div>
-    <hr class="divider">
-    <button class="btn quiet" id="exportBtn">Copy everything as plain text</button>
-  </section>
-
+    <button class="gear" id="gear" title="Settings" aria-label="Settings">&#9881;</button>
+  </div>
+  <div id="stage"></div>
+  <div class="foot">
+    Barcode matching by <a href="https://gameupc.com" target="_blank" rel="noopener">GameUPC</a>.
+    Game data from <a href="https://boardgamegeek.com" target="_blank" rel="noopener">BoardGameGeek</a>,
+    shown unmodified.
+  </div>
 </div>
-
-<nav>
-  <button data-go="capture" aria-current="page">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11.5a7 7 0 0 0 14 0"/><path d="M12 18.5V21.5"/></svg>
-    Capture
-  </button>
-  <button data-go="people">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 20c0-3.6 2.8-5.6 6.2-5.6s6.2 2 6.2 5.6"/><path d="M16.5 5.2a3.4 3.4 0 0 1 0 6.4"/><path d="M18 14.8c2.2.6 3.6 2.4 3.6 5.2"/></svg>
-    People
-  </button>
-  <button data-go="loops">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3.2a8.8 8.8 0 1 1-8.8 8.8"/><path d="M3.2 12V7.4"/><path d="M3.2 12h4.6"/><path d="M12 7.6V12l3 1.8"/></svg>
-    Ask
-  </button>
-</nav>
-
-<div class="toast" id="toast"></div>
-
+<div id="modal"></div>
 <script>
-"use strict";
+/* ============================ config ============================ */
+var UPC_URL  = "https://api.gameupc.com/test/upc/";
+var UPC_KEY  = "test_test_test_test_test";
+/* The proxy holds the BoardGameGeek token and the Gemini key, so no phone
+   needs either. Put your own Worker address in PROXY. */
+var PROXY    = "https://shelfworthy.joshua-shull12.workers.dev";
+// Typed once by each person and kept on their phone. Never in the page itself,
+// so someone who finds the address cannot use the shared keys.
+var K_PASS = "shelfworthy.pass";
+function password(){ try { return localStorage.getItem(K_PASS) || ""; } catch(e){ return ""; } }
+function setPassword(v){ try { v ? localStorage.setItem(K_PASS, v)
+  : localStorage.removeItem(K_PASS); } catch(e){} }
+var BGG      = PROXY + "/bgg/";
+var GAPI     = PROXY + "/gemini";
+var CACHE_URL = "";   // set in settings, e.g. the raw games.json link on GitHub
+var K_CACHE = "shelfworthy.cache.url", K_CACHED = "shelfworthy.cache.data";
+var K_HIST = "shelfworthy.history";
+var K_TOKEN = "shelfworthy.bgg.token", K_GEM = "shelfworthy.gemini.key",
+    K_STAR  = "shelfworthy.starred",   K_OWN = "shelfworthy.owned",
+    K_MODEL = "shelfworthy.gemini.model";
 
-/* ---------------- storage ---------------- */
-const VERSION = "0.9";
-const KEY = "circle.v1";
-let db = { people: [], notes: [], pending: [] };
+/* ============================ storage =========================== */
+function ls(k, v){
+  try {
+    if (v === undefined) return localStorage.getItem(k) || "";
+    v ? localStorage.setItem(k, v) : localStorage.removeItem(k);
+  } catch(e){ return ""; }
+}
+function lsJSON(k){ try { return JSON.parse(ls(k) || "{}"); } catch(e){ return {}; } }
+function saveJSON(k, o){ ls(k, JSON.stringify(o)); }
 
-function load(){
-  try{
-    let raw = localStorage.getItem(KEY);
-    if(!raw){
-      const old = localStorage.getItem("keep.v1");   // app was called Keep briefly
-      if(old){ raw = old; localStorage.setItem(KEY, old); }
-    }
-    if(raw) db = JSON.parse(raw);
-  }catch(e){ /* start fresh */ }
-  if(!Array.isArray(db.people)) db.people = [];
-  if(!Array.isArray(db.notes)) db.notes = [];
-  if(!Array.isArray(db.pending)) db.pending = [];
-  // Notes used to be one row per capture. They are now one row per line, grouped
-  // by captureId, so a paragraph can sit in several category cards without the
-  // whole paragraph showing up in each one.
-  db.people.forEach(p => {
-    if(!p.slots) p.slots = {};
-    if(!p.slotHist) p.slotHist = {};
-    if(!Array.isArray(p.asks)) p.asks = [];
-  });
+function token(){ return "proxy"; }    // the server holds it now
 
-  // Notes were briefly stored one row per line. Put each capture back together as
-  // one note, because splitting every note to feed the summary was more work than
-  // the summary was worth.
-  const groups = {};
-  db.notes.forEach(n => {
-    const k = n.captureId || n.id;
-    (groups[k] = groups[k] || []).push(n);
-  });
-  const rebuilt = [];
-  Object.values(groups).forEach(rows => {
-    rows.sort((a,b) => (a.order||0) - (b.order||0));
-    const first = rows[0];
-    const merged = {
-      id: first.id,
-      personId: first.personId,
-      date: first.date,
-      text: rows.map(r => r.text).join(" ").replace(/\s+/g," ").trim(),
-      saw: rows.some(r => r.saw),
-      created: first.created || Date.now(),
-      raw: first.raw || ""
-    };
-    // Anything flagged under the old model becomes something to ask about.
-    const person = db.people.find(x => x.id === merged.personId);
-    if(person){
-      rows.filter(r => r.loop && !r.resolved).forEach(r => {
-        if(!person.asks.some(q => q.text === r.text))
-          person.asks.push({ id: uid(), text: r.text, date: r.date });
+/* ---------------------------- local cache ----------------------------
+   A weekly job publishes games.json. The app downloads it once, keeps it,
+   and uses it to turn a title into a BGG id without a network round trip.
+   Anything missing simply falls through to a live search.                */
+var CACHE = null, CACHE_TRIED = false;
+
+function cacheIndex(){
+  if (CACHE) return Promise.resolve(CACHE);
+  // On GitHub Pages the cache sits in the same repo, so try the neighbouring
+  // file when no link has been pasted. Harmless 404 anywhere else.
+  var url = ls(K_CACHE) || "data/index.json";
+  if (!url || CACHE_TRIED) return Promise.resolve(null);
+  CACHE_TRIED = true;
+
+  // index.json is a plain title-to-id map. The older games.json carried whole
+  // records; both are accepted so an out-of-date link keeps working.
+  var build = function(raw){
+    var d = JSON.parse(raw), byKey = {};
+    if (d.k){
+      byKey = d.k;
+    } else {
+      (d.g || []).forEach(function(g){
+        if (!byKey[g.k]) byKey[g.k] = g.i;
+        (g.a || []).forEach(function(k){ if (!byKey[k]) byKey[k] = g.i; });
       });
     }
-    rebuilt.push(merged);
-  });
-  db.notes = rebuilt;
-}
-function save(){
-  try{ localStorage.setItem(KEY, JSON.stringify(db)); }
-  catch(e){ toast("Could not save. Storage may be full."); }
-}
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-
-/* ---------------- taxonomy ---------------- */
-const SLOTS = [
-  { id:"work",   label:"work"   },
-  { id:"home",   label:"home"   },
-  { id:"lately", label:"lately" }
-];
-const SLOTNAME = Object.fromEntries(SLOTS.map(x => [x.id, x.label]));
-
-const ASK_HINTS = ["interview","waiting to hear","coming up","next week","next month","applying","will find out","should ask","hoping to hear","results","find out","decision","offer","due in","expecting"];
-
-/* ---------------- parsing ---------------- */
-const STOP = new Set(["i","he","she","they","we","you","it","the","a","an","and","but","so","then","had","has","have","just","last","next","this","that","my","his","her","their","our","today","yesterday","tomorrow","met","saw","talked","lunch","dinner","coffee","monday","tuesday","wednesday","thursday","friday","saturday","sunday","january","february","march","april","may","june","july","august","september","october","november","december"]);
-
-function todayISO(){
-  const d = new Date();
-  return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
-}
-function shiftISO(days){
-  const d = new Date();
-  d.setDate(d.getDate() + days);
-  return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
-}
-
-const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
-
-function guessDate(text){
-  const t = text.toLowerCase();
-  let m = t.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/);
-  if(m){
-    let yr = m[3] ? parseInt(m[3],10) : new Date().getFullYear();
-    if(yr < 100) yr += 2000;
-    const d = new Date(yr, parseInt(m[1],10)-1, parseInt(m[2],10));
-    if(!isNaN(d)) return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
-  }
-  m = t.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:,?\s*(\d{4}))?/);
-  if(m){
-    const yr = m[3] ? parseInt(m[3],10) : new Date().getFullYear();
-    const d = new Date(yr, MONTHS[m[1]], parseInt(m[2],10));
-    if(!isNaN(d)) return new Date(d.getTime() - d.getTimezoneOffset()*60000).toISOString().slice(0,10);
-  }
-  if(/\byesterday\b/.test(t)) return shiftISO(-1);
-  if(/\blast night\b/.test(t)) return shiftISO(-1);
-  if(/\blast week\b/.test(t)) return shiftISO(-7);
-  if(/\blast month\b/.test(t)) return shiftISO(-30);
-  return todayISO();
-}
-
-function guessAsk(text){
-  const t = text.toLowerCase();
-  return ASK_HINTS.some(h => t.includes(h));
-}
-
-function guessSaw(text){
-  return /\b(lunch|dinner|coffee|drinks|met up|saw|hung out|visited|brunch|party|came over|stopped by)\b/i.test(text);
-}
-
-function guessPerson(text){
-  // known people win
-  const lower = text.toLowerCase();
-  let best = null;
-  for(const p of db.people){
-    const first = p.name.split(/\s+/)[0].toLowerCase();
-    if(new RegExp("\\b" + first.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + "\\b").test(lower)){
-      if(!best || p.name.length > best.length) best = p.name;
-    }
-  }
-  if(best) return best;
-  // otherwise first capitalized word that isn't a common opener
-  const words = text.split(/[^A-Za-z'’-]+/).filter(Boolean);
-  for(const w of words){
-    if(/^[A-Z][a-z'’-]{1,}$/.test(w) && !STOP.has(w.toLowerCase())) return w;
-  }
-  return "";
-}
-
-function parseOne(text){
-  return {
-    person: guessPerson(text),
-    date: guessDate(text),
-    text: text.trim(),
-    saw: guessSaw(text),
-    ask: guessAsk(text),
-    raw: text.trim()
-  };
-}
-
-function parseBulk(blob){
-  const blocks = blob.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
-  const out = [];
-  for(const b of blocks){
-    // a block with many lines each starting with a date splits further
-    const lines = b.split(/\n/).map(s => s.trim()).filter(Boolean);
-    const dated = lines.filter(l => /^(\d{1,2}\/\d{1,2}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(l));
-    if(lines.length > 1 && dated.length === lines.length){
-      lines.forEach(l => out.push(parseOne(l)));
-    }else{
-      out.push(parseOne(b));
-    }
-  }
-  return out;
-}
-
-/* ---------------- people helpers ---------------- */
-function findPerson(name){
-  const n = name.trim().toLowerCase();
-  return db.people.find(p => p.name.toLowerCase() === n) || null;
-}
-function ensurePerson(name){
-  const found = findPerson(name);
-  if(found) return found;
-  const p = { id:uid(), name:name.trim(), met:"", closeness:"", energy:"", enneagram:"", birthday:"",
-              slots:{}, slotHist:{}, asks:[] };
-  db.people.push(p);
-  return p;
-}
-function notesFor(pid){
-  return db.notes.filter(n => n.personId === pid)
-    .sort((a,b) => b.date.localeCompare(a.date) || b.created - a.created);
-}
-function lastNoted(pid){
-  const ns = notesFor(pid);
-  return ns.length ? ns[0].date : "";
-}
-function lastSeen(pid){
-  const ns = notesFor(pid).filter(n => n.saw);
-  return ns.length ? ns[0].date : "";
-}
-function asksFor(pid){
-  const p = db.people.find(x => x.id === pid);
-  return p && Array.isArray(p.asks) ? p.asks : [];
-}
-function allAsks(){
-  const out = [];
-  db.people.forEach(p => (p.asks||[]).forEach(q => out.push({ person:p, ask:q })));
-  return out;
-}
-function prettyDate(iso){
-  if(!iso) return "";
-  const [y,m,d] = iso.split("-").map(Number);
-  return new Date(y, m-1, d).toLocaleDateString(undefined,{month:"short", day:"numeric", year:"numeric"});
-}
-function agoDays(iso){
-  if(!iso) return Infinity;
-  const [y,m,d] = iso.split("-").map(Number);
-  return Math.round((Date.now() - new Date(y,m-1,d).getTime()) / 86400000);
-}
-
-/* ---------------- ui plumbing ---------------- */
-const $ = id => document.getElementById(id);
-let current = "capture";
-let profileId = null;
-let queue = [];
-let sortMode = "recent";
-
-function show(name){
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
-  $("s-" + name).classList.add("on");
-  document.querySelectorAll("nav button").forEach(b =>
-    b.toggleAttribute("aria-current", b.dataset.go === name));
-  document.querySelectorAll("nav button").forEach(b => {
-    if(b.dataset.go === name) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
-  });
-  current = name;
-  window.scrollTo(0,0);
-}
-function toast(msg){
-  const el = $("toast");
-  el.textContent = msg;
-  el.classList.add("on");
-  clearTimeout(el._t);
-  el._t = setTimeout(() => el.classList.remove("on"), 1900);
-}
-
-document.querySelectorAll("nav button").forEach(b =>
-  b.addEventListener("click", () => {
-    const go = b.dataset.go;
-    if(go === "people") renderPeople();
-    if(go === "loops") renderLoops();
-    show(go);
-  }));
-document.querySelectorAll("[data-back]").forEach(b =>
-  b.addEventListener("click", () => {
-    const back = b.dataset.back;
-    if(back === "people") renderPeople();
-    if(back === "capture"){ queue = []; }
-    show(back);
-  }));
-
-/* ---------------- voice ---------------- */
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-/* ===== Listening in rounds =====
-   Continuous mode is what caused the repeating text on Android: Chrome re-delivers earlier
-   segments in later events, and any attempt to assemble them stacks the sentence on itself.
-   Single utterance mode fixes that and brings a worse problem, because it ends at the first
-   pause, so pausing for breath ended the recording.
-
-   So each round is single utterance, and when a round ends on its own the finished sentence is
-   banked and a new round starts. Nothing stacks, because every round returns one clean sentence
-   and banked text is never re-delivered. Listening stops when you tap, or when the silence runs
-   long enough that you have clearly finished. */
-
-const REC_QUIET_MS = 10000;
-
-let rec = null;
-let recOn = false;
-let recBase = "";    // sentences banked from finished rounds
-let recFinal = "";   // recBase plus this round's best result
-let recQuiet = null;
-
-const setHint = m => { $("micHint").textContent = m; };
-
-function showHeard(interim){
-  $("captureText").value = (recFinal + " " + (interim || "")).replace(/\s+/g," ").trim();
-}
-
-function armQuiet(){
-  clearTimeout(recQuiet);
-  recQuiet = setTimeout(() => {
-    if(recOn){ stopRec("Stopped after a pause. Tap to add more."); }
-  }, REC_QUIET_MS);
-}
-
-function stopRec(msg){
-  recOn = false;
-  clearTimeout(recQuiet);
-  try{ if(rec) rec.stop(); }catch(e){}
-  $("micBtn").classList.remove("live");
-  $("micBtn").setAttribute("aria-label","Start voice capture");
-  setHint(msg || "Tap and start talking");
-}
-
-function beginRound(){
-  rec = new SR();
-  rec.continuous = false;
-  rec.interimResults = true;
-  rec.lang = navigator.language || "en-US";
-
-  rec.onresult = e => {
-    // Take the single best final rather than joining a list. Belt and braces: if a browser
-    // still hands back a growing chain where each piece repeats the one before, keep the
-    // longest rather than gluing them together.
-    let best = "", interim = "";
-    for(let i = 0; i < e.results.length; i++){
-      const r = e.results[i], t = (r[0] && r[0].transcript) || "";
-      if(r.isFinal){ if(t.length > best.length) best = t; }
-      else if(t.length > interim.length) interim = t;
-    }
-    recFinal = (recBase + " " + best).trim();
-    showHeard(interim.trim());
-    armQuiet();   // you are still talking, so the clock starts again
+    var n = 0;
+    for (var _ in byKey) n++;
+    CACHE = { built: d.built, n: n, byKey: byKey };
+    return CACHE;
   };
 
-  // Silence is not a failure here, it is what a pause looks like from the inside, so it is
-  // left to the round below to restart.
-  rec.onerror = ev => {
-    const err = ev && ev.error;
-    if(err === "no-speech" || err === "aborted") return;
-    stopRec(err === "not-allowed" || err === "service-not-allowed"
-      ? "Microphone blocked. Allow it in your browser settings, or type below."
-      : "Voice stopped. Tap to try again.");
-  };
+  var saved = ls(K_CACHED);
+  if (saved){ try { build(saved); } catch(e){ CACHE = null; } }
 
-  // The usual exit is a pause, not the end of what you were saying, so bank it and go again.
-  rec.onend = () => {
-    if(!recOn) return;          // you tapped done, already handled
-    recBase = recFinal;
-    try{ rec.start(); }catch(e){ stopRec("Voice stopped. Tap to try again."); }
-  };
+  // Refresh in the background; a stale copy is better than a spinner.
+  fetch(url).then(function(r){ return r.ok ? r.text() : null; })
+    .then(function(raw){
+      if (!raw) return;
+      build(raw);
+      try { ls(K_CACHED, raw); } catch(e){}
+    }).catch(function(){});
 
-  try{ rec.start(); return true; }catch(e){ return false; }
+  return Promise.resolve(CACHE);
 }
 
-function startRec(){
-  if(!SR){ setHint("Voice is not supported in this browser. Type below instead."); return; }
-  if(recOn){ stopRec("Saved. Tap to add more."); return; }
-
-  // Carry forward anything already in the box rather than talking over it.
-  recBase = $("captureText").value.trim();
-  recFinal = recBase;
-
-  if(!beginRound()){ setHint("The microphone would not start here. Type below instead."); return; }
-  recOn = true;
-  armQuiet();
-  $("micBtn").classList.add("live");
-  $("micBtn").setAttribute("aria-label","Stop voice capture");
-  setHint("Listening. Tap when you are done.");
+function cacheLookup(title){
+  if (!CACHE) return null;
+  var id = CACHE.byKey[norm(title)];
+  return id ? String(id) : null;
 }
 
-if(!SR){
-  setHint("Voice is not supported in this browser. Type below instead.");
-  $("micBtn").disabled = true;
+// Must match norm() in scripts/build_cache.py exactly, or nothing will match.
+function norm(s){
+  s = String(s).normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+  s = s.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ");
+  return s.replace(/\s+/g, " ").trim();
 }
-$("micBtn").addEventListener("click", startRec);
+function gemKey(){ return "proxy"; }
 
-/* ---------------- capture -> confirm ---------------- */
+var STARRED = lsJSON(K_STAR);   // id -> minimal game record
+var OWNED   = lsJSON(K_OWN);
 
-let pendingId = null;
-
-function openConfirm(){
-  const item = queue[0];
-  $("cPerson").value = item.person;
-  renderPicker();
-  $("cDate").value = item.date;
-  $("cText").value = item.text;
-  $("cSaw").checked = item.saw;
-  $("cAsk").checked = item.ask;
-
-  const many = queue.length > 1;
-  $("queueInfo").hidden = !many;
-  $("queueInfo").textContent = many ? queue.length + " entries left to review" : "";
-  $("skipBtn").hidden = !many;
-  $("confirmSub").textContent = item.person
-    ? "Fix anything that landed wrong."
-    : "Add a name, then fix anything else that landed wrong.";
-
-  show("confirm");
+function isStar(id){ return !!STARRED[id]; }
+function isOwn(id){ return !!OWNED[id]; }
+function toggleStar(g){
+  if (STARRED[g.id]) delete STARRED[g.id]; else STARRED[g.id] = g;
+  saveJSON(K_STAR, STARRED);
 }
-
-function renderPicker(){
-  const box = $("cPicker");
-  const typed = $("cPerson").value.trim().toLowerCase();
-  box.innerHTML = "";
-  const matches = db.people
-    .filter(p => !typed || p.name.toLowerCase().includes(typed))
-    .sort((a,b) => (lastNoted(b.id) || "").localeCompare(lastNoted(a.id) || ""))
-    .slice(0,12);
-  matches.forEach(p => {
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "chip"; b.textContent = p.name;
-    b.setAttribute("aria-pressed", typed === p.name.toLowerCase() ? "true" : "false");
-    b.addEventListener("click", () => { $("cPerson").value = p.name; renderPicker(); });
-    box.appendChild(b);
-  });
-  const exact = typed && db.people.some(p => p.name.toLowerCase() === typed);
-  if(typed && !exact){
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "chip new";
-    b.textContent = "+ New: " + $("cPerson").value.trim();
-    b.addEventListener("click", () => renderPicker());
-    box.appendChild(b);
-  }
+function toggleOwn(g){
+  if (OWNED[g.id]) delete OWNED[g.id]; else OWNED[g.id] = { id:g.id, name:g.name };
+  saveJSON(K_OWN, OWNED);
 }
-$("cPerson").addEventListener("input", renderPicker);
-
-/* ---------------- capture buttons ---------------- */
-$("reviewBtn").addEventListener("click", () => {
-  const txt = $("captureText").value.trim();
-  if(!txt) return toast("Nothing to file yet.");
-  if(recOn) stopRec();
-  queue = [parseOne(txt)];
-  openConfirm();
-});
-
-$("laterBtn").addEventListener("click", () => {
-  const txt = $("captureText").value.trim();
-  if(!txt) return toast("Nothing to save yet.");
-  if(recOn) stopRec();
-  const g = parseOne(txt);
-  db.pending.push({ id: uid(), date: g.date, text: txt, raw: txt, guess: g.person, created: Date.now() });
-  save();
-  $("captureText").value = "";
-  refreshBadge(); renderWaiting();
-  toast("Saved. File it when you have a minute.");
-});
-
-function renderWaiting(){
-  const b = $("waitingLine");
-  const n = db.pending.length;
-  b.hidden = n === 0;
-  b.textContent = n === 1 ? "1 note waiting to be filed" : n + " notes waiting to be filed";
-}
-$("waitingLine").addEventListener("click", () => { renderLoops(); show("loops"); });
-
-$("bulkBtn").addEventListener("click", () => {
-  const blob = $("bulkText").value.trim();
-  if(!blob) return toast("Paste some notes first.");
-  queue = parseBulk(blob);
-  if(!queue.length) return toast("Could not find any entries in that.");
-  openConfirm();
-});
-
-$("skipBtn").addEventListener("click", () => {
-  queue.shift();
-  if(queue.length) openConfirm();
-  else { show("capture"); toast("Done reviewing."); }
-});
-
-$("saveBtn").addEventListener("click", () => {
-  const name = $("cPerson").value.trim();
-  if(!name) return toast("Who is this about?");
-  const text = $("cText").value.trim();
-  if(!text) return toast("The note is empty.");
-
-  const person = ensurePerson(name);
-  const date = $("cDate").value || todayISO();
-
-  db.notes.push({
-    id: uid(), personId: person.id, date, text,
-    saw: $("cSaw").checked, created: Date.now(),
-    raw: queue[0] ? queue[0].raw : text
-  });
-
-  if($("cAsk").checked) person.asks.push({ id: uid(), text, date });
-
-  if(pendingId){
-    db.pending = db.pending.filter(x => x.id !== pendingId);
-    pendingId = null;
-  }
-  save(); renderWaiting();
-
-  queue.shift();
-  if(queue.length){
-    openConfirm();
-  }else{
-    $("captureText").value = ""; $("bulkText").value = "";
-    show("capture");
-    toast("Filed under " + person.name + ".");
-  }
-});
-
-/* ---------------- people list ---------------- */
-$("sortRecent").addEventListener("click", () => { sortMode = "recent"; renderPeople(); });
-$("sortAlpha").addEventListener("click", () => { sortMode = "alpha"; renderPeople(); });
-$("search").addEventListener("input", renderPeople);
-
-function renderPeople(){
-  $("sortRecent").setAttribute("aria-pressed", sortMode === "recent" ? "true" : "false");
-  $("sortAlpha").setAttribute("aria-pressed", sortMode === "alpha" ? "true" : "false");
-
-  const q = $("search").value.trim().toLowerCase();
-  let list = db.people.slice();
-
-  if(q){
-    list = list.filter(p => {
-      if(p.name.toLowerCase().includes(q)) return true;
-      return notesFor(p.id).some(n => n.text.toLowerCase().includes(q));
-    });
-  }
-
-  if(sortMode === "alpha") list.sort((a,b) => a.name.localeCompare(b.name));
-  else list.sort((a,b) => (lastNoted(b.id) || "").localeCompare(lastNoted(a.id) || ""));
-
-  const ul = $("peopleListEl");
-  ul.innerHTML = "";
-  list.forEach(p => {
-    const li = document.createElement("li");
-    const btn = document.createElement("button");
-    const loops = asksFor(p.id).length;
-    const days = agoDays(lastNoted(p.id));
-    let when = "no notes";
-    if(days === 0) when = "today";
-    else if(days === 1) when = "1 day ago";
-    else if(days < 60) when = days + " days ago";
-    else if(isFinite(days)) when = Math.round(days/30) + " months ago";
-
-    btn.innerHTML = '<span class="pname">' + esc(p.name) +
-      (loops ? '<span class="dot" title="' + loops + ' to ask about"></span>' : '') +
-      '</span><span class="pmeta">' + when + '</span>';
-    btn.addEventListener("click", () => openProfile(p.id));
-    li.appendChild(btn);
-    ul.appendChild(li);
-  });
-
-  $("peopleEmpty").hidden = list.length > 0;
-  if(q && !list.length) $("peopleEmpty").textContent = "Nothing matches that.";
-  else $("peopleEmpty").textContent = "No one yet. Capture your first note and they will show up here.";
-}
-
-function esc(s){
-  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-
-/* ---------------- profile ---------------- */
-const FACTS = [
-  { id:"met",       label:"How we met",  type:"text", full:true, ph:"Swing class, 2019" },
-  { id:"closeness", label:"Closeness",   type:"select", opts:["","Acquaintance","Work friend","Friend","Close friend","Family"] },
-  { id:"energy",    label:"Energy",      type:"select", opts:["","Introvert","Extrovert","Somewhere between"] },
-  { id:"enneagram", label:"Enneagram",   type:"select", opts:["","1","2","3","4","5","6","7","8","9"] },
-  { id:"birthday",  label:"Birthday",    type:"text", ph:"Mar 14" }
-];
-
-function renderAskCard(pid){
-  const p = db.people.find(x => x.id === pid);
-  const box = $("pAsk");
-  box.innerHTML = "";
-  if(!p.asks.length) return;
-
-  const card = document.createElement("div");
-  card.className = "askcard";
-  const h = document.createElement("p");
-  h.className = "askhead";
-  h.textContent = "ASK ABOUT";
-  card.appendChild(h);
-
-  p.asks.forEach(q => {
-    const row = document.createElement("div");
-    row.className = "askrow";
-    const t = document.createElement("p");
-    t.className = "asktext";
-    t.textContent = q.text;
-    const x = document.createElement("button");
-    x.className = "askx";
-    x.textContent = "\u00d7";
-    x.setAttribute("aria-label", "Remove from ask list");
-    x.addEventListener("click", () => {
-      p.asks = p.asks.filter(a => a.id !== q.id);
-      save(); openProfile(pid);
-    });
-    row.appendChild(t); row.appendChild(x);
-    const d = document.createElement("p");
-    d.className = "askdate";
-    d.textContent = "came up " + prettyDate(q.date);
-    card.appendChild(row); card.appendChild(d);
-  });
-  box.appendChild(card);
-}
-
-function renderStanding(pid){
-  const p = db.people.find(x => x.id === pid);
-  const box = $("pStand");
-  box.innerHTML = "";
-
-  const h = document.createElement("p");
-  h.className = "rvhead";
-  h.style.marginTop = "16px";
-  h.textContent = "Where things stand";
-  box.appendChild(h);
-
-  SLOTS.forEach(sl => {
-    const cur = p.slots[sl.id];
-    const hist = p.slotHist[sl.id] || [];
-
-    const row = document.createElement("div");
-    row.className = "standrow";
-
-    const lab = document.createElement("span");
-    lab.className = "standlab";
-    lab.textContent = sl.label;
-
-    const mid = document.createElement("div");
-    mid.style.flex = "1";
-    const t = document.createElement("p");
-    t.className = "standtext" + (cur ? "" : " empty");
-    t.textContent = cur ? cur.text : "not set";
-    mid.appendChild(t);
-    if(cur){
-      const d = document.createElement("p");
-      d.className = "standdate";
-      d.textContent = prettyDate(cur.date) + (hist.length ? "  \u00b7  " + hist.length + " earlier" : "");
-      mid.appendChild(d);
-    }
-    mid.addEventListener("click", () => {
-      const v = prompt("Where things stand on " + sl.label, cur ? cur.text : "");
-      if(v === null) return;
-      setSlot(pid, sl.id, v.trim(), todayISO());
-      openProfile(pid);
-    });
-
-    row.appendChild(lab); row.appendChild(mid);
-
-    if(hist.length){
-      const hb = document.createElement("button");
-      hb.className = "standhist";
-      hb.textContent = "\u22ef";
-      hb.setAttribute("aria-label", "Earlier values");
-      hb.addEventListener("click", () => {
-        const lines = hist.slice().reverse()
-          .map(x => prettyDate(x.date) + "  " + x.text).join("\n\n");
-        alert(sl.label + "\n\n" + lines);
-      });
-      row.appendChild(hb);
-    }
-    box.appendChild(row);
-  });
-}
-
-// The old value is kept rather than overwritten, so a slot doubles as a record of
-// how something changed.
-function setSlot(pid, slot, text, date){
-  const p = db.people.find(x => x.id === pid);
-  if(!p) return;
-  const cur = p.slots[slot];
-  if(!text){ delete p.slots[slot]; save(); return; }
-  if(cur && cur.text !== text){
-    p.slotHist[slot] = p.slotHist[slot] || [];
-    p.slotHist[slot].push(cur);
-  }
-  p.slots[slot] = { text, date: date || todayISO() };
-  save();
-}
-
-function renderTimeline(pid){
-  const p = db.people.find(x => x.id === pid);
-  const box = $("pTimeline");
-  box.innerHTML = "";
-
-  const q = $("pSearch").value.trim().toLowerCase();
-  const all = notesFor(pid).filter(n => !q || n.text.toLowerCase().includes(q));
-
-  if(!all.length){
-    const e = document.createElement("div");
-    e.className = "empty";
-    e.textContent = q ? "Nothing matches that." : "No notes on " + p.name + " yet.";
-    box.appendChild(e);
-    return;
-  }
-
-  all.forEach((n, i) => {
-    const row = document.createElement("div");
-    row.className = "tl";
-
-    const rail = document.createElement("div");
-    rail.className = "tlrail";
-    const dot = document.createElement("i");
-    dot.className = "tldot" + (i === 0 ? " now" : "");
-    rail.appendChild(dot);
-    if(i < all.length - 1){
-      const line = document.createElement("i");
-      line.className = "tlline";
-      rail.appendChild(line);
-    }
-
-    const body = document.createElement("div");
-    body.className = "tlbody";
-    const d = document.createElement("p");
-    d.className = "tldate";
-    d.textContent = prettyDate(n.date) + (n.saw ? "  \u00b7  saw them" : "");
-    const t = document.createElement("p");
-    t.className = "tltext";
-    t.innerHTML = mark(n.text, q);
-    body.appendChild(d); body.appendChild(t);
-
-    const acts = document.createElement("div");
-    acts.className = "tlacts";
-
-    SLOTS.forEach(sl => {
-      const b = document.createElement("button");
-      b.textContent = "\u2192 " + sl.label;
-      b.title = "Make this the current " + sl.label;
-      b.addEventListener("click", () => {
-        // Prefilled so a long note can be trimmed down to the line that matters.
-        const v = prompt("Current " + sl.label + "?", n.text);
-        if(v === null || !v.trim()) return;
-        setSlot(pid, sl.id, v.trim(), n.date);
-        openProfile(pid);
-      });
-      acts.appendChild(b);
-    });
-
-    const ask = document.createElement("button");
-    ask.textContent = "\u2192 ask";
-    ask.addEventListener("click", () => {
-      const v = prompt("What should you ask about?", n.text);
-      if(v === null || !v.trim()) return;
-      p.asks.push({ id: uid(), text: v.trim(), date: n.date });
-      save(); openProfile(pid);
-    });
-    acts.appendChild(ask);
-
-    const ed = document.createElement("button");
-    ed.textContent = "edit";
-    ed.addEventListener("click", () => {
-      const v = prompt("Edit note", n.text);
-      if(v !== null && v.trim()){ n.text = v.trim(); save(); openProfile(pid); }
-    });
-    acts.appendChild(ed);
-
-    const del = document.createElement("button");
-    del.className = "warn";
-    del.textContent = "delete";
-    del.addEventListener("click", () => {
-      if(!confirm("Delete this note?")) return;
-      db.notes = db.notes.filter(x => x.id !== n.id);
-      save(); openProfile(pid);
-    });
-    acts.appendChild(del);
-
-    body.appendChild(acts);
-    row.appendChild(rail); row.appendChild(body);
-    box.appendChild(row);
-  });
-}
-
-function mark(text, q){
-  const safe = esc(text);
-  if(!q) return safe;
-  const rx = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig");
-  return safe.replace(rx, '<mark>$1</mark>');
-}
-
-function openProfile(pid){
-  const reopening = profileId === pid;
-  profileId = pid;
-  if(!reopening) $("pSearch").value = "";
-  const p = db.people.find(x => x.id === pid);
-  if(!p) return;
-
-  $("pTitle").textContent = p.name;
-  const seen = lastSeen(pid), noted = lastNoted(pid);
-  $("pSub").textContent = [
-    noted ? "Last noted " + prettyDate(noted) : "No notes yet",
-    seen ? "last seen " + prettyDate(seen) : null
-  ].filter(Boolean).join(", ");
-
-  renderAskCard(pid);
-  renderStanding(pid);
-  renderTimeline(pid);
-
-  const fb = $("pFacts");
-  fb.innerHTML = "";
-  FACTS.forEach(f => {
-    const lab = document.createElement("label");
-    lab.className = "fld" + (f.full ? " full" : "");
-    const sp = document.createElement("span");
-    sp.textContent = f.label;
-    lab.appendChild(sp);
-    let input;
-    if(f.type === "select"){
-      input = document.createElement("select");
-      f.opts.forEach(o => {
-        const opt = document.createElement("option");
-        opt.value = o;
-        opt.textContent = o === "" ? "Not sure yet" : o;
-        input.appendChild(opt);
-      });
-    }else{
-      input = document.createElement("input");
-      input.type = "text";
-      input.placeholder = f.ph || "";
-    }
-    input.value = p[f.id] || "";
-    input.addEventListener("change", () => { p[f.id] = input.value; save(); });
-    lab.appendChild(input);
-    fb.appendChild(lab);
-  });
-
-  const sel = $("mergeSel");
-  sel.innerHTML = '<option value="">Pick someone</option>';
-  db.people.filter(x => x.id !== pid).sort((a,b) => a.name.localeCompare(b.name)).forEach(x => {
-    const o = document.createElement("option");
-    o.value = x.id; o.textContent = x.name;
-    sel.appendChild(o);
-  });
-
-  show("profile");
-}
-
-$("pSearch").addEventListener("input", () => { if(profileId) renderTimeline(profileId); });
-
-$("mergeBtn").addEventListener("click", () => {
-  const target = $("mergeSel").value;
-  if(!target) return toast("Pick who to merge into.");
-  const from = db.people.find(p => p.id === profileId);
-  const into = db.people.find(p => p.id === target);
-  if(!from || !into) return;
-  if(!confirm("Move all of " + from.name + "'s notes into " + into.name + "?")) return;
-
-  db.notes.forEach(n => { if(n.personId === from.id) n.personId = into.id; });
-  FACTS.forEach(f => { if(!into[f.id] && from[f.id]) into[f.id] = from[f.id]; });
-  SLOTS.forEach(sl => { if(!into.slots[sl.id] && from.slots[sl.id]) into.slots[sl.id] = from.slots[sl.id]; });
-  into.asks = [...into.asks, ...(from.asks || [])];
-  db.people = db.people.filter(p => p.id !== from.id);
-  save();
-  toast("Merged into " + into.name + ".");
-  openProfile(into.id);
-});
-
-$("delPersonBtn").addEventListener("click", () => {
-  const p = db.people.find(x => x.id === profileId);
-  if(!p) return;
-  if(!confirm("Delete " + p.name + " and every note on them? This cannot be undone.")) return;
-  db.notes = db.notes.filter(n => n.personId !== p.id);
-  db.people = db.people.filter(x => x.id !== p.id);
-  save(); refreshBadge(); renderPeople(); show("people");
-  toast("Deleted.");
-});
-
-/* ---------------- follow ups ---------------- */
-function renderLoops(){
-  renderPending();
-  const box = $("loopList");
-  box.innerHTML = "";
-  const rows = allAsks();
-
-  rows.forEach(({person, ask}) => {
-    const d = document.createElement("div");
-    d.className = "card";
-    d.innerHTML = '<div class="askwho">' + esc(person.name) + '</div>' +
-      '<div class="histtext">' + esc(ask.text) + '</div>' +
-      '<div class="histdate" style="margin-top:6px">came up ' + prettyDate(ask.date) + '</div>';
-
-    const acts = document.createElement("div");
-    acts.className = "histacts";
-    const done = document.createElement("button");
-    done.textContent = "Remove";
-    done.addEventListener("click", () => {
-      person.asks = person.asks.filter(a => a.id !== ask.id);
-      save(); renderLoops();
-    });
-    acts.appendChild(done);
-    const go = document.createElement("button");
-    go.textContent = "Open " + person.name;
-    go.addEventListener("click", () => openProfile(person.id));
-    acts.appendChild(go);
-    d.appendChild(acts);
-    box.appendChild(d);
-  });
-
-  $("loopEmpty").hidden = rows.length > 0 || db.pending.length > 0;
-}
-
-function renderPending(){
-  const box = $("pendList");
-  box.innerHTML = "";
-  if(!db.pending.length) return;
-
-  const h = document.createElement("p");
-  h.className = "rvhead";
-  h.style.marginTop = "0";
-  h.textContent = "Waiting to be filed";
-  box.appendChild(h);
-
-  db.pending.slice().sort((a,b) => a.created - b.created).forEach(pn => {
-    const d = document.createElement("div");
-    d.className = "card";
-    d.innerHTML = '<div class="histtext">' + esc(pn.text) + '</div>' +
-      '<div class="histdate" style="margin-top:6px">' + prettyDate(pn.date) +
-      (pn.guess ? " \u00b7 " + esc(pn.guess) + "?" : " \u00b7 who is this about?") + '</div>';
-
-    const acts = document.createElement("div");
-    acts.className = "histacts";
-    const go = document.createElement("button");
-    go.textContent = "File it";
-    go.addEventListener("click", () => {
-      queue = [parseOne(pn.text)];
-      queue[0].date = pn.date;
-      openConfirm();
-      rv.pendingId = pn.id;
-    });
-    acts.appendChild(go);
-    const del = document.createElement("button");
-    del.className = "warn";
-    del.textContent = "Discard";
-    del.addEventListener("click", () => {
-      if(!confirm("Discard this note?")) return;
-      db.pending = db.pending.filter(x => x.id !== pn.id);
-      save(); refreshBadge(); renderWaiting(); renderLoops();
-    });
-    acts.appendChild(del);
-    d.appendChild(acts);
-    box.appendChild(d);
-  });
-
-  const hr = document.createElement("p");
-  hr.className = "rvhead";
-  hr.textContent = "Ask about";
-  box.appendChild(hr);
-}
-
-// No count badge on the tab. Some of these never resolve, and a number you
-// cannot clear just becomes noise.
-function refreshBadge(){}
-
-/* ---------------- export ---------------- */
-$("exportBtn").addEventListener("click", async () => {
-  const lines = [];
-  db.people.slice().sort((a,b) => a.name.localeCompare(b.name)).forEach(p => {
-    lines.push("== " + p.name + " ==");
-    FACTS.forEach(f => { if(p[f.id]) lines.push(f.label + ": " + p[f.id]); });
-    SLOTS.forEach(sl => { if(p.slots[sl.id]) lines.push(sl.label + ": " + p.slots[sl.id].text); });
-    (p.asks || []).forEach(q => lines.push("ask: " + q.text));
-    notesFor(p.id).slice().reverse().forEach(n => {
-      lines.push(n.date + (n.saw ? " (saw them)" : "") + " - " + n.text);
-    });
-    lines.push("");
-  });
-  if(db.pending.length){
-    lines.push("== not yet filed ==");
-    db.pending.forEach(pn => lines.push(pn.date + " - " + pn.text));
-  }
-  const txt = lines.join("\n");
-  try{
-    await navigator.clipboard.writeText(txt);
-    toast("Copied.");
-  }catch(e){
-    const w = window.open("", "_blank");
-    if(w) w.document.write("<pre>" + esc(txt) + "</pre>");
-    else toast("Could not copy. Allow clipboard access.");
-  }
-});
-
-/* ---------------- installable ---------------- */
-(function manifest(){
-  const icon = "data:image/svg+xml;base64," + btoa(
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
-    '<rect width="512" height="512" rx="110" fill="#3F6B52"/>' +
-    '<g fill="none" stroke="#F7FAF7" stroke-width="30" stroke-linecap="round">' +
-    '<rect x="199" y="112" width="114" height="200" rx="57"/>' +
-    '<path d="M140 290a116 116 0 0 0 232 0"/><path d="M256 406v56"/></g></svg>');
-  const m = {
-    name:"Circle", short_name:"Circle", start_url:".", display:"standalone",
-    background_color:"#E9EAE4", theme_color:"#E9EAE4",
-    icons:[{src:icon, sizes:"512x512", type:"image/svg+xml", purpose:"any"}]
-  };
-  const link = document.createElement("link");
-  link.rel = "manifest";
-  link.href = URL.createObjectURL(new Blob([JSON.stringify(m)], {type:"application/manifest+json"}));
-  document.head.appendChild(link);
-  const apple = document.createElement("link");
-  apple.rel = "apple-touch-icon";
-  apple.href = icon;
-  document.head.appendChild(apple);
+function starCount(){ return Object.keys(STARRED).length; }
+
+/* ---------------------------- history -------------------------------
+   Keeps what was found, not the photos. Enough to reopen a shelf later
+   without re-photographing it.                                          */
+var HISTORY = (function(){
+  try { var h = JSON.parse(ls(K_HIST) || "[]"); return h.length ? h : []; }
+  catch(e){ return []; }
 })();
 
-/* ---------------- boot ---------------- */
-$("vstamp").textContent = "v" + VERSION;
-load();
-refreshBadge();
-renderWaiting();
-renderPeople();
+function remember(rows){
+  var found = rows.filter(function(r){ return r.game; });
+  if (!found.length) return;
+  var entry = {
+    t: Date.now(),
+    ids: found.map(function(r){ return String(r.game.id); }),
+    names: found.map(function(r){ return r.game.name; }),
+    missed: rows.length - found.length
+  };
+  // Re-scanning the same shelf should replace the old entry, not stack up.
+  var key = entry.ids.slice().sort().join(",");
+  HISTORY = HISTORY.filter(function(h){
+    return (h.ids || []).slice().sort().join(",") !== key; });
+  HISTORY.unshift(entry);
+  HISTORY = HISTORY.slice(0, 40);
+  try { ls(K_HIST, JSON.stringify(HISTORY)); } catch(e){}
+}
+
+function rememberOne(g){ remember([{ game: g }]); }
+
+function forgetAll(){
+  HISTORY = []; try { ls(K_HIST, ""); } catch(e){}
+}
+
+function whenText(ms){
+  var mins = Math.round((Date.now() - ms) / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return mins + " min ago";
+  var hrs = Math.round(mins / 60);
+  if (hrs < 24) return hrs + (hrs === 1 ? " hour ago" : " hours ago");
+  var days = Math.round(hrs / 24);
+  if (days < 7) return days + (days === 1 ? " day ago" : " days ago");
+  return new Date(ms).toLocaleDateString();
+}
+
+function histLabel(h){
+  if (h.ids.length === 1) return esc(h.names[0]);
+  return esc(h.names.slice(0, 3).join(", ")) +
+    (h.names.length > 3 ? " and " + (h.names.length - 3) + " more" : "");
+}
+
+function histRow(h, i){
+  return '<button class="hrow" data-hist="'+i+'">'+
+    '<span class="hn">'+(h.ids.length === 1 ? "1 game" : h.ids.length + " games")+'</span>'+
+    '<span class="hb"><span class="ht">'+histLabel(h)+'</span>'+
+    '<span class="hw">'+esc(whenText(h.t))+
+      (h.missed ? " &middot; " + h.missed + " unmatched" : "")+'</span></span>'+
+    '<span class="go">&rarr;</span></button>';
+}
+
+/* ============================ state ============================= */
+var screen = "idle", stream = null, detector = null, scanning = false;
+var picks = [], game = null, shelf = [], reads = [];
+var lastUPC = "", searchedFor = "", msg = null, msgBad = false, sheet = false;
+var sortKey = "shelf", sortDir = 1, busy = "", busyNote = "", shotURL = null;
+var PRICE_IN = {};   // id -> store price you typed
+
+var el = document.getElementById("stage"), modal = document.getElementById("modal");
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function gameURL(id){ return "https://boardgamegeek.com/boardgame/" + encodeURIComponent(id); }
+function searchURL(q){ return "https://boardgamegeek.com/geeksearch.php?action=search&objecttype=boardgame&q=" + encodeURIComponent(q); }
+
+/* ============================ BGG =============================== */
+function bggFetch(path){
+  return fetch(BGG + path, { headers: { "X-Shelf-Pass": password() } })
+    .then(function(r){
+      if (r.status === 403){ askPassword(true); throw new Error("PASSWORD"); }
+      if (r.status === 401)
+        throw new Error("The shared server could not reach BoardGameGeek.");
+      if (!r.ok) throw new Error("BoardGameGeek did not answer. Try again in a moment.");
+      return r.text();
+    });
+}
+
+function num(node, sel, attr){
+  var e = node.querySelector(sel);
+  if (!e) return null;
+  var v = parseFloat(e.getAttribute(attr || "value"));
+  return isFinite(v) ? v : null;
+}
+
+function links(item, type){
+  return Array.prototype.slice.call(item.querySelectorAll('link[type="'+type+'"]'))
+    .map(function(l){ return l.getAttribute("value"); }).filter(Boolean);
+}
+
+// "Best with" is a user poll, and often disagrees with the box.
+function bestWith(item){
+  var best = null, top = 0;
+  Array.prototype.forEach.call(item.querySelectorAll('poll[name="suggested_numplayers"] results'),
+    function(r){
+      var b = r.querySelector('result[value="Best"]');
+      if (!b) return;
+      var n = parseInt(b.getAttribute("numvotes"), 10) || 0;
+      if (n > top){ top = n; best = r.getAttribute("numplayers"); }
+    });
+  return top > 0 ? best : null;
+}
+
+// BGG lists sellers worldwide. Only USD is comparable to a US shelf tag.
+function usPrices(item){
+  var vals = [];
+  Array.prototype.forEach.call(item.querySelectorAll("marketplacelistings listing"),
+    function(l){
+      var p = l.querySelector("price");
+      if (!p || p.getAttribute("currency") !== "USD") return;
+      var v = parseFloat(p.getAttribute("value"));
+      if (isFinite(v) && v > 0) vals.push(v);
+    });
+  if (vals.length < 3) return null;
+  vals.sort(function(a,b){ return a-b; });
+  var q = function(f){ return vals[Math.min(vals.length-1, Math.floor(vals.length*f))]; };
+  return [Math.round(q(0.05)), Math.round(q(0.5)), Math.round(q(0.95)), vals.length];
+}
+
+function parseItem(item){
+  var nameEl = item.querySelector('name[type="primary"]') || item.querySelector("name");
+  var rank = null, subranks = [];
+  Array.prototype.forEach.call(item.querySelectorAll("ranks rank"), function(r){
+    var v = parseInt(r.getAttribute("value"), 10);
+    if (!isFinite(v)) return;
+    if (r.getAttribute("name") === "boardgame") rank = v;
+    else {
+      var label = (r.getAttribute("friendlyname") || r.getAttribute("name") || "")
+        .replace(/\s*Game Rank$/i, "").replace(/\s*Rank$/i, "");
+      if (label) subranks.push([label, v]);
+    }
+  });
+  subranks.sort(function(a,b){ return a[1]-b[1]; });
+
+  return {
+    id: item.getAttribute("id"),
+    name: (nameEl && nameEl.getAttribute("value")) || "Unknown game",
+    year: num(item, "yearpublished"),
+    avg: num(item, "statistics ratings average"),
+    geek: num(item, "statistics ratings bayesaverage"),
+    users: num(item, "statistics ratings usersrated"),
+    weight: num(item, "statistics ratings averageweight"),
+    min: num(item, "minplayers"),
+    max: num(item, "maxplayers"),
+    time: num(item, "playingtime"),
+    age: num(item, "minage"),
+    rank: rank, subranks: subranks.slice(0,2),
+    best: bestWith(item),
+    cats: links(item, "boardgamecategory").slice(0,4),
+    mechs: links(item, "boardgamemechanic").slice(0,6),
+    thumb: (item.querySelector("thumbnail") || {}).textContent || "",
+    us: usPrices(item),
+    comments: Array.prototype.slice.call(item.querySelectorAll("comments comment"))
+      .map(function(c){ return { who: c.getAttribute("username"),
+        rating: c.getAttribute("rating"), text: c.getAttribute("value") || "" }; })
+      .filter(function(c){ return c.text.length > 60 && c.text.length < 600; })
+      .slice(0, 60)
+  };
+}
+
+function parseItems(xml){
+  var doc = new DOMParser().parseFromString(xml, "text/xml");
+  if (doc.querySelector("parsererror")) throw new Error("BoardGameGeek sent something unreadable.");
+  return Array.prototype.slice.call(doc.querySelectorAll("item")).map(parseItem);
+}
+
+function loadOne(id){
+  return bggFetch("thing?stats=1&marketplace=1&comments=1&pagesize=100&id=" + encodeURIComponent(id))
+    .then(function(x){
+      var list = parseItems(x);
+      if (!list.length) throw new Error("That game was not found on BoardGameGeek.");
+      return list[0];
+    });
+}
+function loadMany(ids){
+  return bggFetch("thing?stats=1&marketplace=1&id=" + ids.join(","))
+    .then(function(x){
+      var out = {};
+      parseItems(x).forEach(function(g){ out[g.id] = g; });
+      return out;
+    });
+}
+function findId(title){
+  var hit = cacheLookup(title);
+  if (hit) return Promise.resolve(hit);
+  return bggFetch("search?type=boardgame&query=" + encodeURIComponent(title))
+    .then(function(x){
+      var doc = new DOMParser().parseFromString(x, "text/xml");
+      var items = doc.querySelectorAll("item");
+      if (!items.length) return null;
+      var best = items[0];
+      Array.prototype.forEach.call(items, function(it){
+        var n = it.querySelector("name");
+        if (n && (n.getAttribute("value")||"").toLowerCase() === title.toLowerCase()) best = it;
+      });
+      return best.getAttribute("id");
+    })
+    .catch(function(){ return null; });
+}
+
+/* ============================ Gemini ============================ */
+function toB64(file){
+  return new Promise(function(res, rej){
+    var r = new FileReader();
+    r.onload = function(){ res(String(r.result).split(",")[1]); };
+    r.onerror = function(){ rej(new Error("Could not read that photo.")); };
+    r.readAsDataURL(file);
+  });
+}
+
+// Model names on this API get renamed and retired often, so rather than hard
+// code one, ask which models this key can actually use and remember the choice.
+function modelList(){
+  var saved = ls(K_MODEL);
+  if (saved) return Promise.resolve(saved.split(","));
+  return fetch(GAPI + "/models", { headers: { "X-Shelf-Pass": password() } })
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){
+      if (!r.ok) throw new Error(gerr(r.status, d));
+      return d;
+    }); })
+    .then(function(d){
+      var usable = (d.models || []).filter(function(m){
+        return (m.supportedGenerationMethods || []).indexOf("generateContent") >= 0 &&
+          !/embed|aqa|tts|image-generation|live|native-audio/.test(m.name);
+      }).map(function(m){ return m.name.replace(/^models\//, ""); });
+      if (!usable.length) throw new Error("That Gemini key has no usable models.");
+      // Prefer a current flash model: fast, cheap, and handles images.
+      var score = function(n){
+        var s = 0;
+        if (/flash/.test(n)) s += 100;
+        if (/lite/.test(n)) s -= 20;
+        if (/preview|exp/.test(n)) s -= 40;
+        var v = (n.match(/(\d+(?:\.\d+)?)/) || [0,0])[1];
+        return s + parseFloat(v) * 5;
+      };
+      usable.sort(function(a,b){ return score(b) - score(a); });
+      usable = usable.slice(0, 4);   // keep a couple of fallbacks for busy days
+      ls(K_MODEL, usable.join(","));
+      return usable;
+    });
+}
+
+function gerr(status, body){
+  var m = body && body.error && body.error.message;
+  if (status === 403){ askPassword(true); return "PASSWORD"; }
+  if (status === 400 || status === 401)
+    return "Gemini rejected the request" + (m ? ": " + m : ".");
+  if (status === 429) return "Gemini is rate limiting. Wait a minute and try again.";
+  if (status === 404)
+    return "Gemini could not find that model" + (m ? ": " + m : "") +
+           " Remove and re-save your key in settings to pick a new one.";
+  return "Gemini returned " + status + (m ? ": " + m : ".");
+}
+
+var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+
+function callModel(model, parts){
+  return fetch(GAPI + "/" + model, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Shelf-Pass": password() },
+    body: JSON.stringify({ contents: [{ parts: parts }] })
+  }).then(function(r){
+    return r.json().catch(function(){ return {}; }).then(function(d){
+      if (r.ok) return d;
+      var e = new Error(gerr(r.status, d)); e.status = r.status; throw e;
+    });
+  });
+}
+
+// 503 means that model is momentarily overloaded, which is common and transient.
+// Wait and retry, then try the next model rather than failing the whole photo.
+function gemini(parts){
+  return modelList().then(function(models){
+    var attempt = function(mi, tries){
+      var model = models[mi];
+      return callModel(model, parts).then(function(d){
+        busyNote = ""; return d;
+      }).catch(function(e){
+        var busyErr = e.status === 503 || e.status === 500 || e.status === 502;
+        if (busyErr && tries < 3){
+          busyNote = "Gemini is busy, retrying\u2026";
+          if (screen === "busy") render();
+          return sleep(700 * (tries + 1)).then(function(){ return attempt(mi, tries + 1); });
+        }
+        if (e.status === 404){
+          ls(K_MODEL, "");
+          if (mi + 1 < models.length) return attempt(mi + 1, 0);
+        }
+        if (busyErr && mi + 1 < models.length){
+          busyNote = "Trying " + models[mi + 1] + "\u2026";
+          if (screen === "busy") render();
+          return attempt(mi + 1, 0);
+        }
+        busyNote = "";
+        if (busyErr) throw new Error(
+          "Gemini is overloaded right now. It usually clears in a minute or two.");
+        throw e;
+      });
+    };
+    return attempt(0, 0);
+  }).then(function(d){
+    var c = ((d.candidates||[])[0]||{}).content;
+    return ((c && c.parts) || []).map(function(p){ return p.text || ""; }).join("");
+  });
+}
+
+function jsonFrom(text, open, close){
+  var t = String(text).replace(/```json|```/g, "").trim();
+  var a = t.indexOf(open), b = t.lastIndexOf(close);
+  if (a < 0 || b < 0) throw new Error("Could not read the reply.");
+  return JSON.parse(t.slice(a, b + 1));
+}
+
+function readTitles(file){
+  return toB64(file).then(function(b64){
+    return gemini([
+      { inline_data: { mime_type: file.type || "image/jpeg", data: b64 } },
+      { text:
+"List the board game titles visible in this photo, left to right. Boxes may be face out or " +
+"turned on their side showing only the spine; read both.\n\n" +
+"Return ONLY a JSON array of objects, no prose and no markdown fences:\n" +
+'[{"title":"Exact Title As Printed","sure":true,"why":""}]\n\n' +
+'Set "sure" false when the title is legible but ambiguous, for example when you cannot tell a ' +
+'base game from its expansion, and put a short reason in "why". Skip any box you cannot read at ' +
+'all rather than guessing. If you can read none, return [].' }
+    ]);
+  }).then(function(text){
+    return jsonFrom(text, "[", "]")
+      .filter(function(o){ return o && typeof o.title === "string" && o.title.trim(); })
+      .map(function(o){ return { title:o.title.trim(), sure:o.sure !== false, why:o.why || "" }; })
+      .slice(0, 20);
+  });
+}
+
+// Comments are shown verbatim; the model only groups and points at them.
+function summarise(g){
+  if (!gemKey() || !g.comments.length) return Promise.resolve(null);
+  var numbered = g.comments.map(function(c, i){ return i + ". " + c.text; }).join("\n");
+  return gemini([{ text:
+"Here are user comments about the board game \"" + g.name + "\", each numbered.\n\n" + numbered +
+"\n\nGroup them into recurring points of praise and recurring criticisms. Ignore comments that " +
+"say nothing about the game itself, such as trade or shelf notes.\n\n" +
+"Return ONLY a JSON array, no prose and no markdown fences, at most 3 praise and 3 criticism:\n" +
+'[{"dir":"up","point":"one short sentence","n":12,"i":3}]\n\n' +
+'"dir" is up for praise and down for criticism. "n" is roughly how many comments make that point. ' +
+'"i" is the number of the single comment that puts it best.' }])
+  .then(function(text){
+    return jsonFrom(text, "[", "]").filter(function(s){
+      return s && s.point && g.comments[s.i];
+    }).map(function(s){
+      var c = g.comments[s.i];
+      return { dir: s.dir === "down" ? "down" : "up", point: String(s.point),
+               n: parseInt(s.n,10) || 1, quote: c.text, who: c.who, rating: c.rating };
+    });
+  })
+  .catch(function(){ return null; });
+}
+
+/* ============================ pieces ============================ */
+function initials(n){
+  return n.replace(/[^A-Za-z0-9 :]/g,"").split(/[\s:]+/).filter(Boolean)
+    .slice(0,2).map(function(w){ return w[0]; }).join("").toUpperCase();
+}
+var ARTC = ["#5B3A2E","#2F6B4F","#3A7B6B","#3A6B8C","#B07A2A","#6B3A7B","#8C3A2B","#4A6B3A"];
+function artColor(id){ return ARTC[(parseInt(id,10)||0) % ARTC.length]; }
+
+function thumb(g, big){
+  var inner = g.thumb
+    ? '<img src="'+esc(g.thumb)+'" alt="" loading="lazy">'
+    : esc(initials(g.name));
+  var badge = g.conf === false
+    ? '<button class="flag" data-fixgo="1" title="Not sure this is right">?</button>' : "";
+  return '<span class="thumbwrap"><span class="thumb'+(big?" lg":"")+'" style="background:'+
+    artColor(g.id)+'">'+inner+'</span>'+(big?"":badge)+'</span>';
+}
+
+function pips(w){
+  var n = Math.round(w||0), o = '<span class="pips">';
+  for (var i=1;i<=5;i++) o += '<i class="'+(i<=n?"f":"")+'"></i>';
+  return o + "</span>";
+}
+function players(g){
+  if (!g.min && !g.max) return "";
+  if (g.min && g.max && g.min !== g.max) return g.min+"-"+g.max;
+  return String(g.max || g.min);
+}
+
+function facts(g){
+  var cells = [
+    ["Geek <s>/</s> rank", g.geek
+      ? g.geek.toFixed(1)+(g.rank?'<s>/</s><i>#'+g.rank+'</i>':"") : null],
+    ["Weight",   g.weight ? g.weight.toFixed(1)+pips(g.weight) : null],
+    ["Age",      g.age ? g.age+"+" : null],
+    ["Players <s>/</s> best", players(g)
+      ? players(g)+(g.best?'<s>/</s><i>'+esc(g.best)+'</i>':"") : null],
+    ["Mins",     g.time || null]
+  ];
+  (g.subranks||[]).forEach(function(s){ cells.push([esc(s[0]), "#"+s[1]]); });
+  var filled = cells.filter(function(c){ return c[1] !== null; });
+  while (filled.length % 3) filled.push(["", "&mdash;"]);
+  return filled.map(function(c){
+    return '<div class="fact"><k>'+c[0]+'</k><b>'+c[1]+'</b></div>';
+  }).join("");
+}
+
+function tags(g){
+  var all = (g.mechs||[]).concat(g.cats||[]);
+  if (!all.length) return "";
+  return '<div class="tags">'+all.map(function(x){
+    return '<span class="tg">'+esc(x)+'</span>'; }).join("")+'</div>';
+}
+
+function priceBlock(g){
+  if (!g.us) return "";
+  var lo=g.us[0], med=g.us[1], hi=g.us[2], n=g.us[3];
+  var shelfP = PRICE_IN[g.id];
+  var verdict = "";
+  if (shelfP){
+    var pct = Math.round((shelfP - med) / med * 100);
+    var good = pct <= -5, bad = pct >= 15;
+    verdict = '<div class="verdict '+(good?"good":bad?"bad":"")+'">'+
+      (good ? "Under the usual price" : bad ? "Above the usual price" : "About the usual price")+
+      ' &middot; '+(pct>0?"+":"")+pct+'% vs $'+med+' typical</div>';
+  }
+  var span = hi - lo || 1;
+  return '<div class="price">'+
+    '<div class="ph"><span>US selling price</span><small>'+n+' listings</small></div>'+
+    '<div class="bar"><div class="fill" style="left:0;right:0"></div>'+
+      '<div class="dot med" style="left:'+Math.round((med-lo)/span*100)+'%"></div>'+
+      (shelfP ? '<div class="dot shelf" style="left:'+
+        Math.max(0,Math.min(100,Math.round((shelfP-lo)/span*100)))+'%"></div>' : "")+
+    '</div>'+
+    '<div class="pl"><span>$'+lo+'</span><b>$'+med+' typical</b><span>$'+hi+'</span></div>'+
+    (shelfP
+      ? '<div class="shelfrow2">You entered <b>$'+shelfP+'</b>'+
+        '<button class="pen" data-clearprice="'+g.id+'">change</button></div>'+verdict
+      : '<div class="askprice"><input inputmode="decimal" placeholder="Store price" '+
+        'data-priceinput="'+g.id+'"><button data-setprice="'+g.id+'">Compare</button></div>')+
+    '</div>';
+}
+
+function markBtns(g){
+  return '<span class="marks big">'+
+    '<button class="mk2 star'+(isStar(g.id)?" on":"")+'" data-star="'+g.id+'">'+
+      (isStar(g.id)?"\u2605":"\u2606")+(isStar(g.id)?"Shortlisted":"Shortlist")+'</button>'+
+    '<button class="mk2 own'+(isOwn(g.id)?" on":"")+'" data-own="'+g.id+'">\u2713'+
+      (isOwn(g.id)?"I own this":"Mark as owned")+'</button></span>';
+}
+
+function card(g){
+  return '<div class="card">'+
+    '<div class="cardtop">'+thumb(g,true)+'<div class="who2">'+
+      '<a class="name" href="'+gameURL(g.id)+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
+      (g.year ? '<div class="sub">'+g.year+'</div>' : "")+
+      (g.avg ? '<div class="big"><span class="n">'+g.avg.toFixed(1)+'</span>'+
+        '<span class="k">Average'+(g.users?'<br><small>'+g.users.toLocaleString()+
+        ' ratings</small>':"")+'</span></div>' : "")+
+    '</div></div>'+
+    '<div class="facts">'+facts(g)+'</div>'+priceBlock(g)+tags(g)+markBtns(g)+'</div>';
+}
+
+function saysBlock(g){
+  if (!g.says) return "";
+  var up = g.says.filter(function(s){ return s.dir==="up"; });
+  var dn = g.says.filter(function(s){ return s.dir==="down"; });
+  function block(list, tag){
+    return list.map(function(s, i){
+      var id = tag+i;
+      return '<div class="say '+s.dir+'">'+
+        '<button data-toggle="'+id+'"><span class="mk">'+(s.dir==="up"?"+":"&minus;")+'</span>'+
+        '<span style="flex:1">'+esc(s.point)+'</span>'+
+        '<span class="cnt">'+s.n+' &rsaquo;</span></button>'+
+        '<div class="body" hidden><div class="quote">'+esc(s.quote)+'</div>'+
+        '<div class="by"><span>'+esc(s.who||"a user")+
+        (s.rating?' rated it '+esc(String(Math.round(parseFloat(s.rating)))):"")+'</span>'+
+        '<a href="'+gameURL(g.id)+'/ratings?comment=1" target="_blank" rel="noopener">'+
+        'all comments &rarr;</a></div></div></div>';
+    }).join("");
+  }
+  return '<div class="says"><h3>What people say</h3>'+
+    '<p class="hint" style="margin-bottom:0">Tap a point to read the comment it came from.</p>'+
+    (up.length ? '<div class="grp">Praised</div>'+block(up,"u") : "")+
+    (dn.length ? '<div class="grp">Criticised</div>'+block(dn,"d") : "")+
+  '</div>';
+}
+
+/* ============================ table ============================= */
+var COLS = [
+  ["avg",   "Avg",       function(g){ return g.avg; },    function(g){ return g.avg?g.avg.toFixed(1):"&mdash;"; }, "r"],
+  ["wt",    "Weight",    function(g){ return g.weight; }, function(g){ return g.weight?g.weight.toFixed(1):"&mdash;"; }, ""],
+  ["rank",  "Rank",      function(g){ return g.rank; },   function(g){ return g.rank?"#"+g.rank:"&mdash;"; }, ""],
+  ["cat",   "Category rank", function(g){ return g.subranks[0]?g.subranks[0][1]:1e9; },
+            function(g){ return g.subranks[0]?esc(g.subranks[0][0])+" #"+g.subranks[0][1]:"&mdash;"; }, ""],
+  ["pl",    "Players",   function(g){ return g.max; },    function(g){ return players(g)||"&mdash;"; }, ""],
+  ["best",  "Best with", function(g){ return parseInt(g.best,10)||0; }, function(g){ return g.best?esc(g.best):"&mdash;"; }, ""],
+  ["time",  "Mins",      function(g){ return g.time; },   function(g){ return g.time||"&mdash;"; }, ""],
+  ["age",   "Age",       function(g){ return g.age; },    function(g){ return g.age?g.age+"+":"&mdash;"; }, ""],
+  ["year",  "Year",      function(g){ return g.year; },   function(g){ return g.year||"&mdash;"; }, ""],
+  ["users", "Ratings",   function(g){ return g.users; },  function(g){ return g.users?g.users.toLocaleString():"&mdash;"; }, ""],
+  ["type",  "Type",      function(g){ return (g.cats||[])[0]||""; }, function(g){ return esc((g.cats||[]).join(", ")); }, "ty"],
+  ["mech",  "Mechanics", function(g){ return (g.mechs||[])[0]||""; }, function(g){ return esc((g.mechs||[]).join(", ")); }, "mx"]
+];
+
+function matched(){ return shelf.filter(function(r){ return r.game; }); }
+
+function sortedRows(){
+  var list = matched().slice();
+  if (sortKey === "shelf") return list;
+  if (sortKey === "name") return list.sort(function(a,b){
+    return a.game.name.localeCompare(b.game.name) * sortDir; });
+  var col = COLS.filter(function(c){ return c[0]===sortKey; })[0];
+  if (!col) return list;
+  return list.sort(function(a,b){
+    var x = col[2](a.game), y = col[2](b.game);
+    if (typeof x === "string") return x.localeCompare(y) * sortDir;
+    return ((y==null?-1:y) - (x==null?-1:x)) * sortDir;
+  });
+}
+
+function shelfTable(){
+  var rows = sortedRows(), missing = shelf.filter(function(r){ return !r.game; });
+  var head = '<th data-sort="shelf" class="'+(sortKey==="shelf"?"on":"")+'">#</th>'+
+    '<th data-sort="name" class="'+(sortKey==="name"?"on":"")+'">Game</th>'+
+    COLS.map(function(c){
+      var on = sortKey===c[0];
+      var extra = (c[4]==="ty"||c[4]==="mx") ? " h"+c[4] : "";
+      return '<th data-sort="'+c[0]+'" class="'+(on?"on":"")+extra+'">'+c[1]+
+        (on?'<span class="ar">'+(sortDir===1?"&#9660;":"&#9650;")+'</span>':"")+'</th>';
+    }).join("");
+
+  var body = rows.map(function(r){
+    var g = r.game;
+    return '<tr class="rw" data-open="'+esc(g.id)+'">'+
+      '<td>'+(shelf.indexOf(r)+1)+'</td>'+
+      '<td><span class="gm">'+thumb(r.conf===false?
+        Object.assign({}, g, {conf:false}) : g)+
+        '<span class="t">'+esc(g.name)+'</span>'+
+        (isStar(g.id)?'<span class="pin star">\u2605</span>':"")+
+        (isOwn(g.id)?'<span class="pin own">\u2713</span>':"")+
+      '</span></td>'+
+      COLS.map(function(c){ return '<td class="'+c[4]+'">'+c[3](g)+'</td>'; }).join("")+
+    '</tr>';
+  }).join("");
+
+  body += missing.map(function(r){
+    return '<tr class="miss rw" data-fixgo="1"><td>'+(shelf.indexOf(r)+1)+'</td>'+
+      '<td><span class="gm"><span class="thumbwrap">'+
+        '<span class="thumb" style="background:#C3C9BE">?</span>'+
+        '<span class="flag bad">!</span></span>'+
+        '<span class="t">'+esc(r.read || "Not recognised")+'</span></span></td>'+
+      COLS.map(function(){ return '<td>&mdash;</td>'; }).join("")+'</tr>';
+  }).join("");
+
+  return '<div class="scroller"><table class="tbl"><thead><tr>'+head+'</tr></thead>'+
+    '<tbody>'+body+'</tbody></table></div>';
+}
+
+function shelfView(){
+  var shaky = shelf.filter(function(r){ return !r.game || r.conf===false; }).length;
+  return '<h2>'+matched().length+' of '+shelf.length+' matched</h2>'+
+    '<div class="statusbar">'+
+      '<label class="chip" tabindex="0">&#128247; Retake'+
+        '<input type="file" accept="image/*" capture="environment" class="shotalt" hidden>'+
+      '</label>'+
+      (shaky ? '<button class="chip warn" data-go="fix">'+shaky+' need a check</button>' : "")+
+      (starCount() ? '<button class="chip star" data-go="compare">&#9733; '+
+        starCount()+' shortlisted</button>' : "")+
+      '<button class="chip" data-go="glossary">&#8505; Terms</button>'+
+    '</div>'+
+    '<div class="sortbar">'+
+      '<button data-sort="shelf" class="'+(sortKey==="shelf"?"sel":"")+'">Shelf order</button>'+
+      '<button data-sort="avg" class="'+(sortKey==="avg"?"sel":"")+'">Best rated</button>'+
+    '</div>'+
+    shelfTable()+
+    '<div class="swipe">&#8596; swipe the table for more columns</div>'+
+    '<button class="btn ghost" data-go="idle">Start over</button>';
+}
+
+/* ============================ screens =========================== */
+function notice(){ return msg ? '<div class="note'+(msgBad?" bad":"")+'">'+msg+'</div>' : ""; }
+
+function photoOut(label, primary){
+  return '<div class="photoout'+(primary?" primary":"")+'">'+
+    '<div class="ic">&#128247;</div>'+
+    '<div class="tx"><b>'+esc(label)+'</b><small>Reads the title straight off the cover. '+
+    'Works even for games no barcode database knows.</small></div>'+
+    '<label class="pobtn" tabindex="0">Photograph'+
+      '<input type="file" accept="image/*" capture="environment" '+
+      'class="shotalt" hidden></label></div>';
+}
+
+function idleView(){
+  return notice()+
+    '<h2>Find a game</h2>'+
+    '<p class="hint">Scan one box, or photograph a whole row and get them all at once.</p>'+
+    '<button class="btn" id="startcam">Scan one barcode</button>'+
+    '<label class="btn ghost" style="display:block;text-align:center" tabindex="0">'+
+      'Photograph a shelf'+
+      '<input type="file" accept="image/*" capture="environment" id="shot" hidden></label>'+
+    '<p class="hint" style="margin:8px 0 0;text-align:center;font-size:12px">'+
+      'A shelf photo reads every title in frame. One box works too.</p>'+
+    (starCount() ? '<button class="btn ghost" data-go="compare">&#9733; '+starCount()+
+      ' shortlisted</button>' : "")+
+    '<div class="typelink"><button class="pen" id="tl">Type a title instead</button></div>'+
+    '<div id="manual" hidden style="margin-top:12px">'+
+      '<div class="row"><input id="q" placeholder="Barcode digits or game name">'+
+      '<button id="qgo">Go</button></div></div>'+
+    (HISTORY.length
+      ? '<div class="hist"><div class="histhead"><h3>Recent</h3>'+
+          (HISTORY.length > 3 ? '<button data-go="history">View all</button>' : "")+
+        '</div>'+
+        HISTORY.slice(0, 3).map(function(h, i){ return histRow(h, i); }).join("")+
+      '</div>'
+      : "");
+}
+
+function busyView(){
+  return (shotURL ? '<img class="shot" src="'+shotURL+'" alt="Your photo">' : "")+
+    '<div class="working"><div class="dots"><i></i><i></i><i></i></div>'+
+    '<h2 style="margin-top:14px">'+esc(busy)+'</h2>'+
+    (busyNote ? '<p class="hint" style="margin-top:6px">'+esc(busyNote)+'</p>' : "")+
+    '</div>';
+}
+
+function scanView(){
+  return '<div class="camwrap"><video id="cam" playsinline muted autoplay></video>'+
+    '<div class="reticle"></div></div>'+
+    '<p class="hint">Hold steady. Flat barcodes read best.</p>'+
+    '<button class="btn ghost" id="stopcam">Cancel</button>';
+}
+
+function detailView(g){
+  return '<button class="back" data-go="'+(shelf.length?"shelf":"idle")+'">&larr; back</button>'+
+    notice()+card(g)+
+    '<div class="wrongbar"><span>Not the right game?</span>'+
+    '<button data-fixgo="1">Fix it</button></div>'+
+    saysBlock(g)+
+    '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">'+
+    (shelf.length?"Back to the shelf":"Scan another")+'</button>';
+}
+
+function picksView(){
+  var h = notice();
+  if (picks.length){
+    h += '<h2>Which one is it?</h2>'+
+      '<p class="hint">The barcode matched more than one entry'+
+      (searchedFor ? ', on "'+esc(searchedFor)+'"' : "")+'. Pick the right box, '+
+      'or let the camera read the cover instead.</p>'+
+      picks.map(function(p){
+        return '<button class="pick" data-open="'+esc(p.id)+'">'+
+          '<span class="n">'+esc(p.name)+'</span><span class="go">&rarr;</span></button>';
+      }).join("")+
+      photoOut("None of these look right?");
+  } else {
+    h += '<h2>Barcode not in the database</h2>'+
+      '<p class="hint">Nobody has mapped that code yet. The cover works just as well.</p>'+
+      photoOut("Photograph the box instead", true)+
+      '<div class="grp">Or type it</div>'+
+      '<div class="row"><input id="q2" placeholder="Game name"><button id="q2go">Search</button></div>';
+  }
+  return h + '<button class="btn ghost" data-go="idle">Scan another</button>';
+}
+
+function compareView(){
+  var list = Object.keys(STARRED).map(function(k){ return STARRED[k]; });
+  if (!list.length){
+    return '<button class="back" data-go="idle">&larr; back</button>'+
+      '<h2>Nothing shortlisted yet</h2>'+
+      '<p class="hint">Tap Shortlist on any game to add it here. The list survives '+
+      'while you photograph more shelves.</p>'+
+      '<button class="btn ghost" data-go="idle">Back</button>';
+  }
+  list.sort(function(a,b){ return (b.avg||0) - (a.avg||0); });
+  var ROWS = [
+    ["Average",    function(g){ return g.avg?g.avg.toFixed(1):"&mdash;"; }, true],
+    ["Weight",     function(g){ return g.weight?g.weight.toFixed(1):"&mdash;"; }, false],
+    ["Players",    function(g){ return players(g)||"&mdash;"; }, false],
+    ["Best with",  function(g){ return g.best?esc(g.best):"&mdash;"; }, false],
+    ["Mins",       function(g){ return g.time||"&mdash;"; }, false],
+    ["Age",        function(g){ return g.age?g.age+"+":"&mdash;"; }, false],
+    ["Rank",       function(g){ return g.rank?"#"+g.rank:"&mdash;"; }, false],
+    ["Typical US", function(g){ return g.us?"$"+g.us[1]:"&mdash;"; }, false],
+    ["Store price",function(g){ return PRICE_IN[g.id]?"$"+PRICE_IN[g.id]:"&mdash;"; }, false]
+  ];
+  if (!list.some(function(g){ return PRICE_IN[g.id]; })) ROWS.pop();
+
+  return '<button class="back" data-go="'+(shelf.length?"shelf":"idle")+'">&larr; back</button>'+
+    '<h2>'+list.length+' shortlisted</h2>'+
+    '<p class="hint">Kept across photos. Shortlist more as you go, then compare here.</p>'+
+    '<div class="cmp"><div class="scroller"><table class="tbl cmptbl"><thead><tr><th>&nbsp;</th>'+
+      list.map(function(g){
+        return '<th class="hg"><span class="ch">'+thumb(g)+
+          '<span class="cn">'+esc(g.name)+'</span></span></th>'; }).join("")+
+    '</tr></thead><tbody>'+
+      ROWS.map(function(r){
+        var vals = list.map(r[1]);
+        var nums = vals.map(parseFloat).filter(isFinite);
+        var best = r[2] && nums.length ? Math.max.apply(null, nums) : null;
+        return '<tr><td class="lb">'+r[0]+'</td>'+vals.map(function(v){
+          return '<td'+(best!==null && parseFloat(v)===best ? ' class="win"' : "")+'>'+v+'</td>';
+        }).join("")+'</tr>';
+      }).join("")+
+      '<tr><td class="lb">&nbsp;</td>'+list.map(function(g){
+        return '<td><button class="mk2 star on" data-star="'+esc(g.id)+'" '+
+          'title="Remove">\u2605</button></td>'; }).join("")+'</tr>'+
+    '</tbody></table></div></div>'+
+    '<label class="btn ghost" style="display:block;text-align:center" tabindex="0">'+
+      'Photograph another shelf<input type="file" accept="image/*" capture="environment" '+
+      'class="shotalt" hidden></label>'+
+    '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">Back</button>';
+}
+
+function fixView(){
+  var flagged = shelf.filter(function(r){ return !r.game || r.conf===false; });
+  var clean   = shelf.filter(function(r){ return r.game && r.conf!==false; });
+  function row(r){
+    var i = shelf.indexOf(r), g = r.game;
+    var why = !g ? (r.why || "Not found on BoardGameGeek")
+            : r.conf===false ? (r.why || "Read, but not certain") : "Read clearly";
+    return '<div class="fixrow'+(!g||r.conf===false?" flagged":"")+'">'+
+      '<span class="thumbwrap"><span class="thumb" style="background:'+
+        (g?artColor(g.id):"#C3C9BE")+'">'+(g?(g.thumb?'<img src="'+esc(g.thumb)+'" alt="">':
+        esc(initials(g.name))):"?")+'</span>'+
+        (!g||r.conf===false?'<span class="flag'+(!g?" bad":"")+'" style="pointer-events:none">'+
+        (!g?"!":"?")+'</span>':"")+'</span>'+
+      '<div class="t">'+esc(g?g.name:(r.read||"Unreadable box"))+'<small>'+esc(why)+'</small></div>'+
+      '<button class="fixbtn" data-fixi="'+i+'">Change</button></div>'+
+      '<div class="fixopts" data-opts="'+i+'" hidden>'+
+        '<button class="btn ghost" data-fixscan="'+i+'">Scan this game\u2019s barcode</button>'+
+        '<label class="btn ghost" style="display:block;text-align:center" tabindex="0">'+
+          'Photograph it again<input type="file" accept="image/*" capture="environment" '+
+          'data-fixshot="'+i+'" hidden></label>'+
+        '<div class="row" style="margin-top:8px">'+
+          '<input placeholder="Type the correct title" data-fixtitle="'+i+'">'+
+          '<button data-fixset="'+i+'">Set</button></div>'+
+        '<button class="pen" data-fixdrop="'+i+'">Remove from the list</button>'+
+      '</div>';
+  }
+  return '<button class="back" data-go="shelf">&larr; back to the shelf</button>'+
+    notice()+'<h2>Fix the list</h2>'+
+    '<p class="hint">Change any game, not just the flagged ones. A confident read can '+
+    'still be the wrong edition.</p>'+
+    (flagged.length ? '<div class="grp">Needs a look &middot; '+flagged.length+'</div>'+
+      flagged.map(row).join("") : "")+
+    (clean.length ? '<div class="grp">Read clearly &middot; '+clean.length+'</div>'+
+      clean.map(row).join("") : "")+
+    '<button class="btn" data-go="shelf">Done</button>';
+}
+
+var TERMS = [
+  ["Average", "The plain average of every rating people have given. This is the big number BoardGameGeek shows on a game's page."],
+  ["Geek rating", "The average pulled toward the middle to stop a game with nine glowing ratings outranking one with fifty thousand. Always lower than the average. It is what the overall rank is built from."],
+  ["Rank", "Position across every board game on the site, ordered by Geek rating. #1 is the highest rated game on BoardGameGeek."],
+  ["Category rank", "Position within one category, like Strategy or Family. Often more useful than the overall rank, since a great party game will never outrank a heavy strategy game."],
+  ["Weight", "How complex people found it, from 1 to 5. Roughly: under 2 is a filler you teach in five minutes, 2 to 3 is an evening game, 3 to 4 asks for real attention, above 4 is a commitment."],
+  ["Best with", "The player count people voted plays best, which often disagrees with the range printed on the box. A box saying 2 to 6 can still be mediocre at 2."],
+  ["Players", "The range the publisher prints on the box."],
+  ["Mins", "Playing time in minutes, as published. Treat it as optimistic."],
+  ["Ratings", "How many people rated it. A 9.0 from 40 people means much less than an 8.2 from 40,000."],
+  ["Type", "Broad subject categories, like Economic or Animals. What the game is about."],
+  ["Mechanics", "How the game actually works, like Worker Placement or Deck Building. Usually a better guide to whether you will enjoy it than the category."],
+  ["Typical US", "The middle of current US marketplace listings on BoardGameGeek. Listings in other currencies are left out."]
+];
+
+function historyView(){
+  if (!HISTORY.length){
+    return '<button class="back" data-go="idle">&larr; back</button>'+
+      '<h2>Nothing scanned yet</h2>'+
+      '<p class="hint">Scans and shelf photos are listed here so you can reopen '+
+      'them without photographing the shelf again.</p>'+
+      '<button class="btn ghost" data-go="idle">Back</button>';
+  }
+  return '<button class="back" data-go="idle">&larr; back</button>'+
+    '<h2>'+HISTORY.length+' in history</h2>'+
+    '<p class="hint">Tap one to load it again. Ratings are refetched, so they '+
+    'are current rather than whatever they were at the time.</p>'+
+    HISTORY.map(function(h, i){ return histRow(h, i); }).join("")+
+    '<button class="btn ghost" id="clearhist">Clear history</button>'+
+    '<button class="btn ghost" data-go="idle">Back</button>';
+}
+
+function openHistory(i){
+  var h = HISTORY[i];
+  if (!h) return;
+  if (h.ids.length === 1) return openGame(h.ids[0]);
+  newCapture();
+  busy = "Reloading " + h.ids.length + " games"; screen = "busy"; render();
+  loadMany(h.ids).then(function(det){
+    shelf = h.ids.map(function(id, n){
+      return { read: h.names[n], conf: true, game: det[id] || null };
+    });
+    sortKey = "shelf"; sortDir = 1;
+    screen = "shelf"; render();
+  }).catch(function(e){
+    fail(e); screen = "idle"; render();
+  });
+}
+
+var passWrong = false;
+
+function askPassword(wrong){
+  if (wrong) setPassword("");
+  passWrong = !!wrong;
+  screen = "pass";
+  // Defer so we are not re-rendering from inside a failing request chain.
+  setTimeout(render, 0);
+}
+
+function passView(){
+  return '<h2>'+(passWrong ? "That password did not work" : "Enter the password")+'</h2>'+
+    '<p class="hint">'+(passWrong
+      ? "It may have been changed. Ask whoever sent you the link for the current one."
+      : "Whoever sent you the link will have given you a password. You only enter it once.")+
+    '</p>'+
+    '<div class="row"><input id="passin" type="text" autocomplete="off" autocapitalize="none" '+
+      'spellcheck="false" placeholder="Password"></div>'+
+    '<button class="btn" id="passgo">Continue</button>'+
+    '<div id="passout"></div>';
+}
+
+function tryPassword(){
+  var v = (document.getElementById("passin").value || "").trim();
+  if (!v) return;
+  var out = document.getElementById("passout");
+  out.innerHTML = '<p class="hint" style="margin-top:10px">Checking\u2026</p>';
+  // Ask the server rather than trusting the phone: the check is only real there.
+  fetch(PROXY + "/bgg/thing?id=224517", { headers: { "X-Shelf-Pass": v } })
+    .then(function(r){
+      if (r.status === 403){
+        out.innerHTML = '<div class="note bad" style="margin-top:10px">'+
+          '<b>Not that one</b>Check the spelling and capitals.</div>';
+        return;
+      }
+      setPassword(v); passWrong = false; msg = null;
+      screen = "idle"; render();
+    })
+    .catch(function(){
+      out.innerHTML = '<div class="note bad" style="margin-top:10px">'+
+        '<b>Could not reach the server</b>Check your signal and try again.</div>';
+    });
+}
+
+function glossaryView(){
+  return '<button class="back" data-go="'+(shelf.length?"shelf":"idle")+'">&larr; back</button>'+
+    '<h2>What the numbers mean</h2>'+
+    '<p class="hint">All of these come from BoardGameGeek.</p>'+
+    TERMS.map(function(x){
+      return '<div class="term"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>';
+    }).join("")+
+    '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">Back</button>';
+}
+
+/* ============================ settings ========================== */
+function renderSheet(){
+  if (!sheet){ modal.innerHTML = ""; return; }
+  var t = token();
+  modal.innerHTML =
+    '<div class="sheet" id="scrim"><div class="inner">'+
+      '<h2>Settings</h2>'+
+      '<p class="hint">Nothing to set up. Ratings and photo reading go through a '+
+      'shared server, so there are no keys to paste.</p>'+
+      '<p class="hint" style="margin:16px 0 6px"><b>Game cache</b> (optional). '+
+      'Paste the raw games.json link from your GitHub repo to match titles '+
+      'without a lookup.</p>'+
+      '<div class="row"><input id="cacheurl" placeholder="leave blank if hosted with the cache" '+
+        'value="'+esc(ls(K_CACHE))+'" autocomplete="off" spellcheck="false"></div>'+
+      (CACHE ? '<p class="hint" style="margin:6px 0 0">Holding '+CACHE.n+
+        ' titles, built '+esc(CACHE.built||"")+'.</p>' : "")+
+      '<button class="btn" id="savetok">Save</button>'+
+      '<button class="btn ghost" id="testkeys">Test the connection</button>'+
+      '<button class="btn ghost" id="forgetpass">Change password</button>'+
+      '<div id="testout"></div>'+
+      '<button class="btn ghost" data-go="glossary">What do Weight, Rank and the rest mean?</button>'+
+      '<button class="btn ghost" id="closetok">Close</button>'+
+    '</div></div>';
+
+  document.getElementById("savetok").onclick = function(){
+    var newCache = (document.getElementById("cacheurl").value||"").trim();
+    if (newCache !== ls(K_CACHE)){
+      ls(K_CACHE, newCache); ls(K_CACHED, ""); CACHE = null; CACHE_TRIED = false;
+    }
+    cacheIndex();
+    sheet = false; msg = null; render();
+  };
+  document.getElementById("testkeys").onclick = function(){
+    var out = document.getElementById("testout");
+    out.innerHTML = '<div class="note">Testing\u2026</div>';
+    var lines = [];
+    var bggTest = bggFetch("thing?id=224517&stats=1")
+          .then(function(x){
+            var n = new DOMParser().parseFromString(x,"text/xml").querySelector("name");
+            return "BoardGameGeek: working (read " +
+              ((n && n.getAttribute("value")) || "a game") + ")";
+          })
+          .catch(function(e){ return "BoardGameGeek: " + e.message; });
+
+    var gemTest = (ls(K_MODEL, ""), modelList())
+          .then(function(ms){
+            return gemini([{ text: "Reply with the single word: ok" }])
+              .then(function(){ return "Gemini: working, using " + ms[0]; })
+              .catch(function(e){ return "Gemini: found " + ms[0] + ", but " + e.message; });
+          })
+          .catch(function(e){ return "Gemini: " + e.message; });
+
+    Promise.all([bggTest, gemTest]).then(function(r){
+      var bad = r.some(function(s){ return !/working/.test(s); });
+      out.innerHTML = '<div class="note'+(bad?" bad":"")+'">'+
+        r.map(function(s){ return esc(s); }).join("<br>")+'</div>';
+    });
+  };
+
+  var fp = document.getElementById("forgetpass");
+  if (fp) fp.onclick = function(){ sheet = false; setPassword(""); askPassword(false); };
+
+  var c = document.getElementById("cleartok");
+  if (c) c.onclick = function(){ ls(K_MODEL,"");
+    ls(K_CACHE,""); ls(K_CACHED,""); CACHE = null; CACHE_TRIED = false;
+    sheet = false; render(); };
+  document.getElementById("closetok").onclick = function(){ sheet = false; render(); };
+  document.getElementById("scrim").onclick = function(e){
+    if (e.target.id === "scrim"){ sheet = false; render(); }
+  };
+  Array.prototype.forEach.call(modal.querySelectorAll("[data-go]"), function(b){
+    b.onclick = function(){ sheet = false; go(b.dataset.go); };
+  });
+}
+
+/* ============================ render ============================ */
+function go(s){ screen = s; msg = null; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function render(){
+  var prev = document.querySelector(".scroller");
+  var keepX = prev ? prev.scrollLeft : 0;
+
+  document.getElementById("gear").className = "gear";
+
+  var h;
+  if (!password() && screen !== "pass") screen = "pass";
+  if (screen === "pass")          h = passView();
+  else if (screen === "scanning") h = scanView();
+  else if (screen === "busy")     h = busyView();
+  else if (screen === "picks")    h = picksView();
+  else if (screen === "detail")   h = game ? detailView(game) : idleView();
+  else if (screen === "shelf")    h = shelfView();
+  else if (screen === "fix")      h = fixView();
+  else if (screen === "compare")  h = compareView();
+  else if (screen === "glossary") h = glossaryView();
+  else if (screen === "history")  h = historyView();
+  else                            h = idleView();
+  el.innerHTML = h;
+
+  var now = document.querySelector(".scroller");
+  if (now && keepX) now.scrollLeft = keepX;
+
+  wire();
+  renderSheet();
+
+  if (screen === "scanning"){
+    var v = document.getElementById("cam");
+    if (v && stream){ v.srcObject = stream; v.play().catch(function(){}); }
+  }
+}
+
+function wire(){
+  var $ = function(s){ return document.getElementById(s); };
+  if ($("passgo")) $("passgo").onclick = tryPassword;
+  if ($("passin")){
+    $("passin").onkeydown = function(e){ if (e.key === "Enter") tryPassword(); };
+    setTimeout(function(){ $("passin") && $("passin").focus(); }, 50);
+  }
+
+  if ($("startcam")) $("startcam").onclick = startCamera;
+  if ($("stopcam"))  $("stopcam").onclick  = stopCamera;
+  if ($("shot")) $("shot").onchange = function(e){
+    var f = e.target.files && e.target.files[0]; if (f) readPhoto(f);
+  };
+  if ($("tl")) $("tl").onclick = function(){
+    var m = $("manual"); m.hidden = !m.hidden; if (!m.hidden) $("q").focus();
+  };
+  if ($("qgo")) $("qgo").onclick = submitManual;
+  if ($("q"))   $("q").onkeydown = function(e){ if (e.key==="Enter") submitManual(); };
+  if ($("q2go")) $("q2go").onclick = function(){
+    var v = ($("q2").value||"").trim(); if (v) byName(v); };
+  if ($("q2")) $("q2").onkeydown = function(e){
+    if (e.key==="Enter") $("q2go").click(); };
+
+  each(".shotalt", function(inp){ inp.onchange = function(e){
+    var fl = e.target.files && e.target.files[0]; if (fl) readPhoto(fl); }; });
+  each("[data-fixshot]", function(inp){ inp.onchange = function(e){
+    var fl = e.target.files && e.target.files[0];
+    if (fl) readPhoto(fl, parseInt(inp.dataset.fixshot, 10)); }; });
+
+  each("[data-go]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation(); go(b.dataset.go); }; });
+
+  each("[data-open]", function(b){ b.onclick = function(ev){
+    if (ev.target.closest("[data-star],[data-own],[data-fixgo]")) return;
+    openGame(b.dataset.open); }; });
+
+  each("[data-fixgo]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation(); go("fix"); }; });
+
+  each("[data-star]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation();
+    var g = (game && game.id === b.dataset.star) ? game
+          : STARRED[b.dataset.star] || findLoaded(b.dataset.star);
+    if (g) { toggleStar(g); render(); }
+  }; });
+  each("[data-own]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation();
+    var g = (game && game.id === b.dataset.own) ? game : findLoaded(b.dataset.own);
+    if (g) { toggleOwn(g); render(); }
+  }; });
+
+  each("[data-sort]", function(b){ b.onclick = function(){
+    var k = b.dataset.sort;
+    if (k === sortKey && k !== "shelf") sortDir = -sortDir;
+    else { sortKey = k; sortDir = 1; }
+    render();
+  }; });
+
+  each("[data-toggle]", function(b){ b.onclick = function(){
+    var body = b.parentNode.querySelector(".body"); body.hidden = !body.hidden; }; });
+
+  each("[data-setprice]", function(b){ b.onclick = function(){
+    var inp = document.querySelector('[data-priceinput="'+b.dataset.setprice+'"]');
+    var v = parseFloat((inp.value||"").replace(/[^0-9.]/g,""));
+    if (isFinite(v) && v > 0){ PRICE_IN[b.dataset.setprice] = Math.round(v); render(); }
+  }; });
+  each("[data-clearprice]", function(b){ b.onclick = function(){
+    delete PRICE_IN[b.dataset.clearprice]; render(); }; });
+  each("[data-priceinput]", function(inp){ inp.onkeydown = function(e){
+    if (e.key === "Enter") document.querySelector('[data-setprice="'+
+      inp.dataset.priceinput+'"]').click(); }; });
+
+  each("[data-hist]", function(b){ b.onclick = function(){
+    openHistory(parseInt(b.dataset.hist, 10)); }; });
+  if ($("clearhist")) $("clearhist").onclick = function(){
+    forgetAll(); render(); };
+
+  each("[data-fixi]", function(b){ b.onclick = function(){
+    var o = document.querySelector('[data-opts="'+b.dataset.fixi+'"]');
+    if (o) o.hidden = !o.hidden; }; });
+  each("[data-fixdrop]", function(b){ b.onclick = function(){
+    shelf.splice(+b.dataset.fixdrop, 1);
+    if (!shelf.length) go("idle"); else render(); }; });
+  each("[data-fixscan]", function(b){ b.onclick = function(){ startCamera(+b.dataset.fixscan); }; });
+  each("[data-fixset]", function(b){ b.onclick = function(){
+    var inp = document.querySelector('[data-fixtitle="'+b.dataset.fixset+'"]');
+    var v = (inp.value||"").trim();
+    if (v) replaceRow(+b.dataset.fixset, v);
+  }; });
+}
+
+function each(sel, fn){ Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
+
+function findLoaded(id){
+  if (game && game.id === id) return game;
+  var r = shelf.filter(function(x){ return x.game && x.game.id === id; })[0];
+  return r ? r.game : (STARRED[id] || null);
+}
+
+/* ============================ actions =========================== */
+function fail(e){
+  if (e && e.message === "PASSWORD") return;     // the password screen explains it
+  msg = "<b>Something went wrong</b>" + esc(e && e.message ? e.message : String(e));
+  msgBad = true;
+}
+
+function needToken(){ return false; }   // the server holds the keys
+
+function openGame(id){
+  if (needToken()) return;
+  busy = "Loading the game"; screen = "busy"; render();
+  loadOne(id)
+    .then(function(g){
+      game = g;
+      rememberOne(g);
+      screen = "detail"; render();
+      return summarise(g).then(function(s){
+        if (s && s.length && game && game.id === g.id){ game.says = s; render(); }
+      });
+    })
+    .catch(function(e){
+      fail(e);
+      picks = [{ id: id, name: "This game" }];
+      screen = shelf.length ? "shelf" : "picks"; render();
+    });
+}
+
+function byName(q){
+  if (needToken()) return;
+  busy = "Searching BoardGameGeek"; screen = "busy"; render();
+  findId(q).then(function(id){
+    if (!id){ msg = "<b>No match</b>Nothing on BoardGameGeek matched \u201c"+esc(q)+"\u201d.";
+      msgBad = true; screen = "idle"; render(); return; }
+    openGame(id);
+  }).catch(function(e){ fail(e); screen = "idle"; render(); });
+}
+
+function submitManual(){
+  var v = (document.getElementById("q").value||"").trim();
+  if (!v) return;
+  if (/^[0-9]{6,14}$/.test(v)) lookup(v); else byName(v);
+}
+
+/* --- barcode --- */
+var fixTarget = null;
+
+function startCamera(target){
+  msg = null; busyNote = "";
+  fixTarget = (typeof target === "number") ? target : null;
+  if (!("BarcodeDetector" in window)){
+    msg = "<b>This browser cannot scan barcodes</b>Chrome on Android works. On iPhone, "+
+          "take a photo of the box instead, or type the number.";
+    msgBad = true; screen = "idle"; render(); return;
+  }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    msg = "<b>No camera available</b>Type the barcode number instead.";
+    msgBad = true; screen = "idle"; render(); return;
+  }
+  detector = detector || new window.BarcodeDetector({
+    formats: ["ean_13","upc_a","ean_8","upc_e","code_128"] });
+  navigator.mediaDevices.getUserMedia({ video:{ facingMode:{ ideal:"environment" } }, audio:false })
+    .then(function(s){ stream = s; screen = "scanning"; scanning = true; render(); tick(); })
+    .catch(function(){
+      msg = "<b>Camera blocked</b>Allow camera access in your browser settings, "+
+            "or type the number instead.";
+      msgBad = true; screen = "idle"; render();
+    });
+}
+
+function stopCamera(){
+  scanning = false;
+  if (stream){ stream.getTracks().forEach(function(t){ t.stop(); }); stream = null; }
+  if (screen === "scanning"){ screen = "idle"; render(); }
+}
+
+function tick(){
+  if (!scanning) return;
+  var v = document.getElementById("cam");
+  if (v && v.readyState >= 2){
+    detector.detect(v).then(function(codes){
+      if (!scanning) return;
+      if (codes && codes.length){
+        var raw = String(codes[0].rawValue||"").replace(/\D/g,"");
+        if (raw){ stopCamera(); lookup(raw); return; }
+      }
+      requestAnimationFrame(tick);
+    }).catch(function(){ requestAnimationFrame(tick); });
+  } else requestAnimationFrame(tick);
+}
+
+function lookup(upc){
+  var keepFix = fixTarget;
+  if (keepFix !== null && shelf[keepFix]) startCorrection();
+  else newCapture();
+  fixTarget = keepFix;
+  lastUPC = upc;
+  busy = "Looking up " + upc; screen = "busy"; render();
+  fetch(UPC_URL + encodeURIComponent(upc), { headers: { "x-api-key": UPC_KEY } })
+    .then(function(r){ if (!r.ok) throw new Error("bad"); return r.json(); })
+    .then(function(d){
+      searchedFor = d.searched_for || "";
+      var verified = d.bgg_info_status === "verified";
+      picks = (d.bgg_info||[]).filter(function(g){ return g && g.id && g.name; })
+        .map(function(g){ return { id:String(g.id), name:g.name }; });
+      if (verified) picks = picks.slice(0,1);
+      if (fixTarget !== null && picks.length === 1) return replaceRowById(fixTarget, picks[0].id);
+      if (picks.length === 1 && verified) return openGame(picks[0].id);
+      screen = "picks"; render();
+    })
+    .catch(function(){
+      msg = "<b>Could not reach the barcode service</b>Check your signal, or photograph the box.";
+      msgBad = true; picks = []; screen = "picks"; render();
+    });
+}
+
+/* --- photo --- */
+function newCapture(){
+  // Anything left from the last scan should not linger behind the next one.
+  game = null; picks = []; shelf = []; reads = [];
+  lastUPC = ""; searchedFor = ""; shotURL = null; fixTarget = null;
+  sortKey = "shelf"; sortDir = 1; msg = null; busyNote = "";
+}
+
+// Correcting a single row is not a new capture: the rest of the shelf stays.
+function startCorrection(){
+  game = null; picks = []; lastUPC = ""; searchedFor = "";
+  shotURL = null; msg = null; busyNote = "";
+}
+
+function readPhoto(file, fixIndex){
+  var correcting = (typeof fixIndex === "number" && shelf[fixIndex]);
+  if (correcting){ startCorrection(); fixTarget = fixIndex; }
+  else newCapture();
+  shotURL = URL.createObjectURL(file);
+  busy = "Reading the boxes"; screen = "busy"; render();
+  cacheIndex();
+  readTitles(file).then(function(list){
+    if (!list.length) throw new Error("No titles were legible. Get closer, or square up to the shelf.");
+    reads = list;
+    busy = "Matching " + list.length + " on BoardGameGeek"; render();
+    return Promise.all(list.map(function(o){
+      return findId(o.title).then(function(id){
+        return { read:o.title, id:id, conf:o.sure, why:o.why };
+      });
+    }));
+  }).then(function(found){
+    var ids = found.filter(function(f){ return f.id; }).map(function(f){ return f.id; });
+    return (ids.length ? loadMany(ids) : Promise.resolve({})).then(function(det){
+      var rows = found.map(function(f){
+        return { read:f.read, conf:f.conf, why:f.why, game: (f.id && det[f.id]) || null };
+      });
+
+      if (correcting){
+        // Put the best read into the row being corrected and go back to the list.
+        var pick = rows.filter(function(r){ return r.game; })[0] || rows[0];
+        shelf[fixTarget] = { read: pick.read, conf: pick.conf !== false, game: pick.game };
+        fixTarget = null;
+        if (rows.length > 1)
+          msg = "<b>Read " + rows.length + " titles</b>Used the first match for that row.";
+        screen = "fix"; render();
+        return;
+      }
+
+      shelf = rows;
+      sortKey = "shelf"; sortDir = 1;
+      remember(shelf);
+      if (shelf.length === 1 && shelf[0].game) return openGame(shelf[0].game.id);
+      screen = "shelf"; render();
+    });
+  }).catch(function(e){
+    if (e && e.message === "PASSWORD") return;   // the password screen is already up
+    msg = "<b>Could not read that photo</b>"+esc(e.message||"Something went wrong.");
+    msgBad = true; screen = "idle"; render();
+  });
+}
+
+/* --- corrections --- */
+function replaceRowById(i, id){
+  busy = "Loading the game"; screen = "busy"; render();
+  return loadOne(id).then(function(g){
+    if (shelf[i]) shelf[i] = { read:g.name, conf:true, game:g };
+    fixTarget = null; screen = shelf.length ? "fix" : "idle"; render();
+  }).catch(function(e){ fail(e); screen = "fix"; render(); });
+}
+function replaceRow(i, title){
+  busy = "Searching BoardGameGeek"; screen = "busy"; render();
+  findId(title).then(function(id){
+    if (!id){ msg = "<b>No match</b>Nothing matched \u201c"+esc(title)+"\u201d.";
+      msgBad = true; screen = "fix"; render(); return; }
+    return replaceRowById(i, id);
+  }).catch(function(e){ fail(e); screen = "fix"; render(); });
+}
+
+document.getElementById("gear").onclick = function(){ sheet = true; render(); };
+cacheIndex();
+render();
 </script>
 </body>
 </html>
