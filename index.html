@@ -186,13 +186,47 @@
   .thumb{flex:none;width:34px;height:34px;border-radius:5px;display:flex;align-items:center;
     justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:700;color:#FFF;
     font-size:12px;letter-spacing:-.4px;overflow:hidden}
-  .thumb.lg{width:70px;height:70px;font-size:22px;border-radius:8px}
+  .thumb.lg{width:104px;height:104px;font-size:30px;border-radius:10px}
 
   .back{border:none;background:none;color:var(--slate);font-size:13px;padding:4px 0 12px;
     display:inline-flex;align-items:center;gap:5px}
   .back:hover{color:var(--pine)}
 
-  .cardtop{display:flex;gap:13px;align-items:flex-start}
+  .cardtop{display:flex;gap:15px;align-items:center}
+  .card{position:relative}
+  .cardtop .who2{min-width:0}
+  .cardtop .name{padding-right:58px}
+  .fixcorner{position:absolute;top:12px;right:12px;border:1.5px solid var(--line);
+    background:var(--board);color:var(--slate);border-radius:999px;padding:6px 10px 6px 8px;
+    font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;min-height:34px;
+    display:inline-flex;align-items:center;gap:4px}
+  .fixcorner svg{width:14px;height:14px}
+  .fixcorner:hover{border-color:var(--flag);color:var(--flag)}
+
+  .fact.tap{border:none;text-align:left;cursor:pointer;font-family:inherit;color:inherit;width:100%}
+  .fact.tap:hover{background:#FBFCF9}
+  .inf{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;
+    border-radius:50%;border:1.3px solid var(--slate);font-size:9px;font-style:italic;
+    font-family:Fraunces,Georgia,serif;font-weight:700;text-decoration:none;margin-left:4px;
+    vertical-align:1px;text-transform:none}
+
+  .saysload{display:flex;gap:13px;align-items:center;background:var(--card);
+    border:1.5px solid var(--line);border-radius:10px;padding:15px 14px}
+  .saysload .dots i{width:7px;height:7px}
+  .saysload b{display:block;font-size:14px}
+  .saysload small{display:block;font-size:12px;color:var(--slate);margin-top:1px}
+
+  .pop{position:fixed;inset:0;background:rgba(22,36,30,.5);display:flex;align-items:center;
+    justify-content:center;padding:18px;z-index:30}
+  .popin{background:var(--board);border-radius:16px;padding:20px 18px;max-width:420px;width:100%}
+  .popin h3{font-family:Fraunces,Georgia,serif;font-size:19px;margin:0 0 6px}
+  .popin p{font-size:13.5px;color:var(--slate);margin:0 0 12px;line-height:1.45}
+  .wrow{display:flex;gap:12px;padding:9px 10px;border-radius:8px;margin-bottom:3px}
+  .wrow.on{background:#FFF;box-shadow:inset 3px 0 0 var(--ochre)}
+  .wr{flex:none;width:62px;font-size:12px;font-weight:600;color:var(--slate);padding-top:1px}
+  .wd{flex:1;font-size:13.5px;line-height:1.4}
+  .wd small{display:block;font-size:12px;color:var(--slate);margin-top:1px}
+  .wthis{margin-top:12px !important;color:var(--ink) !important}
   .cardtop .who2{flex:1;min-width:0}
 
   /* the last two are prose, not figures, so they read left-aligned */
@@ -264,7 +298,7 @@
 
   .marks.big{display:flex;gap:8px;margin:13px 0 0;padding-top:13px;flex-wrap:wrap;
     border-top:1px solid var(--line)}
-  .marks.big .mk2{flex:1;justify-content:center;min-width:132px}
+  .marks.big .mk2{flex:1;justify-content:center;min-width:0;white-space:nowrap}
   .marks.big .mk2{border:1.5px solid var(--line);background:var(--card);color:var(--slate);
     border-radius:9px;height:42px;padding:0 15px;font-size:13.5px;font-weight:600;
     display:inline-flex;align-items:center;gap:7px}
@@ -433,7 +467,7 @@
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "1.0.5";
+var APP_VERSION = "1.0.6";
 var UPC_URL  = "https://api.gameupc.com/test/upc/";
 var UPC_KEY  = "test_test_test_test_test";
 /* The proxy holds the BoardGameGeek token and the Gemini key, so no phone
@@ -1066,7 +1100,7 @@ function facts(g){
   var cells = [
     ["Geek <s>/</s> rank", g.geek
       ? g.geek.toFixed(1)+(g.rank?'<s>/</s><i>#'+g.rank+'</i>':"") : null],
-    ["Weight",   g.weight ? g.weight.toFixed(1)+pips(g.weight) : null],
+    ["Weight <u class=\"inf\">i</u>", g.weight ? g.weight.toFixed(1)+pips(g.weight) : null, "weight"],
     ["Age",      g.age ? g.age+"+" : null],
     ["Players <s>/</s> best", players(g)
       ? players(g)+(g.best?'<s>/</s><i>'+esc(g.best)+'</i>':"") : null],
@@ -1076,8 +1110,39 @@ function facts(g){
   var filled = cells.filter(function(c){ return c[1] !== null; });
   while (filled.length % 3) filled.push(["", "&mdash;"]);
   return filled.map(function(c){
-    return '<div class="fact"><k>'+c[0]+'</k><b>'+c[1]+'</b></div>';
+    return c[2] === "weight"
+      ? '<button class="fact tap" data-weightinfo="1"><k>'+c[0]+'</k><b>'+c[1]+'</b></button>'
+      : '<div class="fact"><k>'+c[0]+'</k><b>'+c[1]+'</b></div>';
   }).join("");
+}
+
+function weightBand(w){
+  if (w < 2) return "light";
+  if (w < 3) return "medium";
+  if (w < 4) return "medium-heavy";
+  return "heavy";
+}
+
+function weightPopup(g){
+  var rows = [
+    ["Under 2", "Light", "Learn it in minutes.", "Codenames, Azul"],
+    ["2 to 3", "Medium", "An easy evening with some decisions.", "Catan, Wingspan"],
+    ["3 to 4", "Medium-heavy", "Real planning and a proper teach.", "Terraforming Mars, Brass"],
+    ["4 and up", "Heavy", "A commitment. Long rules, long games.", "Twilight Imperium"]
+  ];
+  var band = g.weight ? weightBand(g.weight) : "";
+  return '<div class="pop" id="popscrim"><div class="popin">'+
+    '<h3>Weight</h3>'+
+    '<p>How complex BoardGameGeek players found it, rated 1 to 5 and averaged. '+
+    'It measures rules and decisions, not how long a game takes.</p>'+
+    rows.map(function(r){
+      var on = r[1].toLowerCase() === band;
+      return '<div class="wrow'+(on?" on":"")+'"><span class="wr">'+r[0]+'</span>'+
+        '<span class="wd"><b>'+r[1]+'</b> '+r[2]+'<small>'+r[3]+'</small></span></div>';
+    }).join("")+
+    (g.weight ? '<p class="wthis">This game: <b>'+g.weight.toFixed(1)+'</b>, '+band+'.</p>' : "")+
+    '<button class="btn" id="popclose">Got it</button>'+
+  '</div></div>';
 }
 
 function tags(g){
@@ -1103,13 +1168,16 @@ function priceBlock(g){
 function markBtns(g){
   return '<span class="marks big">'+
     '<button class="mk2 star'+(isStar(g.id)?" on":"")+'" data-star="'+g.id+'">'+
-      (isStar(g.id)?"\u2605":"\u2606")+(isStar(g.id)?"Shortlisted":"Shortlist")+'</button>'+
-    '<button class="mk2 own'+(isOwn(g.id)?" on":"")+'" data-own="'+g.id+'">\u2713'+
-      (isOwn(g.id)?"I own this":"Mark as owned")+'</button></span>';
+      '<span>'+(isStar(g.id)?"\u2605":"\u2606")+'</span>'+(isStar(g.id)?"Shortlisted":"Shortlist")+'</button>'+
+    '<button class="mk2 own'+(isOwn(g.id)?" on":"")+'" data-own="'+g.id+'"><span>\u2713</span>'+
+      (isOwn(g.id)?"I own this":"Owned")+'</button></span>';
 }
 
 function card(g){
   return '<div class="card">'+
+    '<button class="fixcorner" data-fixthis="1" title="Not the right game? Fix it">'+
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" '+
+      'fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Fix</button>'+
     '<div class="cardtop">'+thumb(g,true)+'<div class="who2">'+
       '<a class="name" href="'+gameURL(g.id)+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
       (g.year ? '<div class="sub">'+g.year+'</div>' : "")+
@@ -1121,6 +1189,18 @@ function card(g){
 }
 
 function saysBlock(g){
+  if (g.saysState === "failed"){
+    return '<div class="says"><h3>What people say</h3>'+
+      '<p class="hint">Could not summarise the reviews right now. '+
+      '<a href="'+gameURL(g.id)+'/ratings?comment=1" target="_blank" rel="noopener">'+
+      'Read them on BoardGameGeek</a>.</p></div>';
+  }
+  if (g.saysState === "loading"){
+    return '<div class="says"><h3>What people say</h3>'+
+      '<div class="saysload"><div class="dots"><i></i><i></i><i></i></div>'+
+      '<div><b>Summarizing reviews</b><small>Grouping what players praise and criticise</small></div>'+
+      '</div></div>';
+  }
   if (!g.says) return "";
   var up = g.says.filter(function(s){ return s.dir==="up"; });
   var dn = g.says.filter(function(s){ return s.dir==="down"; });
@@ -1320,8 +1400,6 @@ function scanView(){
 function detailView(g){
   return '<button class="back" data-go="'+(shelf.length?"shelf":"idle")+'">&larr; back</button>'+
     notice()+card(g)+
-    '<div class="wrongbar"><span>Not the right game?</span>'+
-    '<button data-fixthis="1">Fix it</button></div>'+
     saysBlock(g)+
     (shelf.length <= 1 ? timingLine() : "")+
     '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">'+
@@ -1579,7 +1657,16 @@ function glossaryView(){
 }
 
 /* ============================ settings ========================== */
+var weightOpen = false;
+
 function renderSheet(){
+  if (weightOpen && game){
+    modal.innerHTML = weightPopup(game);
+    var close = function(){ weightOpen = false; renderSheet(); };
+    document.getElementById("popclose").onclick = close;
+    document.getElementById("popscrim").onclick = function(e){ if (e.target.id === "popscrim") close(); };
+    return;
+  }
   if (!sheet){ modal.innerHTML = ""; return; }
   var t = token();
   modal.innerHTML =
@@ -1729,6 +1816,8 @@ function wire(){
 
   each("[data-fixgo]", function(b){ b.onclick = function(ev){
     ev.stopPropagation(); fixFocus = null; go("fix"); }; });
+  each("[data-weightinfo]", function(b){ b.onclick = function(){
+    weightOpen = true; renderSheet(); }; });
   each("[data-fixthis]", function(b){ b.onclick = function(ev){
     ev.stopPropagation(); startFixThis(); }; });
   each("[data-fixall]", function(b){ b.onclick = function(){
@@ -1814,10 +1903,19 @@ function openGame(id){
     .then(function(g){
       game = g;
       rememberOne(g);
+      // Show the placeholder straight away if there is anything to summarise.
+      g.saysState = (g.comments && g.comments.length) ? "loading" : "none";
       screen = "detail"; render();
-      return summarise(g).then(function(s){
-        if (s && s.length && game && game.id === g.id){ game.says = s; render(); }
-      });
+      if (g.saysState === "none") return;        // nothing to summarise, so say nothing
+      // Never leave the placeholder up indefinitely: give up after 25 seconds.
+      var timeout = new Promise(function(res){ setTimeout(function(){ res("timeout"); }, 25000); });
+      return Promise.race([summarise(g).catch(function(){ return "failed"; }), timeout])
+        .then(function(s){
+          if (!game || game.id !== g.id) return;
+          if (s && s.length && typeof s !== "string"){ game.says = s; game.saysState = "done"; }
+          else game.saysState = (s === "timeout" || s === "failed" || s === null) ? "failed" : "none";
+          render();
+        });
     })
     .catch(function(e){
       fail(e);
