@@ -18,7 +18,6 @@ from urllib.error import HTTPError, URLError
 
 API = os.environ.get("LIBBY_API", "https://thunder.api.overdrive.com/v2/libraries")
 UA = "shelfworthy-libraries/1.0 (personal book lookup)"
-PER_PAGE = 100
 DELAY = float(os.environ.get("DELAY", "0.4"))   # be polite: this is an unofficial endpoint
 MAX_PAGES = 1000
 MAX_TRIES = 4
@@ -27,7 +26,8 @@ OUT = os.path.join(HERE, "data", "libraries.json")
 
 
 def get(page):
-    url = f"{API}?perPage={PER_PAGE}&page={page}"
+    # Use Libby's own page size: asking for a bigger one silently skipped libraries.
+    url = f"{API}?page={page}"
     for attempt in range(MAX_TRIES):
         try:
             with urlopen(Request(url, headers={"User-Agent": UA, "Accept": "application/json"}), timeout=30) as r:
@@ -41,8 +41,12 @@ def get(page):
 
 def main():
     libs, seen, total_seen = [], set(), 0
-    for page in range(1, MAX_PAGES + 1):
-        items = (get(page) or {}).get("items") or []
+    first = get(1) or {}
+    expected = int(first.get("totalItems") or 0)
+    last = int(((first.get("links") or {}).get("last") or {}).get("page") or MAX_PAGES)
+    print(f"Libby lists {expected} libraries over {last} pages", flush=True)
+    for page in range(1, min(last, MAX_PAGES) + 1):
+        items = (first if page == 1 else (get(page) or {})).get("items") or []
         if not items:
             break
         for it in items:
@@ -59,7 +63,9 @@ def main():
             print(f"page {page}: {total_seen} read, {len(libs)} live", flush=True)
         time.sleep(DELAY)
 
-    # A broken run must never replace a good file with an empty one.
+    # A broken run must never replace a good file with a partial one.
+    if expected and total_seen < expected * 0.98:
+        raise SystemExit(f"Read only {total_seen} of {expected} listed libraries; keeping the previous file.")
     if len(libs) < int(os.environ.get("MIN_LIBRARIES", "1000")):
         raise SystemExit(f"Only {len(libs)} live libraries found; keeping the previous file.")
 
