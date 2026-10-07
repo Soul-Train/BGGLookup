@@ -458,6 +458,41 @@
   .pin.read{color:var(--pine)}
   .grfile{display:block;margin:8px 0 4px}
   .fact b .gw{white-space:normal;display:block;line-height:1.2}
+  .tbl td.r .few{font-family:Archivo,system-ui,sans-serif;font-size:11px;font-weight:600;color:var(--slate);white-space:nowrap}
+  .vt{display:inline-flex;border:1.5px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);flex:none}
+  .vt button{display:flex;align-items:center;gap:5px;padding:7px 10px;font-size:12.5px;font-weight:600;color:var(--slate);
+    background:none;border:none;font-family:inherit;min-height:36px}
+  .vt button.on{background:var(--pine);color:#F6F7F3}
+  .vt svg{width:14px;height:14px}
+  .rhead{display:flex;align-items:center;gap:10px;margin-bottom:8px}.rhead h2{flex:1;margin:0}
+  .bl{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px}
+  .bl .top2{display:flex;gap:12px;cursor:pointer}
+  .bl .cv{width:58px;height:87px;border-radius:4px;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    font-family:Fraunces,Georgia,serif;font-weight:700;color:#F6F7F3;font-size:16px;box-shadow:0 1px 4px rgba(22,36,30,.25)}
+  .bl .cv img{width:100%;height:100%;object-fit:cover;display:block}
+  .bl .bd{flex:1;min-width:0}
+  .bl .nm{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:17px;line-height:1.2;color:var(--ink)}
+  .bl .au{color:var(--slate);font-size:12.5px;margin-top:2px}
+  .bl .rt{display:flex;align-items:baseline;gap:7px;margin-top:6px;flex-wrap:wrap}
+  .bl .rt .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:26px;color:var(--pine);line-height:1}
+  .bl .rt .k{font-size:12px;color:var(--slate)}
+  .bl .rt .few{font-size:12.5px;font-weight:600;color:var(--slate)}
+  .bl .rk{flex:none;font-family:Fraunces,Georgia,serif;font-size:13px;color:var(--slate);font-weight:700}
+  .bl .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .bl .cp{font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 9px;background:#E3E6DF;color:var(--slate)}
+  .bl .cp.rd{background:var(--pine);color:#F6F7F3}.bl .cp.st{background:#FFF7E4;color:#7A5A10;border:1px solid #E0C071}
+  .bl .cp.wn{background:#FFF7E4;color:#7A5A10}
+  .bl .exp{display:block;width:100%;text-align:left;border:none;background:none;color:var(--pine);font-weight:600;font-size:13px;
+    padding:10px 0 0;margin-top:10px;border-top:1px dashed var(--line);font-family:inherit;cursor:pointer}
+  .bl .pc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  .bl .pc h4{margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .bl .pc .u h4{color:var(--pine)} .bl .pc .d h4{color:var(--flag)}
+  .bl .pc ul{margin:0;padding-left:15px;font-size:12.5px;line-height:1.35}.bl .pc li{margin-bottom:3px}
+  .bl .more{display:inline-block;font-size:12.5px;color:var(--pine);font-weight:600;margin-top:8px;background:none;border:none;
+    padding:4px 0;font-family:inherit;cursor:pointer}
+  .bl .ld{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--slate);margin-top:8px}
+  .bl .ld .dots i{width:6px;height:6px}
+  .bl.miss{border-style:dashed}.bl.miss .nm{font-style:italic;color:var(--slate)}
 </style>
 </head>
 <body>
@@ -529,17 +564,26 @@ function editWithin1(a, b){
   }
   return diff + (a.length - i) + (b.length - j) <= 1;
 }
+/** Whole title as words, keeping text after a colon ("Star Wars: Heir to the Empire"),
+    dropping only a trailing "(Series, #1)" and a leading article. */
+function titleWords(s){
+  var t = String(s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    .replace(/&/g, " and ").replace(/\s*\([^)]*\)\s*$/, "")
+    .replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim().replace(/^(the|a|an)\s+/, "");
+  return t ? t.split(" ").filter(function(w, i, a){ return a.indexOf(w) === i; }) : [];
+}
+function sameWord(w, x){ return w === x || (w.length >= 4 && x.length >= 4 && editWithin1(w, x)); }
+/** Titles match when every word of the shorter one is in the longer one
+    ("Dune" / "Dune: Deluxe Edition", "Heir to the Empire" / "Star Wars: Heir to the Empire"),
+    or when most words are shared, allowing one-letter typos ("harry poter"). */
 function titleMatches(query, found){
-  var a = normTitle(query), b = normTitle(found);
-  if (!a || !b) return false;
-  if (a === b || a.indexOf(b) >= 0 || b.indexOf(a) >= 0) return true;
-  var wa = a.split(" ").filter(function(w, i, s){ return s.indexOf(w) === i; });
-  var wb = b.split(" ").filter(function(w, i, s){ return s.indexOf(w) === i; });
-  var common = 0;
-  wa.forEach(function(w){
-    if (wb.some(function(x){ return x === w || (w.length >= 4 && x.length >= 4 && editWithin1(w, x)); })) common++;
-  });
-  return common / Math.max(wa.length, wb.length) >= 0.55;
+  var a = titleWords(query), b = titleWords(found);
+  if (!a.length || !b.length) return false;
+  var short = a.length <= b.length ? a : b, long = short === a ? b : a;
+  var inLong = short.filter(function(w){ return long.some(function(x){ return sameWord(w, x); }); }).length;
+  if (inLong === short.length) return true;
+  var common = a.filter(function(w){ return b.some(function(x){ return sameWord(w, x); }); }).length;
+  return common / Math.max(a.length, b.length) >= 0.55;
 }
 /** true / false / null (unknown). Any 3+ letter word typed or read appears in the author. */
 function authorMatches(query, found){
@@ -713,7 +757,7 @@ function readStatus(g, READ, GR){
 
 if (typeof module !== "undefined") module.exports = {
   RATING_MIN: RATING_MIN, isbnDigits: isbnDigits, validIsbn13: validIsbn13, validIsbn10: validIsbn10, isbn10to13: isbn10to13,
-  classifyCode: classifyCode, normTitle: normTitle, editWithin1: editWithin1, titleMatches: titleMatches,
+  classifyCode: classifyCode, normTitle: normTitle, editWithin1: editWithin1, titleMatches: titleMatches, titleWords: titleWords,
   authorMatches: authorMatches, isJunk: isJunk, pickMatching: pickMatching, hcSearchQ: hcSearchQ, hcIsbnQ: hcIsbnQ,
   hcBooksQ: hcBooksQ, hcDetailQ: hcDetailQ, searchHits: searchHits, authorFrom: authorFrom, genreFrom: genreFrom,
   parseBook: parseBook, thinRating: thinRating, looksEnglish: looksEnglish, cleanText: cleanText, pickReviews: pickReviews,
@@ -726,7 +770,7 @@ if (typeof module !== "undefined") module.exports = {
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "0.1.0";
+var APP_VERSION = "0.1.2";
 /* The proxy holds the Hardcover token and the Gemini key, so no phone
    needs either. Put your own Worker address in PROXY. */
 var PROXY    = "https://shelfworthy.joshua-shull12.workers.dev";
@@ -748,7 +792,8 @@ var GAPI     = PROXY + "/gemini";
 // everything about books is kept apart from the games lists.
 var K_HIST = "shelfworthy.books.history";
 var K_STAR = "shelfworthy.books.starred", K_READ = "shelfworthy.books.read",
-    K_GR   = "shelfworthy.books.goodreads", K_MODEL = "shelfworthy.gemini.model.v5";
+    K_GR   = "shelfworthy.books.goodreads", K_MODEL = "shelfworthy.gemini.model.v5",
+    K_VIEW = "shelfworthy.books.view";
 
 /* ============================ storage =========================== */
 function ls(k, v){
@@ -1338,7 +1383,7 @@ function saysBlock(g){
 /* ============================ table ============================= */
 var COLS = [
   ["avg",   "Rating",  function(g){ return thinRating(g) ? null : g.avg; },
-            function(g){ return thinRating(g) ? "&mdash;" : g.avg.toFixed(1); }, "r"],
+            function(g){ return thinRating(g) ? '<span class="few">too few</span>' : g.avg.toFixed(1); }, "r"],
   ["users", "Ratings", function(g){ return g.users; },  function(g){ return g.users ? g.users.toLocaleString() : "&mdash;"; }, ""],
   ["rev",   "Reviews", function(g){ return g.reviews; }, function(g){ return g.reviews ? g.reviews.toLocaleString() : "&mdash;"; }, ""],
   ["year",  "Year",    function(g){ return g.year; },   function(g){ return g.year || "&mdash;"; }, ""],
@@ -1400,10 +1445,92 @@ function shelfTable(){
     '<tbody>'+body+'</tbody></table></div>';
 }
 
+var ICON_LIST = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+var ICON_TABLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>'+
+  '<path d="M3.5 10h17M3.5 15h17M9.5 4.5v15" stroke="currentColor" stroke-width="2"/></svg>';
+function viewMode(){ return ls(K_VIEW) === "table" ? "table" : "list"; }
+
+// Pros and cons per book in the list, loaded only when tapped (each costs a Hardcover
+// lookup and a Gemini call). id -> { state: loading|done|none|failed, says }
+var EXP = {};
+
+function listCard(r, rank){
+  var g = r.game, st = readStatus(g, READ, GR), x = EXP[g.id];
+  var cover = g.thumb ? '<img src="'+esc(g.thumb)+'" alt="" loading="lazy">' : esc(initials(g.name));
+  var rating = thinRating(g)
+    ? '<span class="few">Too few ratings</span><span class="k">· '+(g.users||0)+' rating'+(g.users===1?'':'s')+'</span>'
+    : '<span class="n">'+g.avg.toFixed(1)+'</span><span class="k">'+g.users.toLocaleString()+' ratings</span>';
+  var chips = (st ? '<span class="cp rd">✓ Read'+(st.rating ? ' · you gave ★'+st.rating : '')+'</span>' : '')+
+    (isStar(g.id) ? '<span class="cp st">★ Shortlisted</span>' : '')+
+    (r.conf === false ? '<span class="cp wn">? Check this match</span>' : '');
+  var says = "";
+  if (!x || !x.open){
+    says = g.reviews ? '<button class="exp" data-exp="'+esc(g.id)+'">▸ What readers say</button>' : "";
+  } else if (x.state === "loading"){
+    says = '<button class="exp" data-exp="'+esc(g.id)+'">▾ What readers say</button>'+
+      '<div class="ld"><span class="dots"><i></i><i></i><i></i></span>Reading the reviews…</div>';
+  } else {
+    var up = (x.says||[]).filter(function(s){ return s.dir === "up"; });
+    var dn = (x.says||[]).filter(function(s){ return s.dir === "down"; });
+    var li = function(l){ return l.map(function(s){ return '<li>'+esc(s.point)+'</li>'; }).join(""); };
+    says = '<button class="exp" data-exp="'+esc(g.id)+'">▾ What readers say</button>'+
+      (x.state === "done" && (up.length || dn.length)
+        ? '<div class="pc">'+(up.length ? '<div class="u"><h4>👍 Praised</h4><ul>'+li(up)+'</ul></div>' : '<div></div>')+
+          (dn.length ? '<div class="d"><h4>👎 Criticised</h4><ul>'+li(dn)+'</ul></div>' : '<div></div>')+'</div>'
+        : '<p class="hint" style="margin:8px 0 0">'+(x.state === "none" ? "No written reviews to summarise yet."
+            : "Could not summarise the reviews right now.")+'</p>')+
+      '<button class="more" data-open="'+esc(g.id)+'">Open full details &rarr;</button>';
+  }
+  return '<div class="bl">'+
+    '<div class="top2" data-open="'+esc(g.id)+'"><div class="cv" style="background:'+artColor(g.id)+'">'+cover+'</div>'+
+    '<div class="bd"><div class="nm">'+esc(g.name)+'</div>'+
+      '<div class="au">'+esc([g.author, g.year].filter(Boolean).join(" · "))+'</div>'+
+      '<div class="rt">'+rating+'</div>'+(chips ? '<div class="chips">'+chips+'</div>' : '')+
+    '</div><span class="rk">#'+rank+'</span></div>'+says+'</div>';
+}
+
+function bookList(){
+  var rows = sortedRows(), missing = shelf.filter(function(r){ return !r.game; });
+  return rows.map(function(r, i){ return listCard(r, sortKey === "shelf" ? shelf.indexOf(r) + 1 : i + 1); }).join("")+
+    missing.map(function(r){
+      return '<div class="bl miss"><div class="top2" data-fixgo="1"><div class="cv" style="background:#C3C9BE">?</div>'+
+        '<div class="bd"><div class="nm">'+esc(r.read || "Unreadable spine")+'</div>'+
+        '<div class="au">'+esc(r.why || "Not found on Hardcover")+'</div>'+
+        '<button class="more" data-fixgo="1">Fix this one &rarr;</button></div></div></div>';
+    }).join("");
+}
+
+function expandBook(id){
+  var x = EXP[id];
+  if (x){
+    x.open = !x.open;
+    if (!(x.open && x.state === "failed")){ render(); return; }   // a failed load retries on reopen
+  }
+  EXP[id] = { state: "loading", open: true }; render();
+  var timeout = new Promise(function(res){ setTimeout(function(){ res("timeout"); }, 25000); });
+  loadOne(id).then(function(g){
+    if (!g.comments.length) return "none";
+    return Promise.race([summarise(g).catch(function(){ return "failed"; }), timeout]);
+  }).then(function(s){
+    var cur = EXP[id]; if (!cur) return;            // a new photo cleared the list
+    if (s && s.length && typeof s !== "string"){ cur.state = "done"; cur.says = s; }
+    else cur.state = s === "none" ? "none" : "failed";
+    render();
+  }).catch(function(e){
+    if (e && e.message === "PASSWORD") return;
+    if (EXP[id]){ EXP[id].state = "failed"; render(); }
+  });
+}
+
 function shelfView(){
   var shaky = shelf.filter(function(r){ return !r.game || r.conf===false; }).length;
   var thinOnes = matched().filter(function(r){ return thinRating(r.game); });
-  return '<h2>'+matched().length+' of '+shelf.length+' matched</h2>'+
+  var mode = viewMode();
+  return '<div class="rhead"><h2>'+matched().length+' of '+shelf.length+' matched</h2>'+
+      '<span class="vt" role="group" aria-label="View">'+
+        '<button data-view="list" class="'+(mode==="list"?"on":"")+'" aria-pressed="'+(mode==="list")+'">'+ICON_LIST+'List</button>'+
+        '<button data-view="table" class="'+(mode==="table"?"on":"")+'" aria-pressed="'+(mode==="table")+'">'+ICON_TABLE+'Table</button>'+
+      '</span></div>'+
     '<div class="statusbar">'+
       '<label class="chip" tabindex="0">&#128247; Retake'+
         '<input type="file" accept="image/*" capture="environment" class="shotalt" hidden>'+
@@ -1417,12 +1544,14 @@ function shelfView(){
       '<button data-sort="shelf" class="'+(sortKey==="shelf"?"sel":"")+'">Shelf order</button>'+
       '<button data-sort="avg" class="'+(sortKey==="avg"?"sel":"")+'">Best rated</button>'+
     '</div>'+
-    shelfTable()+
-    '<div class="swipe">&#8596; swipe the table for more columns</div>'+
-    (thinOnes.length ? '<div class="note" style="margin-top:12px"><b>'+
-      (thinOnes.length === 1 ? esc(thinOnes[0].game.name)+' has too few ratings'
-        : thinOnes.length+' books have too few ratings')+'</b>'+
-      'Fewer than '+RATING_MIN+' on Hardcover, so the rating is hidden rather than misleading.</div>' : "")+
+    (mode === "table"
+      ? shelfTable()+'<div class="swipe">&#8596; swipe the table for more columns</div>'+
+        (thinOnes.length ? '<div class="note" style="margin-top:12px"><b>'+
+          (thinOnes.length === 1 ? esc(thinOnes[0].game.name)+' has too few ratings'
+            : thinOnes.length+' books have too few ratings: '+
+              thinOnes.map(function(r){ return esc(r.game.name.split(":")[0]); }).join(", "))+'</b>'+
+          'Fewer than '+RATING_MIN+' on Hardcover, so the rating is hidden rather than misleading.</div>' : "")
+      : bookList())+
     timingLine()+
     '<button class="btn ghost" data-go="idle">Start over</button>';
 }
@@ -1928,6 +2057,11 @@ function wire(){
     toggleRead(g); render();
   }; });
 
+  each("[data-view]", function(b){ b.onclick = function(){
+    ls(K_VIEW, b.dataset.view === "table" ? "table" : ""); render(); }; });
+  each("[data-exp]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation(); expandBook(b.dataset.exp); }; });
+
   each("[data-sort]", function(b){ b.onclick = function(){
     var k = b.dataset.sort;
     if (k === sortKey && k !== "shelf") sortDir = -sortDir;
@@ -2116,7 +2250,7 @@ function lookup(code){
 /* --- photo --- */
 function newCapture(){
   // Anything left from the last scan should not linger behind the next one.
-  game = null; picks = []; shelf = []; reads = [];
+  game = null; picks = []; shelf = []; reads = []; EXP = {};
   lastUPC = ""; searchedFor = ""; shotURL = null; fixTarget = null;
   sortKey = "shelf"; sortDir = 1; msg = null; busyNote = "";
 }
