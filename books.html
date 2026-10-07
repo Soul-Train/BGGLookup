@@ -516,6 +516,78 @@
   .li button{border:none;background:none;font:inherit;cursor:pointer;min-height:36px;padding:0 4px}
   .li .x{color:var(--slate);font-size:18px} .li .add{color:var(--pine);font-weight:700;font-size:13px}
   .li.res{background:#FFF}
+  /* ---- book page (v0.3.0) ---- */
+  .app.slim .top{display:none}
+  .bp-tb{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+  .bp-tb .back{margin:0;padding:6px 0;flex:none;font-size:14px}
+  .bp-tb .nm{flex:1;text-align:center;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:16px;color:var(--pine)}
+  .bp-tb .nm span{color:var(--ochre)}
+  .bp-tb .gear{flex:none;width:38px;height:38px}
+  .bp-hero{background:var(--card);border:1.5px solid var(--pine);border-radius:14px;padding:14px;position:relative}
+  .bp-top{display:flex;gap:14px}
+  .bp-cv{width:74px;height:111px;border-radius:5px;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    font-family:Fraunces,Georgia,serif;font-weight:700;font-size:20px;color:#F6F7F3;box-shadow:0 2px 6px rgba(22,36,30,.25)}
+  .bp-cv img{width:100%;height:100%;object-fit:cover;display:block}
+  .bp-who{flex:1;min-width:0}
+  .bp-t{display:block;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:20px;line-height:1.15;padding-right:34px;
+    color:var(--ink);text-decoration:none}
+  .bp-a{color:var(--slate);font-size:13px;margin-top:3px}
+  .bp-r{display:flex;align-items:baseline;gap:8px;margin-top:7px;flex-wrap:wrap}
+  .bp-r .n{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:34px;color:var(--pine);line-height:1}
+  .bp-r .k{color:var(--slate);font-size:12px}
+  .bp-few{margin-top:8px;font-size:12.5px;color:var(--slate)}
+  .bp-few b{display:block;font-family:Fraunces,Georgia,serif;font-size:18px;color:var(--ink)}
+  .bp-stars{position:relative;display:inline-block;color:#D9D3C1;font-size:15px;letter-spacing:1px;line-height:1}
+  .bp-stars i{position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:var(--ochre);font-style:normal}
+  .bp-m{color:var(--slate);font-size:12.5px;margin-top:5px}
+  .bp-fx{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:8px;border:1.5px solid var(--line);
+    background:var(--card);display:flex;align-items:center;justify-content:center;color:var(--slate);cursor:pointer;padding:0}
+  .bp-fx svg{width:14px;height:14px}
+  .bp-fx:hover{border-color:var(--flag);color:var(--flag)}
+  .bp-vd{display:flex;gap:6px;margin-top:12px;font-size:12.5px;line-height:1.3}
+  .bp-vd div{flex:1;border-radius:9px;padding:8px 9px;min-width:0}
+  .bp-vd .u{background:#DCEBE2;color:#1F4536}.bp-vd .d{background:#F7E3DF;color:#7A2E22}
+  .bp-vd b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;opacity:.85}
+  .bp-vd .ld{background:#EEF0EA;color:var(--slate);display:flex;align-items:center;gap:8px}
+  .bp-vd .ld .dots i{width:6px;height:6px}
+  .bp-tg{display:flex;gap:8px;margin-top:12px}
+  .bp-tg button{flex:1;border-radius:999px;padding:9px 0;font-size:13px;font-weight:600;border:1.5px solid var(--line);
+    color:var(--slate);background:#FFF;cursor:pointer;min-height:40px}
+  .bp-tg button.on.star{background:var(--ochre);border-color:var(--ochre);color:#16241E}
+  .bp-tg button.on.read{background:var(--pine);border-color:var(--pine);color:#F6F7F3}
+  .bp-sec{margin-top:16px}
+  .bp-sec h3{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;margin:0 0 7px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .bp-sec h3 small{font-family:Archivo,system-ui,sans-serif;font-weight:400;color:var(--slate);font-size:12px}
+  .bp-pc{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .bp-pc.one{grid-template-columns:1fr}
+  .bp-col{border-radius:11px;padding:8px 10px}
+  .bp-col.u{background:#E9F3EC;border:1px solid #CFE3D6}.bp-col.d{background:#FBEEEB;border:1px solid #EFD2CB}
+  .bp-col h4{margin:0 0 3px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .bp-col.u h4{color:var(--pine)}.bp-col.d h4{color:var(--flag)}
+  .bp-pt{display:flex;gap:6px;width:100%;text-align:left;background:none;border:none;border-top:1px dashed rgba(0,0,0,.09);
+    padding:7px 0;font:inherit;font-size:13px;line-height:1.3;color:var(--ink);cursor:pointer}
+  .bp-col h4 + .bp-pt{border-top:none}
+  .bp-pt span{flex:1}.bp-pt i{font-style:normal;color:var(--slate);font-size:11px;padding-top:1px}
+  .bp-pt.on span{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+  .bp-q{margin-top:8px;background:#FFF;border:1px solid var(--line);border-left:3px solid var(--pine);border-radius:8px;
+    padding:9px 11px;font-size:13px;line-height:1.45}
+  .bp-q.d{border-left-color:var(--flag)}
+  .bp-q small{display:flex;justify-content:space-between;gap:8px;color:var(--slate);font-size:11.5px;margin-top:5px}
+  .bp-q small a{color:var(--pine)}
+  .bp-lr{display:flex;align-items:center;gap:8px;border-radius:9px;padding:9px 10px;margin-bottom:6px;font-size:13.5px;
+    color:var(--ink);text-decoration:none}
+  .bp-lr b{font-weight:700}.bp-lr .m{flex:1;color:var(--slate);font-size:12px}
+  .bp-lr .go{font-weight:700;font-size:12.5px;white-space:nowrap}
+  .bp-lr.now{background:#DCEBE2}.bp-lr.now .go{color:var(--pine)}
+  .bp-lr.wait{background:#FFF4D6}.bp-lr.wait .go{color:#7A5A10}
+  .bp-lr.err{background:#EEF0EA}.bp-lr.err .go{color:var(--slate);font-weight:600}
+  .bp-lnone{font-size:12px;color:var(--slate);padding:0 2px}
+  .bp-buy{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;margin-top:16px}
+  .bp-buy span{color:var(--slate);margin-right:2px}
+  .bp-buy a{border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--pine);font-weight:600;background:#FFF;text-decoration:none}
+  .bp-buy a:hover{border-color:var(--pine)}
+  .btn.bp-again{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px}
+  .btn.bp-again svg{width:18px;height:18px}
 
   /* ---- Board games | Books switch ---- */
   .appsw{display:flex;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card);margin:-4px 0 18px}
@@ -878,6 +950,36 @@ function olFromSearch(json){
   return { title: String(d.title).trim(), author: ((d.author_name || [])[0] || "").trim() };
 }
 
+/* ---------- book page helpers ---------- */
+/** "Loudoun County Public Library" -> "Loudoun". Keeps the original if nothing would be left. */
+function shortLibName(name){
+  var n = String(name || "").replace(/\b(county|public|library|libraries|district|system|regional|free)\b/gi, " ")
+    .replace(/\s+/g, " ").replace(/^[\s,&-]+|[\s,&-]+$/g, "").trim();
+  return n || String(name || "");
+}
+/** Libby rows in order of usefulness: available now (most copies free first), then shortest wait;
+    libraries that errored or don't have it are listed separately. */
+function sortLibby(per){
+  var now = [], wait = [], err = [], none = [];
+  (per || []).forEach(function(x){
+    if (x.err) err.push(x);
+    else if (!x.st || x.st.state === "none") none.push(x);
+    else if (x.st.state === "now") now.push(x);
+    else wait.push(x);
+  });
+  now.sort(function(a, b){ return (b.st.avail || 0) - (a.st.avail || 0); });
+  wait.sort(function(a, b){ return a.st.weeks - b.st.weeks; });
+  return { rows: now.concat(wait), err: err, none: none };
+}
+/** The single strongest praise and criticism, for the verdict strip. */
+function topSays(says){
+  var best = function(dir){ return (says || []).filter(function(s){ return s.dir === dir; })
+    .sort(function(a, b){ return (b.n || 0) - (a.n || 0); })[0] || null; };
+  return { up: best("up"), down: best("down") };
+}
+/** Fill width for the gold stars: 4.5 -> 90 (%). */
+function starPct(avg){ return Math.max(0, Math.min(100, Math.round((avg || 0) / 5 * 100))); }
+
 if (typeof module !== "undefined") module.exports = {
   RATING_MIN: RATING_MIN, isbnDigits: isbnDigits, validIsbn13: validIsbn13, validIsbn10: validIsbn10, isbn10to13: isbn10to13,
   classifyCode: classifyCode, normTitle: normTitle, editWithin1: editWithin1, titleMatches: titleMatches, titleWords: titleWords,
@@ -888,7 +990,8 @@ if (typeof module !== "undefined") module.exports = {
   parseGoodreads: parseGoodreads, readStatus: readStatus,
   libbyPath: libbyPath, isEnglish: isEnglish, pickLibbyItem: pickLibbyItem, libbyStatus: libbyStatus, waitText: waitText,
   bestLibby: bestLibby, libbyLink: libbyLink, searchLibraries: searchLibraries, cleanLibCode: cleanLibCode,
-  olIsbnURL: olIsbnURL, olFromSearch: olFromSearch
+  olIsbnURL: olIsbnURL, olFromSearch: olFromSearch,
+  shortLibName: shortLibName, sortLibby: sortLibby, topSays: topSays, starPct: starPct
 };
 
 </script>
@@ -899,7 +1002,7 @@ try { localStorage.setItem("shelfworthy.lastApp", "books"); } catch(e){}
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "0.2.1";
+var APP_VERSION = "0.3.0";
 /* The proxy holds the Hardcover token and the Gemini key, so no phone
    needs either. Put your own Worker address in PROXY. */
 var PROXY    = "https://shelfworthy.joshua-shull12.workers.dev";
@@ -1284,24 +1387,28 @@ function libbyBest(g){
 }
 function libbyBlock(g){
   var libs = myLibs();
-  if (!libs.length) return '<div class="lib"><button class="libsetup" data-libsetup="1">'+
-    '\ud83c\udfa7 Add your library to see if the audiobook is on Libby</button></div>';
+  if (!libs.length) return '<div class="bp-sec bp-lib"><button class="libsetup" data-libsetup="1">'+
+    '🎧 Add your library to see if the audiobook is on Libby</button></div>';
   var e = LIBBY[g.id] || loadLibby(g);
-  var head = '<div class="ph"><span>\ud83c\udfa7 Audiobook on Libby</span><small>tap a library to open it</small></div>';
-  if (e.state !== "done") return '<div class="lib">'+head+'<div class="librow"><div><small>Checking '+libs.length+
-    ' librar'+(libs.length === 1 ? 'y' : 'ies')+'\u2026</small></div></div></div>';
-  return '<div class="lib">'+head+e.per.map(function(x){
-    var st = x.st;
-    var cls = x.err || !st || st.state === "none" ? "no" : st.state === "now" ? "av" : "wt";
-    var sub = x.err ? "Couldn\u2019t check right now"
-      : !st || st.state === "none" ? "No English audiobook in their catalog"
-      : st.state === "now" ? (st.lucky ? "Skip-the-line copy, no hold needed" : st.avail+" of "+st.owned+" cop"+(st.owned === 1 ? "y" : "ies")+" free")
-      : st.holds+" hold"+(st.holds === 1 ? "" : "s")+" on "+st.owned+" cop"+(st.owned === 1 ? "y" : "ies");
-    var inner = '<div>'+esc(x.lib.name)+'<small>'+esc(sub)+'</small></div><span class="bdg '+cls+'">'+
-      esc(x.err ? "Try later" : waitText(st))+'</span>';
-    return st && st.id ? '<a class="librow" href="'+esc(libbyLink(st))+'" target="_blank" rel="noopener">'+inner+'</a>'
-                       : '<div class="librow">'+inner+'</div>';
-  }).join("")+'</div>';
+  var head = '<h3>🎧 Audiobook on Libby</h3>';
+  if (e.state !== "done") return '<div class="bp-sec bp-lib">'+head+'<div class="bp-lnone">Checking '+libs.length+
+    ' librar'+(libs.length === 1 ? 'y' : 'ies')+'…</div></div>';
+  var o = sortLibby(e.per);
+  var row = function(x){
+    var st = x.st, nm = '<b>'+esc(shortLibName(x.lib.name))+'</b>';
+    var cls = st.state === "now" ? "now" : "wait";
+    var m = st.state === "now" ? (st.lucky ? "skip-the-line copy" : st.avail+" of "+st.owned+" free")
+      : st.holds+" hold"+(st.holds === 1 ? "" : "s")+" · "+st.owned+" cop"+(st.owned === 1 ? "y" : "ies");
+    var go = st.state === "now" ? (st.lucky ? "Lucky Day ›" : "Borrow ›") : (st.weeks > 26 ? "6+ mo ›" : "~"+st.weeks+" wk ›");
+    return '<a class="bp-lr '+cls+'" href="'+esc(libbyLink(st))+'" target="_blank" rel="noopener">'+nm+
+      '<span class="m">'+esc(m)+'</span><span class="go">'+go+'</span></a>';
+  };
+  var names = function(list){ return list.map(function(x){ return esc(shortLibName(x.lib.name)); }).join(", "); };
+  return '<div class="bp-sec bp-lib">'+head+o.rows.map(row).join("")+
+    o.err.map(function(x){ return '<div class="bp-lr err"><b>'+esc(shortLibName(x.lib.name))+'</b>'+
+      '<span class="m">couldn’t check right now</span><span class="go">Try later</span></div>'; }).join("")+
+    (o.none.length ? '<div class="bp-lnone">'+(o.rows.length || o.err.length ? 'Not at ' : 'No English audiobook at ')+names(o.none)+'</div>' : '')+
+  '</div>';
 }
 function libbyChip(g){
   if (!myLibs().length) return "";
@@ -1638,8 +1745,8 @@ function facts(g){
 
 
 function priceBlock(g){
-  return '<div class="links">'+priceLinks(g).map(function(l){
-    return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a>'; }).join("")+'</div>';
+  return '<div class="bp-buy"><span>Buy:</span>'+priceLinks(g).map(function(l){
+    return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0] === "Used prices" ? "Used" : l[0])+'</a>'; }).join("")+'</div>';
 }
 
 function markBtns(g){
@@ -1652,61 +1759,68 @@ function markBtns(g){
 }
 
 function card(g){
-  var st = readStatus(g, READ, GR);
+  var st = readStatus(g, READ, GR), rd = !!st, sl = isStar(g.id);
+  var cover = g.thumb ? '<img src="'+esc(g.thumb)+'" alt="" loading="lazy">' : esc(initials(g.name));
   var score = thinRating(g)
-    ? '<div class="thin"><b>Too few ratings</b>'+(g.users ? g.users+' on Hardcover' : 'None on Hardcover yet')+
-        ', not enough to judge.</div>'
-    : '<div class="big"><span class="n">'+g.avg.toFixed(1)+'</span>'+
-        '<span class="k">Average<small>'+g.users.toLocaleString()+' ratings</small></span></div>';
-  return '<div class="card">'+
-    '<button class="fixcorner" data-fixthis="1" title="Not the right book? Fix it">'+
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" '+
-      'fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Fix</button>'+
-    '<div class="cardtop">'+thumb(g,true)+'<div class="who2">'+
-      '<a class="name" href="'+esc(bookURL(g))+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
-      '<div class="sub">'+esc([g.author, g.year].filter(Boolean).join(" \u00b7 "))+'</div>'+
-      score+
-      (st ? '<div class="readline">\u2713 Read'+(st.rating ? ' \u00b7 you gave \u2605'+st.rating : '')+'</div>' : "")+
-    '</div></div>'+
-    '<div class="facts">'+facts(g)+'</div>'+libbyBlock(g)+priceBlock(g)+markBtns(g)+'</div>';
+    ? '<div class="bp-few"><b>Too few ratings</b>'+(g.users ? g.users+' on Hardcover' : 'None on Hardcover yet')+', not enough to judge.</div>'
+    : '<div class="bp-r"><span class="n">'+g.avg.toFixed(1)+'</span>'+
+        '<span class="bp-stars" aria-label="'+g.avg.toFixed(1)+' out of 5">★★★★★<i style="width:'+starPct(g.avg)+'%">★★★★★</i></span>'+
+        '<span class="k">'+g.users.toLocaleString()+' ratings</span></div>';
+  var meta = [g.pages ? g.pages+" pages" : "", g.genre || "", g.reviews ? g.reviews.toLocaleString()+" reviews" : ""].filter(Boolean);
+  var v = "", top = topSays(g.says);
+  if (g.saysState === "loading")
+    v = '<div class="bp-vd"><div class="ld"><span class="dots"><i></i><i></i><i></i></span>Reading what readers think…</div></div>';
+  else if (top.up || top.down)
+    v = '<div class="bp-vd">'+
+      (top.up ? '<div class="u"><b>👍 Readers love</b>'+esc(top.up.point)+'</div>' : '')+
+      (top.down ? '<div class="d"><b>👎 Common gripe</b>'+esc(top.down.point)+'</div>' : '')+'</div>';
+  return '<div class="bp-hero card">'+
+    '<button class="bp-fx" data-fixthis="1" title="Not the right book? Fix it" aria-label="Not the right book? Fix it">'+
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z" fill="none" stroke="currentColor" '+
+      'stroke-width="2" stroke-linejoin="round"/></svg></button>'+
+    '<div class="bp-top"><div class="bp-cv" style="background:'+artColor(g.id)+'">'+cover+'</div><div class="bp-who">'+
+      '<a class="bp-t" href="'+esc(bookURL(g))+'" target="_blank" rel="noopener">'+esc(g.name)+'</a>'+
+      '<div class="bp-a">'+esc([g.author, g.year].filter(Boolean).join(" · "))+'</div>'+
+      score+(meta.length ? '<div class="bp-m">'+esc(meta.join(" · "))+'</div>' : '')+
+    '</div></div>'+v+
+    '<div class="bp-tg">'+
+      '<button class="star'+(sl?" on":"")+'" data-star="'+esc(g.id)+'">'+(sl?"★ Shortlisted":"☆ Shortlist")+'</button>'+
+      '<button class="read'+(rd?" on":"")+'" data-read="'+esc(g.id)+'">✓ '+(rd ? "Read"+(st.rating ? " · you gave ★"+st.rating : "") : "I've read this")+'</button>'+
+    '</div></div>';
 }
 
+var PT_SEL = -1;   // which point's review is open on the book page; survives redraws
+function quoteHTML(g){
+  var x = g && g.says && g.says[PT_SEL];
+  if (!x) return '<div id="bp-q"></div>';
+  return '<div id="bp-q" class="bp-q'+(x.dir === "down" ? " d" : "")+'">\u201c'+esc(x.quote)+'\u201d<small><span>'+esc(x.who || "a reader")+
+    (x.rating ? ' rated it '+esc(String(Math.round(parseFloat(x.rating)))) : '')+'</span>'+
+    '<a href="'+esc(reviewsURL(g))+'" target="_blank" rel="noopener">all reviews &rarr;</a></small></div>';
+}
 function saysBlock(g){
   if (g.saysState === "failed"){
-    return '<div class="says"><h3>What readers say</h3>'+
+    return '<div class="bp-sec says"><h3>What readers say</h3>'+
       '<p class="hint">Could not summarise the reviews right now. '+
-      '<a href="'+esc(reviewsURL(g))+'" target="_blank" rel="noopener">'+
-      'Read them on Hardcover</a>.</p></div>';
+      '<a href="'+esc(reviewsURL(g))+'" target="_blank" rel="noopener">Read them on Hardcover</a>.</p></div>';
   }
   if (g.saysState === "loading"){
-    return '<div class="says"><h3>What readers say</h3>'+
+    return '<div class="bp-sec says"><h3>What readers say</h3>'+
       '<div class="saysload"><div class="dots"><i></i><i></i><i></i></div>'+
-      '<div><b>Summarizing reviews</b><small>Grouping what readers praise and criticise</small></div>'+
-      '</div></div>';
+      '<div><b>Summarizing reviews</b><small>Grouping what readers praise and criticise</small></div></div></div>';
   }
-  if (!g.says) return "";
-  var up = g.says.filter(function(s){ return s.dir==="up"; });
-  var dn = g.says.filter(function(s){ return s.dir==="down"; });
-  function block(list, tag){
-    return list.map(function(s, i){
-      var id = tag+i;
-      return '<div class="say '+s.dir+'">'+
-        '<button data-toggle="'+id+'"><span class="mk">'+(s.dir==="up"?"+":"&minus;")+'</span>'+
-        '<span style="flex:1">'+esc(s.point)+'</span>'+
-        '<span class="cnt">'+s.n+' &rsaquo;</span></button>'+
-        '<div class="body" hidden><div class="quote">'+esc(s.quote)+'</div>'+
-        '<div class="by"><span>'+esc(s.who||"a user")+
-        (s.rating?' rated it '+esc(String(Math.round(parseFloat(s.rating)))):"")+'</span>'+
-        '<a href="'+esc(reviewsURL(g))+'" target="_blank" rel="noopener">'+
-        'all reviews &rarr;</a></div></div></div>';
-    }).join("");
-  }
-  return '<div class="says"><h3>What readers say</h3>'+
-    '<p class="hint" style="margin-bottom:0">From '+g.comments.length+' top Hardcover reviews. '+
-    'Tap a point to read the review it came from.</p>'+
-    (up.length ? '<div class="grp">Praised</div>'+block(up,"u") : "")+
-    (dn.length ? '<div class="grp">Criticised</div>'+block(dn,"d") : "")+
-  '</div>';
+  if (!g.says || !g.says.length) return "";
+  var pts = function(dir){ return g.says.map(function(x, i){ return [x, i]; }).filter(function(p){ return p[0].dir === dir; }); };
+  var up = pts("up"), dn = pts("down");
+  var col = function(list, cls, label){
+    return '<div class="bp-col '+cls+'"><h4>'+label+'</h4>'+list.map(function(p){
+      return '<button class="bp-pt'+(p[1] === PT_SEL ? ' on' : '')+'" data-pt="'+p[1]+'"><span>'+esc(p[0].point)+'</span><i>'+(p[0].n||"")+'</i></button>';
+    }).join("")+'</div>';
+  };
+  var n = (g.comments && g.comments.length) || 0;
+  return '<div class="bp-sec says"><h3>What readers say <small>'+(n ? n+' top reviews · ' : '')+'tap a point for the review</small></h3>'+
+    '<div class="bp-pc'+(up.length && dn.length ? '' : ' one')+'">'+
+      (up.length ? col(up, "u", "Praised") : "")+(dn.length ? col(dn, "d", "Criticised") : "")+'</div>'+
+    quoteHTML(g)+'</div>';
 }
 
 /* ============================ table ============================= */
@@ -1985,12 +2099,15 @@ function scanView(){
 }
 
 function detailView(g){
-  return '<button class="back" data-go="'+(shelf.length?"shelf":"idle")+'">&larr; back</button>'+
-    notice()+card(g)+
-    saysBlock(g)+
+  var to = shelf.length ? "shelf" : "idle";
+  return '<div class="bp-tb"><button class="back" data-go="'+to+'">&larr; '+(shelf.length ? "Shelf" : "Back")+'</button>'+
+      '<div class="nm">Shelfworthy <span>Books</span></div>'+
+      '<button class="gear" data-gear="1" title="Settings" aria-label="Settings">&#9881;</button></div>'+
+    notice()+card(g)+saysBlock(g)+libbyBlock(g)+priceBlock(g)+
     (shelf.length <= 1 ? timingLine() : "")+
-    '<button class="btn ghost" data-go="'+(shelf.length?"shelf":"idle")+'">'+
-    (shelf.length?"Back to the shelf":"Scan another")+'</button>';
+    (shelf.length
+      ? '<button class="btn bp-again" data-go="shelf">&larr; Back to the shelf</button>'
+      : '<button class="btn bp-again" data-go="idle">'+ICON_CAMERA+'Scan another</button>');
 }
 
 function picksView(){
@@ -2416,6 +2533,7 @@ function render(){
   document.getElementById("gear").className = "gear";
 
   var h;
+  document.querySelector(".app").classList.toggle("slim", screen === "detail" && !!game);
   if (!password() && screen !== "pass") screen = "pass";
   if (screen === "pass")          h = passView();
   else if (screen === "scanning") h = scanView();
@@ -2525,6 +2643,14 @@ function wire(){
 
   each("[data-toggle]", function(b){ b.onclick = function(){
     var body = b.parentNode.querySelector(".body"); body.hidden = !body.hidden; }; });
+  each("[data-pt]", function(b){ b.onclick = function(){
+    var i = +b.dataset.pt;
+    PT_SEL = PT_SEL === i ? -1 : i;
+    each("[data-pt]", function(x){ x.classList.toggle("on", +x.dataset.pt === PT_SEL); });
+    var box = document.getElementById("bp-q");
+    if (box) box.outerHTML = quoteHTML(game);
+  }; });
+  each("[data-gear]", function(b){ b.onclick = function(){ sheet = true; render(); }; });
 
   each("[data-setprice]", function(b){ b.onclick = function(){
     var inp = document.querySelector('[data-priceinput="'+b.dataset.setprice+'"]');
@@ -2582,7 +2708,7 @@ function openGame(id){
   busy = "Loading the book"; screen = "busy"; showShot = false; render();
   loadOne(id)
     .then(function(g){
-      game = g;
+      game = g; PT_SEL = -1;
       rememberOne(g);
       // Show the placeholder straight away if there is anything to summarise.
       g.saysState = (g.comments && g.comments.length) ? "loading" : "none";
