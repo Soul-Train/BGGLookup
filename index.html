@@ -443,6 +443,13 @@
   #cam{width:100%;border-radius:14px;background:#0D1512;display:block;aspect-ratio:4/3;object-fit:cover}
   .shot{width:100%;border-radius:12px;display:block;margin-bottom:12px;border:1px solid var(--line)}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ---- Board games | Books switch ---- */
+  .appsw{display:flex;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card);margin:-4px 0 18px}
+  .appsw a{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 0;font-size:14px;
+    font-weight:600;color:var(--slate);text-decoration:none;min-height:44px}
+  .appsw a.on{background:var(--pine);color:#F6F7F3}
+  .appsw svg{width:17px;height:17px}
 </style>
 </head>
 <body>
@@ -464,10 +471,19 @@
 </div>
 <div id="modal"></div>
 <script>
+(function(){
+  try {
+    var wantGames = /[?&]app=games\b/.test(location.search);
+    if (!wantGames && localStorage.getItem("shelfworthy.lastApp") === "books"){ location.replace("books.html"); return; }
+    localStorage.setItem("shelfworthy.lastApp", "games");
+  } catch(e){}
+})();
+</script>
+<script>
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "1.0.6";
+var APP_VERSION = "1.0.7";
 var UPC_URL  = "https://api.gameupc.com/test/upc/";
 var UPC_KEY  = "test_test_test_test_test";
 /* The proxy holds the BoardGameGeek token and the Gemini key, so no phone
@@ -1319,6 +1335,16 @@ function shelfView(){
 }
 
 /* ============================ screens =========================== */
+var ICON_DIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/>'+
+  '<circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/><circle cx="15" cy="9" r="1.5" fill="currentColor"/><circle cx="9" cy="15" r="1.5" fill="currentColor"/></svg>';
+var ICON_BOOK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.5A2.5 2.5 0 0 1 17 7v12.5H7.5A2.5 2.5 0 0 1 5 17V4.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'+
+  '<path d="M5 17a2.5 2.5 0 0 1 2.5-2.5H17" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+function appSwitch(here){
+  return '<nav class="appsw" aria-label="Switch app">'+
+    '<a href="index.html?app=games" class="'+(here==="games"?"on":"")+'"'+(here==="games"?' aria-current="page"':'')+'>'+ICON_DIE+'Board games</a>'+
+    '<a href="books.html" class="'+(here==="books"?"on":"")+'"'+(here==="books"?' aria-current="page"':'')+'>'+ICON_BOOK+'Books</a></nav>';
+}
+
 function notice(){ return msg ? '<div class="note'+(msgBad?" bad":"")+'">'+msg+'</div>' : ""; }
 
 function photoOut(label, primary){
@@ -1345,6 +1371,7 @@ var ICON_BARCODE = '<svg viewBox="0 0 24 24" aria-hidden="true">'+
 
 function idleView(){
   return notice()+
+    appSwitch("games")+
     '<h2>Find a game</h2>'+
     '<label class="bigact main" tabindex="0">'+
       '<span class="ai">'+ICON_CAMERA+'</span>'+

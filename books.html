@@ -493,6 +493,36 @@
   .bl .ld{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--slate);margin-top:8px}
   .bl .ld .dots i{width:6px;height:6px}
   .bl.miss{border-style:dashed}.bl.miss .nm{font-style:italic;color:var(--slate)}
+  /* ---- Libby ---- */
+  .lib{margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
+  .lib .ph{margin-bottom:4px}
+  .librow{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;padding:7px 0;
+    color:var(--ink);text-decoration:none;border-bottom:1px dashed var(--line)}
+  .librow:last-child{border-bottom:none}
+  a.librow:hover .bdg{filter:brightness(.95)}
+  .librow small{color:var(--slate);font-size:11.5px;display:block}
+  .bdg{display:inline-block;font-size:11.5px;font-weight:600;border-radius:999px;padding:3px 9px;white-space:nowrap;flex:none}
+  .bdg.av{background:#DCEBE2;color:var(--pine)} .bdg.wt{background:#FFF7E4;color:#7A5A10;border:1px solid #E0C071}
+  .bdg.no{background:#E3E6DF;color:var(--slate)}
+  .libsetup{display:block;width:100%;text-align:left;background:none;border:none;padding:4px 0;font:inherit;font-size:13px;
+    font-weight:600;color:var(--pine);text-decoration:underline;cursor:pointer}
+  .bl .cp.lv{background:#DCEBE2;color:var(--pine)}
+  .tbl td .lbn{font-size:11.5px;font-weight:600;white-space:nowrap}
+  .tbl td .lbn.av{color:var(--pine)} .tbl td .lbn.wt{color:#7A5A10} .tbl td .lbn.no{color:var(--slate);font-weight:500}
+  .lst{background:var(--card);border:1.5px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:6px}
+  .lst:empty{display:none}
+  .li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px}
+  .li:last-child{border-bottom:none} .li .g{flex:1;min-width:0} .li small{display:block;color:var(--slate);font-size:12px}
+  .li button{border:none;background:none;font:inherit;cursor:pointer;min-height:36px;padding:0 4px}
+  .li .x{color:var(--slate);font-size:18px} .li .add{color:var(--pine);font-weight:700;font-size:13px}
+  .li.res{background:#FFF}
+
+  /* ---- Board games | Books switch ---- */
+  .appsw{display:flex;border:1.5px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card);margin:-4px 0 18px}
+  .appsw a{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 0;font-size:14px;
+    font-weight:600;color:var(--slate);text-decoration:none;min-height:44px}
+  .appsw a.on{background:var(--pine);color:#F6F7F3}
+  .appsw svg{width:17px;height:17px}
 </style>
 </head>
 <body>
@@ -755,6 +785,80 @@ function readStatus(g, READ, GR){
   return hit ? { read: true, rating: hit.r || 0, src: "goodreads" } : null;
 }
 
+/* ---------- Libby (audiobook availability) ---------- */
+var LIBBY_LOAN_DAYS = 14;   // Libby's usual audiobook loan
+function libbyPath(libKey, g){
+  var q = g.name.split(":")[0] + " " + lastName(g.author);
+  return "libraries/" + encodeURIComponent(libKey) + "/media?query=" + encodeURIComponent(q.trim()) +
+    "&format=audiobook-overdrive,audiobook-mp3&perPage=20";
+}
+function isEnglish(item){
+  var l = item && item.languages;
+  if (!Array.isArray(l) || !l.length) return true;          // not stated: assume English
+  return l.some(function(x){ return x && (x.id === "en" || /^english$/i.test(x.name || "")); });
+}
+/** The library's copy of this book: English, same title, author doesn't contradict,
+    not a summary or study guide sold under the same title, and the one with most copies. */
+function pickLibbyItem(g, items){
+  var asked = g.name + " by " + (g.author || "");
+  var ok = (items || []).filter(function(it){
+    if (!it || !it.id || !it.title) return false;
+    if (!isEnglish(it)) return false;
+    if (!titleMatches(g.name, it.title)) return false;
+    if (authorMatches(lastName(g.author), it.firstCreatorName) === false) return false;
+    var label = it.title + " " + (it.subtitle || "") + " " + (it.edition || "");
+    if (isJunk(asked, label) || /\b(abridged|summary of|a novel by .* summary)\b/i.test(label)) return false;
+    return true;
+  });
+  if (!ok.length) return null;
+  var exact = function(it){ return titleWords(it.title).join(" ") === titleWords(g.name).join(" ") ? 1 : 0; };
+  ok.sort(function(a, b){ return exact(b) - exact(a) || (b.ownedCopies || 0) - (a.ownedCopies || 0); });
+  return ok[0];
+}
+/** -> { state: "now" | "wait" | "none", avail, owned, holds, weeks, id } */
+function libbyStatus(item){
+  if (!item) return { state: "none" };
+  var owned = item.ownedCopies || 0, avail = item.availableCopies || 0, holds = item.holdsCount || 0;
+  var lucky = item.luckyDayAvailableCopies || 0;
+  if (item.isAvailable || avail > 0 || lucky > 0)
+    return { state: "now", avail: Math.max(avail, lucky), owned: owned, holds: 0, id: String(item.id), lucky: !avail && lucky > 0 };
+  if (!owned && !holds) return { state: "none" };
+  var weeks = Math.max(1, Math.round((holds + 1) / Math.max(owned, 1) * LIBBY_LOAN_DAYS / 7));
+  return { state: "wait", avail: 0, owned: owned, holds: holds, weeks: weeks, id: String(item.id) };
+}
+function waitText(st){
+  if (!st || st.state === "none") return "Not on Libby";
+  if (st.state === "now") return st.lucky ? "Lucky Day copy" : "Borrow now";
+  return st.weeks > 26 ? "6+ months" : "about " + st.weeks + " wk";
+}
+/** Best across your libraries: available now beats any wait; shorter wait beats longer. */
+function bestLibby(statuses){
+  var list = (statuses || []).filter(Boolean);
+  var rank = function(s){ return s.state === "now" ? 0 : s.state === "wait" ? s.weeks : 9999; };
+  list.sort(function(a, b){ return rank(a) - rank(b); });
+  return list[0] || null;
+}
+function libbyLink(st){ return st && st.id ? "https://share.libbyapp.com/title/" + encodeURIComponent(st.id) : "https://libbyapp.com"; }
+/** Search the saved library list by name or code. Starts-with beats contains. */
+function searchLibraries(list, q, max){
+  q = String(q || "").toLowerCase().trim();
+  if (q.length < 2) return [];
+  var words = q.split(/\s+/);
+  var hits = [];
+  (list || []).forEach(function(l){
+    var name = String(l[1]).toLowerCase(), key = String(l[0]).toLowerCase();
+    if (!words.every(function(w){ return name.indexOf(w) >= 0 || key.indexOf(w) >= 0; })) return;
+    var score = key === q ? 0 : name.indexOf(q) === 0 ? 1 : (" " + name).indexOf(" " + words[0]) >= 0 ? 2 : 3;
+    hits.push([score, l]);
+  });
+  hits.sort(function(a, b){ return a[0] - b[0] || a[1][1].localeCompare(b[1][1]); });
+  return hits.slice(0, max || 8).map(function(h){ return { key: h[1][0], name: h[1][1] }; });
+}
+function cleanLibCode(s){
+  var m = String(s || "").trim().toLowerCase().match(/^(?:https?:\/\/)?(?:www\.)?(?:libbyapp\.com\/library\/)?([a-z0-9._-]+?)(?:\.overdrive\.com)?(?:[\/?#].*)?$/);
+  return m ? m[1] : "";
+}
+
 if (typeof module !== "undefined") module.exports = {
   RATING_MIN: RATING_MIN, isbnDigits: isbnDigits, validIsbn13: validIsbn13, validIsbn10: validIsbn10, isbn10to13: isbn10to13,
   classifyCode: classifyCode, normTitle: normTitle, editWithin1: editWithin1, titleMatches: titleMatches, titleWords: titleWords,
@@ -762,15 +866,20 @@ if (typeof module !== "undefined") module.exports = {
   hcBooksQ: hcBooksQ, hcDetailQ: hcDetailQ, searchHits: searchHits, authorFrom: authorFrom, genreFrom: genreFrom,
   parseBook: parseBook, thinRating: thinRating, looksEnglish: looksEnglish, cleanText: cleanText, pickReviews: pickReviews,
   bookURL: bookURL, reviewsURL: reviewsURL, priceLinks: priceLinks, parseCsv: parseCsv, lastName: lastName, readKey: readKey,
-  parseGoodreads: parseGoodreads, readStatus: readStatus
+  parseGoodreads: parseGoodreads, readStatus: readStatus,
+  libbyPath: libbyPath, isEnglish: isEnglish, pickLibbyItem: pickLibbyItem, libbyStatus: libbyStatus, waitText: waitText,
+  bestLibby: bestLibby, libbyLink: libbyLink, searchLibraries: searchLibraries, cleanLibCode: cleanLibCode
 };
 
+</script>
+<script>
+try { localStorage.setItem("shelfworthy.lastApp", "books"); } catch(e){}
 </script>
 <script>
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "0.1.2";
+var APP_VERSION = "0.2.0";
 /* The proxy holds the Hardcover token and the Gemini key, so no phone
    needs either. Put your own Worker address in PROXY. */
 var PROXY    = "https://shelfworthy.joshua-shull12.workers.dev";
@@ -793,7 +902,13 @@ var GAPI     = PROXY + "/gemini";
 var K_HIST = "shelfworthy.books.history";
 var K_STAR = "shelfworthy.books.starred", K_READ = "shelfworthy.books.read",
     K_GR   = "shelfworthy.books.goodreads", K_MODEL = "shelfworthy.gemini.model.v5",
-    K_VIEW = "shelfworthy.books.view";
+    K_VIEW = "shelfworthy.books.view", K_LIBS = "shelfworthy.books.libraries";
+var MAX_LIBS = 5;
+function myLibs(){
+  try { var l = JSON.parse(ls(K_LIBS) || "[]"); return Array.isArray(l) ? l.filter(function(x){ return x && x.key; }) : []; }
+  catch(e){ return []; }
+}
+function saveLibs(l){ ls(K_LIBS, l.length ? JSON.stringify(l.slice(0, MAX_LIBS)) : ""); LIBBY = {}; }
 
 /* ============================ storage =========================== */
 function ls(k, v){
@@ -982,6 +1097,83 @@ function findIsbn(isbn13, isbn10){
     var e = (d.editions || [])[0];
     return e && e.book_id ? String(e.book_id) : null;
   });
+}
+
+/* ============================ Libby ============================= */
+// Public catalog lookups only, through the Worker (cached there for an hour).
+var LIBBY = {};              // book id -> { state: "loading"|"done", per: [{ lib, st, err }] }
+var LB_ACTIVE = 0, LB_QUEUE = [];
+function libbyGet(path){
+  return new Promise(function(res){
+    var go = function(){ LB_ACTIVE++; res(); };
+    if (LB_ACTIVE < 4) go(); else LB_QUEUE.push(go);
+  }).then(function(){
+    return fetch(PROXY + "/libby/" + path, { headers: proxyHeaders() });
+  }).then(function(r){
+    LB_ACTIVE--; var n = LB_QUEUE.shift(); if (n) n();
+    if (r.status === 403){ askPassword(true); throw new Error("PASSWORD"); }
+    if (!r.ok) throw new Error("Libby did not answer (" + r.status + ")");
+    return r.json();
+  }, function(e){ LB_ACTIVE--; var n = LB_QUEUE.shift(); if (n) n(); throw e; });
+}
+function loadLibby(g){
+  var libs = myLibs();
+  if (!g || !libs.length) return null;
+  if (LIBBY[g.id]) return LIBBY[g.id];
+  var entry = LIBBY[g.id] = { state: "loading", per: [] };
+  Promise.all(libs.map(function(l){
+    return libbyGet(libbyPath(l.key, g))
+      .then(function(d){ return { lib: l, st: libbyStatus(pickLibbyItem(g, d && d.items)) }; })
+      .catch(function(e){ return { lib: l, st: null, err: !(e && e.message === "PASSWORD") }; });
+  })).then(function(per){
+    if (LIBBY[g.id] !== entry) return;           // libraries changed meanwhile
+    entry.state = "done"; entry.per = per; renderSoon();
+  });
+  return entry;
+}
+// Many answers arrive at once on a shelf; redraw once for the batch, and never
+// while Settings is open (it would wipe what you're typing).
+var renderTimer = null;
+function renderSoon(){
+  if (renderTimer) return;
+  renderTimer = setTimeout(function(){
+    renderTimer = null;
+    if (!sheet && (screen === "shelf" || screen === "detail")) render();
+  }, 80);
+}
+function libbyBest(g){
+  var e = LIBBY[g.id];
+  return e && e.state === "done" ? bestLibby(e.per.map(function(x){ return x.st; })) : null;
+}
+function libbyBlock(g){
+  var libs = myLibs();
+  if (!libs.length) return '<div class="lib"><button class="libsetup" data-libsetup="1">'+
+    '\ud83c\udfa7 Add your library to see if the audiobook is on Libby</button></div>';
+  var e = LIBBY[g.id] || loadLibby(g);
+  var head = '<div class="ph"><span>\ud83c\udfa7 Audiobook on Libby</span><small>tap a library to open it</small></div>';
+  if (e.state !== "done") return '<div class="lib">'+head+'<div class="librow"><div><small>Checking '+libs.length+
+    ' librar'+(libs.length === 1 ? 'y' : 'ies')+'\u2026</small></div></div></div>';
+  return '<div class="lib">'+head+e.per.map(function(x){
+    var st = x.st;
+    var cls = x.err || !st || st.state === "none" ? "no" : st.state === "now" ? "av" : "wt";
+    var sub = x.err ? "Couldn\u2019t check right now"
+      : !st || st.state === "none" ? "No English audiobook in their catalog"
+      : st.state === "now" ? (st.lucky ? "Skip-the-line copy, no hold needed" : st.avail+" of "+st.owned+" cop"+(st.owned === 1 ? "y" : "ies")+" free")
+      : st.holds+" hold"+(st.holds === 1 ? "" : "s")+" on "+st.owned+" cop"+(st.owned === 1 ? "y" : "ies");
+    var inner = '<div>'+esc(x.lib.name)+'<small>'+esc(sub)+'</small></div><span class="bdg '+cls+'">'+
+      esc(x.err ? "Try later" : waitText(st))+'</span>';
+    return st && st.id ? '<a class="librow" href="'+esc(libbyLink(st))+'" target="_blank" rel="noopener">'+inner+'</a>'
+                       : '<div class="librow">'+inner+'</div>';
+  }).join("")+'</div>';
+}
+function libbyChip(g){
+  if (!myLibs().length) return "";
+  var e = LIBBY[g.id];
+  if (!e || e.state !== "done") return '<span class="cp">\ud83c\udfa7 \u2026</span>';
+  var b = libbyBest(g);
+  if (!b || b.state === "none") return '<span class="cp">\ud83c\udfa7 Not on Libby</span>';
+  return b.state === "now" ? '<span class="cp lv">\ud83c\udfa7 Libby: now</span>'
+    : '<span class="cp wn">\ud83c\udfa7 Libby: '+(b.weeks > 26 ? "6+ mo" : "~"+b.weeks+" wk")+'</span>';
 }
 
 /* ============================ Gemini ============================ */
@@ -1339,7 +1531,7 @@ function card(g){
       score+
       (st ? '<div class="readline">\u2713 Read'+(st.rating ? ' \u00b7 you gave \u2605'+st.rating : '')+'</div>' : "")+
     '</div></div>'+
-    '<div class="facts">'+facts(g)+'</div>'+priceBlock(g)+markBtns(g)+'</div>';
+    '<div class="facts">'+facts(g)+'</div>'+libbyBlock(g)+priceBlock(g)+markBtns(g)+'</div>';
 }
 
 function saysBlock(g){
@@ -1384,6 +1576,12 @@ function saysBlock(g){
 var COLS = [
   ["avg",   "Rating",  function(g){ return thinRating(g) ? null : g.avg; },
             function(g){ return thinRating(g) ? '<span class="few">too few</span>' : g.avg.toFixed(1); }, "r"],
+  ["libby", "Libby",   function(g){ var b = libbyBest(g); return !b ? 9999 : b.state === "now" ? 0 : b.state === "wait" ? b.weeks : 999; },
+            function(g){ var e = LIBBY[g.id], b = libbyBest(g);
+              if (!e || e.state !== "done") return '<span class="lbn no">\u2026</span>';
+              if (!b || b.state === "none") return '<span class="lbn no">None</span>';
+              return b.state === "now" ? '<span class="lbn av">Now</span>'
+                : '<span class="lbn wt">'+(b.weeks > 26 ? "6+ mo" : "~"+b.weeks+" wk")+'</span>'; }, ""],
   ["users", "Ratings", function(g){ return g.users; },  function(g){ return g.users ? g.users.toLocaleString() : "&mdash;"; }, ""],
   ["rev",   "Reviews", function(g){ return g.reviews; }, function(g){ return g.reviews ? g.reviews.toLocaleString() : "&mdash;"; }, ""],
   ["year",  "Year",    function(g){ return g.year; },   function(g){ return g.year || "&mdash;"; }, ""],
@@ -1391,6 +1589,7 @@ var COLS = [
   ["genre", "Genre",   function(g){ return g.genre || ""; }, function(g){ return esc(g.genre || ""); }, "ty"]
 ];
 
+function cols(){ return myLibs().length ? COLS : COLS.filter(function(c){ return c[0] !== "libby"; }); }
 function matched(){ return shelf.filter(function(r){ return r.game; }); }
 
 function sortedRows(){
@@ -1400,6 +1599,7 @@ function sortedRows(){
     return a.game.name.localeCompare(b.game.name) * sortDir; });
   var col = COLS.filter(function(c){ return c[0]===sortKey; })[0];
   if (!col) return list;
+  if (sortKey === "libby") return list.sort(function(a,b){ return (col[2](a.game) - col[2](b.game)) * sortDir; });
   return list.sort(function(a,b){
     var x = col[2](a.game), y = col[2](b.game);
     if (typeof x === "string") return x.localeCompare(y) * sortDir;
@@ -1411,7 +1611,7 @@ function shelfTable(){
   var rows = sortedRows(), missing = shelf.filter(function(r){ return !r.game; });
   var head = '<th data-sort="shelf" class="'+(sortKey==="shelf"?"on":"")+'">#</th>'+
     '<th data-sort="name" class="'+(sortKey==="name"?"on":"")+'">Book</th>'+
-    COLS.map(function(c){
+    cols().map(function(c){
       var on = sortKey===c[0];
       var extra = (c[4]==="ty"||c[4]==="mx") ? " h"+c[4] : "";
       return '<th data-sort="'+c[0]+'" class="'+(on?"on":"")+extra+'">'+c[1]+
@@ -1428,7 +1628,7 @@ function shelfTable(){
         (isStar(g.id)?'<span class="pin star">\u2605</span>':"")+
         (isRead(g)?'<span class="pin read">\u2713</span>':"")+
       '</span></td>'+
-      COLS.map(function(c){ return '<td class="'+c[4]+'">'+c[3](g)+'</td>'; }).join("")+
+      cols().map(function(c){ return '<td class="'+c[4]+'">'+c[3](g)+'</td>'; }).join("")+
     '</tr>';
   }).join("");
 
@@ -1438,7 +1638,7 @@ function shelfTable(){
         '<span class="thumb" style="background:#C3C9BE">?</span>'+
         '<span class="flag bad">!</span></span>'+
         '<span class="t">'+esc(r.read || "Not recognised")+'</span></span></td>'+
-      COLS.map(function(){ return '<td>&mdash;</td>'; }).join("")+'</tr>';
+      cols().map(function(){ return '<td>&mdash;</td>'; }).join("")+'</tr>';
   }).join("");
 
   return '<div class="scroller"><table class="tbl"><thead><tr>'+head+'</tr></thead>'+
@@ -1462,7 +1662,7 @@ function listCard(r, rank){
     : '<span class="n">'+g.avg.toFixed(1)+'</span><span class="k">'+g.users.toLocaleString()+' ratings</span>';
   var chips = (st ? '<span class="cp rd">✓ Read'+(st.rating ? ' · you gave ★'+st.rating : '')+'</span>' : '')+
     (isStar(g.id) ? '<span class="cp st">★ Shortlisted</span>' : '')+
-    (r.conf === false ? '<span class="cp wn">? Check this match</span>' : '');
+    (r.conf === false ? '<span class="cp wn">? Check this match</span>' : '')+libbyChip(g);
   var says = "";
   if (!x || !x.open){
     says = g.reviews ? '<button class="exp" data-exp="'+esc(g.id)+'">▸ What readers say</button>' : "";
@@ -1557,6 +1757,16 @@ function shelfView(){
 }
 
 /* ============================ screens =========================== */
+var ICON_DIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/>'+
+  '<circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/><circle cx="15" cy="9" r="1.5" fill="currentColor"/><circle cx="9" cy="15" r="1.5" fill="currentColor"/></svg>';
+var ICON_BOOK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.5A2.5 2.5 0 0 1 17 7v12.5H7.5A2.5 2.5 0 0 1 5 17V4.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'+
+  '<path d="M5 17a2.5 2.5 0 0 1 2.5-2.5H17" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+function appSwitch(here){
+  return '<nav class="appsw" aria-label="Switch app">'+
+    '<a href="index.html?app=games" class="'+(here==="games"?"on":"")+'"'+(here==="games"?' aria-current="page"':'')+'>'+ICON_DIE+'Board games</a>'+
+    '<a href="books.html" class="'+(here==="books"?"on":"")+'"'+(here==="books"?' aria-current="page"':'')+'>'+ICON_BOOK+'Books</a></nav>';
+}
+
 function notice(){ return msg ? '<div class="note'+(msgBad?" bad":"")+'">'+msg+'</div>' : ""; }
 
 function photoOut(label, primary){
@@ -1583,6 +1793,7 @@ var ICON_BARCODE = '<svg viewBox="0 0 24 24" aria-hidden="true">'+
 
 function idleView(){
   return notice()+
+    appSwitch("books")+
     '<h2>Find a book</h2>'+
     '<label class="bigact main" tabindex="0">'+
       '<span class="ai">'+ICON_CAMERA+'</span>'+
@@ -1794,6 +2005,7 @@ var TERMS = [
   ["Reviews", "How many readers wrote a review, not just a star rating. The summary is built from the most liked of these."],
   ["What readers say", "Gemini groups the top reviews into recurring praise and criticism. Every point links to the real review it came from, so you can check it."],
   ["Read", "Books you marked as read here, or that are on the read shelf of a Goodreads export you imported. Kept on this phone only."],
+  ["Libby", "Whether your libraries have the audiobook. \u201cBorrow now\u201d means a copy is free; a wait is an estimate from holds per copy and Libby\u2019s usual 2-week loan, so treat it as rough. Pick libraries in Settings. Borrowing happens in the Libby app."],
   ["Hardcover", "A community-run book site, like Goodreads. Its catalog is smaller, so a rare edition may be missing; the cover photo usually still finds it."]
 ];
 
@@ -1890,13 +2102,67 @@ function glossaryView(){
 /* ============================ settings ========================== */
 var weightOpen = false;
 
+var LIBLIST = null, LIBLIST_ERR = "";
+function libList(){
+  if (LIBLIST) return Promise.resolve(LIBLIST);
+  return fetch("data/libraries.json", { cache: "default" }).then(function(r){
+    if (!r.ok) throw new Error("missing");
+    return r.json();
+  }).then(function(d){ LIBLIST = (d && d.libs) || []; LIBLIST_ERR = ""; return LIBLIST; })
+    .catch(function(){ LIBLIST_ERR = "The library list isn\u2019t built yet. Use \u201cAdd by code\u201d below."; return []; });
+}
+function libResults(q){
+  var out = document.getElementById("libres");
+  if (!out) return;
+  if (String(q).trim().length < 2){ out.innerHTML = ""; return; }
+  libList().then(function(list){
+    var mine = myLibs().map(function(l){ return l.key; });
+    var hits = searchLibraries(list, q, 8);
+    out.innerHTML = LIBLIST_ERR ? '<p class="hint" style="margin:6px 0">'+esc(LIBLIST_ERR)+'</p>'
+      : !hits.length ? '<p class="hint" style="margin:6px 0">No library matches \u201c'+esc(q)+'\u201d. Try one word of its name, or add it by code.</p>'
+      : '<div class="lst">'+hits.map(function(h){
+          var have = mine.indexOf(h.key) >= 0;
+          return '<div class="li res"><div class="g">'+esc(h.name)+'<small>code: '+esc(h.key)+'</small></div>'+
+            (have ? '<small>added</small>' : '<button class="add" data-addlib="'+esc(h.key)+'" data-libname="'+esc(h.name)+'">+ Add</button>')+'</div>';
+        }).join("")+'</div>';
+    Array.prototype.forEach.call(out.querySelectorAll("[data-addlib]"), function(b){
+      b.onclick = function(){ addLib(b.dataset.addlib, b.dataset.libname); };
+    });
+  });
+}
+function addLib(key, name){
+  var l = myLibs();
+  if (l.some(function(x){ return x.key === key; }) || l.length >= MAX_LIBS) return;
+  l.push({ key: key, name: name }); saveLibs(l);
+  var q = document.getElementById("libq"); if (q) q.value = "";
+  renderSheet();
+}
 function renderSheet(){
   if (!sheet){ modal.innerHTML = ""; return; }
-  var grN = Object.keys(GR).length, appN = Object.keys(READ).length;
+  var grN = Object.keys(GR).length, appN = Object.keys(READ).length, libs = myLibs();
+  // Keep what you were typing and where you were scrolled when Settings redraws.
+  var oldQ = document.getElementById("libq"), qVal = oldQ ? oldQ.value : "", qFocus = oldQ && document.activeElement === oldQ;
+  var oldIn = modal.querySelector(".inner"), keepTop = oldIn ? oldIn.scrollTop : 0;
   modal.innerHTML =
     '<div class="sheet" id="scrim"><div class="inner">'+
       '<h2>Settings</h2>'+
       '<p class="hint" style="margin:-2px 0 10px">Version '+esc(APP_VERSION)+'. Saved on this phone only.</p>'+
+      '<p class="hint" style="margin:16px 0 6px"><b>Libby libraries</b><br>Pick the libraries you have cards for. '+
+        'Checks audiobook availability only; borrowing opens Libby.</p>'+
+      '<div class="lst">'+libs.map(function(l){
+        return '<div class="li"><div class="g"><b>'+esc(l.name)+'</b><small>code: '+esc(l.key)+'</small></div>'+
+          '<button class="x" data-rmlib="'+esc(l.key)+'" aria-label="Remove '+esc(l.name)+'">\u2715</button></div>';
+      }).join("")+'</div>'+
+      (libs.length < MAX_LIBS
+        ? '<div class="row"><input id="libq" placeholder="Search libraries by name" autocomplete="off" '+
+            'autocapitalize="none" spellcheck="false"></div><div id="libres"></div>'
+        : '<p class="hint" style="margin:4px 0">Up to '+MAX_LIBS+' libraries. Remove one to add another.</p>')+
+      '<p class="hint" style="margin:6px 0 0;font-size:12.5px">Can\u2019t find yours? '+
+        '<button class="pen" id="libcodeopen" style="display:inline;padding:0">Add by code</button></p>'+
+      '<div id="libcode" hidden><p class="hint" style="margin:6px 0;font-size:12px">The code is in your library\u2019s Libby '+
+        'or OverDrive web address, like <b>loudoun</b> in loudoun.overdrive.com. You can paste the whole address.</p>'+
+        '<div class="row"><input id="libcodein" placeholder="Code or web address" autocomplete="off" autocapitalize="none" spellcheck="false">'+
+        '<button id="libcodego">Add</button></div><div id="libcodeout"></div></div>'+
       '<p class="hint" style="margin:16px 0 6px"><b>Books I\u2019ve read</b><br>'+
         appN+' marked here'+(grN ? ' \u00b7 '+grN+' from Goodreads' : '')+'. Tap \u201cI\u2019ve read this\u201d on any book, '+
         'or import your Goodreads library.</p>'+
@@ -1913,6 +2179,37 @@ function renderSheet(){
       '<button class="btn ghost" data-go="glossary">What do the numbers mean?</button>'+
       '<button class="btn ghost" id="closetok">Close</button>'+
     '</div></div>';
+
+  var inner = modal.querySelector(".inner"); if (inner && keepTop) inner.scrollTop = keepTop;
+  var lq = document.getElementById("libq");
+  if (lq){
+    lq.oninput = function(){ libResults(lq.value); };
+    if (qVal){ lq.value = qVal; libResults(qVal); }
+    if (qFocus) lq.focus();
+  }
+  Array.prototype.forEach.call(modal.querySelectorAll("[data-rmlib]"), function(b){
+    b.onclick = function(){ saveLibs(myLibs().filter(function(l){ return l.key !== b.dataset.rmlib; })); renderSheet(); };
+  });
+  document.getElementById("libcodeopen").onclick = function(){
+    var c = document.getElementById("libcode"); c.hidden = !c.hidden;
+    if (!c.hidden) document.getElementById("libcodein").focus();
+  };
+  var codeGo = function(){
+    var code = cleanLibCode(document.getElementById("libcodein").value), out = document.getElementById("libcodeout");
+    if (!code){ out.innerHTML = '<div class="note bad" style="margin-top:8px"><b>That doesn\u2019t look like a library code</b>Letters and numbers only, like loudoun.</div>'; return; }
+    if (myLibs().length >= MAX_LIBS) return;
+    out.innerHTML = '<p class="hint" style="margin:8px 0">Checking\u2026</p>';
+    libbyGet("libraries/" + encodeURIComponent(code)).then(function(d){
+      if (!d || !d.id || String(d.status || "").toLowerCase() !== "live") throw new Error("not live");
+      addLib(String(d.id), String(d.name || code));
+    }).catch(function(e){
+      if (e && e.message === "PASSWORD") return;
+      out.innerHTML = '<div class="note bad" style="margin-top:8px"><b>No Libby library with the code \u201c'+esc(code)+'\u201d</b>'+
+        'Check your library\u2019s Libby or OverDrive web address.</div>';
+    });
+  };
+  document.getElementById("libcodego").onclick = codeGo;
+  document.getElementById("libcodein").onkeydown = function(e){ if (e.key === "Enter") codeGo(); };
 
   document.getElementById("grfile").onchange = function(e){
     var f = e.target.files && e.target.files[0], out = document.getElementById("grout");
@@ -1989,6 +2286,10 @@ function render(){
 
   wire();
   renderSheet();
+  if (myLibs().length){
+    if (screen === "shelf") matched().forEach(function(r){ loadLibby(r.game); });
+    else if (screen === "detail" && game) loadLibby(game);
+  }
 
   if (screen === "scanning"){
     var v = document.getElementById("cam");
@@ -2057,6 +2358,10 @@ function wire(){
     toggleRead(g); render();
   }; });
 
+  each("[data-libsetup]", function(b){ b.onclick = function(ev){
+    ev.stopPropagation(); sheet = true; render();
+    // Focus right away, inside the tap, so phones open the keyboard.
+    var q = document.getElementById("libq"); if (q) q.focus(); }; });
   each("[data-view]", function(b){ b.onclick = function(){
     ls(K_VIEW, b.dataset.view === "table" ? "table" : ""); render(); }; });
   each("[data-exp]", function(b){ b.onclick = function(ev){
