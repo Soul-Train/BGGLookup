@@ -603,15 +603,25 @@ function titleWords(s){
   return t ? t.split(" ").filter(function(w, i, a){ return a.indexOf(w) === i; }) : [];
 }
 function sameWord(w, x){ return w === x || (w.length >= 4 && x.length >= 4 && editWithin1(w, x)); }
-/** Titles match when every word of the shorter one is in the longer one
-    ("Dune" / "Dune: Deluxe Edition", "Heir to the Empire" / "Star Wars: Heir to the Empire"),
-    or when most words are shared, allowing one-letter typos ("harry poter"). */
+/** A title and its pieces: the whole thing, plus the parts either side of a subtitle break
+    (colon, ", or", or a dash). "Star Wars: Heir to the Empire" -> whole, "star wars", "heir to the empire". */
+function titleParts(s){
+  var raw = String(s || "").replace(/\s*\([^)]*\)\s*$/, "");
+  var whole = titleWords(raw).join(" ");
+  var parts = raw.split(/:|,\s+or\s+|\s+[-\u2013\u2014]\s+/i).map(function(x){ return titleWords(x).join(" "); })
+    .filter(Boolean);
+  return { whole: whole, parts: parts };
+}
+/** Titles match when they're the same, when one is just the other minus a subtitle
+    ("Dune" / "Dune: Deluxe Edition", "Heir to the Empire" / "Star Wars: Heir to the Empire",
+    "The Hobbit" / "The Hobbit, or There and Back Again"), or when most words are shared,
+    allowing one-letter typos ("harry poter"). Extra title words are NOT a subtitle:
+    "Dune" does not match "Dune Messiah". */
 function titleMatches(query, found){
-  var a = titleWords(query), b = titleWords(found);
-  if (!a.length || !b.length) return false;
-  var short = a.length <= b.length ? a : b, long = short === a ? b : a;
-  var inLong = short.filter(function(w){ return long.some(function(x){ return sameWord(w, x); }); }).length;
-  if (inLong === short.length) return true;
+  var A = titleParts(query), B = titleParts(found);
+  if (!A.whole || !B.whole) return false;
+  if (A.whole === B.whole || B.parts.indexOf(A.whole) >= 0 || A.parts.indexOf(B.whole) >= 0) return true;
+  var a = titleWords(query.replace(/\s*\([^)]*\)\s*$/, "")), b = titleWords(String(found).replace(/\s*\([^)]*\)\s*$/, ""));
   var common = a.filter(function(w){ return b.some(function(x){ return sameWord(w, x); }); }).length;
   return common / Math.max(a.length, b.length) >= 0.55;
 }
@@ -638,7 +648,8 @@ function pickMatching(q, list){
   });
   var good = scored.filter(function(x){ return x.tier > 0; }).sort(function(x, y){
     return y.tier - x.tier || (y.r.count || 0) - (x.r.count || 0) || x.i - y.i; });
-  return good.length ? { id: String(good[0].r.id), ok: true } : { id: String(found[0].id), ok: false };
+  return good.length ? { id: String(good[0].r.id), ok: true, title: good[0].r.title || "" }
+                     : { id: String(found[0].id), ok: false, title: found[0].title || "" };
 }
 
 /* ---------- Hardcover queries (each top-level field costs one rate-limit token) ---------- */
@@ -859,6 +870,14 @@ function cleanLibCode(s){
   return m ? m[1] : "";
 }
 
+/* ---------- Open Library: title and author for an ISBN Hardcover doesn't know ---------- */
+function olIsbnURL(isbn13){ return "https://openlibrary.org/search.json?q=isbn:" + encodeURIComponent(isbn13) + "&fields=title,author_name&limit=1"; }
+function olFromSearch(json){
+  var d = json && json.docs && json.docs[0];
+  if (!d || !d.title) return null;
+  return { title: String(d.title).trim(), author: ((d.author_name || [])[0] || "").trim() };
+}
+
 if (typeof module !== "undefined") module.exports = {
   RATING_MIN: RATING_MIN, isbnDigits: isbnDigits, validIsbn13: validIsbn13, validIsbn10: validIsbn10, isbn10to13: isbn10to13,
   classifyCode: classifyCode, normTitle: normTitle, editWithin1: editWithin1, titleMatches: titleMatches, titleWords: titleWords,
@@ -868,7 +887,8 @@ if (typeof module !== "undefined") module.exports = {
   bookURL: bookURL, reviewsURL: reviewsURL, priceLinks: priceLinks, parseCsv: parseCsv, lastName: lastName, readKey: readKey,
   parseGoodreads: parseGoodreads, readStatus: readStatus,
   libbyPath: libbyPath, isEnglish: isEnglish, pickLibbyItem: pickLibbyItem, libbyStatus: libbyStatus, waitText: waitText,
-  bestLibby: bestLibby, libbyLink: libbyLink, searchLibraries: searchLibraries, cleanLibCode: cleanLibCode
+  bestLibby: bestLibby, libbyLink: libbyLink, searchLibraries: searchLibraries, cleanLibCode: cleanLibCode,
+  olIsbnURL: olIsbnURL, olFromSearch: olFromSearch
 };
 
 </script>
@@ -879,7 +899,7 @@ try { localStorage.setItem("shelfworthy.lastApp", "books"); } catch(e){}
 /* ============================ config ============================ */
 // Bump this with every upload, so a glance at the footer confirms which build
 // a phone is running.
-var APP_VERSION = "0.2.0";
+var APP_VERSION = "0.2.1";
 /* The proxy holds the Hardcover token and the Gemini key, so no phone
    needs either. Put your own Worker address in PROXY. */
 var PROXY    = "https://shelfworthy.joshua-shull12.workers.dev";
@@ -1020,6 +1040,81 @@ function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
 function gameURL(id){ var g = findLoaded(String(id)); return bookURL(g || { slug: "" }); }
 function searchURL(q){ return "https://hardcover.app/search?q=" + encodeURIComponent(q); }
 
+/* ========================= saved lookups ========================
+   Past lookups are kept on the phone (in IndexedDB, which has far more room
+   than the small storage the title cache already uses) so opening the same
+   thing again needs no network. Shared by the games and books pages; keys
+   start with "g:" or "b:". If the browser blocks it, everything still works,
+   just without the shortcut.                                               */
+var LC = (function(){
+  var DB = "shelfworthy-lookups", ST = "kv", dbp = null;
+  function db(){
+    if (dbp) return dbp;
+    dbp = new Promise(function(res){
+      try {
+        var r = indexedDB.open(DB, 1);
+        r.onupgradeneeded = function(){ r.result.createObjectStore(ST); };
+        r.onsuccess = function(){ res(r.result); };
+        r.onerror = r.onblocked = function(){ res(null); };
+      } catch(e){ res(null); }
+      setTimeout(function(){ res(null); }, 1500);      // never let storage hold up a lookup
+    });
+    return dbp;
+  }
+  function req(mode, fn){
+    return db().then(function(d){
+      if (!d) return null;
+      return new Promise(function(res){
+        try {
+          var q = fn(d.transaction(ST, mode).objectStore(ST));
+          q.onsuccess = function(){ res(q.result); };
+          q.onerror = function(){ res(null); };
+        } catch(e){ res(null); }
+      });
+    });
+  }
+  function eachKey(test){
+    return db().then(function(d){
+      if (!d) return 0;
+      return new Promise(function(res){
+        var n = 0;
+        try {
+          var c = d.transaction(ST, "readwrite").objectStore(ST).openCursor();
+          c.onsuccess = function(){
+            var cur = c.result;
+            if (!cur){ res(n); return; }
+            if (test(String(cur.key), cur.value)){ cur.delete(); n++; }
+            cur.continue();
+          };
+          c.onerror = function(){ res(n); };
+        } catch(e){ res(n); }
+      });
+    });
+  }
+  return {
+    /** The saved value if younger than maxAge (ms), else null. */
+    get: function(k, maxAge){
+      return req("readonly", function(s){ return s.get(k); }).then(function(v){
+        return v && Date.now() - v.t < maxAge ? v.v : null;
+      });
+    },
+    set: function(k, v){ return req("readwrite", function(s){ return s.put({ v: v, t: Date.now() }, k); }); },
+    /** Remove every key starting with prefix. Resolves to how many went. */
+    clear: function(prefix){ return eachKey(function(k){ return k.indexOf(prefix) === 0; }); },
+    /** Drop anything not touched for maxAge, so the store never grows forever. */
+    prune: function(maxAge){ return eachKey(function(k, v){ return !v || Date.now() - v.t > maxAge; }); }
+  };
+})();
+var DAY = 864e5;
+setTimeout(function(){ LC.prune(60 * DAY); }, 4000);
+function lcKey(s){ return String(s || "").toLowerCase().replace(/\s+/g, " ").trim(); }
+/** A copy safe to save: no review text (large, and only needed until summarised). */
+function lean(g){
+  var o = {}; for (var k in g) if (k !== "comments" && k !== "says" && k !== "saysState" && k !== "conf") o[k] = g[k];
+  o.nComments = (g.comments || []).length;
+  return o;
+}
+
 /* ========================== Hardcover =========================== */
 // Free tier: bursts of 10 calls, then about 1 a second. The Worker caches
 // answers for a day, so repeat books cost nothing. A 429 means wait and retry.
@@ -1060,23 +1155,47 @@ function hcFetch(query, tries){
 function loadMany(ids){
   ids = ids.filter(function(x, i, a){ return x && a.indexOf(x) === i; });
   if (!ids.length) return Promise.resolve({});
-  return hcFetch(hcBooksQ(ids)).then(function(d){
-    var out = {};
-    (d.books || []).forEach(function(b){ var g = parseBook(b); out[g.id] = g; });
-    return out;
+  var out = {};
+  // Saved books come straight from the phone; only the rest go to Hardcover.
+  return Promise.all(ids.map(function(id){
+    return LC.get("b:book:" + id, 7 * DAY).then(function(v){ if (v){ v.comments = []; out[id] = v; } });
+  })).then(function(){
+    var need = ids.filter(function(id){ return !out[id]; });
+    if (!need.length) return out;
+    return hcFetch(hcBooksQ(need)).then(function(d){
+      (d.books || []).forEach(function(b){ var g = parseBook(b); out[g.id] = g; LC.set("b:book:" + g.id, lean(g)); });
+      return out;
+    });
   });
 }
 function loadOne(id){
-  return hcFetch(hcDetailQ(id)).then(function(d){
-    var b = (d.books || [])[0];
-    if (!b) throw new Error("That book was not found on Hardcover.");
-    var g = parseBook(b);
-    g.comments = pickReviews(d.user_books);
-    return g;
+  // The full page needs reviews only to summarise them. If the summary is saved
+  // (or there are no reviews), the saved book is all we need.
+  var said = saysCache()[id], fresh = said && Date.now() - said.t < 30 * DAY;
+  return LC.get("b:book:" + id, 7 * DAY).then(function(v){
+    if (v && v.full && (fresh || !v.nComments)){
+      v.comments = []; if (fresh && said.s && said.s.length) v.says = said.s;
+      return v;
+    }
+    return hcFetch(hcDetailQ(id)).then(function(d){
+      var b = (d.books || [])[0];
+      if (!b) throw new Error("That book was not found on Hardcover.");
+      var g = parseBook(b);
+      g.comments = pickReviews(d.user_books);
+      var keep = lean(g); keep.full = true; LC.set("b:book:" + g.id, keep);
+      return g;
+    });
   });
 }
 /** A title (and author, if known) to { id, ok }. ok=false means "closest guess, check it". */
 function findMatch(title, author){
+  var key = "b:q:" + lcKey(title) + "|" + lcKey(author);
+  return LC.get(key, 30 * DAY).then(function(hit){
+    if (hit) return hit;
+    return findMatchLive(title, author).then(function(m){ if (m) LC.set(key, m); return m; });
+  });
+}
+function findMatchLive(title, author){
   var q = { title: title, author: author || null, raw: author ? title + " by " + author : title };
   return hcFetch(hcSearchQ(title)).then(function(d){
     var m = pickMatching(q, searchHits({ data: d }));
@@ -1093,10 +1212,21 @@ function findId(title, author){
   return findMatch(title, author).then(function(m){ return m ? m.id : null; });
 }
 function findIsbn(isbn13, isbn10){
-  return hcFetch(hcIsbnQ(isbn13, isbn10)).then(function(d){
-    var e = (d.editions || [])[0];
-    return e && e.book_id ? String(e.book_id) : null;
+  var key = "b:isbn:" + isbn13;
+  return LC.get(key, 30 * DAY).then(function(hit){
+    if (hit) return hit;
+    return hcFetch(hcIsbnQ(isbn13, isbn10)).then(function(d){
+      var e = (d.editions || [])[0];
+      var id = e && e.book_id ? String(e.book_id) : null;
+      if (id) LC.set(key, id);
+      return id;
+    });
   });
+}
+/** Title and author for an ISBN, from Open Library (free, no key). */
+function olIsbn(isbn13){
+  return fetch(olIsbnURL(isbn13)).then(function(r){ return r.ok ? r.json() : null; })
+    .then(olFromSearch).catch(function(){ return null; });
 }
 
 /* ============================ Libby ============================= */
@@ -1122,8 +1252,15 @@ function loadLibby(g){
   if (LIBBY[g.id]) return LIBBY[g.id];
   var entry = LIBBY[g.id] = { state: "loading", per: [] };
   Promise.all(libs.map(function(l){
-    return libbyGet(libbyPath(l.key, g))
-      .then(function(d){ return { lib: l, st: libbyStatus(pickLibbyItem(g, d && d.items)) }; })
+    var key = "b:libby:" + l.key + ":" + g.id;
+    return LC.get(key, 3600e3).then(function(saved){
+      if (saved) return { lib: l, st: saved.st };
+      return libbyGet(libbyPath(l.key, g)).then(function(d){
+        var st = libbyStatus(pickLibbyItem(g, d && d.items));
+        LC.set(key, { st: st });
+        return { lib: l, st: st };
+      });
+    })
       .catch(function(e){ return { lib: l, st: null, err: !(e && e.message === "PASSWORD") }; });
   })).then(function(per){
     if (LIBBY[g.id] !== entry) return;           // libraries changed meanwhile
@@ -1709,6 +1846,7 @@ function expandBook(id){
   EXP[id] = { state: "loading", open: true }; render();
   var timeout = new Promise(function(res){ setTimeout(function(){ res("timeout"); }, 25000); });
   loadOne(id).then(function(g){
+    if (g.says && g.says.length) return g.says;
     if (!g.comments.length) return "none";
     return Promise.race([summarise(g).catch(function(){ return "failed"; }), timeout]);
   }).then(function(s){
@@ -1858,8 +1996,9 @@ function detailView(g){
 function picksView(){
   var h = notice();
   if (picks.length){
-    h += '<h2>Which one is it?</h2>'+
-      '<p class="hint">More than one book could match. Pick the right one, '+
+    h += '<h2>Is this the book?</h2>'+
+      '<p class="hint">'+(searchedFor ? 'That ISBN is \u201c'+esc(searchedFor)+'\u201d. The closest Hardcover match is below; '+
+        'tap it if it\u2019s right, ' : 'More than one book could match. Pick the right one, ')+
       'or photograph the cover instead.</p>'+
       picks.map(function(p){
         return '<button class="pick" data-open="'+esc(p.id)+'">'+
@@ -1868,8 +2007,9 @@ function picksView(){
       photoOut("None of these look right?");
   } else {
     h += '<h2>'+(lastUPC ? 'That ISBN is not on Hardcover' : 'Book not found')+'</h2>'+
-      '<p class="hint">Hardcover\u2019s catalog is community built, so some editions are missing. '+
-      'The cover usually works, since the title finds any edition.</p>'+
+      '<p class="hint">'+(lastUPC ? 'Neither Hardcover nor Open Library recognised it. ' : '')+
+      'Hardcover\u2019s catalog is community built, so some books are missing. '+
+      'Try the cover, or type the title.</p>'+
       photoOut("Photograph the cover instead", true)+
       '<div class="grp">Or type it</div>'+
       '<div class="row"><input id="q2" placeholder="Title, or title by author"><button id="q2go">Search</button></div>';
@@ -2175,6 +2315,9 @@ function renderSheet(){
       (grN ? '<button class="pen" id="grclear" style="margin:4px 0 0">Remove the Goodreads import</button>' : '')+
       '<button class="btn ghost" id="testkeys" style="margin-top:16px">Test the connection</button>'+
       '<div id="testout"></div>'+
+      '<button class="btn ghost" id="lcclear">Clear saved lookups</button>'+
+      '<p class="hint" style="margin:4px 0 0;font-size:12px">Books you\u2019ve looked up are kept on this phone for a week, '+
+        'so they open instantly. Clear them to fetch everything fresh.</p><div id="lcout"></div>'+
       '<button class="btn ghost" id="forgetpass">Change password</button>'+
       '<button class="btn ghost" data-go="glossary">What do the numbers mean?</button>'+
       '<button class="btn ghost" id="closetok">Close</button>'+
@@ -2244,6 +2387,12 @@ function renderSheet(){
     Promise.all([hcTest, gemTest]).then(function(r){
       var bad = r.some(function(x){ return !/working/.test(x); });
       out.innerHTML = '<div class="note'+(bad?" bad":"")+'">'+r.map(function(x){ return esc(x); }).join("<br>")+'</div>';
+    });
+  };
+  document.getElementById("lcclear").onclick = function(){
+    LC.clear("b:").then(function(n){
+      LIBBY = {};
+      document.getElementById("lcout").innerHTML = '<div class="note" style="margin-top:8px">Cleared '+(n||0)+' saved lookup'+(n===1?'':'s')+'.</div>';
     });
   };
   document.getElementById("forgetpass").onclick = function(){ sheet = false; setPassword(""); askPassword(false); };
@@ -2542,7 +2691,21 @@ function lookup(code){
   lastUPC = c.isbn13;
   busy = "Looking up ISBN " + c.isbn13; screen = "busy"; render();
   findIsbn(c.isbn13, c.isbn10).then(function(id){
-    if (!id){ picks = []; screen = "picks"; render(); return; }
+    if (id) return id;
+    busy = "Finding this edition\u2019s title"; busyNote = "Hardcover doesn\u2019t list this exact edition"; render();
+    return olIsbn(c.isbn13).then(function(t){
+      if (!t) return null;
+      busy = "Looking for \u201c" + t.title + "\u201d on Hardcover"; render();
+      return findMatch(t.title, t.author).then(function(m){
+        if (m && m.ok){ LC.set("b:isbn:" + c.isbn13, m.id); return m.id; }
+        if (m) picks = [{ id: m.id, name: m.title || t.title }];   // close, but let you confirm
+        searchedFor = t.title + (t.author ? " by " + t.author : "");
+        return null;
+      });
+    });
+  }).then(function(id){
+    busyNote = "";
+    if (!id){ screen = "picks"; render(); return; }
     if (fixTarget !== null) return replaceRowById(fixTarget, id);
     openGame(id);
   }).catch(function(e){
